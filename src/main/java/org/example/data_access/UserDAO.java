@@ -4,6 +4,7 @@ import org.example.models.User;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class UserDAO {
@@ -48,5 +49,26 @@ public class UserDAO {
         statement.setDate(7, new java.sql.Date(user.getBirthday().getTime()));
         statement.setString(8, user.getId());
         statement.executeUpdate();
+    }
+
+    public User getUser(String userId) throws SQLException {
+        PreparedStatement statement = connection.prepareStatement("SELECT * FROM users WHERE id = ?");
+        statement.setString(1, userId);
+        ResultSet resultSet = statement.executeQuery();
+
+        if (resultSet.next()) {
+            User user = new User();
+            user.setId(resultSet.getString("id"));
+            user.setFirstName(resultSet.getString("first_name"));
+            user.setLastName(resultSet.getString("last_name"));
+            user.setEmail(resultSet.getString("email"));
+            user.setPhoneNumber(resultSet.getString("phone_number"));
+            user.setPassword(resultSet.getString("password"));
+            user.setCountry(resultSet.getString("country"));
+            user.setBirthday(resultSet.getDate("birthday"));
+            return user;
+        }
+
+        return null; // User not found
     }
 }
