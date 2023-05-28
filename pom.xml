@@ -14,4 +14,17 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
+    <dependencies>
+        <dependency>
+            <groupId>mysql</groupId> <!-- Replace with your database vendor, e.g., oracle, postgresql -->
+            <artifactId>mysql-connector-java</artifactId> <!-- Replace with the appropriate JDBC driver for your database -->
+            <version>8.0.27</version> <!-- Replace with the appropriate driver version -->
+        </dependency>
+
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>42.3.1</version> <!-- Replace with the appropriate driver version -->
+        </dependency>
+    </dependencies>
 </project>
