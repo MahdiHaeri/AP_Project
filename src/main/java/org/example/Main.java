@@ -2,7 +2,9 @@ package org.example;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.example.controllers.FollowController;
 import org.example.controllers.UserController;
+import org.example.models.Follow;
 import org.example.models.User;
 
 import java.sql.SQLException;
@@ -12,6 +14,11 @@ public class Main {
     public static void main(String[] args) {
         try {
             UserController userController = new UserController();
+
+            FollowController followController = new FollowController();
+            followController.saveFollow("1", "2");
+//            followController.deleteFollow("1", "2");
+
 //            userController.deleteUser("1");
 //            userController.createUser("1", "mahdi", "haeri", "mahdihaerim@gmail.com", "123456789", "123456", "Iran", new Date());
 //            userController.createUser("2", "mobin", "zaki", "mobinzaki@gmail.com", "123456789", "123456", "Iran", new Date());
