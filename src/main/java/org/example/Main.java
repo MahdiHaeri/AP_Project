@@ -14,6 +14,8 @@ public class Main {
             UserController userController = new UserController();
 //            userController.deleteUser("1");
 //            userController.createUser("1", "mahdi", "haeri", "mahdihaerim@gmail.com", "123456789", "123456", "Iran", new Date());
+//            userController.createUser("2", "mobin", "zaki", "mobinzaki@gmail.com", "123456789", "123456", "Iran", new Date());
+
 //            userController.updateUser("1", "mahdi", "haeri", "mohammadmahdihaeri@gmail.com", "123456789", "123456", "Iran", new Date());
 //
 //            User user = userController.getUser("1");
@@ -24,7 +26,7 @@ public class Main {
 //            userController.createUser("2", "mobin", "zaki", "mobinzaki@gmail.com", "123456789", "123456", "Iran", new Date());
         } catch (SQLException e) {
             throw new RuntimeException(e);
-////        } catch (JsonProcessingException e) {
+//        } catch (JsonProcessingException e) {
 //            throw new RuntimeException(e);
         }
     }

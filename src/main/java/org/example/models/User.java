@@ -20,7 +20,23 @@ public class User {
     private String country;
     @JsonProperty("birthday")
     private Date birthday;
+    @JsonProperty("createdAt")
+    private Date createdAt;
+    @JsonProperty("updatedAt")
+    private Date updatedAt;
 
+    public User(String id, String firstName, String lastName, String email, String phoneNumber, String password, String country, Date birthday, Date createdAt, Date updatedAt) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
+        this.password = password;
+        this.country = country;
+        this.birthday = birthday;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
+    }
     public User(String id, String firstName, String lastName, String email, String phoneNumber, String password, String country, Date birthday) {
         this.id = id;
         this.firstName = firstName;
@@ -98,6 +114,22 @@ public class User {
 
     public void setBirthday(Date birthday) {
         this.birthday = birthday;
+    }
+
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public Date getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(Date updatedAt) {
+        this.updatedAt = updatedAt;
     }
 
     @Override

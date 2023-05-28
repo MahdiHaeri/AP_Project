@@ -14,13 +14,14 @@ public class UserDAO {
         createUserTable();
     }
 
+
     public void createUserTable() throws SQLException {
-        PreparedStatement statement = connection.prepareStatement("CREATE TABLE IF NOT EXISTS users (id VARCHAR(36) PRIMARY KEY, first_name VARCHAR(255), last_name VARCHAR(255), email VARCHAR(255), phone_number VARCHAR(255), password VARCHAR(255), country VARCHAR(255), birthday DATE)");
+        PreparedStatement statement = connection.prepareStatement("CREATE TABLE IF NOT EXISTS users (id VARCHAR(36) PRIMARY KEY, first_name VARCHAR(255), last_name VARCHAR(255), email VARCHAR(255), phone_number VARCHAR(255), password VARCHAR(255), country VARCHAR(255), birthday DATE, created_at DATE, updated_at DATE)");
         statement.executeUpdate();
     }
 
     public void saveUser(User user) throws SQLException {
-        PreparedStatement statement = connection.prepareStatement("INSERT INTO users VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+        PreparedStatement statement = connection.prepareStatement("INSERT INTO users (id, first_name, last_name, email, phone_number, password, country, birthday, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
         statement.setString(1, user.getId());
         statement.setString(2, user.getFirstName());
         statement.setString(3, user.getLastName());
@@ -29,6 +30,9 @@ public class UserDAO {
         statement.setString(6, user.getPassword());
         statement.setString(7, user.getCountry());
         statement.setDate(8, new java.sql.Date(user.getBirthday().getTime()));
+        statement.setDate(9, new java.sql.Date(user.getCreatedAt().getTime()));
+        statement.setDate(10, new java.sql.Date(user.getUpdatedAt().getTime()));
+
         statement.executeUpdate();
     }
 
@@ -39,7 +43,7 @@ public class UserDAO {
     }
 
     public void updateUser(User user) throws SQLException {
-        PreparedStatement statement = connection.prepareStatement("UPDATE users SET first_name = ?, last_name = ?, email = ?, phone_number = ?, password = ?, country = ?, birthday = ? WHERE id = ?");
+PreparedStatement statement = connection.prepareStatement("UPDATE users SET first_name = ?, last_name = ?, email = ?, phone_number = ?, password = ?, country = ?, birthday = ? WHERE id = ?");
         statement.setString(1, user.getFirstName());
         statement.setString(2, user.getLastName());
         statement.setString(3, user.getEmail());
@@ -48,6 +52,7 @@ public class UserDAO {
         statement.setString(6, user.getCountry());
         statement.setDate(7, new java.sql.Date(user.getBirthday().getTime()));
         statement.setString(8, user.getId());
+
         statement.executeUpdate();
     }
 
@@ -66,6 +71,8 @@ public class UserDAO {
             user.setPassword(resultSet.getString("password"));
             user.setCountry(resultSet.getString("country"));
             user.setBirthday(resultSet.getDate("birthday"));
+            user.setCreatedAt(resultSet.getDate("created_at"));
+            user.setUpdatedAt(resultSet.getDate("updated_at"));
             return user;
         }
 
