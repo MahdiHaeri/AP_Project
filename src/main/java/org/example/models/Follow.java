@@ -1,16 +1,19 @@
 package org.example.models;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+
+import java.util.Date;
+
 public class Follow {
 
     @JsonProperty("follower")
     private String follower;
-    @JsonProperty("following")
-    private String following;
+    @JsonProperty("followed")
+    private String followed;
 
-    public Follow(String follower, String following) {
+    public Follow(String follower, String followed) {
         this.follower = follower;
-        this.following = following;
+        this.followed = followed;
     }
 
     public Follow() {
@@ -25,19 +28,19 @@ public class Follow {
         this.follower = follower;
     }
 
-    public String getFollowing() {
-        return following;
+    public String getFollowed() {
+        return followed;
     }
 
-    public void setFollowing(String following) {
-        this.following = following;
+    public void setFollowed(String following) {
+        this.followed = following;
     }
 
     @Override
     public String toString() {
         return "Follow{" +
                 "follower='" + follower + '\'' +
-                ", following='" + following + '\'' +
+                ", following='" + followed + '\'' +
                 '}';
     }
 }
