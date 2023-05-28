@@ -1,15 +1,24 @@
 package org.example.models;
 
 import java.util.Date;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class User {
+    @JsonProperty("id")
     private String id;
+    @JsonProperty("firstName")
     private String firstName;
+    @JsonProperty("lastName")
     private String lastName;
+    @JsonProperty("email")
     private String email;
+    @JsonProperty("phoneNumber")
     private String phoneNumber;
+    @JsonProperty("password")
     private String password;
+    @JsonProperty("country")
     private String country;
+    @JsonProperty("birthday")
     private Date birthday;
 
     public User(String id, String firstName, String lastName, String email, String phoneNumber, String password, String country, Date birthday) {
