@@ -1,0 +1,80 @@
+package org.example.models;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import java.util.Date;
+
+public class Tweet {
+    @JsonProperty("id")
+    private String id;
+    @JsonProperty("writerId")
+    private String writerId;
+    @JsonProperty("ownerId")
+    private String ownerId;
+    @JsonProperty("text")
+    private String text;
+    @JsonProperty("quoteTweetId")
+    private String quoteTweetId;
+    @JsonProperty("createdAt")
+    private Date createdAt;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getWriterId() {
+        return writerId;
+    }
+
+    public void setWriterId(String writerId) {
+        this.writerId = writerId;
+    }
+
+    public String getOwnerId() {
+        return ownerId;
+    }
+
+    public void setOwnerId(String ownerId) {
+        this.ownerId = ownerId;
+    }
+
+    public String getText() {
+        return text;
+    }
+
+    public void setText(String text) {
+        this.text = text;
+    }
+
+    public String getQuoteTweetId() {
+        return quoteTweetId;
+    }
+
+    public void setQuoteTweetId(String quoteTweetId) {
+        this.quoteTweetId = quoteTweetId;
+    }
+
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    @Override
+    public String toString() {
+        return "Tweet{" +
+                "id='" + id + '\'' +
+                ", writerId='" + writerId + '\'' +
+                ", ownerId='" + ownerId + '\'' +
+                ", text='" + text + '\'' +
+                ", quoteTweetId='" + quoteTweetId + '\'' +
+                ", createdAt=" + createdAt +
+                '}';
+    }
+}
