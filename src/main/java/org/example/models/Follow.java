@@ -8,6 +8,7 @@ public class Follow {
 
     @JsonProperty("follower")
     private String follower;
+
     @JsonProperty("followed")
     private String followed;
 

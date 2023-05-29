@@ -15,13 +15,14 @@ public class Main {
         try {
             UserController userController = new UserController();
 
-            FollowController followController = new FollowController();
-            followController.saveFollow("1", "2");
+//            FollowController followController = new FollowController();
+//            followController.saveFollow("1", "2");
 //            followController.deleteFollow("1", "2");
 
 //            userController.deleteUser("1");
 //            userController.createUser("1", "mahdi", "haeri", "mahdihaerim@gmail.com", "123456789", "123456", "Iran", new Date());
 //            userController.createUser("2", "mobin", "zaki", "mobinzaki@gmail.com", "123456789", "123456", "Iran", new Date());
+//            userController.createUser("3", "sina", "sahabi", "sinasahabi@gmail.com", "123123123", "123", "Iran", new Date());
 
 //            userController.updateUser("1", "mahdi", "haeri", "mohammadmahdihaeri@gmail.com", "123456789", "123456", "Iran", new Date());
 //
