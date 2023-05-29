@@ -18,6 +18,19 @@ public class Tweet {
     @JsonProperty("createdAt")
     private Date createdAt;
 
+    public Tweet(String id, String writerId, String ownerId, String text, String quoteTweetId, Date createdAt) {
+        this.id = id;
+        this.writerId = writerId;
+        this.ownerId = ownerId;
+        this.text = text;
+        this.quoteTweetId = quoteTweetId;
+        this.createdAt = createdAt;
+    }
+
+    public Tweet() {
+
+    }
+
     public String getId() {
         return id;
     }
