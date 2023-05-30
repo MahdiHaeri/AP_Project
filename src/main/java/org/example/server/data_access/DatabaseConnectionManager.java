@@ -1,4 +1,4 @@
-package org.example.data_access;
+package org.example.server.data_access;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

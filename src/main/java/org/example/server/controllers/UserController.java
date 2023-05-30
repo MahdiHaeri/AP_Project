@@ -1,7 +1,7 @@
-package org.example.controllers;
+package org.example.server.controllers;
 
-import org.example.data_access.UserDAO;
-import org.example.models.User;
+import org.example.server.data_access.UserDAO;
+import org.example.server.models.User;
 
 import java.sql.SQLException;
 import java.util.Date;

@@ -1,7 +1,7 @@
-package org.example.controllers;
+package org.example.server.controllers;
 
-import org.example.data_access.FollowDAO;
-import org.example.models.Follow;
+import org.example.server.data_access.FollowDAO;
+import org.example.server.models.Follow;
 import java.sql.SQLException;
 public class FollowController {
     private final FollowDAO followDAO;

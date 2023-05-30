@@ -1,9 +1,9 @@
-package org.example.controllers;
+package org.example.server.controllers;
 
 import java.sql.SQLException;
 
-import org.example.data_access.TweetDAO;
-import org.example.models.Tweet;
+import org.example.server.data_access.TweetDAO;
+import org.example.server.models.Tweet;
 
 public class TweetController {
     private final TweetDAO tweetDAO;

@@ -1,6 +1,6 @@
-package org.example.data_access;
+package org.example.server.data_access;
 
-import org.example.models.User;
+import org.example.server.models.User;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

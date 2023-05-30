@@ -2,10 +2,10 @@ package org.example;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.example.controllers.FollowController;
-import org.example.controllers.UserController;
-import org.example.models.Follow;
-import org.example.models.User;
+import org.example.server.controllers.FollowController;
+import org.example.server.controllers.UserController;
+import org.example.server.models.Follow;
+import org.example.server.models.User;
 
 import java.sql.SQLException;
 import java.util.Date;
