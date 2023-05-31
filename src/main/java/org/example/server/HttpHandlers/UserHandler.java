@@ -83,6 +83,22 @@ public class UserHandler implements HttpHandler {
                 response = "This is the response users Put";
                 break;
             case "DELETE":
+                if (splitedPath.length == 2) {
+                    try {
+                        userController.deleteUsers();
+                        response = "All users deleted";
+                    } catch (SQLException e) {
+                        throw new RuntimeException(e);
+                    }
+                } else {
+                    // Extract the user ID from the path
+                    String userId = splitedPath[splitedPath.length - 1];
+                    try {
+                        userController.deleteUser(userId);
+                    } catch (SQLException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
                 response = "This is the response users Delete";
                 break;
             default:

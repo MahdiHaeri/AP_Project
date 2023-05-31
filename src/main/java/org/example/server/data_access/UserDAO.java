@@ -42,6 +42,11 @@ public class UserDAO {
         statement.executeUpdate();
     }
 
+    public void deleteUsers() throws SQLException {
+        PreparedStatement statement = connection.prepareStatement("DELETE FROM users");
+        statement.executeUpdate();
+    }
+
     public void updateUser(User user) throws SQLException {
         PreparedStatement statement = connection.prepareStatement("UPDATE users SET first_name = ?, last_name = ?, email = ?, phone_number = ?, password = ?, country = ?, birthday = ? WHERE id = ?");
         statement.setString(1, user.getFirstName());
