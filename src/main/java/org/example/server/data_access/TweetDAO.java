@@ -11,6 +11,7 @@ public class TweetDAO {
     private final Connection connection;
     public TweetDAO() throws SQLException {
         connection = DatabaseConnectionManager.getConnection();
+        createTweetTable();
     }
 
     public void createTweetTable() throws SQLException {

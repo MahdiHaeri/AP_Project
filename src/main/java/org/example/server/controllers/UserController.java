@@ -1,9 +1,12 @@
 package org.example.server.controllers;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.example.server.data_access.UserDAO;
 import org.example.server.models.User;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Date;
 
 public class UserController {
@@ -32,4 +35,10 @@ public class UserController {
         return userDAO.getUser(id);
     }
 
+    public String getUsers() throws SQLException, JsonProcessingException {
+        ArrayList<User> users = userDAO.getUsers();
+        ObjectMapper objectMapper = new ObjectMapper();
+        String response = objectMapper.writeValueAsString(users);
+        return response;
+    }
 }
