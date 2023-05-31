@@ -1,12 +1,11 @@
 package org.example.server;
 
-import com.sun.net.httpserver.HttpExchange;
-import com.sun.net.httpserver.HttpHandler;
 import com.sun.net.httpserver.HttpServer;
-import org.example.server.models.Follow;
+import org.example.server.HttpHandlers.FollowHandler;
+import org.example.server.HttpHandlers.TweetHandler;
+import org.example.server.HttpHandlers.UserHandler;
 
 import java.io.IOException;
-import java.io.OutputStream;
 import java.net.InetSocketAddress;
 
 public class Server {
