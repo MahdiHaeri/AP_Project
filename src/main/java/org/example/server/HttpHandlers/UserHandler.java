@@ -13,14 +13,28 @@ public class UserHandler implements HttpHandler {
     @Override
     public void handle(HttpExchange exchange) throws IOException {
         String method = exchange.getRequestMethod();
+        String path = exchange.getRequestURI().getPath();
         String response = "";
         switch (method) {
             case "GET":
-                try {
-                    UserController userController = new UserController();
-                    response = userController.getUsers();
-                } catch (SQLException e) {
-                    throw new RuntimeException(e);
+                if (path.matches("^/users/\\d+$")) {
+                    // Extract the user ID from the path
+                    String[] pathSegments = path.split("/");
+                    String userId = pathSegments[pathSegments.length - 1];
+
+                    try {
+                        UserController userController = new UserController();
+                        response = userController.getUserById(userId);
+                    } catch (SQLException e) {
+                        throw new RuntimeException(e);
+                    }
+                } else {
+                    try {
+                        UserController userController = new UserController();
+                        response = userController.getUsers();
+                    } catch (SQLException e) {
+                        throw new RuntimeException(e);
+                    }
                 }
                 break;
             case "POST":

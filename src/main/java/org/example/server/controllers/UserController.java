@@ -31,8 +31,10 @@ public class UserController {
         userDAO.updateUser(user);
     }
 
-    public User getUser(String id) throws SQLException {
-        return userDAO.getUser(id);
+    public String getUserById(String id) throws SQLException, JsonProcessingException {
+        ObjectMapper objectMapper = new ObjectMapper();
+        String response = objectMapper.writeValueAsString(userDAO.getUser(id));
+        return response;
     }
 
     public String getUsers() throws SQLException, JsonProcessingException {
