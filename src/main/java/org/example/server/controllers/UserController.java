@@ -16,6 +16,7 @@ public class UserController {
     }
 
     public void createUser(String id, String firstName, String lastName, String email, String phoneNumber, String password, String country, Date birthday) throws SQLException {
+        System.out.println("this is the bug");
         User user = new User(id, firstName, lastName, email, phoneNumber, password, country, birthday, new Date(), new Date());
         userDAO.saveUser(user);
     }
