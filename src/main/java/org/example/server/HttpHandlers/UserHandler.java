@@ -12,17 +12,6 @@ import org.example.server.controllers.UserController;
 import org.json.JSONObject;
 
 public class UserHandler implements HttpHandler {
-    public Date myConvert(String str) {
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-        try {
-            Date res = format.parse(str);
-            return res;
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
     @Override
     public void handle(HttpExchange exchange) throws IOException {
         UserController userController = null;
