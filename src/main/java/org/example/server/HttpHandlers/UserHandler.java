@@ -18,25 +18,6 @@ public class UserHandler implements HttpHandler {
         String[] splitedPath = path.split("/");
         switch (method) {
             case "GET":
-                // if (path.matches("^/users/\\d+$")) {
-                //     // Extract the user ID from the path
-                //     String[] pathSegments = path.split("/");
-                //     String userId = pathSegments[pathSegments.length - 1];
-
-                //     try {
-                //         UserController userController = new UserController();
-                //         response = userController.getUserById(userId);
-                //     } catch (SQLException e) {
-                //         throw new RuntimeException(e);
-                //     }
-                // } else {
-                //     try {
-                //         UserController userController = new UserController();
-                //         response = userController.getUsers();
-                //     } catch (SQLException e) {
-                //         throw new RuntimeException(e);
-                //     }
-                // }
                 if (splitedPath.length == 2) {
                     try {
                         UserController userController = new UserController();
