@@ -15,23 +15,42 @@ public class UserHandler implements HttpHandler {
         String method = exchange.getRequestMethod();
         String path = exchange.getRequestURI().getPath();
         String response = "";
+        String[] splitedPath = path.split("/");
         switch (method) {
             case "GET":
-                if (path.matches("^/users/\\d+$")) {
-                    // Extract the user ID from the path
-                    String[] pathSegments = path.split("/");
-                    String userId = pathSegments[pathSegments.length - 1];
+                // if (path.matches("^/users/\\d+$")) {
+                //     // Extract the user ID from the path
+                //     String[] pathSegments = path.split("/");
+                //     String userId = pathSegments[pathSegments.length - 1];
 
+                //     try {
+                //         UserController userController = new UserController();
+                //         response = userController.getUserById(userId);
+                //     } catch (SQLException e) {
+                //         throw new RuntimeException(e);
+                //     }
+                // } else {
+                //     try {
+                //         UserController userController = new UserController();
+                //         response = userController.getUsers();
+                //     } catch (SQLException e) {
+                //         throw new RuntimeException(e);
+                //     }
+                // }
+                if (splitedPath.length == 2) {
                     try {
                         UserController userController = new UserController();
-                        response = userController.getUserById(userId);
+                        response = userController.getUsers();
                     } catch (SQLException e) {
                         throw new RuntimeException(e);
                     }
                 } else {
+                    // Extract the user ID from the path
+                    String userId = splitedPath[splitedPath.length - 1];
+
                     try {
                         UserController userController = new UserController();
-                        response = userController.getUsers();
+                        response = userController.getUserById(userId);
                     } catch (SQLException e) {
                         throw new RuntimeException(e);
                     }
