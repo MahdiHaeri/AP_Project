@@ -26,6 +26,10 @@ public class UserController {
         userDAO.deleteUser(user);
     }
 
+    public void deleteUsers() throws SQLException {
+        userDAO.deleteUsers();
+    }
+
     public void updateUser(String id, String firstName, String lastName, String email, String phoneNumber, String password, String country, Date birthday) throws SQLException {
         User user = new User(id, firstName, lastName, email, phoneNumber, password, country, birthday);
         userDAO.updateUser(user);
