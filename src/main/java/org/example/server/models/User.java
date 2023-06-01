@@ -31,9 +31,6 @@ public class User {
     @JsonProperty("createdAt")
     private Date createdAt;
 
-    @JsonProperty("updatedAt")
-    private Date updatedAt;
-
     @JsonProperty("avatarPath")
     private String avatarPath;
 
@@ -43,7 +40,7 @@ public class User {
     @JsonProperty("bio")
     private Bio bio;
 
-    public User(String id, String firstName, String lastName, String email, String phoneNumber, String password, String country, Date birthday, Date createdAt, Date updatedAt, String avatarPath, String headerPath, Bio bio) {
+    public User(String id, String firstName, String lastName, String email, String phoneNumber, String password, String country, Date birthday, Date createdAt, String avatarPath, String headerPath, Bio bio) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -53,7 +50,6 @@ public class User {
         this.country = country;
         this.birthday = birthday;
         this.createdAt = createdAt;
-        this.updatedAt = updatedAt;
         this.avatarPath = avatarPath;
         this.headerPath = headerPath;
         this.bio = bio;
@@ -146,14 +142,6 @@ public class User {
         this.createdAt = createdAt;
     }
 
-    public Date getUpdatedAt() {
-        return updatedAt;
-    }
-
-    public void setUpdatedAt(Date updatedAt) {
-        this.updatedAt = updatedAt;
-    }
-
     public String getAvatarPath() {
         return avatarPath;
     }
@@ -190,7 +178,6 @@ public class User {
                 ", country='" + country + '\'' +
                 ", birthday=" + birthday +
                 ", createdAt=" + createdAt +
-                ", updatedAt=" + updatedAt +
                 ", avatarPath='" + avatarPath + '\'' +
                 ", headerPath='" + headerPath + '\'' +
                 ", bio=" + bio +
