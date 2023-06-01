@@ -43,8 +43,7 @@ public class User {
     @JsonProperty("bio")
     private Bio bio;
 
-
-    public User(String id, String firstName, String lastName, String email, String phoneNumber, String password, String country, Date birthday, Date createdAt, Date updatedAt) {
+    public User(String id, String firstName, String lastName, String email, String phoneNumber, String password, String country, Date birthday, Date createdAt, Date updatedAt, String avatarPath, String headerPath, Bio bio) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -55,6 +54,9 @@ public class User {
         this.birthday = birthday;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
+        this.avatarPath = avatarPath;
+        this.headerPath = headerPath;
+        this.bio = bio;
     }
     public User(String id, String firstName, String lastName, String email, String phoneNumber, String password, String country, Date birthday) {
         this.id = id;
@@ -65,6 +67,7 @@ public class User {
         this.password = password;
         this.country = country;
         this.birthday = birthday;
+        this.createdAt = new Date();
     }
 
     public User() {
@@ -151,17 +154,46 @@ public class User {
         this.updatedAt = updatedAt;
     }
 
+    public String getAvatarPath() {
+        return avatarPath;
+    }
+
+    public void setAvatarPath(String avatarPath) {
+        this.avatarPath = avatarPath;
+    }
+
+    public String getHeaderPath() {
+        return headerPath;
+    }
+
+    public void setHeaderPath(String headerPath) {
+        this.headerPath = headerPath;
+    }
+
+    public Bio getBio() {
+        return bio;
+    }
+
+    public void setBio(Bio bio) {
+        this.bio = bio;
+    }
+
     @Override
     public String toString() {
         return "User{" +
                 "id='" + id + '\'' +
-                ", firstName=" + firstName +
-                ", lastName=" + lastName +
-                ", email=" + email +
-                ", phoneNumber=" + phoneNumber +
-                ", password=" + password +
-                ", country=" + country +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", email='" + email + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", password='" + password + '\'' +
+                ", country='" + country + '\'' +
                 ", birthday=" + birthday +
+                ", createdAt=" + createdAt +
+                ", updatedAt=" + updatedAt +
+                ", avatarPath='" + avatarPath + '\'' +
+                ", headerPath='" + headerPath + '\'' +
+                ", bio=" + bio +
                 '}';
     }
 }
