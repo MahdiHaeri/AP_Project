@@ -21,6 +21,18 @@ public class Bio {
         this.website = website;
     }
 
+    public Bio() {
+
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
     public String getBiography() {
         return biography;
     }
