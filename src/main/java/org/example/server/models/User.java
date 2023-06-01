@@ -34,6 +34,16 @@ public class User {
     @JsonProperty("updatedAt")
     private Date updatedAt;
 
+    @JsonProperty("avatarPath")
+    private String avatarPath;
+
+    @JsonProperty("headerPath")
+    private String headerPath;
+
+    @JsonProperty("bio")
+    private Bio bio;
+
+
     public User(String id, String firstName, String lastName, String email, String phoneNumber, String password, String country, Date birthday, Date createdAt, Date updatedAt) {
         this.id = id;
         this.firstName = firstName;

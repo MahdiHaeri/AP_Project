@@ -1,0 +1,53 @@
+package org.example.server.models;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+public class Bio {
+
+    @JsonProperty("biography")
+    private String biography;
+
+    @JsonProperty("location")
+    private String location;
+
+    @JsonProperty("website")
+    private String website;
+
+    public Bio(String biography, String location, String website) {
+        this.biography = biography;
+        this.location = location;
+        this.website = website;
+    }
+
+    public String getBiography() {
+        return biography;
+    }
+
+    public void setBiography(String biography) {
+        this.biography = biography;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public String getWebsite() {
+        return website;
+    }
+
+    public void setWebsite(String website) {
+        this.website = website;
+    }
+
+    @Override
+    public String toString() {
+        return "Bio{" +
+                "biography='" + biography + '\'' +
+                ", location='" + location + '\'' +
+                ", website='" + website + '\'' +
+                '}';
+    }
+}
