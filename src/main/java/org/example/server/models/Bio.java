@@ -3,6 +3,8 @@ package org.example.server.models;
 import com.fasterxml.jackson.annotation.JsonProperty;
 public class Bio {
 
+    @JsonProperty("id")
+    private String id;
     @JsonProperty("biography")
     private String biography;
 
@@ -12,7 +14,8 @@ public class Bio {
     @JsonProperty("website")
     private String website;
 
-    public Bio(String biography, String location, String website) {
+    public Bio(String id, String biography, String location, String website) {
+        this.id = id;
         this.biography = biography;
         this.location = location;
         this.website = website;
@@ -45,7 +48,8 @@ public class Bio {
     @Override
     public String toString() {
         return "Bio{" +
-                "biography='" + biography + '\'' +
+                "id='" + id + '\'' +
+                ", biography='" + biography + '\'' +
                 ", location='" + location + '\'' +
                 ", website='" + website + '\'' +
                 '}';
