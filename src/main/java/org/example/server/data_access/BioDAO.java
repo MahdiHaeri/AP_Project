@@ -1,7 +1,6 @@
 package org.example.server.data_access;
 
 import org.example.server.models.Bio;
-import org.example.server.models.User;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -56,7 +55,7 @@ public class BioDAO {
 
         if (resultSet.next()) {
             Bio bio = new Bio();
-            bio.setId(resultSet.getString("user_id"));
+            bio.setUserId(resultSet.getString("user_id"));
             bio.setBiography(resultSet.getString("biography"));
             bio.setLocation(resultSet.getString("location"));
             bio.setWebsite(resultSet.getString("website"));
@@ -73,7 +72,7 @@ public class BioDAO {
 
         while (resultSet.next()) {
             Bio bio = new Bio();
-            bio.setId(resultSet.getString("user_id"));
+            bio.setUserId(resultSet.getString("user_id"));
             bio.setBiography(resultSet.getString("biography"));
             bio.setLocation(resultSet.getString("location"));
             bio.setWebsite(resultSet.getString("website"));
