@@ -13,6 +13,7 @@ public class BioDAO {
 
     public BioDAO() throws SQLException {
         connection = DatabaseConnectionManager.getConnection();
+        createBioTable();
     }
 
     public void createBioTable() throws SQLException {
@@ -20,9 +21,9 @@ public class BioDAO {
         statement.executeUpdate();
     }
 
-    public void saveBio(String userId, Bio bio) throws SQLException {
+    public void saveBio(Bio bio) throws SQLException {
         PreparedStatement statement = connection.prepareStatement("INSERT INTO bios (user_id, biography, location, website) VALUES (?, ?, ?, ?)");
-        statement.setString(1, userId);
+        statement.setString(1, bio.getUserId());
         statement.setString(2, bio.getBiography());
         statement.setString(3, bio.getLocation());
         statement.setString(4, bio.getWebsite());

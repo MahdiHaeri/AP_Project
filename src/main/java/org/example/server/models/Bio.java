@@ -3,7 +3,7 @@ package org.example.server.models;
 import com.fasterxml.jackson.annotation.JsonProperty;
 public class Bio {
 
-    @JsonProperty("id")
+    @JsonProperty("userId")
     private String userId;
     @JsonProperty("biography")
     private String biography;

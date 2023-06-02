@@ -1,10 +1,11 @@
 package org.example.server;
 
 import com.sun.net.httpserver.HttpServer;
+import org.example.server.HttpHandlers.BioHandler;
 import org.example.server.HttpHandlers.FollowHandler;
 import org.example.server.HttpHandlers.TweetHandler;
 import org.example.server.HttpHandlers.UserHandler;
-import org.example.server.controllers.UserController;
+import org.example.server.HttpHandlers.BioHandler;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
@@ -25,6 +26,7 @@ public class Server {
 //        System.exit(0);
         try {
             HttpServer server = HttpServer.create(new InetSocketAddress(8080), 0);
+            server.createContext("/bios", new BioHandler());
             server.createContext("/users", new UserHandler());
             server.createContext("/tweets", new TweetHandler());
             server.createContext("/follows", new FollowHandler());

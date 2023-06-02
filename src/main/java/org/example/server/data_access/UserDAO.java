@@ -22,11 +22,6 @@ public class UserDAO {
         statement.executeUpdate();
     }
 
-    public void createBioTable() throws SQLException {
-        PreparedStatement statement = connection.prepareStatement("CREATE TABLE IF NOT EXISTS bio (user_id VARCHAR(36) PRIMARY KEY, biography VARCHAR(255), location VARCHAR(255), website VARCHAR(255))");
-        statement.executeUpdate();
-    }
-
     public void saveUser(User user) throws SQLException {
         PreparedStatement statement = connection.prepareStatement("INSERT INTO users (id, first_name, last_name, email, phone_number, password, country, birthday, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
         statement.setString(1, user.getId());
@@ -42,35 +37,14 @@ public class UserDAO {
         statement.executeUpdate();
     }
 
-    public void saveBio(String userId, Bio bio) throws SQLException {
-        PreparedStatement statement = connection.prepareStatement("INSERT INTO bio (user_id, biography, location, website) VALUES (?, ?, ?, ?)");
-        statement.setString(1, userId);
-        statement.setString(2, bio.getBiography());
-        statement.setString(3, bio.getLocation());
-        statement.setString(4, bio.getWebsite());
-
-        statement.executeUpdate();
-    }
-
     public void deleteUser(User user) throws SQLException {
         PreparedStatement statement = connection.prepareStatement("DELETE FROM users WHERE id = ?");
         statement.setString(1, user.getId());
         statement.executeUpdate();
     }
 
-    public void deleteBio(String userId) throws SQLException {
-        PreparedStatement statement = connection.prepareStatement("DELETE FROM bio WHERE user_id = ?");
-        statement.setString(1, userId);
-        statement.executeUpdate();
-    }
-
     public void deleteUsers() throws SQLException {
         PreparedStatement statement = connection.prepareStatement("DELETE FROM users");
-        statement.executeUpdate();
-    }
-
-    public void deleteBios() throws SQLException {
-        PreparedStatement statement = connection.prepareStatement("DELETE FROM bio");
         statement.executeUpdate();
     }
 
@@ -84,16 +58,6 @@ public class UserDAO {
         statement.setString(6, user.getCountry());
         statement.setDate(7, new java.sql.Date(user.getBirthday().getTime()));
         statement.setString(8, user.getId());
-
-        statement.executeUpdate();
-    }
-
-    public void updateBio(String userId, Bio bio) throws SQLException {
-        PreparedStatement statement = connection.prepareStatement("UPDATE bio SET biography = ?, location = ?, website = ? WHERE user_id = ?");
-        statement.setString(1, bio.getBiography());
-        statement.setString(2, bio.getLocation());
-        statement.setString(3, bio.getWebsite());
-        statement.setString(4, userId);
 
         statement.executeUpdate();
     }
@@ -120,21 +84,6 @@ public class UserDAO {
         return null; // User not found
     }
 
-    public Bio getBio(String userId) throws SQLException {
-        PreparedStatement statement = connection.prepareStatement("SELECT * FROM bio WHERE user_id = ?");
-        statement.setString(1, userId);
-        ResultSet resultSet = statement.executeQuery();
-
-        if (resultSet.next()) {
-            Bio bio = new Bio();
-            bio.setBiography(resultSet.getString("biography"));
-            bio.setLocation(resultSet.getString("location"));
-            bio.setWebsite(resultSet.getString("website"));
-            return bio;
-        }
-
-        return null; // Bio not found
-    }
 
     public ArrayList<User> getUsers() throws SQLException {
         ArrayList<User> users = new ArrayList<User>();
@@ -155,20 +104,5 @@ public class UserDAO {
         }
 
         return users;
-    }
-
-    public ArrayList<Bio> getBios() throws SQLException {
-        ArrayList<Bio> bios = new ArrayList<Bio>();
-        PreparedStatement statement = connection.prepareStatement("SELECT * FROM bio");
-        ResultSet resultSet = statement.executeQuery();
-        while (resultSet.next()) {
-            Bio bio = new Bio();
-            bio.setBiography(resultSet.getString("biography"));
-            bio.setLocation(resultSet.getString("location"));
-            bio.setWebsite(resultSet.getString("website"));
-            bios.add(bio);
-        }
-
-        return bios;
     }
 }
