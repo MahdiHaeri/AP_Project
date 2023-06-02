@@ -47,4 +47,12 @@ public class UserController {
         String response = objectMapper.writeValueAsString(users);
         return response;
     }
+
+    public String getUserByIdAndPass(String id, String pass) throws SQLException, JsonProcessingException {
+        User user = userDAO.getUser(id, pass);
+        if (user == null) return null;
+        ObjectMapper objectMapper = new ObjectMapper();
+        String response = objectMapper.writeValueAsString(user);
+        return response;
+    }
 }
