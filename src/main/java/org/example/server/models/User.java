@@ -31,16 +31,7 @@ public class User {
     @JsonProperty("createdAt")
     private Date createdAt;
 
-    @JsonProperty("avatarPath")
-    private String avatarPath;
-
-    @JsonProperty("headerPath")
-    private String headerPath;
-
-    @JsonProperty("bio")
-    private Bio bio;
-
-    public User(String id, String firstName, String lastName, String email, String phoneNumber, String password, String country, Date birthday, Date createdAt, String avatarPath, String headerPath, Bio bio) {
+    public User(String id, String firstName, String lastName, String email, String phoneNumber, String password, String country, Date birthday, Date createdAt) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -50,10 +41,8 @@ public class User {
         this.country = country;
         this.birthday = birthday;
         this.createdAt = createdAt;
-        this.avatarPath = avatarPath;
-        this.headerPath = headerPath;
-        this.bio = bio;
     }
+
     public User(String id, String firstName, String lastName, String email, String phoneNumber, String password, String country, Date birthday) {
         this.id = id;
         this.firstName = firstName;
@@ -142,30 +131,6 @@ public class User {
         this.createdAt = createdAt;
     }
 
-    public String getAvatarPath() {
-        return avatarPath;
-    }
-
-    public void setAvatarPath(String avatarPath) {
-        this.avatarPath = avatarPath;
-    }
-
-    public String getHeaderPath() {
-        return headerPath;
-    }
-
-    public void setHeaderPath(String headerPath) {
-        this.headerPath = headerPath;
-    }
-
-    public Bio getBio() {
-        return bio;
-    }
-
-    public void setBio(Bio bio) {
-        this.bio = bio;
-    }
-
     @Override
     public String toString() {
         return "User{" +
@@ -178,9 +143,6 @@ public class User {
                 ", country='" + country + '\'' +
                 ", birthday=" + birthday +
                 ", createdAt=" + createdAt +
-                ", avatarPath='" + avatarPath + '\'' +
-                ", headerPath='" + headerPath + '\'' +
-                ", bio=" + bio +
                 '}';
     }
 }
