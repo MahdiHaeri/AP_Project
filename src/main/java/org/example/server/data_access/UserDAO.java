@@ -84,6 +84,27 @@ public class UserDAO {
         return null; // User not found
     }
 
+    public User getUser(String userId, String userPass) throws SQLException {
+        PreparedStatement statement = connection.prepareStatement("SELECT * FROM users WHERE id = ? AND password = ?");
+        statement.setString(1, userId);
+        statement.setString(2, userPass);
+        ResultSet resultSet = statement.executeQuery();
+        if (resultSet.next()) {
+            User user = new User();
+            user.setId(resultSet.getString("id"));
+            user.setFirstName(resultSet.getString("first_name"));
+            user.setLastName(resultSet.getString("last_name"));
+            user.setEmail(resultSet.getString("email"));
+            user.setPhoneNumber(resultSet.getString("phone_number"));
+            user.setPassword(resultSet.getString("password"));
+            user.setCountry(resultSet.getString("country"));
+            user.setBirthday(resultSet.getDate("birthday"));
+            user.setCreatedAt(resultSet.getDate("created_at"));
+            return user;
+        }
+
+        return null; // User not found
+    }
 
     public ArrayList<User> getUsers() throws SQLException {
         ArrayList<User> users = new ArrayList<User>();

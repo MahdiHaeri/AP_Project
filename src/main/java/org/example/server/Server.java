@@ -3,6 +3,7 @@ package org.example.server;
 import com.sun.net.httpserver.HttpServer;
 import org.example.server.HttpHandlers.BioHandler;
 import org.example.server.HttpHandlers.FollowHandler;
+import org.example.server.HttpHandlers.SessionHandler;
 import org.example.server.HttpHandlers.TweetHandler;
 import org.example.server.HttpHandlers.UserHandler;
 import org.example.server.HttpHandlers.BioHandler;
@@ -30,6 +31,7 @@ public class Server {
             server.createContext("/users", new UserHandler());
             server.createContext("/tweets", new TweetHandler());
             server.createContext("/follows", new FollowHandler());
+            server.createContext("/sessions", new SessionHandler());
             server.start();
         } catch (IOException e) {
             throw new RuntimeException(e);

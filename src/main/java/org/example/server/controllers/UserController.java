@@ -77,10 +77,19 @@ public class UserController {
         return response;
     }
 
+
     public String getBios() throws SQLException, JsonProcessingException {
         ArrayList<Bio> bios = bioDAO.getBios();
         ObjectMapper objectMapper = new ObjectMapper();
         String response = objectMapper.writeValueAsString(bios);
+    }
+  
+    public String getUserByIdAndPass(String id, String pass) throws SQLException, JsonProcessingException {
+        User user = userDAO.getUser(id, pass);
+        if (user == null) return null;
+        ObjectMapper objectMapper = new ObjectMapper();
+        String response = objectMapper.writeValueAsString(user);
+
         return response;
     }
 }

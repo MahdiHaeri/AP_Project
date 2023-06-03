@@ -2,12 +2,9 @@ package org.example.server.HttpHandlers;
 
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
-
 import java.io.*;
 import java.sql.SQLException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
-
 import org.example.server.controllers.UserController;
 import org.json.JSONObject;
 
