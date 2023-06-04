@@ -1,17 +1,11 @@
 package org.example.server;
 
 import com.sun.net.httpserver.HttpServer;
-import org.example.server.HttpHandlers.BioHandler;
-import org.example.server.HttpHandlers.FollowHandler;
-import org.example.server.HttpHandlers.SessionHandler;
-import org.example.server.HttpHandlers.TweetHandler;
-import org.example.server.HttpHandlers.UserHandler;
+import org.example.server.HttpHandlers.*;
 import org.example.server.HttpHandlers.BioHandler;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
-import java.sql.SQLException;
-import java.util.Date;
 
 public class Server {
     public static void main(String[] args) {
@@ -32,6 +26,7 @@ public class Server {
             server.createContext("/tweets", new TweetHandler());
             server.createContext("/follows", new FollowHandler());
             server.createContext("/sessions", new SessionHandler());
+            server.createContext("/media", new MediaHandler());
             server.start();
         } catch (IOException e) {
             throw new RuntimeException(e);

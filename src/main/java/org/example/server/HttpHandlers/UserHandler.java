@@ -3,6 +3,8 @@ package org.example.server.HttpHandlers;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.sql.SQLException;
 import java.util.Date;
 import org.example.server.controllers.UserController;
@@ -58,6 +60,7 @@ public class UserHandler implements HttpHandler {
                 } catch (SQLException e) {
                     throw new RuntimeException(e);
                 }
+                Files.createDirectories(Paths.get("src/main/java/org/example/server/assets/" + jsonObject.getString("id")));
                 response = "this is done!";
                 break;
             case "PUT":
