@@ -59,14 +59,18 @@ public class UserController {
     }
 
     public String getUserById(String id) throws SQLException, JsonProcessingException {
+        User user = userDAO.getUser(id);
+        if (user == null) return null;
         ObjectMapper objectMapper = new ObjectMapper();
-        String response = objectMapper.writeValueAsString(userDAO.getUser(id));
+        String response = objectMapper.writeValueAsString(user);
         return response;
     }
 
     public String getBioByUserId(String userId) throws SQLException, JsonProcessingException {
+        Bio bio = bioDAO.getBio(userId);
+        if (bio == null) return null;
         ObjectMapper objectMapper = new ObjectMapper();
-        String response = objectMapper.writeValueAsString(bioDAO.getBio(userId));
+        String response = objectMapper.writeValueAsString(bio);
         return response;
     }
 
@@ -77,6 +81,13 @@ public class UserController {
         return response;
     }
 
+    public boolean isUserExists (String ID) {
+        try {
+            return (userDAO.getUser(ID) != null);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
     public String getBios() throws SQLException, JsonProcessingException {
         ArrayList<Bio> bios = bioDAO.getBios();
