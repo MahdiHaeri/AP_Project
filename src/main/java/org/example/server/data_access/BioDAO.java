@@ -1,6 +1,6 @@
-package org.example.server.data_access;
+package com.sinarmin.server.data_access;
 
-import org.example.server.models.Bio;
+import com.sinarmin.server.models.Bio;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

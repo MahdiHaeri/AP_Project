@@ -1,12 +1,13 @@
-package org.example.server.controllers;
+package com.sinarmin.server.controllers;
 
 import java.sql.Date;
 import java.sql.SQLException;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.example.server.data_access.TweetDAO;
-import org.example.server.models.Tweet;
+import com.sinarmin.server.data_access.TweetDAO;
+import com.sinarmin.server.models.Tweet;
+import com.sinarmin.server.models.User;
 
 import java.time.LocalDate;
 

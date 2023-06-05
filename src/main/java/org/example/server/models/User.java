@@ -1,4 +1,4 @@
-package org.example.server.models;
+package com.sinarmin.server.models;
 
 import java.util.Date;
 import com.fasterxml.jackson.annotation.JsonProperty;

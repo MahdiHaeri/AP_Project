@@ -1,8 +1,7 @@
-package org.example.server.controllers;
+package com.sinarmin.server.controllers;
 
-import org.example.server.data_access.FollowDAO;
-import org.example.server.models.Follow;
-
+import com.sinarmin.server.data_access.FollowDAO;
+import com.sinarmin.server.models.Follow;
 import java.sql.SQLException;
 public class FollowController {
     private final FollowDAO followDAO;

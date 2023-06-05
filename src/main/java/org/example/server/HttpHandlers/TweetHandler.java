@@ -1,7 +1,10 @@
-package org.example.server.HttpHandlers;
+package com.sinarmin.server.HttpHandlers;
 
-import org.example.server.controllers.TweetController;
-import org.example.server.utils.ExtractUserAuth;
+import com.sinarmin.server.controllers.TweetController;
+import com.sinarmin.server.controllers.UserController;
+import com.sinarmin.server.utils.ExtractUserAuth;
+import com.sinarmin.server.utils.JwtAuth;
+import com.sun.net.httpserver.Headers;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import org.json.JSONObject;
@@ -9,6 +12,7 @@ import org.json.*;
 
 import java.io.*;
 import java.sql.SQLException;
+import java.util.Date;
 
 public class TweetHandler implements HttpHandler {
     @Override
@@ -132,13 +136,12 @@ public class TweetHandler implements HttpHandler {
         os.close();
     }
     public static String[] toStringArray(JSONArray array) {
-        if(array==null)
+        if(array == null)
             return new String[0];
 
-        String[] arr=new String[array.length()];
-        for(int i=0; i<arr.length; i++) {
-            arr[i]=array.optString(i);
-        }
+        String[] arr = new String[array.length()];
+        for(int i = 0; i < arr.length; i++)
+            arr[i] = array.optString(i);
         return arr;
     }
 }

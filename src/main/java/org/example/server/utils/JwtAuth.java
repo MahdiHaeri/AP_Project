@@ -1,4 +1,4 @@
-package org.example.server.utils;
+package com.sinarmin.server.utils;
 
 public class JwtAuth {
 	private static final String secret = "DrHosseinZynali";

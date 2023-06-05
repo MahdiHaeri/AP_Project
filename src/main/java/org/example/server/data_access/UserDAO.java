@@ -1,4 +1,4 @@
-package org.example.server.data_access;
+package com.sinarmin.server.data_access;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -6,7 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import org.example.server.models.User;
+import com.sinarmin.server.models.User;
 
 public class UserDAO {
     private final Connection connection;

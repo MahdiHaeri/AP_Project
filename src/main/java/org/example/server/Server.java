@@ -1,8 +1,7 @@
-package org.example.server;
+package com.sinarmin.server;
 
+import com.sinarmin.server.HttpHandlers.*;
 import com.sun.net.httpserver.HttpServer;
-import org.example.server.HttpHandlers.*;
-
 import java.io.IOException;
 import java.net.InetSocketAddress;
 
@@ -26,6 +25,7 @@ public class Server {
             server.createContext("/follows", new FollowHandler());
             server.createContext("/sessions", new SessionHandler());
             server.createContext("/media", new MediaHandler());
+            server.createContext("/hashtag", new HashtagHandler());
             server.start();
         } catch (IOException e) {
             throw new RuntimeException(e);

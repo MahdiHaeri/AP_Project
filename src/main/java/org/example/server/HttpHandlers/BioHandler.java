@@ -1,4 +1,4 @@
-package org.example.server.HttpHandlers;
+package com.sinarmin.server.HttpHandlers;
 
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
@@ -6,7 +6,7 @@ import com.sun.net.httpserver.HttpHandler;
 import java.io.*;
 import java.sql.SQLException;
 
-import org.example.server.controllers.UserController;
+import com.sinarmin.server.controllers.UserController;
 import org.json.JSONObject;
 
 public class BioHandler implements HttpHandler {
