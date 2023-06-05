@@ -6,7 +6,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import org.example.server.models.Bio;
 import org.example.server.models.User;
 
 public class UserDAO {

@@ -5,6 +5,7 @@ import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import org.example.server.controllers.UserController;
 import org.example.server.utils.JwtAuth;
+
 import java.io.IOException;
 import java.io.OutputStream;
 import java.sql.SQLException;

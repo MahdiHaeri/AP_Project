@@ -6,6 +6,11 @@ import java.util.Date;
 import java.util.ArrayList;
 
 public class Tweet {
+    private static int TotalNumOfTweets;
+
+    static {
+        TotalNumOfTweets = 0;
+    }
     @JsonProperty("id")
     private String id;
 
@@ -69,7 +74,8 @@ public class Tweet {
     public String getId() {
         return id;
     }
-
+    public static int getTotalNumOfTweets() { return TotalNumOfTweets;}
+    public static void IncTotalNumOfTweets() {TotalNumOfTweets++;}
     public void setId(String id) {
         this.id = id;
     }
