@@ -1,8 +1,7 @@
-package com.sinarmin.server.HttpHandlers;
+package org.example.server.HttpHandlers;
 
-import com.sinarmin.server.controllers.HashtagController;
-import com.sinarmin.server.controllers.UserController;
-import com.sinarmin.server.models.Hashtag;
+import org.example.server.controllers.HashtagController;
+import org.example.server.models.Hashtag;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import org.json.JSONArray;
@@ -10,7 +9,6 @@ import org.json.JSONArray;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.sql.SQLException;
-import java.util.logging.Handler;
 
 public class HashtagHandler implements HttpHandler {
     @Override

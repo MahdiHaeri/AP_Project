@@ -1,7 +1,7 @@
-package com.sinarmin.server;
+package org.example.server;
 
-import com.sinarmin.server.HttpHandlers.*;
 import com.sun.net.httpserver.HttpServer;
+import org.example.server.HttpHandlers.*;
 import java.io.IOException;
 import java.net.InetSocketAddress;
 

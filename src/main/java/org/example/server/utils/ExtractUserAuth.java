@@ -1,4 +1,4 @@
-package com.sinarmin.server.utils;
+package org.example.server.utils;
 
 import com.sun.net.httpserver.HttpExchange;
 

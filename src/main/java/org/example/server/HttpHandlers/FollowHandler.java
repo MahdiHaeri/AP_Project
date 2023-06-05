@@ -1,4 +1,4 @@
-package com.sinarmin.server.HttpHandlers;
+package org.example.server.HttpHandlers;
 
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;

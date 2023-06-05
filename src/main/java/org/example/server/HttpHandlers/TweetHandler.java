@@ -1,10 +1,7 @@
-package com.sinarmin.server.HttpHandlers;
+package org.example.server.HttpHandlers;
 
-import com.sinarmin.server.controllers.TweetController;
-import com.sinarmin.server.controllers.UserController;
-import com.sinarmin.server.utils.ExtractUserAuth;
-import com.sinarmin.server.utils.JwtAuth;
-import com.sun.net.httpserver.Headers;
+import org.example.server.controllers.TweetController;
+import org.example.server.utils.ExtractUserAuth;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import org.json.JSONObject;
@@ -12,7 +9,6 @@ import org.json.*;
 
 import java.io.*;
 import java.sql.SQLException;
-import java.util.Date;
 
 public class TweetHandler implements HttpHandler {
     @Override

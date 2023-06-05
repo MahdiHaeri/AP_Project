@@ -1,10 +1,8 @@
-package com.sinarmin.server.data_access;
+package org.example.server.data_access;
 
-import com.sinarmin.server.models.Hashtag;
-import com.sinarmin.server.models.Tweet;
+import org.example.server.models.Hashtag;
 
 import java.sql.*;
-import java.util.ArrayList;
 
 public class HashtagDAO {
     private final Connection connection;

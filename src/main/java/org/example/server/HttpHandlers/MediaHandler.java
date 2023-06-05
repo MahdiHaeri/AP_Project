@@ -1,9 +1,9 @@
-package com.sinarmin.server.HttpHandlers;
+package org.example.server.HttpHandlers;
 
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
-import com.sinarmin.server.controllers.UserController;
-import com.sinarmin.server.utils.ExtractUserAuth;
+import org.example.server.controllers.UserController;
+import org.example.server.utils.ExtractUserAuth;
 
 import java.io.*;
 import java.nio.file.Files;

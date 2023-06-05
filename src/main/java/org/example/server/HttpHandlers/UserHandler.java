@@ -1,4 +1,4 @@
-package com.sinarmin.server.HttpHandlers;
+package org.example.server.HttpHandlers;
 
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
@@ -7,7 +7,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.sql.SQLException;
 import java.util.Date;
-import com.sinarmin.server.controllers.UserController;
+import org.example.server.controllers.UserController;
 import org.json.JSONObject;
 
 public class UserHandler implements HttpHandler {
