@@ -9,7 +9,6 @@ This project is a Twitter simulation written in Java, designed for an AP course.
 - [Technologies](#technologies)
 - [Installation](#installation)
 - [Usage](#usage)
-- [Project Structure](#project-structure)
 - [Contributing](#contributing)
 - [License](#license)
 
@@ -57,19 +56,6 @@ To run the Twitter Simulation project, perform the following steps:
 1. Start the HTTP server.
 2. Launch the client-side application.
 3. Access the application through a web browser or other HTTP client.
-
-## Project Structure
-
-The project follows the MVC (Model-View-Controller) pattern to organize the codebase. Here is a high-level overview of the project structure:
-
-- `src/`: Contains the source code files.
-  - `com.example.app/`: Main package for the application.
-    - `controllers/`: Contains the controller classes for handling user requests.
-    - `models/`: Defines the data models used in the application.
-    - `views/`: Includes the view templates for rendering the user interface.
-    - `dataAccess/`: Implements the data access layer for interacting with the database.
-    - `server/`: Contains the HTTP server implementation.
-- `resources/`: Includes configuration files, static assets, and templates.
 
 ## Contributing
 
