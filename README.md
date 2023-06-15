@@ -44,7 +44,7 @@ The project utilizes the following technologies:
 
 To install and set up the Twitter Simulation project, follow these steps:
 
-1. Clone the repository: `git clone https://github.com/your-username/twitter-simulation.git`
+1. Clone the repository: `git clone git@github.com:MahdiHaeri/AP_Project.git`
 2. Install the required dependencies.
 3. Set up the PostgreSQL database and configure the connection details.
 4. Build the project using a build tool such as Maven or Gradle.
