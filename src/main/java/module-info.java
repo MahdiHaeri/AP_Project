@@ -10,8 +10,10 @@ module com.example.ap_project {
     requires com.fasterxml.jackson.core;
     requires com.fasterxml.jackson.databind;
 
-    opens com.example.ap_project to javafx.fxml;
+    opens com.example.client to javafx.fxml;
     opens com.example.server.models to com.fasterxml.jackson.databind; // Add this line
 
-    exports com.example.ap_project;
+    exports com.example.client;
+    exports com.example.client.controllers;
+    opens com.example.client.controllers to javafx.fxml;
 }
