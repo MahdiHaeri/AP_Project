@@ -46,6 +46,7 @@ public class BioDAO {
         statement.setString(1, bio.getBiography());
         statement.setString(2, bio.getLocation());
         statement.setString(3, bio.getWebsite());
+        statement.setString(4, bio.getUserId());
         statement.executeUpdate();
     }
 

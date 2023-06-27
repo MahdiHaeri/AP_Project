@@ -23,6 +23,17 @@ public class BioHandler implements HttpHandler {
         String path = exchange.getRequestURI().getPath();
         String response = "";
         String[] splitedPath = path.split("/");
+
+        // Read the request body
+        InputStream requestBody = exchange.getRequestBody();
+        BufferedReader reader = new BufferedReader(new InputStreamReader(requestBody));
+        StringBuilder body = new StringBuilder();
+        String line;
+        while ((line = reader.readLine()) != null) {
+            body.append(line);
+        }
+        requestBody.close();
+
         switch (method) {
             case "GET":
                 if (splitedPath.length == 2) {
@@ -42,16 +53,6 @@ public class BioHandler implements HttpHandler {
                 }
                 break;
             case "POST":
-                // Read the request body
-                InputStream requestBody = exchange.getRequestBody();
-                BufferedReader reader = new BufferedReader(new InputStreamReader(requestBody));
-                StringBuilder body = new StringBuilder();
-                String line;
-                while ((line = reader.readLine()) != null) {
-                    body.append(line);
-                }
-                requestBody.close();
-
                 // Process the bio creation based on the request body
                 String newUser = body.toString();
                 JSONObject jsonObject = new JSONObject(newUser);
@@ -63,6 +64,14 @@ public class BioHandler implements HttpHandler {
                 response = "this is done!";
                 break;
             case "PUT":
+                // Process the bio update based on the request body
+                String updatedUser = body.toString();
+                JSONObject updatedJsonObject = new JSONObject(updatedUser);
+                try {
+                    userController.updateBio(updatedJsonObject.getString("userId"), updatedJsonObject.getString("biography"), updatedJsonObject.getString("location"), updatedJsonObject.getString("website"));
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
                 response = "This is the response bios Put";
                 break;
             case "DELETE":
