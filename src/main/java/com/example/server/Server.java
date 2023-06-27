@@ -1,12 +1,9 @@
 package com.example.server;
 
-import com.example.server.controllers.UserController;
 import com.sun.net.httpserver.HttpServer;
 import com.example.server.HttpHandlers.*;
 import java.io.IOException;
 import java.net.InetSocketAddress;
-import java.sql.SQLException;
-import java.util.Date;
 
 public class Server {
     public static void main(String[] args) {
@@ -26,7 +23,7 @@ public class Server {
             server.createContext("/users", new UserHandler());
             server.createContext("/tweets", new TweetHandler());
             server.createContext("/follows", new FollowHandler());
-            server.createContext("/sessions", new SessionHandler());
+            server.createContext("/login", new LoginHandler());
             server.createContext("/media", new MediaHandler());
             server.createContext("/hashtag", new HashtagHandler());
             server.start();

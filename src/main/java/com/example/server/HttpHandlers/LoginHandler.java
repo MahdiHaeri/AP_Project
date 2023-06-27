@@ -10,7 +10,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.sql.SQLException;
 
-public class SessionHandler implements HttpHandler {
+public class LoginHandler implements HttpHandler {
     @Override
     public void handle(HttpExchange exchange) throws IOException {
         UserController userController = null;
