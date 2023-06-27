@@ -1,5 +1,6 @@
 package com.example.server.HttpHandlers;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import java.io.*;
@@ -23,6 +24,17 @@ public class UserHandler implements HttpHandler {
         String path = exchange.getRequestURI().getPath();
         String response = "";
         String[] splitedPath = path.split("/");
+
+        // Read the request body
+        InputStream requestBody = exchange.getRequestBody();
+        BufferedReader reader = new BufferedReader(new InputStreamReader(requestBody));
+        StringBuilder body = new StringBuilder();
+        String line;
+        while ((line = reader.readLine()) != null) {
+            body.append(line);
+        }
+        requestBody.close();
+
         switch (method) {
             case "GET":
                 if (splitedPath.length == 2) {
@@ -42,16 +54,6 @@ public class UserHandler implements HttpHandler {
                 }
                 break;
             case "POST":
-                // Read the request body
-                InputStream requestBody = exchange.getRequestBody();
-                BufferedReader reader = new BufferedReader(new InputStreamReader(requestBody));
-                StringBuilder body = new StringBuilder();
-                String line;
-                while ((line = reader.readLine()) != null) {
-                    body.append(line);
-                }
-                requestBody.close();
-
                 // Process the user creation based on the request body
                 String newUser = body.toString();
                 JSONObject jsonObject = new JSONObject(newUser);
@@ -64,6 +66,13 @@ public class UserHandler implements HttpHandler {
                 response = "this is done!";
                 break;
             case "PUT":
+                String putUser = body.toString();
+                JSONObject putJsonObject = new JSONObject(putUser);
+                try {
+                    userController.updateUser(putJsonObject.getString("id"), putJsonObject.getString("firstName"), putJsonObject.getString("lastName"), putJsonObject.getString("email"), putJsonObject.getString("phoneNumber"), putJsonObject.getString("password"), putJsonObject.getString("country"), new Date(putJsonObject.getLong("birthday")));
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
                 response = "This is the response users Put";
                 break;
             case "DELETE":
