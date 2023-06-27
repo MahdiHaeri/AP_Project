@@ -28,6 +28,10 @@ public class FollowController {
         followDAO.saveFollow(follow);
     }
 
+    public void deleteFollows() throws SQLException {
+        followDAO.deleteFollows();
+    }
+
     public void deleteFollow(String follower, String followed) throws SQLException {
         Follow follow = new Follow(follower, followed);
         followDAO.deleteFollow(follow);

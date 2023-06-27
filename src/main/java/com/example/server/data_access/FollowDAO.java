@@ -28,6 +28,11 @@ public class FollowDAO {
         preparedStatement.executeUpdate();
     }
 
+    public void deleteFollows() throws SQLException {
+        PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM follows");
+        preparedStatement.executeUpdate();
+    }
+
     public void deleteFollow(Follow follow) throws SQLException {
         PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM follows WHERE follower = ? AND followed = ?");
         preparedStatement.setString(1, follow.getFollower());
