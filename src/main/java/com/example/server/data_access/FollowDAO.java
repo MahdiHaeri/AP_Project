@@ -7,7 +7,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
 
 public class FollowDAO {
 
@@ -36,11 +35,10 @@ public class FollowDAO {
         preparedStatement.executeUpdate();
     }
 
-    public List<Follow> getFollows(String userId) throws SQLException {
-        PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM follows WHERE follower = ?");
-        preparedStatement.setString(1, userId);
+    public ArrayList<Follow> getFollows() throws SQLException {
+        PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM follows");
         ResultSet resultSet = preparedStatement.executeQuery();
-        List<Follow> follows = new ArrayList<>();
+        ArrayList<Follow> follows = new ArrayList<>();
         while (resultSet.next()) {
             Follow follow = new Follow();
             follow.setFollower(resultSet.getString("follower"));
@@ -50,11 +48,10 @@ public class FollowDAO {
         return follows;
     }
 
-    public List<Follow> getFollowers(String userId) throws SQLException {
-        PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM follows WHERE followed = ?");
+    public ArrayList<Follow> getFollowers(String userId) throws SQLException { PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM follows WHERE followed = ?");
         preparedStatement.setString(1, userId);
         ResultSet resultSet = preparedStatement.executeQuery();
-        List<Follow> follows = new ArrayList<>();
+        ArrayList<Follow> follows = new ArrayList<>();
         while (resultSet.next()) {
             Follow follow = new Follow();
             follow.setFollower(resultSet.getString("follower"));
@@ -63,6 +60,19 @@ public class FollowDAO {
         }
         return follows;
     }
+    public ArrayList<Follow> getFollowings(String userId) throws SQLException { PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM follows WHERE follower = ?");
+        preparedStatement.setString(1, userId);
+        ResultSet resultSet = preparedStatement.executeQuery();
+        ArrayList<Follow> follows = new ArrayList<>();
+        while (resultSet.next()) {
+            Follow follow = new Follow();
+            follow.setFollower(resultSet.getString("follower"));
+            follow.setFollowed(resultSet.getString("followed"));
+            follows.add(follow);
+        }
+        return follows;
+    }
+
 
     public boolean isFollowing(String followerId, String followedId) throws SQLException {
         PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM follows WHERE follower = ? AND followed = ?");
