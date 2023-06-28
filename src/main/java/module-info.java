@@ -10,6 +10,10 @@ module com.example.ap_project {
     requires com.fasterxml.jackson.core;
     requires com.fasterxml.jackson.databind;
 
+//    requires javafx.base;
+//    requires javafx.graphics;
+    // add icon pack modules
+
     opens com.example.client to javafx.fxml;
     opens com.example.server.models to com.fasterxml.jackson.databind; // Add this line
 
