@@ -10,9 +10,15 @@
 }
 
 .right-pane {
-    -fx-background-color: #1DA1F2;
+    /*-fx-background-color: #1DA1F2;*/
+    -fx-background-color: linear-gradient(to right top,  #1DA1F2,rgba(14,188,231,1) 100%);
     -fx-alignment: center;
     -fx-padding: 30px;
+}
+
+.twitter-icon {
+    -fx-font-size: 75px;
+    -fx-fill: linear-gradient(to right top,  #1DA1F2,rgba(14,188,231,1) 100%);
 }
 
 .text-field {
