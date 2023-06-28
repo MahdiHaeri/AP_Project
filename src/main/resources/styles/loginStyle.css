@@ -14,7 +14,7 @@
 }
 
 .right-pane {
-    -fx-background-color: #0090ff;
+    -fx-background-color: #1DA1F2;
     -fx-background-radius: 0 10px 10px 0;
     -fx-border-radius: 0 10px 10px 0;
     -fx-alignment: center;
@@ -28,12 +28,12 @@
 
 .login-button {
     -fx-text-fill: white;
-    -fx-background-color: linear-gradient(to right top,  #0090ff ,rgba(14,188,231,1) 100%);
+    -fx-background-color: linear-gradient(to right top,  #1DA1F2,rgba(14,188,231,1) 100%);
 }
 
 .login-button:hover {
     -fx-cursor: hand;
-    -fx-background-color: linear-gradient(to left , #0090ff, rgba(14,188,231,1) 100%);
+    -fx-background-color: linear-gradient(to left , #1DA1F2, rgba(14,188,231,1) 100%);
 }
 
 .login-button:hover .arrow-icon {
