@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@../../../styles/loginStyle.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
@@ -28,7 +31,15 @@
             </AnchorPane>
             <AnchorPane prefHeight="200.0" prefWidth="200.0" styleClass="right-pane" GridPane.columnIndex="1">
                <children>
-                  <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="32.0" layoutY="42.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fitHeight="276.0" fitWidth="261.0" layoutX="21.0" layoutY="111.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="28.0" AnchorPane.leftAnchor="21.0" AnchorPane.rightAnchor="18.0" AnchorPane.topAnchor="111.0">
+                     <image>
+                        <Image url="@../../../images/Mobile%20login-bro.png" />
+                     </image></ImageView>
+                  <Label layoutX="26.0" layoutY="26.0" prefHeight="85.0" prefWidth="252.0" text="Join Twitter tody and see what's happening in the world right now" textAlignment="CENTER" textFill="WHITE" textOverrun="CLIP" wrapText="true">
+                     <font>
+                        <Font name="Al Bayan Plain" size="17.0" />
+                     </font>
+                  </Label>
                </children></AnchorPane>
          </children>
       </GridPane>
