@@ -34,7 +34,7 @@
                <center>
                   <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="20.0" BorderPane.alignment="CENTER">
                      <children>
-                        <FontAwesomeIconView fill="WHITE" glyphName="TWITTER" size="75" />
+                        <FontAwesomeIconView fill="WHITE" glyphName="TWITTER" size="75" styleClass="twitter-icon" />
                         <ImageView fitHeight="300.0" fitWidth="300.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../../../images/Sign%20up-amico.png" />
@@ -46,7 +46,7 @@
             </BorderPane>
             <BorderPane prefHeight="200.0" prefWidth="373.0" styleClass="right-pane" GridPane.columnIndex="1">
                <center>
-                  <VBox prefHeight="200.0" prefWidth="100.0" spacing="10.0" BorderPane.alignment="CENTER">
+                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="10.0" BorderPane.alignment="CENTER">
                      <children>
                         <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="51.0" prefWidth="257.0" text="Joing Twitter today">
                            <font>
@@ -55,17 +55,21 @@
                         </Label>
                         <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" spacing="10.0">
                            <children>
-                              <TextField promptText="Username" />
-                              <TextField promptText="First name" />
-                              <TextField promptText="Last name" />
-                              <TextField promptText="Email or Phone number" />
-                              <PasswordField promptText="Password" />
-                              <PasswordField promptText="Comfirm Password" />
-                              <ComboBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="150.0" promptText="Country" />
-                              <DatePicker maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" promptText="Birthday" />
+                              <TextField promptText="Username" styleClass="my-text-field" />
+                              <TextField promptText="First name" styleClass="my-text-field" />
+                              <TextField promptText="Last name" styleClass="my-text-field" />
+                              <TextField promptText="Email or Phone number" styleClass="my-text-field" />
+                              <PasswordField promptText="Password" styleClass="my-text-field" />
+                              <PasswordField promptText="Comfirm Password" styleClass="my-text-field" />
+                              <ComboBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="150.0" promptText="Country" styleClass="country-combo-box" />
+                              <DatePicker maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" promptText="Birthday" styleClass="birthday-date-picker" />
                            </children>
                         </VBox>
-                        <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Rigester" />
+                        <Button contentDisplay="RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="register-button" text="Rigester" textAlignment="CENTER">
+                           <graphic>
+                              <FontAwesomeIconView fill="WHITE" glyphName="ARROW_RIGHT" styleClass="arrow-icon" />
+                           </graphic>
+                        </Button>
                         <HBox alignment="CENTER" prefHeight="43.0" prefWidth="330.0">
                            <children>
                               <Label text="Already have an account?" />
