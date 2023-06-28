@@ -1,13 +1,9 @@
 .root {
-    -fx-background-radius: 10px;
-    -fx-border-radius: 10px;
     -fx-alignment: center;
 }
 
 .left-pane {
     -fx-background-color: white;
-    -fx-background-radius: 10px 0 0 10px;
-    -fx-border-radius: 10px 0 0 10px;
     -fx-column-halignment: center;
     -fx-row-valignment: center;
     -fx-padding: 30px;
@@ -15,8 +11,6 @@
 
 .right-pane {
     -fx-background-color: #1DA1F2;
-    -fx-background-radius: 0 10px 10px 0;
-    -fx-border-radius: 0 10px 10px 0;
     -fx-alignment: center;
     -fx-padding: 30px;
 }
