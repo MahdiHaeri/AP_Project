@@ -32,7 +32,7 @@ public class MediaHandler implements HttpHandler {
 			case "GET":
 				File file;
 				try {
-					file = new File("src/main/java/com.example/server/assets/" + splitedPath[2] + "/" + splitedPath[3] + "." + splitedPath[4]);
+					file = new File("src/main/java/com/example/server/assets/" + splitedPath[2] + "/" + splitedPath[3] + "." + splitedPath[4]);
 				} catch (NullPointerException e) {
 					response = "no-media";
 					break;
@@ -53,7 +53,7 @@ public class MediaHandler implements HttpHandler {
 					response = "permission-denied";
 					break;
 				}
-				Files.copy(exchange.getRequestBody(), Path.of("src/main/java/com.example/server/assets/" , splitedPath[2], splitedPath[3] + "." + splitedPath[4]), StandardCopyOption.REPLACE_EXISTING);
+				Files.copy(exchange.getRequestBody(), Path.of("src/main/java/com/example/server/assets/" , splitedPath[2], splitedPath[3] + "." + splitedPath[4]), StandardCopyOption.REPLACE_EXISTING);
 				exchange.getRequestBody().close();
 				response = "done";
 				break;

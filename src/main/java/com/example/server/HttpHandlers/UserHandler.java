@@ -62,7 +62,7 @@ public class UserHandler implements HttpHandler {
                 } catch (SQLException e) {
                     throw new RuntimeException(e);
                 }
-                Files.createDirectories(Paths.get("src/main/java/com.example/server/assets/" + jsonObject.getString("id")));
+                Files.createDirectories(Paths.get("src/main/java/com/example/server/assets/" + jsonObject.getString("id")));
                 response = "this is done!";
                 break;
             case "PUT":
