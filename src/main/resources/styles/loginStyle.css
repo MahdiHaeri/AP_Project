@@ -18,11 +18,13 @@
 .text-field {
     -fx-background-color: white;
     -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.75) , 4, 0, 1, 1);
+    -fx-padding: 7px;
 }
 
 .login-button {
     -fx-text-fill: white;
     -fx-background-color: linear-gradient(to right top,  #1DA1F2,rgba(14,188,231,1) 100%);
+    -fx-padding: 7px;
 }
 
 .login-button:hover {
