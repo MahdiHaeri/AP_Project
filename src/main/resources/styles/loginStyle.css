@@ -8,7 +8,9 @@
     -fx-background-color: white;
     -fx-background-radius: 10px 0 0 10px;
     -fx-border-radius: 10px 0 0 10px;
-    -fx-alignment: center;
+    -fx-column-halignment: center;
+    -fx-row-valignment: center;
+    -fx-padding: 30px;
 }
 
 .right-pane {
@@ -16,9 +18,27 @@
     -fx-background-radius: 0 10px 10px 0;
     -fx-border-radius: 0 10px 10px 0;
     -fx-alignment: center;
+    -fx-padding: 30px;
 }
 
+.text-field {
+    -fx-background-color: white;
+    -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.75) , 4, 0, 1, 1);
+}
 
+.login-button {
+    -fx-text-fill: white;
+    -fx-background-color: linear-gradient(to right top,  #0090ff ,rgba(14,188,231,1) 100%);
+}
+
+.login-button:hover {
+    -fx-cursor: hand;
+    -fx-background-color: linear-gradient(to left , #0090ff, rgba(14,188,231,1) 100%);
+}
+
+.login-button:hover .arrow-icon {
+    -fx-translate-x: 10px;
+}
 
 /*.text-field {*/
 /*    -fx-padding: 8 15 15 15;*/
