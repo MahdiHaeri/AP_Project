@@ -19,7 +19,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="800.0" styleClass="root" stylesheets="@../../../styles/signupStyle.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="800.0" styleClass="root" stylesheets="@../../../styles/signupStyle.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.client.controllers.SignUpController">
    <children>
       <GridPane layoutX="132.0" layoutY="123.0" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <columnConstraints>
@@ -55,17 +55,17 @@
                         </Label>
                         <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" spacing="10.0">
                            <children>
-                              <TextField promptText="Username" styleClass="my-text-field" />
-                              <TextField promptText="First name" styleClass="my-text-field" />
-                              <TextField promptText="Last name" styleClass="my-text-field" />
-                              <TextField promptText="Email or Phone number" styleClass="my-text-field" />
-                              <PasswordField promptText="Password" styleClass="my-text-field" />
-                              <PasswordField promptText="Comfirm Password" styleClass="my-text-field" />
-                              <ComboBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="150.0" promptText="Country" styleClass="country-combo-box" />
-                              <DatePicker maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" promptText="Birthday" styleClass="birthday-date-picker" />
+                              <TextField fx:id="usernameTf" promptText="Username" styleClass="my-text-field" />
+                              <TextField fx:id="firstNameTf" promptText="First name" styleClass="my-text-field" />
+                              <TextField fx:id="lastNameTf" promptText="Last name" styleClass="my-text-field" />
+                              <TextField fx:id="emailOrPhoneNumberTf" promptText="Email or Phone number" styleClass="my-text-field" />
+                              <PasswordField fx:id="passwordTf" promptText="Password" styleClass="my-text-field" />
+                              <PasswordField fx:id="confirmPasswordTf" promptText="Confirm Password" styleClass="my-text-field" />
+                              <ComboBox fx:id="countryCmb" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="150.0" promptText="Country" styleClass="country-combo-box" />
+                              <DatePicker fx:id="birthdayDp" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" promptText="Birthday" styleClass="birthday-date-picker" />
                            </children>
                         </VBox>
-                        <Button contentDisplay="RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="register-button" text="Rigester" textAlignment="CENTER">
+                        <Button fx:id="registerBtn" contentDisplay="RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onRigesterBtnAction" styleClass="register-button" text="Rigester" textAlignment="CENTER">
                            <graphic>
                               <FontAwesomeIconView fill="WHITE" glyphName="ARROW_RIGHT" styleClass="arrow-icon" />
                            </graphic>
@@ -73,7 +73,7 @@
                         <HBox alignment="CENTER" prefHeight="43.0" prefWidth="330.0">
                            <children>
                               <Label text="Already have an account?" />
-                              <Hyperlink text="Login" />
+                              <Hyperlink fx:id="loginLink" onAction="#onLoginLinkActino" text="Login" />
                            </children>
                         </HBox>
                      </children>
