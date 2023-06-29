@@ -6,11 +6,6 @@ import java.util.Date;
 import java.util.ArrayList;
 
 public class Tweet {
-    private static int TotalNumOfTweets;
-
-    static {
-        TotalNumOfTweets = 0;
-    }
     @JsonProperty("id")
     private String id;
 
@@ -29,42 +24,42 @@ public class Tweet {
     @JsonProperty("mediaPaths")
     private ArrayList<String> mediaPaths;
 
-    @JsonProperty("likes")
-    private int likes;
+    @JsonProperty("replies")
+    private int replies;
 
     @JsonProperty("retweets")
     private int retweets;
 
-    @JsonProperty("replies")
-    private int replies;
+    @JsonProperty("likes")
+    private int likes;
 
     @JsonProperty("createdAt")
     private Date createdAt;
 
-    public Tweet(String id, String writerId, String ownerId, String text, String quoteTweetId, Date createdAt, int likes, int retweets, int replies) {
+    public Tweet(String id, String writerId, String ownerId, String text, String quoteTweetId, ArrayList<String> mediaPaths, int replies, int retweets, int likes, Date createdAt) {
         this.id = id;
         this.writerId = writerId;
         this.ownerId = ownerId;
         this.text = text;
         this.quoteTweetId = quoteTweetId;
-        this.createdAt = createdAt;
-        this.likes = likes;
-        this.retweets = retweets;
+        this.mediaPaths = mediaPaths;
         this.replies = replies;
-        mediaPaths = new ArrayList<String>();
+        this.retweets = retweets;
+        this.likes = likes;
+        this.createdAt = createdAt;
     }
 
-    public Tweet(String id, String writerId, String ownerId, String text, String quoteTweetId, Date createdAt) {
+    public Tweet(String id, String writerId, String ownerId, String text, String quoteTweetId, ArrayList<String> mediaPaths) {
         this.id = id;
         this.writerId = writerId;
         this.ownerId = ownerId;
         this.text = text;
         this.quoteTweetId = quoteTweetId;
-        this.createdAt = createdAt;
-        likes = 0;
-        retweets = 0;
-        replies = 0;
-        mediaPaths = new ArrayList<String>();
+        this.mediaPaths = mediaPaths;
+        this.replies = 0;
+        this.retweets = 0;
+        this.likes = 0;
+        this.createdAt = new Date();
     }
 
     public Tweet() {
@@ -74,8 +69,7 @@ public class Tweet {
     public String getId() {
         return id;
     }
-    public static int getTotalNumOfTweets() { return TotalNumOfTweets;}
-    public static void IncTotalNumOfTweets() {TotalNumOfTweets++;}
+
     public void setId(String id) {
         this.id = id;
     }
@@ -120,18 +114,12 @@ public class Tweet {
         this.mediaPaths = mediaPaths;
     }
 
-    public void setMediaPaths(String[] mediaPaths) {
-        for (String mediaPath : mediaPaths) {
-            this.mediaPaths.add(mediaPath);
-        }
+    public int getReplies() {
+        return replies;
     }
 
-    public int getLikes() {
-        return likes;
-    }
-
-    public void setLikes(int likes) {
-        this.likes = likes;
+    public void setReplies(int replies) {
+        this.replies = replies;
     }
 
     public int getRetweets() {
@@ -142,12 +130,12 @@ public class Tweet {
         this.retweets = retweets;
     }
 
-    public int getReplies() {
-        return replies;
+    public int getLikes() {
+        return likes;
     }
 
-    public void setReplies(int replies) {
-        this.replies = replies;
+    public void setLikes(int likes) {
+        this.likes = likes;
     }
 
     public Date getCreatedAt() {
@@ -156,29 +144,6 @@ public class Tweet {
 
     public void setCreatedAt(Date createdAt) {
         this.createdAt = createdAt;
-    }
-    public void incrementLikes() {
-        this.likes++;
-    }
-
-    public void incrementRetweets() {
-        this.retweets++;
-    }
-
-    public void incrementReplies() {
-        this.replies++;
-    }
-
-    public void decrementLikes() {
-        this.likes--;
-    }
-
-    public void decrementRetweets() {
-        this.retweets--;
-    }
-
-    public void decrementReplies() {
-        this.replies--;
     }
 
     @Override
@@ -190,9 +155,9 @@ public class Tweet {
                 ", text='" + text + '\'' +
                 ", quoteTweetId='" + quoteTweetId + '\'' +
                 ", mediaPaths=" + mediaPaths +
-                ", likes=" + likes +
-                ", retweets=" + retweets +
                 ", replies=" + replies +
+                ", retweets=" + retweets +
+                ", likes=" + likes +
                 ", createdAt=" + createdAt +
                 '}';
     }
