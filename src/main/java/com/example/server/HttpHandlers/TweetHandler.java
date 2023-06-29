@@ -45,11 +45,11 @@ public class TweetHandler implements HttpHandler {
                         // Process the user creation based on the request body
                         String newTweet = body.toString();
                         JSONObject jsonObject = new JSONObject(newTweet);
-                        try {
-                            tweetController.createTweet(jsonObject.getString("writerId"), jsonObject.getString("ownerId"), jsonObject.getString("text"), null, toStringArray(jsonObject.getJSONArray("mediaPaths")), jsonObject.getInt("likes"), jsonObject.getInt("retweets"), jsonObject.getInt("replies"));
-                        } catch (SQLException e) {
-                            throw new RuntimeException(e);
-                        }
+//                        try {
+////                            tweetController.createTweet(jsonObject.getString("writerId"), jsonObject.getString("ownerId"), jsonObject.getString("text"), null, toStringArray(jsonObject.getJSONArray("mediaPaths")), jsonObject.getInt("likes"), jsonObject.getInt("retweets"), jsonObject.getInt("replies"));
+//                        } catch (SQLException e) {
+//                            throw new RuntimeException(e);
+//                        }
 
                         response = "Tweet successfully tweeted!";
                         break;
@@ -67,16 +67,16 @@ public class TweetHandler implements HttpHandler {
                         // Process the user creation based on the request body
                         String newreTweet = body.toString();
                         JSONObject jsonObject = new JSONObject(newreTweet);
-                        try {
-                            String reTweetId = jsonObject.getString("quoteTweetId");
-                            if (tweetController.getTweet(reTweetId) == null) {
-                                response = "tweet not found!";
-                                break;
-                            }
-                            tweetController.createTweet(jsonObject.getString("writerId"), jsonObject.getString("ownerId"), null, jsonObject.getString("quoteTweetId"), toStringArray(jsonObject.getJSONArray("mediaPaths")), jsonObject.getInt("likes"), jsonObject.getInt("retweets"), jsonObject.getInt("replies"));
-                        } catch (SQLException e) {
-                            throw new RuntimeException(e);
-                        }
+//                        try {
+//                            String reTweetId = jsonObject.getString("quoteTweetId");
+//                            if (tweetController.getTweet(reTweetId) == null) {
+//                                response = "tweet not found!";
+//                                break;
+//                            }
+//                            tweetController.createTweet(jsonObject.getString("writerId"), jsonObject.getString("ownerId"), null, jsonObject.getString("quoteTweetId"), toStringArray(jsonObject.getJSONArray("mediaPaths")), jsonObject.getInt("likes"), jsonObject.getInt("retweets"), jsonObject.getInt("replies"));
+//                        } catch (SQLException e) {
+//                            throw new RuntimeException(e);
+//                        }
 
                         response = "Tweet successfully retweeted!";
                         break;
@@ -100,7 +100,7 @@ public class TweetHandler implements HttpHandler {
                                 response = "tweet not found!";
                                 break;
                             }
-                            tweetController.createTweet(jsonObject.getString("writerId"), jsonObject.getString("ownerId"), jsonObject.getString("text"), jsonObject.getString("quoteTweetId"), toStringArray(jsonObject.getJSONArray("mediaPaths")), jsonObject.getInt("likes"), jsonObject.getInt("retweets"), jsonObject.getInt("replies"));
+//                            tweetController.createTweet(jsonObject.getString("writerId"), jsonObject.getString("ownerId"), jsonObject.getString("text"), jsonObject.getString("quoteTweetId"), toStringArray(jsonObject.getJSONArray("mediaPaths")), jsonObject.getInt("likes"), jsonObject.getInt("retweets"), jsonObject.getInt("replies"));
                         } catch (SQLException e) {
                             throw new RuntimeException(e);
                         }
@@ -115,9 +115,15 @@ public class TweetHandler implements HttpHandler {
                 }
                 break;
             case "GET":
-                String tweetId = splitedPath[splitedPath.length - 1];
+//                String tweetId = splitedPath[splitedPath.length - 1];
+//                try {
+//                    response = tweetController.getTweetById(tweetId);
+//                } catch (SQLException e) {
+//                    throw new RuntimeException(e);
+//                }
+
                 try {
-                    response = tweetController.getTweetById(tweetId);
+                    response = tweetController.getTweets();
                 } catch (SQLException e) {
                     throw new RuntimeException(e);
                 }
