@@ -10,6 +10,7 @@ module com.example.ap_project {
     requires com.fasterxml.jackson.core;
     requires com.fasterxml.jackson.databind;
     requires javafx.media;
+    requires GNAvatarView;
 
 //    requires javafx.base;
 //    requires javafx.graphics;

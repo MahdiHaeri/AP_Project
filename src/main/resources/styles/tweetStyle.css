@@ -1,6 +1,11 @@
 .root {
     -fx-background-color: transparent;
     -fx-padding: 10px;
+    -fx-text-fill: #ddd;
+}
+
+.text-lable {
+    -fx-text-fill: #ddd;
 }
 
 .avatar-image {
@@ -11,6 +16,13 @@
 
 .tweet-buttons {
     -fx-background-color: transparent;
+    -fx-fill: #ddd;
+    -fx-text-fill: #ddd;
+}
+
+.tweet-icon {
+    -fx-fill: #ddd;
+    -fx-text-fill: #ddd;
 }
 
 .username-text {

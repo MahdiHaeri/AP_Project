@@ -23,9 +23,9 @@
                <left>
                   <VBox prefHeight="445.0" prefWidth="61.0" BorderPane.alignment="CENTER">
                      <children>
-                        <GNAvatarView prefHeight="60.0" prefWidth="84.0" styleClass="avatar-image" type="CIRCLE">
+                        <GNAvatarView fx:id="avatarView" prefHeight="60.0" prefWidth="84.0" stroke="#ffffff00" styleClass="avatar-image" type="CIRCLE">
                            <image>
-                              <Image url="@../../../../../../../../Pictures/myImage.jpeg" />
+                              <Image url="@../../../images/Sign%20up-amico.png" />
                            </image>
                         </GNAvatarView>
                      </children>
@@ -36,48 +36,64 @@
                      <top>
                         <HBox prefHeight="30.0" prefWidth="530.0" spacing="10.0" BorderPane.alignment="CENTER">
                            <children>
-                              <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="username-text" text="writer name" textAlignment="CENTER">
+                              <Label fx:id="writerNameLbl" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="text-lable" text="writer name" textAlignment="CENTER">
                                  <font>
                                     <Font name="System Bold" size="13.0" />
                                  </font></Label>
-                              <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="writer username" textAlignment="CENTER" />
-                              <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="timestammp" textAlignment="CENTER" />
+                              <Label fx:id="writerUsernameLbl" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="text-lable" text="writer username" textAlignment="CENTER" />
+                              <Label fx:id="timestapLbl" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="text-lable" text="timestammp" textAlignment="CENTER" />
                            </children>
                         </HBox>
                      </top>
                      <bottom>
                         <HBox prefHeight="31.0" prefWidth="530.0" spacing="20.0" BorderPane.alignment="CENTER">
                            <children>
-                              <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="143">
+                              <Button fx:id="replyBtn" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onReplyBtnAction" text="143">
                                  <graphic>
-                                    <FontAwesomeIconView glyphName="COMMENT" styleClass="comment-icon" />
+                                    <FontAwesomeIconView glyphName="COMMENT">
+                                       <styleClass>
+                                          <String fx:value="comment-icon" />
+                                          <String fx:value="tweet-icon" />
+                                       </styleClass></FontAwesomeIconView>
                                  </graphic>
                                  <styleClass>
                                     <String fx:value="tweet-buttons" />
                                     <String fx:value="comment-button" />
                                  </styleClass>
                               </Button>
-                              <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="21.3k">
+                              <Button fx:id="retweetBtn" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onRetweetBtnAction" text="21.3k">
                                  <graphic>
-                                    <FontAwesomeIconView glyphName="RETWEET" styleClass="retweet-icon" />
+                                    <FontAwesomeIconView glyphName="RETWEET">
+                                       <styleClass>
+                                          <String fx:value="retweet-icon" />
+                                          <String fx:value="tweet-icon" />
+                                       </styleClass></FontAwesomeIconView>
                                  </graphic>
                                  <styleClass>
                                     <String fx:value="tweet-buttons" />
                                     <String fx:value="retweet-button" />
                                  </styleClass>
                               </Button>
-                              <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="203k">
+                              <Button fx:id="likeBtn" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onLikeBtnAction" text="203k">
                                  <graphic>
-                                    <FontAwesomeIconView glyphName="HEART" styleClass="like-icon" />
+                                    <FontAwesomeIconView glyphName="HEART">
+                                       <styleClass>
+                                          <String fx:value="like-icon" />
+                                          <String fx:value="tweet-icon" />
+                                       </styleClass></FontAwesomeIconView>
                                  </graphic>
                                  <styleClass>
                                     <String fx:value="tweet-buttons" />
                                     <String fx:value="like-button" />
                                  </styleClass>
                               </Button>
-                              <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false">
+                              <Button fx:id="shareBtn" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onShareBtnAction">
                                  <graphic>
-                                    <FontAwesomeIconView glyphName="ARROW_UP" styleClass="share-icon" />
+                                    <FontAwesomeIconView glyphName="ARROW_UP">
+                                       <styleClass>
+                                          <String fx:value="share-icon" />
+                                          <String fx:value="tweet-icon" />
+                                       </styleClass></FontAwesomeIconView>
                                  </graphic>
                                  <styleClass>
                                     <String fx:value="tweet-buttons" />
@@ -90,10 +106,13 @@
                      <center>
                         <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
                            <children>
-                              <Label text="test message" />
-                              <ImageView fitHeight="150.0" fitWidth="155.0" pickOnBounds="true" preserveRatio="true" />
-                              <MediaView fitHeight="200.0" fitWidth="200.0" />
-                              <Label text="qute" />
+                              <Label fx:id="textMessageLbl" styleClass="text-lable" text="test message" />
+                              <ImageView fx:id="imageView" fitHeight="150.0" fitWidth="155.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../../images/Mobile%20login-bro.png" />
+                                 </image></ImageView>
+                              <MediaView fx:id="meidaView" fitHeight="200.0" fitWidth="200.0" />
+                              <Label fx:id="quoteLbl" styleClass="text-lable" text="quote" />
                            </children>
                         </VBox>
                      </center>
@@ -105,8 +124,9 @@
             <HBox alignment="CENTER_LEFT" prefHeight="27.0" prefWidth="600.0" spacing="10.0" BorderPane.alignment="CENTER">
                <children>
                   <Pane prefHeight="27.0" prefWidth="29.0" />
-                  <FontAwesomeIconView glyphName="RETWEET" />
-                  <Label text="ownerId Retweeted" />
+                  <FontAwesomeIconView glyphName="RETWEET" styleClass="tweet-icon" />
+                  <Label fx:id="ownerNameLbl" styleClass="text-lable" text="owner name" />
+                  <Label styleClass="text-lable" text="Retweeted" />
                </children>
             </HBox>
          </top>
