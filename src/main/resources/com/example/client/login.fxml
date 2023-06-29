@@ -58,16 +58,16 @@
                         </Label>
                         <VBox alignment="CENTER_LEFT" prefHeight="53.0" prefWidth="240.0" spacing="10.0">
                            <children>
-                              <TextField promptText="Phone, email, or username" />
-                              <TextField promptText="Password" />
-                              <Hyperlink text="Forgot password?" textAlignment="CENTER">
+                              <TextField fx:id="PhoneEmailUsernameTf" promptText="Phone, email, or username" />
+                              <TextField fx:id="passwordTf" promptText="Password" />
+                              <Hyperlink fx:id="forgotPasswordLink" onAction="#onForgotPasswordAction" text="Forgot password?" textAlignment="CENTER">
                                  <font>
                                     <Font size="10.0" />
                                  </font>
                               </Hyperlink>
                            </children>
                         </VBox>
-                        <Button alignment="CENTER" contentDisplay="RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="login-button" text="Login in" textAlignment="CENTER">
+                        <Button fx:id="loginBtn" alignment="CENTER" contentDisplay="RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onLoginBtnAction" styleClass="login-button" text="Login in" textAlignment="CENTER">
                            <graphic>
                               <FontAwesomeIconView fill="WHITE" glyphName="ARROW_RIGHT" styleClass="arrow-icon" text="" textAlignment="CENTER" />
                            </graphic>
@@ -79,7 +79,7 @@
                                     <Font size="10.0" />
                                  </font>
                               </Label>
-                              <Hyperlink text="Sign up?">
+                              <Hyperlink fx:id="signupLink" onAction="#onSignupLinkAction" text="Sign up?">
                                  <font>
                                     <Font size="10.0" />
                                  </font>
