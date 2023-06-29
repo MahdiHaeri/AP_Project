@@ -19,7 +19,7 @@ public class TweetDAO {
     }
     
     public void saveTweet(Tweet tweet) throws SQLException {
-        PreparedStatement statement = connection.prepareStatement("INSERT INTO tweets (writer_id, owner_id, text, quote_tweet_id, media_path, likes, retweets, replies, create_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+        PreparedStatement statement = connection.prepareStatement("INSERT INTO tweets (writer_id, owner_id, text, quote_tweet_id, media_path, likes, retweets, replies, create_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
         statement.setString(1, tweet.getWriterId());
         statement.setString(2, tweet.getOwnerId());
         statement.setString(3, tweet.getText());
@@ -71,7 +71,8 @@ public class TweetDAO {
             tweet.setText(resultSet.getString("text"));
             tweet.setQuoteTweetId(resultSet.getString("quote_tweet_id"));
             Array array = resultSet.getArray("media_path");
-            ArrayList<String> mediapath = (ArrayList<String>) array.getArray();
+            Object[] elements = (Object[]) array.getArray();
+            ArrayList<String> mediapath = toArrayList(elements);
             tweet.setMediaPaths(mediapath);
             tweet.setLikes(resultSet.getInt("likes"));
             tweet.setRetweets(resultSet.getInt("retweets"));
@@ -92,10 +93,9 @@ public class TweetDAO {
             resultTweet.setOwnerId(resultSet.getString("owner_id"));
             resultTweet.setText(resultSet.getString("text"));
             resultTweet.setQuoteTweetId(resultSet.getString("quote_tweet_id"));
-//            Array x = resultSet.getArray("media_path");
-//            String[] mediapath = (String[]) x.getArray();
             Array array = resultSet.getArray("media_path");
-            ArrayList<String> mediapath = (ArrayList<String>) array.getArray();
+            Object[] elements = (Object[]) array.getArray();
+            ArrayList<String> mediapath = toArrayList(elements);
             resultTweet.setMediaPaths(mediapath);
             resultTweet.setLikes(resultSet.getInt("likes"));
             resultTweet.setRetweets(resultSet.getInt("retweets"));
@@ -116,10 +116,9 @@ public class TweetDAO {
             tweet.setOwnerId(resultSet.getString("owner_id"));
             tweet.setText(resultSet.getString("text"));
             tweet.setQuoteTweetId(resultSet.getString("quote_tweet_id"));
-//            Array x = resultSet.getArray("media_path");
-//            String[] mediapath = (String[]) x.getArray();
             Array array = resultSet.getArray("media_path");
-            ArrayList<String> mediapath = (ArrayList<String>) array.getArray();
+            Object[] elements = (Object[]) array.getArray();
+            ArrayList<String> mediapath = toArrayList(elements);
             tweet.setMediaPaths(mediapath);
             tweet.setLikes(resultSet.getInt("likes"));
             tweet.setRetweets(resultSet.getInt("retweets"));
@@ -141,10 +140,9 @@ public class TweetDAO {
             tweet.setOwnerId(resultSet.getString("owner_id"));
             tweet.setText(resultSet.getString("text"));
             tweet.setQuoteTweetId(resultSet.getString("quote_tweet_id"));
-//            Array x = resultSet.getArray("media_path");
-//            String[] mediapath = (String[]) x.getArray();
             Array array = resultSet.getArray("media_path");
-            ArrayList<String> mediapath = (ArrayList<String>) array.getArray();
+            Object[] elements = (Object[]) array.getArray();
+            ArrayList<String> mediapath = toArrayList(elements);
             tweet.setMediaPaths(mediapath);
             tweet.setLikes(resultSet.getInt("likes"));
             tweet.setRetweets(resultSet.getInt("retweets"));
@@ -166,10 +164,9 @@ public class TweetDAO {
             tweet.setOwnerId(resultSet.getString("owner_id"));
             tweet.setText(resultSet.getString("text"));
             tweet.setQuoteTweetId(resultSet.getString("quote_tweet_id"));
-//            Array x = resultSet.getArray("media_path");
-//            String[] mediapath = (String[]) x.getArray();
             Array array = resultSet.getArray("media_path");
-            ArrayList<String> mediapath = (ArrayList<String>) array.getArray();
+            Object[] elements = (Object[]) array.getArray();
+            ArrayList<String> mediapath = toArrayList(elements);
             tweet.setMediaPaths(mediapath);
             tweet.setLikes(resultSet.getInt("likes"));
             tweet.setRetweets(resultSet.getInt("retweets"));
@@ -191,10 +188,9 @@ public class TweetDAO {
             tweet.setOwnerId(resultSet.getString("owner_id"));
             tweet.setText(resultSet.getString("text"));
             tweet.setQuoteTweetId(resultSet.getString("quote_tweet_id"));
-//            Array x = resultSet.getArray("media_path");
-//            String[] mediapath = (String[]) x.getArray();
             Array array = resultSet.getArray("media_path");
-            ArrayList<String> mediapath = (ArrayList<String>) array.getArray();
+            Object[] elements = (Object[]) array.getArray();
+            ArrayList<String> mediapath = toArrayList(elements);
             tweet.setMediaPaths(mediapath);
             tweet.setLikes(resultSet.getInt("likes"));
             tweet.setRetweets(resultSet.getInt("retweets"));
@@ -203,5 +199,13 @@ public class TweetDAO {
         }
 
         return tweets;
+    }
+
+    public static ArrayList<String> toArrayList(Object[] objects) {
+        ArrayList<String> result = new ArrayList<>();
+        for (Object object : objects) {
+            result.add(object.toString());
+        }
+        return result;
     }
 }

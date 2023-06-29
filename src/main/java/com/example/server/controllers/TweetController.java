@@ -18,17 +18,16 @@ public class TweetController {
         tweetDAO = new TweetDAO();
     }
 
-    public void createTweet(String writerId, String ownerId, String text, String quoteTweetId, ArrayList<String> mediaPaths, int likes, int retweets, int replies) throws SQLException {
+    public void createTweet(String writerId, String ownerId, String text, String quoteTweetId, ArrayList<String> mediaPaths,int replies, int retweets, int likes) throws SQLException {
         Tweet tweet = new Tweet();
-
         tweet.setWriterId(writerId);
         tweet.setOwnerId(ownerId);
         tweet.setText(text);
         tweet.setQuoteTweetId(quoteTweetId);
         tweet.setMediaPaths(mediaPaths);
-        tweet.setLikes(likes);
-        tweet.setRetweets(retweets);
         tweet.setReplies(replies);
+        tweet.setRetweets(retweets);
+        tweet.setLikes(likes);
         tweet.setCreatedAt(new Date());
         tweetDAO.saveTweet(tweet);
     }
