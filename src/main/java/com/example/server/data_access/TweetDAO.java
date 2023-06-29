@@ -3,6 +3,7 @@ package com.example.server.data_access;
 import com.example.server.models.Tweet;
 
 import java.sql.*;
+import java.util.ArrayList;
 
 public class TweetDAO {
 
@@ -69,8 +70,8 @@ public class TweetDAO {
             tweet.setOwnerId(resultSet.getString("owner_id"));
             tweet.setText(resultSet.getString("text"));
             tweet.setQuoteTweetId(resultSet.getString("quote_tweet_id"));
-            Array x = resultSet.getArray("media_path");
-            String[] mediapath = (String[]) x.getArray();
+            Array array = resultSet.getArray("media_path");
+            ArrayList<String> mediapath = (ArrayList<String>) array.getArray();
             tweet.setMediaPaths(mediapath);
             tweet.setLikes(resultSet.getInt("likes"));
             tweet.setRetweets(resultSet.getInt("retweets"));
@@ -80,91 +81,103 @@ public class TweetDAO {
         return null;
     }
 
-    public Tweet getTweet(Tweet tweet1) throws SQLException {
+    public Tweet getTweet(Tweet tweet) throws SQLException {
         PreparedStatement statement = connection.prepareStatement("SELECT * FROM tweets WHERE id = ?");
-        statement.setString(1, tweet1.getId());
+        statement.setString(1, tweet.getId());
         ResultSet resultSet = statement.executeQuery();
         if (resultSet.next()) {
-            Tweet tweet = new Tweet();
-            tweet.setId(resultSet.getString("id"));
-            tweet.setWriterId(resultSet.getString("writer_id"));
-            tweet.setOwnerId(resultSet.getString("owner_id"));
-            tweet.setText(resultSet.getString("text"));
-            tweet.setQuoteTweetId(resultSet.getString("quote_tweet_id"));
-            Array x = resultSet.getArray("media_path");
-            String[] mediapath = (String[]) x.getArray();
-            tweet.setMediaPaths(mediapath);
-            tweet.setLikes(resultSet.getInt("likes"));
-            tweet.setRetweets(resultSet.getInt("retweets"));
-            tweet.setReplies(resultSet.getInt("replies"));
-            return tweet;
+            Tweet resultTweet = new Tweet();
+            resultTweet.setId(resultSet.getString("id"));
+            resultTweet.setWriterId(resultSet.getString("writer_id"));
+            resultTweet.setOwnerId(resultSet.getString("owner_id"));
+            resultTweet.setText(resultSet.getString("text"));
+            resultTweet.setQuoteTweetId(resultSet.getString("quote_tweet_id"));
+//            Array x = resultSet.getArray("media_path");
+//            String[] mediapath = (String[]) x.getArray();
+            Array array = resultSet.getArray("media_path");
+            ArrayList<String> mediapath = (ArrayList<String>) array.getArray();
+            resultTweet.setMediaPaths(mediapath);
+            resultTweet.setLikes(resultSet.getInt("likes"));
+            resultTweet.setRetweets(resultSet.getInt("retweets"));
+            resultTweet.setReplies(resultSet.getInt("replies"));
+            return resultTweet;
         }
         return null;
     }
 
-    public Tweet getTweetByWriterId(String writerId) throws SQLException {
+    public ArrayList<Tweet> getTweetsByWriterId(String writerId) throws SQLException {
+        ArrayList<Tweet> tweets = new ArrayList<Tweet>();
         PreparedStatement statement = connection.prepareStatement("SELECT * FROM tweets WHERE writer_id = ?");
         statement.setString(1, writerId);
         ResultSet resultSet = statement.executeQuery();
-        if (resultSet.next()) {
+        while (resultSet.next()) {
             Tweet tweet = new Tweet();
             tweet.setId(resultSet.getString("id"));
             tweet.setWriterId(resultSet.getString("writer_id"));
             tweet.setOwnerId(resultSet.getString("owner_id"));
             tweet.setText(resultSet.getString("text"));
             tweet.setQuoteTweetId(resultSet.getString("quote_tweet_id"));
-            Array x = resultSet.getArray("media_path");
-            String[] mediapath = (String[]) x.getArray();
+//            Array x = resultSet.getArray("media_path");
+//            String[] mediapath = (String[]) x.getArray();
+            Array array = resultSet.getArray("media_path");
+            ArrayList<String> mediapath = (ArrayList<String>) array.getArray();
             tweet.setMediaPaths(mediapath);
             tweet.setLikes(resultSet.getInt("likes"));
             tweet.setRetweets(resultSet.getInt("retweets"));
             tweet.setReplies(resultSet.getInt("replies"));
-            return tweet;
+            tweets.add(tweet);
         }
-        return null;
+        return tweets;
     }
 
-    public Tweet getTweetByOwnerId(String ownerId) throws SQLException {
+    public ArrayList<Tweet> getTweetsByOwnerId(String ownerId) throws SQLException {
+        ArrayList<Tweet> tweets = new ArrayList<>();
         PreparedStatement statement = connection.prepareStatement("SELECT * FROM tweets WHERE owner_id = ?");
         statement.setString(1, ownerId);
         ResultSet resultSet = statement.executeQuery();
-        if (resultSet.next()) {
+        while (resultSet.next()) {
             Tweet tweet = new Tweet();
             tweet.setId(resultSet.getString("id"));
             tweet.setWriterId(resultSet.getString("writer_id"));
             tweet.setOwnerId(resultSet.getString("owner_id"));
             tweet.setText(resultSet.getString("text"));
             tweet.setQuoteTweetId(resultSet.getString("quote_tweet_id"));
-            Array x = resultSet.getArray("media_path");
-            String[] mediapath = (String[]) x.getArray();
+//            Array x = resultSet.getArray("media_path");
+//            String[] mediapath = (String[]) x.getArray();
+            Array array = resultSet.getArray("media_path");
+            ArrayList<String> mediapath = (ArrayList<String>) array.getArray();
             tweet.setMediaPaths(mediapath);
             tweet.setLikes(resultSet.getInt("likes"));
             tweet.setRetweets(resultSet.getInt("retweets"));
             tweet.setReplies(resultSet.getInt("replies"));
-            return tweet;
+            tweets.add(tweet);
         }
-        return null;
+        return tweets;
     }
 
-    public Tweet getTweetByQuoteTweetId(String quoteTweetId) throws SQLException {
+    public ArrayList<Tweet> getTweetsByQuoteTweetId(String quoteTweetId) throws SQLException {
+        ArrayList<Tweet> tweets = new ArrayList<>();
         PreparedStatement statement = connection.prepareStatement("SELECT * FROM tweets WHERE quote_tweet_id = ?");
         statement.setString(1, quoteTweetId);
         ResultSet resultSet = statement.executeQuery();
-        if (resultSet.next()) {
+        while (resultSet.next()) {
             Tweet tweet = new Tweet();
             tweet.setId(resultSet.getString("id"));
             tweet.setWriterId(resultSet.getString("writer_id"));
             tweet.setOwnerId(resultSet.getString("owner_id"));
             tweet.setText(resultSet.getString("text"));
             tweet.setQuoteTweetId(resultSet.getString("quote_tweet_id"));
-            Array x = resultSet.getArray("media_path");
-            String[] mediapath = (String[]) x.getArray();
+//            Array x = resultSet.getArray("media_path");
+//            String[] mediapath = (String[]) x.getArray();
+            Array array = resultSet.getArray("media_path");
+            ArrayList<String> mediapath = (ArrayList<String>) array.getArray();
             tweet.setMediaPaths(mediapath);
             tweet.setLikes(resultSet.getInt("likes"));
             tweet.setRetweets(resultSet.getInt("retweets"));
             tweet.setReplies(resultSet.getInt("replies"));
-            return tweet;
+            tweets.add(tweet);
         }
-        return null;
+
+        return tweets;
     }
 }

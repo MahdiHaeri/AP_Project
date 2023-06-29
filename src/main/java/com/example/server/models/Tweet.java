@@ -49,8 +49,7 @@ public class Tweet {
         this.createdAt = createdAt;
     }
 
-    public Tweet(String id, String writerId, String ownerId, String text, String quoteTweetId, ArrayList<String> mediaPaths) {
-        this.id = id;
+    public Tweet(String writerId, String ownerId, String text, String quoteTweetId, ArrayList<String> mediaPaths) {
         this.writerId = writerId;
         this.ownerId = ownerId;
         this.text = text;

@@ -32,8 +32,8 @@
                      <top>
                         <HBox prefHeight="30.0" prefWidth="530.0" spacing="10.0" BorderPane.alignment="CENTER">
                            <children>
-                              <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="full name" textAlignment="CENTER" />
-                              <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="username" textAlignment="CENTER" />
+                              <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="writer name" textAlignment="CENTER" />
+                              <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="writer username" textAlignment="CENTER" />
                               <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="timestammp" textAlignment="CENTER" />
                            </children>
                         </HBox>
@@ -41,22 +41,22 @@
                      <bottom>
                         <HBox prefHeight="31.0" prefWidth="530.0" spacing="20.0" BorderPane.alignment="CENTER">
                            <children>
-                              <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Button">
+                              <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="143">
                                  <graphic>
                                     <FontAwesomeIconView glyphName="COMMENT" />
                                  </graphic>
                               </Button>
-                              <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Button">
+                              <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="21.3k">
                                  <graphic>
                                     <FontAwesomeIconView glyphName="RETWEET" />
                                  </graphic>
                               </Button>
-                              <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Button">
+                              <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="203k">
                                  <graphic>
                                     <FontAwesomeIconView glyphName="HEART" />
                                  </graphic>
                               </Button>
-                              <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Button">
+                              <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false">
                                  <graphic>
                                     <FontAwesomeIconView glyphName="ARROW_UP" />
                                  </graphic>
@@ -82,7 +82,7 @@
             <HBox alignment="CENTER_LEFT" prefHeight="27.0" prefWidth="600.0" spacing="10.0" BorderPane.alignment="CENTER">
                <children>
                   <FontAwesomeIconView glyphName="RETWEET" />
-                  <Label text="jadi Retweeted" />
+                  <Label text="ownerId Retweeted" />
                </children>
             </HBox>
          </top>
