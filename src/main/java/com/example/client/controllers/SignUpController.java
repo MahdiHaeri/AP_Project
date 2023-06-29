@@ -87,9 +87,17 @@ public class SignUpController implements Initializable {
             user.setEmail(emailOrPhoneNumberTf.getText());
             user.setPhoneNumber(emailOrPhoneNumberTf.getText());
             user.setPassword(passwordTf.getText());
-//            user.setCountry((String) countryCmb.getValue());
-            user.setCountry("Iran");
+            user.setCountry((String) countryCmb.getValue());
             user.setBirthday(Date.from(birthdayDp.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant()));
+
+            usernameTf.setText("");
+            firstNameTf.setText("");
+            lastNameTf.setText("");
+            emailOrPhoneNumberTf.setText("");
+            passwordTf.setText("");
+            confirmPasswordTf.setText("");
+            countryCmb.setValue("");
+            birthdayDp.setValue(null);
 
             ObjectMapper objectMapper = new ObjectMapper();
             String bodyRequest;
