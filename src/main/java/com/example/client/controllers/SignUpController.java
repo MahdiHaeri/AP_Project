@@ -4,6 +4,9 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
@@ -13,6 +16,7 @@ import javafx.scene.control.TextField;
 
 import com.example.server.models.User;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.io.OutputStream;
@@ -58,7 +62,19 @@ public class SignUpController {
 
     @FXML
     void onLoginLinkActino(ActionEvent event) {
-        System.out.println("OnLoginLinkAction");
+        try {
+            // Load the FXML file for the SignUp page
+            Parent loginPage = FXMLLoader.load(getClass().getResource("/com/example/client/login.fxml"));
+
+            // Create a new scene using the SignUp page
+            Scene loginScene = new Scene(loginPage);
+
+            // Get the current stage (window) and set the new scene
+            Stage currentStage = (Stage) loginLink.getScene().getWindow();
+            currentStage.setScene(loginScene);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
