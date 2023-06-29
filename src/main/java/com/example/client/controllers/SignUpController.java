@@ -1,10 +1,12 @@
 package com.example.client.controllers;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -15,20 +17,18 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
 import com.example.server.models.User;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
-import java.net.URLConnection;
 import java.time.ZoneId;
 import java.util.Date;
+import java.util.ResourceBundle;
 
 
-public class SignUpController {
+public class SignUpController implements Initializable {
 
     @FXML
     private DatePicker birthdayDp;
@@ -37,7 +37,7 @@ public class SignUpController {
     private PasswordField confirmPasswordTf;
 
     @FXML
-    private ComboBox<?> countryCmb;
+    private ComboBox<String> countryCmb;
 
     @FXML
     private TextField emailOrPhoneNumberTf;
@@ -122,4 +122,8 @@ public class SignUpController {
         }
     }
 
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        countryCmb.getItems().addAll("Iran", "USA", "Canada", "Germany", "France", "Italy", "Spain", "Russia", "China", "Japan", "South Korea", "Australia", "Brazil", "Mexico", "Argentina", "Chile", "Peru", "Colombia", "Venezuela", "Ecuador", "Bolivia", "Paraguay", "Uruguay", "Panama", "Costa Rica", "Nicaragua", "Honduras", "El Salvador", "Guatemala", "Cuba", "Dominican Republic", "Puerto Rico", "Jamaica", "Haiti", "Bahamas", "Trinidad and Tobago", "Barbados", "Saint Lucia", "Saint Vincent and the Grenadines", "Grenada", "Antigua and Barbuda", "Dominica", "Saint Kitts and Nevis", "Belize", "Guyana", "Suriname", "Aruba", "Curacao", "Saint Martin", "Sint Maarten", "Bermuda", "Cayman Islands", "British Virgin Islands", "Turks and Caicos Islands", "US Virgin Islands", "Anguilla", "Montserrat", "Martinique", "Guadeloupe", "Saint Barthelemy", "Puerto Rico", "Greenland", "Faroe Islands", "Iceland", "Norway", "Sweden", "Finland", "Denmark");
+    }
 }
