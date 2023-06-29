@@ -1,17 +1,21 @@
 .root {
     -fx-background-color: transparent;
+    -fx-padding: 10px;
 }
 
 .avatar-image {
-    -fx-background-radius: 100%;
-    -fx-background-color: #ffffff;
-    -fx-border-radius: 100%;
-    -fx-border-color: #000000;
-    -fx-border-width: 1px;
+    /*-fx-border-radius: 100%;*/
+    /*-fx-border-color: #000000;*/
+    /*-fx-border-width: 1px;*/
 }
 
 .tweet-buttons {
     -fx-background-color: transparent;
+}
+
+.username-text {
+    /* bold text */
+    -fx-font-weight: bold;
 }
 
 /*.tweet-buttons:hover {*/

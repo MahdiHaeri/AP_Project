@@ -10,8 +10,10 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.media.MediaView?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" stylesheets="@../../../styles/tweetStyle.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.client.controllers.TweetController">
    <children>
@@ -21,7 +23,7 @@
                <left>
                   <VBox prefHeight="445.0" prefWidth="61.0" BorderPane.alignment="CENTER">
                      <children>
-                        <GNAvatarView prefHeight="60.0" prefWidth="84.0" type="CIRCLE">
+                        <GNAvatarView prefHeight="60.0" prefWidth="84.0" styleClass="avatar-image" type="CIRCLE">
                            <image>
                               <Image url="@../../../../../../../../Pictures/myImage.jpeg" />
                            </image>
@@ -34,7 +36,10 @@
                      <top>
                         <HBox prefHeight="30.0" prefWidth="530.0" spacing="10.0" BorderPane.alignment="CENTER">
                            <children>
-                              <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="writer name" textAlignment="CENTER" />
+                              <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="username-text" text="writer name" textAlignment="CENTER">
+                                 <font>
+                                    <Font name="System Bold" size="13.0" />
+                                 </font></Label>
                               <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="writer username" textAlignment="CENTER" />
                               <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="timestammp" textAlignment="CENTER" />
                            </children>
@@ -86,7 +91,7 @@
                         <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
                            <children>
                               <Label text="test message" />
-                              <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+                              <ImageView fitHeight="150.0" fitWidth="155.0" pickOnBounds="true" preserveRatio="true" />
                               <MediaView fitHeight="200.0" fitWidth="200.0" />
                               <Label text="qute" />
                            </children>
@@ -99,6 +104,7 @@
          <top>
             <HBox alignment="CENTER_LEFT" prefHeight="27.0" prefWidth="600.0" spacing="10.0" BorderPane.alignment="CENTER">
                <children>
+                  <Pane prefHeight="27.0" prefWidth="29.0" />
                   <FontAwesomeIconView glyphName="RETWEET" />
                   <Label text="ownerId Retweeted" />
                </children>
