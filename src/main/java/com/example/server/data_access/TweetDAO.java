@@ -105,6 +105,30 @@ public class TweetDAO {
         return null;
     }
 
+    public ArrayList<Tweet> getTweets() throws SQLException {
+        ArrayList<Tweet> tweets = new ArrayList<Tweet>();
+        PreparedStatement statement = connection.prepareStatement("SELECT * FROM tweets");
+        ResultSet resultSet = statement.executeQuery();
+        while (resultSet.next()) {
+            Tweet tweet = new Tweet();
+            tweet.setId(resultSet.getString("id"));
+            tweet.setWriterId(resultSet.getString("writer_id"));
+            tweet.setOwnerId(resultSet.getString("owner_id"));
+            tweet.setText(resultSet.getString("text"));
+            tweet.setQuoteTweetId(resultSet.getString("quote_tweet_id"));
+//            Array x = resultSet.getArray("media_path");
+//            String[] mediapath = (String[]) x.getArray();
+            Array array = resultSet.getArray("media_path");
+            ArrayList<String> mediapath = (ArrayList<String>) array.getArray();
+            tweet.setMediaPaths(mediapath);
+            tweet.setLikes(resultSet.getInt("likes"));
+            tweet.setRetweets(resultSet.getInt("retweets"));
+            tweet.setReplies(resultSet.getInt("replies"));
+            tweets.add(tweet);
+        }
+        return tweets;
+    }
+
     public ArrayList<Tweet> getTweetsByWriterId(String writerId) throws SQLException {
         ArrayList<Tweet> tweets = new ArrayList<Tweet>();
         PreparedStatement statement = connection.prepareStatement("SELECT * FROM tweets WHERE writer_id = ?");

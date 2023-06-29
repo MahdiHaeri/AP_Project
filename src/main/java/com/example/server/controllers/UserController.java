@@ -62,23 +62,20 @@ public class UserController {
         User user = userDAO.getUser(id);
         if (user == null) return null;
         ObjectMapper objectMapper = new ObjectMapper();
-        String response = objectMapper.writeValueAsString(user);
-        return response;
+        return objectMapper.writeValueAsString(user);
     }
 
     public String getBioByUserId(String userId) throws SQLException, JsonProcessingException {
         Bio bio = bioDAO.getBio(userId);
         if (bio == null) return null;
         ObjectMapper objectMapper = new ObjectMapper();
-        String response = objectMapper.writeValueAsString(bio);
-        return response;
+        return objectMapper.writeValueAsString(bio);
     }
 
     public String getUsers() throws SQLException, JsonProcessingException {
         ArrayList<User> users = userDAO.getUsers();
         ObjectMapper objectMapper = new ObjectMapper();
-        String response = objectMapper.writeValueAsString(users);
-        return response;
+        return objectMapper.writeValueAsString(users);
     }
 
     public boolean isUserExists (String ID) {
@@ -92,16 +89,13 @@ public class UserController {
     public String getBios() throws SQLException, JsonProcessingException {
         ArrayList<Bio> bios = bioDAO.getBios();
         ObjectMapper objectMapper = new ObjectMapper();
-        String response = objectMapper.writeValueAsString(bios);
-        return response;
+        return objectMapper.writeValueAsString(bios);
     }
   
     public String getUserByIdAndPass(String id, String pass) throws SQLException, JsonProcessingException {
         User user = userDAO.getUser(id, pass);
         if (user == null) return null;
         ObjectMapper objectMapper = new ObjectMapper();
-        String response = objectMapper.writeValueAsString(user);
-
-        return response;
+        return objectMapper.writeValueAsString(user);
     }
 }
