@@ -1,0 +1,59 @@
+.root {
+    -fx-background-color: transparent;
+}
+
+.avatar-image {
+    -fx-background-radius: 100%;
+    -fx-background-color: #ffffff;
+    -fx-border-radius: 100%;
+    -fx-border-color: #000000;
+    -fx-border-width: 1px;
+}
+
+.tweet-buttons {
+    -fx-background-color: transparent;
+}
+
+/*.tweet-buttons:hover {*/
+/*    -fx-background-color: #e8e8e8;*/
+/*}*/
+
+.comment-button:hover {
+    -fx-text-fill: #1DA1F2;
+    -fx-fill: #1DA1F2;
+}
+
+.comment-button:hover .comment-icon {
+    -fx-text-fill: #1DA1F2;
+    -fx-fill: #1DA1F2;
+}
+
+.retweet-button:hover {
+    -fx-text-fill: #17bf63;
+    -fx-fill : #17bf63;
+}
+
+.retweet-button:hover .retweet-icon {
+    -fx-text-fill: #17bf63;
+    -fx-fill : #17bf63;
+}
+
+.like-button:hover {
+    -fx-text-fill: #e0245e;
+    -fx-fill: #e0245e;
+}
+
+.like-button:hover .like-icon {
+    -fx-text-fill: #e0245e;
+    -fx-fill: #e0245e;
+}
+
+.share-button:hover {
+    -fx-text-fill: #1DA1F2;
+    -fx-fill: #1DA1F2;
+}
+
+.share-button:hover .share-icon {
+    -fx-text-fill: #1DA1F2;
+    -fx-fill: #1DA1F2;
+}
