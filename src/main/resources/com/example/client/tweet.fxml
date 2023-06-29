@@ -12,7 +12,7 @@
 <?import javafx.scene.media.MediaView?>
 
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.client.controllers.TweetController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" stylesheets="@../../../styles/tweetStyle.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.client.controllers.TweetController">
    <children>
       <BorderPane layoutX="82.0" layoutY="111.0" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <left>
