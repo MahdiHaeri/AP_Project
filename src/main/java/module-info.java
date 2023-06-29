@@ -9,6 +9,7 @@ module com.example.ap_project {
     requires json;
     requires com.fasterxml.jackson.core;
     requires com.fasterxml.jackson.databind;
+    requires javafx.media;
 
 //    requires javafx.base;
 //    requires javafx.graphics;
