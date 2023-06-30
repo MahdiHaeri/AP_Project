@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import io.github.gleidson28.GNAvatarView?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="488.0" prefWidth="592.0" stylesheets="@../../../styles/profileStyle.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <top>
+      <AnchorPane prefHeight="335.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+         <children>
+            <AnchorPane layoutX="59.0" layoutY="-23.0" prefHeight="150.0" prefWidth="600.0" styleClass="header-image-container" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+            <GNAvatarView layoutX="74.0" layoutY="105.0" prefHeight="90.0" prefWidth="96.0" stroke="#111111" strokeWidth="4.0" type="CIRCLE">
+               <image>
+                  <Image url="@../../../../../../../../Pictures/myImage.jpeg" />
+               </image>
+            </GNAvatarView>
+            <VBox layoutY="152.0" prefHeight="106.0" prefWidth="600.0" spacing="10.0" styleClass="information-vbox" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+               <children>
+                  <Label styleClass="light-text" text="Full name" />
+                  <Label styleClass="dark-text" text="user name" />
+                  <Label styleClass="light-text" text="Bio" />
+                  <HBox prefHeight="100.0" prefWidth="200.0" spacing="10.0">
+                     <children>
+                        <Label text="Location">
+                           <graphic>
+                              <FontAwesomeIconView fill="WHITE" glyphName="LOCATION_ARROW" />
+                           </graphic>
+                        </Label>
+                        <Label text="Date" />
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="100.0" prefWidth="200.0" spacing="10.0">
+                     <children>
+                        <Label styleClass="light-text" text="Label" />
+                        <Label styleClass="dark-text" text="Following" />
+                        <Label styleClass="light-text" text="Label" />
+                        <Label styleClass="dark-text" text="Follower" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+         </children>
+      </AnchorPane>
+   </top>
+   <center>
+      <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
+        <tabs>
+          <Tab text="Tweets">
+               <content>
+                  <AnchorPane prefHeight="200.0" prefWidth="200.0" />
+               </content>
+            </Tab>
+          <Tab text="Tweets &amp; replise">
+               <content>
+                  <AnchorPane prefHeight="200.0" prefWidth="200.0" />
+               </content>
+            </Tab>
+            <Tab text="Media">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+              </content>
+            </Tab>
+            <Tab text="Likes">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+              </content>
+            </Tab>
+        </tabs>
+      </TabPane>
+   </center>
+</BorderPane>

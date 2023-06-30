@@ -1,0 +1,34 @@
+.root {
+    -fx-background-color: #111;
+    -fx-text-fill: white;
+    -fx-fill: white;
+}
+
+.header-image-container {
+    -fx-background-image: url("../images/logo.jpeg");
+    -fx-background-size: cover;
+    -fx-background-position: center;
+    -fx-background-repeat: no-repeat;
+    -fx-background-color: #000000;
+}
+
+.light-text {
+    -fx-text-fill: #fff;
+}
+
+.dark-text {
+    -fx-text-fill: #666;
+}
+
+.information-vbox {
+    -fx-padding: 10px;
+}
+
+.tab-pane {
+    -fx-background-color: #111;
+}
+
+.tab {
+    -fx-background-color: #111;
+    -fx-fill: white;
+}
