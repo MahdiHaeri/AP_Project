@@ -39,7 +39,19 @@ public class LoginController implements Initializable {
 
     @FXML
     void onLoginBtnAction(ActionEvent event) {
+        try {
+            // Load the FXML file for the Main page
+            Parent mainPage = FXMLLoader.load(getClass().getResource("/com/example/client/main.fxml"));
 
+            // Create a new scene using the Main page
+            Scene mainScene = new Scene(mainPage);
+
+            // Get the current stage (window) and set the new scene
+            Stage currentStage = (Stage) loginBtn.getScene().getWindow();
+            currentStage.setScene(mainScene);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
