@@ -20,6 +20,7 @@
 
 .menu-bar-button:focused {
     -fx-background-color: #252525;
+    -fx-text-fill: #1DA1F2;
 }
 
 
