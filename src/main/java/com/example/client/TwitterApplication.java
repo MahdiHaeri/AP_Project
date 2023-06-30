@@ -19,7 +19,7 @@ public class TwitterApplication extends Application {
     @Override
     public void start(Stage stage) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/client/main.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/client/profile.fxml"));
             Parent root = fxmlLoader.load();
 
             Scene scene = new Scene(root);

@@ -11,38 +11,51 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="488.0" prefWidth="592.0" stylesheets="@../../../styles/profileStyle.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="488.0" prefWidth="592.0" stylesheets="@../../../styles/profileStyle.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.client.controllers.ProfileController">
    <top>
       <AnchorPane prefHeight="335.0" prefWidth="600.0" BorderPane.alignment="CENTER">
          <children>
             <AnchorPane layoutX="59.0" layoutY="-23.0" prefHeight="150.0" prefWidth="600.0" styleClass="header-image-container" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
             <GNAvatarView layoutX="74.0" layoutY="105.0" prefHeight="90.0" prefWidth="96.0" stroke="#111111" strokeWidth="4.0" type="CIRCLE">
                <image>
-                  <Image url="@../../../../../../../../Pictures/myImage.jpeg" />
+                  <Image url="@../../../images/myImage.jpeg" />
                </image>
             </GNAvatarView>
             <VBox layoutY="152.0" prefHeight="106.0" prefWidth="600.0" spacing="10.0" styleClass="information-vbox" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
                <children>
-                  <Label styleClass="light-text" text="Full name" />
-                  <Label styleClass="dark-text" text="user name" />
-                  <Label styleClass="light-text" text="Bio" />
+                  <HBox prefHeight="100.0" prefWidth="200.0" spacing="5.0">
+                     <children>
+                        <Label fx:id="firstNameLbl" styleClass="light-text" text="First name" />
+                        <Label fx:id="lastNameLbl" styleClass="light-text" text=" last name" />
+                     </children>
+                  </HBox>
+                  <Label fx:id="usernameLbl" styleClass="dark-text" text="\\@username" />
+                  <Label fx:id="bioLbl" styleClass="light-text" text="Bio" />
                   <HBox prefHeight="100.0" prefWidth="200.0" spacing="10.0">
                      <children>
-                        <Label text="Location">
+                        <Label fx:id="locationLbl" styleClass="dark-text" text="Location">
                            <graphic>
                               <FontAwesomeIconView fill="WHITE" glyphName="LOCATION_ARROW" />
                            </graphic>
                         </Label>
-                        <Label text="Date" />
+                        <HBox prefHeight="100.0" prefWidth="200.0" spacing="2.0">
+                           <children>
+                              <Label fx:id="joinedLbl" styleClass="dark-text" text="Joined">
+                                 <graphic>
+                                    <FontAwesomeIconView fill="WHITE" glyphName="CALENDAR" />
+                                 </graphic>
+                              </Label>
+                              <Label fx:id="DateLbl" styleClass="dark-text" text="Date" />
+                           </children>
+                        </HBox>
                      </children>
                   </HBox>
                   <HBox prefHeight="100.0" prefWidth="200.0" spacing="10.0">
                      <children>
-                        <Label styleClass="light-text" text="Label" />
-                        <Label styleClass="dark-text" text="Following" />
-                        <Label styleClass="light-text" text="Label" />
-                        <Label styleClass="dark-text" text="Follower" />
+                        <Label fx:id="followingCountLbl" styleClass="light-text" text="23" />
+                        <Label fx:id="followingLbl" styleClass="dark-text" text="Following" />
+                        <Label fx:id="followercountLbl" styleClass="light-text" text="44" />
+                        <Label fx:id="followerLbl" styleClass="dark-text" text="Follower" />
                      </children>
                   </HBox>
                </children>
