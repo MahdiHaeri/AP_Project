@@ -35,8 +35,17 @@ public class TweetHandler implements HttpHandler {
         }
         requestBody.close();
 
+        JSONObject jsonObject = new JSONObject(body.toString());
+
         // ip:port/tweets/tweet-type :(
         switch (method) {
+            case "GET":
+                try {
+                    response = tweetController.getTweets();
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+                break;
             case "POST":
 //                String user_id = ExtractUserAuth.extract(exchange);
 //                if (user_id == null) {
@@ -45,8 +54,6 @@ public class TweetHandler implements HttpHandler {
 //                }
 
 //                 Process the user creation based on the request body
-                String newTweet = body.toString();
-                JSONObject jsonObject = new JSONObject(newTweet);
                 try {
                     tweetController.createTweet(jsonObject.getString("writerId"), jsonObject.getString("ownerId"), jsonObject.getString("text"), jsonObject.getString("quoteTweetId"), toStringArray(jsonObject.getJSONArray("mediaPaths")), jsonObject.getInt("likes"), jsonObject.getInt("retweets"), jsonObject.getInt("replies"));
                 } catch (SQLException e) {
@@ -55,12 +62,20 @@ public class TweetHandler implements HttpHandler {
 
                 response = "Tweet successfully tweeted!";
                 break;
-            case "GET":
+            case "PUT":
                 try {
-                    response = tweetController.getTweets();
+                    tweetController.updateTweet(jsonObject.getString("writerId"), jsonObject.getString("ownerId"), jsonObject.getString("text"), jsonObject.getString("quoteTweetId"), toStringArray(jsonObject.getJSONArray("mediaPaths")), jsonObject.getInt("likes"), jsonObject.getInt("retweets"), jsonObject.getInt("replies"));
                 } catch (SQLException e) {
                     throw new RuntimeException(e);
                 }
+                break;
+            case "DELETE":
+                try {
+                    tweetController.deleteTweets();
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+                response = "Tweet successfully deleted!";
                 break;
             default:
                 response = "unknown-request";

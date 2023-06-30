@@ -47,6 +47,11 @@ public class TweetDAO {
         statement.executeUpdate();
     }
 
+    public void deleteTweets() throws SQLException {
+        PreparedStatement statement = connection.prepareStatement("DELETE FROM tweets");
+        statement.executeUpdate();
+    }
+
     public void deleteTweet(Tweet tweet) throws SQLException {
         PreparedStatement statement = connection.prepareStatement("DELETE FROM tweets WHERE id = ?");
         statement.setString(1, tweet.getId());

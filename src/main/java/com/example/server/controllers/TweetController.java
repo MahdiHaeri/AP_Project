@@ -47,6 +47,9 @@ public class TweetController {
         tweetDAO.updateTweet(tweet);
     }
 
+    public void deleteTweets() throws SQLException {
+        tweetDAO.deleteTweets();
+    }
     public void deleteTweet(String id) throws SQLException {
         tweetDAO.deleteTweet(id);
     }
