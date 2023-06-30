@@ -1,3 +1,6 @@
+.root {
+    -fx-background-color: transparent;
+}
 .scroll-pane {
-    -fx-background-color: #333;
+    -fx-background-color: #222;
 }

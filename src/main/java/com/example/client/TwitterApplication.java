@@ -19,13 +19,15 @@ public class TwitterApplication extends Application {
     @Override
     public void start(Stage stage) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/client/timeline.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/client/main.fxml"));
             Parent root = fxmlLoader.load();
 
             Scene scene = new Scene(root);
 //            scene.setFill(Color.TRANSPARENT);
 
 //            stage.initStyle(StageStyle.TRANSPARENT);
+            // full screen mode
+            stage.setFullScreen(true);
             stage.setScene(scene);
             stage.setTitle("Twitter");
             stage.show();

@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="root" stylesheets="@../../../styles/mainStyle.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.client.controllers.MainController">
+<BorderPane fx:id="rootBp" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="root" stylesheets="@../../../styles/mainStyle.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.client.controllers.MainController">
    <left>
       <BorderPane styleClass="menu-bar" BorderPane.alignment="CENTER">
          <center>
@@ -18,37 +18,37 @@
                   <VBox prefHeight="200.0" prefWidth="100.0">
                      <children>
                         <Pane prefHeight="6.0" prefWidth="196.0" />
-                        <Button alignment="TOP_LEFT" graphicTextGap="15.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="menu-bar-button" text="Home" textAlignment="CENTER">
+                        <Button fx:id="homeBtn" alignment="TOP_LEFT" graphicTextGap="15.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onHomeBtnAction" styleClass="menu-bar-button" text="Home" textAlignment="CENTER">
                            <graphic>
                               <FontAwesomeIconView glyphName="HOME" size="18" styleClass="menu-bar-button-icons" />
                            </graphic>
                         </Button>
-                        <Button alignment="TOP_LEFT" graphicTextGap="15.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="menu-bar-button" text="Explore" textAlignment="CENTER">
+                        <Button fx:id="exploreBtn" alignment="TOP_LEFT" graphicTextGap="15.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onExploreBtnAction" styleClass="menu-bar-button" text="Explore" textAlignment="CENTER">
                            <graphic>
                               <FontAwesomeIconView glyphName="HASHTAG" size="18" styleClass="menu-bar-button-icons" />
                            </graphic>
                         </Button>
-                        <Button alignment="TOP_LEFT" graphicTextGap="15.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="menu-bar-button" text="Notifications" textAlignment="CENTER">
+                        <Button fx:id="notificationBtn" alignment="TOP_LEFT" graphicTextGap="15.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onNotificatinosBtnAction" styleClass="menu-bar-button" text="Notifications" textAlignment="CENTER">
                            <graphic>
                               <FontAwesomeIconView glyphName="BELL" size="18" styleClass="menu-bar-button-icons" />
                            </graphic>
                         </Button>
-                        <Button alignment="TOP_LEFT" graphicTextGap="15.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="menu-bar-button" text="Messages" textAlignment="CENTER">
+                        <Button fx:id="messagesBtn" alignment="TOP_LEFT" graphicTextGap="15.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onMessagesBtnAction" styleClass="menu-bar-button" text="Messages" textAlignment="CENTER">
                            <graphic>
                               <FontAwesomeIconView glyphName="ENVELOPE" size="18" styleClass="menu-bar-button-icons" />
                            </graphic>
                         </Button>
-                        <Button alignment="TOP_LEFT" graphicTextGap="15.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="menu-bar-button" text="Bookmarks" textAlignment="CENTER">
+                        <Button fx:id="bookmarksBtn" alignment="TOP_LEFT" graphicTextGap="15.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onBookmarksBtnAction" styleClass="menu-bar-button" text="Bookmarks" textAlignment="CENTER">
                            <graphic>
                               <FontAwesomeIconView glyphName="BOOKMARK" size="18" styleClass="menu-bar-button-icons" />
                            </graphic>
                         </Button>
-                        <Button alignment="TOP_LEFT" graphicTextGap="15.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="menu-bar-button" text="Lists" textAlignment="CENTER">
+                        <Button fx:id="listsBtn" alignment="TOP_LEFT" graphicTextGap="15.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onListsBtnAction" styleClass="menu-bar-button" text="Lists" textAlignment="CENTER">
                            <graphic>
                               <FontAwesomeIconView glyphName="LIST" size="18" styleClass="menu-bar-button-icons" />
                            </graphic>
                         </Button>
-                        <Button alignment="TOP_LEFT" graphicTextGap="15.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="menu-bar-button" text="Profile" textAlignment="CENTER">
+                        <Button fx:id="profileBtn" alignment="TOP_LEFT" graphicTextGap="15.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onProfileBtnAction" styleClass="menu-bar-button" text="Profile" textAlignment="CENTER">
                            <graphic>
                               <GNAvatarView prefHeight="20.0" prefWidth="20.0" styleClass="menu-bar-button-icons">
                                  <image>
@@ -57,7 +57,7 @@
                               </GNAvatarView>
                            </graphic>
                         </Button>
-                        <Button alignment="TOP_LEFT" graphicTextGap="15.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="menu-bar-button" text="More" textAlignment="CENTER">
+                        <Button fx:id="moreBtn" alignment="TOP_LEFT" graphicTextGap="15.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onMoreBtnAction" styleClass="menu-bar-button" text="More" textAlignment="CENTER">
                            <graphic>
                               <FontAwesomeIconView glyphName="ELLIPSIS_H" size="18" styleClass="menu-bar-button-icons" />
                            </graphic>
@@ -66,7 +66,7 @@
                   </VBox>
                   <VBox prefHeight="200.0" prefWidth="100.0" styleClass="tweet-vbox">
                      <children>
-                        <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="37.0" prefWidth="180.0" styleClass="tweet-buttons" text="Tweet" />
+                        <Button fx:id="tweetBtn" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onTweetBtnAction" prefHeight="37.0" prefWidth="180.0" styleClass="tweet-buttons" text="Tweet" />
                      </children>
                   </VBox>
                </children>

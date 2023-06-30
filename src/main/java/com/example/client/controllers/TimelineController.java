@@ -87,4 +87,8 @@ public class TimelineController implements Initializable {
             }
         }
     }
+
+    public Node getTimelinePane() {
+        return tweetsVbox;
+    }
 }

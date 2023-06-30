@@ -14,8 +14,6 @@
     /*-fx-background-color: black;*/
     -fx-text-fill: white;
     -fx-padding: 10px;
-    -fx-background-radius: 0px;
-    -fx-border-radius: 0xp;
 }
 
 .menu-bar-button:focused {
