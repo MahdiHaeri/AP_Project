@@ -65,6 +65,9 @@ public class TimelineController implements Initializable {
                     tweetController.setOwnerNameLbl(tweetJson.get("ownerId").asText());
 //                    tweetController.setTimestapLbl(tweetJson.get("timestamp").asText());
                     tweetController.setQuoteLbl(tweetJson.get("quoteTweetId").asText());
+                    tweetController.setReplyBtn(tweetJson.get("replies").asText());
+                    tweetController.setRetweetBtn(tweetJson.get("retweets").asText());
+                    tweetController.setLikeBtn(tweetJson.get("likes").asText());
                     // ... set other information on the controller
 
                     // Add the tweet to the tweet box

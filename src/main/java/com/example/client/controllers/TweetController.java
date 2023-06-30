@@ -71,15 +71,6 @@ public class TweetController implements Initializable {
 //    public void setImageView(ImageView imageView) {
 //        this.imageView = imageView;
 //    }
-
-//    public Button getLikeBtn() {
-//        return likeBtn;
-//    }
-//
-//    public void setLikeBtn(Button likeBtn) {
-//        this.likeBtn = likeBtn;
-//    }
-
 //    public MediaView getMeidaView() {
 //        return meidaView;
 //    }
@@ -104,29 +95,37 @@ public class TweetController implements Initializable {
         this.quoteLbl.setText(text);
     }
 
-//    public Button getReplyBtn() {
-//        return replyBtn;
-//    }
-//
-//    public void setReplyBtn(Button replyBtn) {
-//        this.replyBtn = replyBtn;
-//    }
-//
-//    public Button getRetweetBtn() {
-//        return retweetBtn;
-//    }
-//
-//    public void setRetweetBtn(Button retweetBtn) {
-//        this.retweetBtn = retweetBtn;
-//    }
-//
-//    public Button getShareBtn() {
-//        return shareBtn;
-//    }
-//
-//    public void setShareBtn(Button shareBtn) {
-//        this.shareBtn = shareBtn;
-//    }
+    public String getReplyBtn() {
+        return replyBtn.getText();
+    }
+
+    public void setReplyBtn(String text) {
+        this.replyBtn.setText(text);
+    }
+
+    public String getRetweetBtn() {
+        return retweetBtn.getText();
+    }
+
+    public void setRetweetBtn(String text) {
+        this.retweetBtn.setText(text);
+    }
+
+    public String getLikeBtn() {
+        return likeBtn.getText();
+    }
+
+    public void setLikeBtn(String text) {
+        this.likeBtn.setText(text);
+    }
+
+    public String getShareBtn() {
+        return shareBtn.getText();
+    }
+
+    public void setShareBtn(String text) {
+        this.shareBtn.setText(text);
+    }
 
     public String getTextMessageLbl() {
         return textMessageLbl.getText();
