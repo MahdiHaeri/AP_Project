@@ -18,9 +18,9 @@
     -fx-border-radius: 0xp;
 }
 
-/*.menu-bar-button:hover {*/
-/*    -fx-background-color: #1DA1F2;*/
-/*}*/
+.menu-bar-button:focused {
+    -fx-background-color: #252525;
+}
 
 
 .menu-bar-button:hover .menu-bar-button-icons {
