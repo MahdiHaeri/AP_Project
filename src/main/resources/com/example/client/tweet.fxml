@@ -7,7 +7,6 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
@@ -15,136 +14,146 @@
 <?import javafx.scene.media.MediaView?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" stylesheets="@../../../styles/tweetStyle.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.client.controllers.TweetController">
-   <children>
-      <BorderPane prefHeight="445.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+<BorderPane styleClass="root" stylesheets="@../../../styles/tweetStyle.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.client.controllers.TweetController">
+   <top>
+      <HBox alignment="CENTER_LEFT" prefHeight="27.0" prefWidth="600.0" spacing="10.0" BorderPane.alignment="CENTER">
+         <children>
+            <Pane prefHeight="27.0" prefWidth="29.0" />
+            <FontAwesomeIconView glyphName="RETWEET" styleClass="tweet-icon" />
+            <Label fx:id="ownerNameLbl" styleClass="text-lable" text="owner name" />
+            <Label styleClass="text-lable" text="Retweeted" />
+         </children>
+      </HBox>
+   </top>
+   <center>
+      <BorderPane prefHeight="400.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+         <left>
+            <VBox alignment="TOP_CENTER" prefHeight="445.0" prefWidth="61.0" styleClass="left-vbox" BorderPane.alignment="CENTER">
+               <children>
+                  <GNAvatarView fx:id="avatarView" prefHeight="60.0" prefWidth="84.0" stroke="#ffffff00" styleClass="avatar-image" type="CIRCLE">
+                     <image>
+                        <Image url="@../../../images/Sign%20up-amico.png" />
+                     </image>
+                  </GNAvatarView>
+               </children>
+            </VBox>
+         </left>
          <center>
-            <BorderPane prefHeight="400.0" prefWidth="600.0" BorderPane.alignment="CENTER">
-               <left>
-                  <VBox prefHeight="445.0" prefWidth="61.0" BorderPane.alignment="CENTER">
+            <BorderPane prefHeight="200.0" prefWidth="200.0" styleClass="center-pane" BorderPane.alignment="CENTER">
+               <bottom>
+                  <HBox prefHeight="31.0" prefWidth="530.0" spacing="20.0" BorderPane.alignment="CENTER">
                      <children>
-                        <GNAvatarView fx:id="avatarView" prefHeight="60.0" prefWidth="84.0" stroke="#ffffff00" styleClass="avatar-image" type="CIRCLE">
+                        <Button fx:id="replyBtn" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onReplyBtnAction" text="143">
+                           <graphic>
+                              <FontAwesomeIconView glyphName="COMMENT">
+                                 <styleClass>
+                                    <String fx:value="comment-icon" />
+                                    <String fx:value="tweet-icon" />
+                                 </styleClass>
+                              </FontAwesomeIconView>
+                           </graphic>
+                           <styleClass>
+                              <String fx:value="tweet-buttons" />
+                              <String fx:value="comment-button" />
+                           </styleClass>
+                        </Button>
+                        <Button fx:id="retweetBtn" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onRetweetBtnAction" text="21.3k">
+                           <graphic>
+                              <FontAwesomeIconView glyphName="RETWEET">
+                                 <styleClass>
+                                    <String fx:value="retweet-icon" />
+                                    <String fx:value="tweet-icon" />
+                                 </styleClass>
+                              </FontAwesomeIconView>
+                           </graphic>
+                           <styleClass>
+                              <String fx:value="tweet-buttons" />
+                              <String fx:value="retweet-button" />
+                           </styleClass>
+                        </Button>
+                        <Button fx:id="likeBtn" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onLikeBtnAction" text="203k">
+                           <graphic>
+                              <FontAwesomeIconView glyphName="HEART">
+                                 <styleClass>
+                                    <String fx:value="like-icon" />
+                                    <String fx:value="tweet-icon" />
+                                 </styleClass>
+                              </FontAwesomeIconView>
+                           </graphic>
+                           <styleClass>
+                              <String fx:value="tweet-buttons" />
+                              <String fx:value="like-button" />
+                           </styleClass>
+                        </Button>
+                        <Button fx:id="shareBtn" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onShareBtnAction">
+                           <graphic>
+                              <FontAwesomeIconView glyphName="ARROW_UP">
+                                 <styleClass>
+                                    <String fx:value="share-icon" />
+                                    <String fx:value="tweet-icon" />
+                                 </styleClass>
+                              </FontAwesomeIconView>
+                           </graphic>
+                           <styleClass>
+                              <String fx:value="tweet-buttons" />
+                              <String fx:value="share-button" />
+                           </styleClass>
+                        </Button>
+                     </children>
+                  </HBox>
+               </bottom>
+               <center>
+                  <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+                     <children>
+                        <Label fx:id="textMessageLbl" styleClass="text-lable" text="test message" />
+                        <ImageView fx:id="imageView" fitHeight="150.0" fitWidth="155.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../../images/Sign%20up-amico.png" />
+                              <Image url="@../../../images/Mobile%20login-bro.png" />
                            </image>
-                        </GNAvatarView>
+                        </ImageView>
+                        <MediaView fx:id="meidaView" fitHeight="200.0" fitWidth="200.0" />
+                        <Label fx:id="quoteLbl" styleClass="text-lable" text="quote" />
                      </children>
                   </VBox>
-               </left>
-               <center>
-                  <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-                     <top>
-                        <HBox alignment="CENTER_LEFT" prefHeight="30.0" prefWidth="530.0" spacing="10.0" BorderPane.alignment="CENTER">
+               </center>
+               <top>
+                  <BorderPane prefHeight="31.0" prefWidth="539.0" BorderPane.alignment="CENTER">
+                     <right>
+                        <Button mnemonicParsing="false" BorderPane.alignment="CENTER">
+                           <graphic>
+                              <FontAwesomeIconView glyphName="ELLIPSIS_H">
+                                 <styleClass>
+                                    <String fx:value="tweet-icon" />
+                                    <String fx:value="ellipsis-h-icon" />
+                                 </styleClass>
+                              </FontAwesomeIconView>
+                           </graphic>
+                           <styleClass>
+                              <String fx:value="tweet-buttons" />
+                              <String fx:value="ellipsis-h-button" />
+                           </styleClass>
+                        </Button>
+                     </right>
+                     <left>
+                        <HBox prefHeight="100.0" prefWidth="200.0" spacing="10.0" BorderPane.alignment="CENTER">
                            <children>
                               <Label fx:id="writerNameLbl" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="text-lable" text="writer name" textAlignment="CENTER">
                                  <font>
                                     <Font name="System Bold" size="13.0" />
-                                 </font></Label>
+                                 </font>
+                              </Label>
                               <Label fx:id="writerUsernameLbl" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="text-lable" text="writer username" textAlignment="CENTER" />
                               <Label fx:id="timestapLbl" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="text-lable" text="timestammp" textAlignment="CENTER" />
-                              <Pane prefHeight="30.0" prefWidth="244.0" />
-                              <Button mnemonicParsing="false">
-                                 <graphic>
-                                    <FontAwesomeIconView glyphName="ELLIPSIS_H">
-                                       <styleClass>
-                                          <String fx:value="tweet-icon" />
-                                          <String fx:value="ellipsis-h-icon" />
-                                       </styleClass>
-                                    </FontAwesomeIconView>
-                                 </graphic>
-                                 <styleClass>
-                                    <String fx:value="tweet-buttons" />
-                                    <String fx:value="ellipsis-h-button" />
-                                 </styleClass>
-                              </Button>
                            </children>
                         </HBox>
-                     </top>
-                     <bottom>
-                        <HBox prefHeight="31.0" prefWidth="530.0" spacing="20.0" BorderPane.alignment="CENTER">
-                           <children>
-                              <Button fx:id="replyBtn" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onReplyBtnAction" text="143">
-                                 <graphic>
-                                    <FontAwesomeIconView glyphName="COMMENT">
-                                       <styleClass>
-                                          <String fx:value="comment-icon" />
-                                          <String fx:value="tweet-icon" />
-                                       </styleClass></FontAwesomeIconView>
-                                 </graphic>
-                                 <styleClass>
-                                    <String fx:value="tweet-buttons" />
-                                    <String fx:value="comment-button" />
-                                 </styleClass>
-                              </Button>
-                              <Button fx:id="retweetBtn" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onRetweetBtnAction" text="21.3k">
-                                 <graphic>
-                                    <FontAwesomeIconView glyphName="RETWEET">
-                                       <styleClass>
-                                          <String fx:value="retweet-icon" />
-                                          <String fx:value="tweet-icon" />
-                                       </styleClass></FontAwesomeIconView>
-                                 </graphic>
-                                 <styleClass>
-                                    <String fx:value="tweet-buttons" />
-                                    <String fx:value="retweet-button" />
-                                 </styleClass>
-                              </Button>
-                              <Button fx:id="likeBtn" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onLikeBtnAction" text="203k">
-                                 <graphic>
-                                    <FontAwesomeIconView glyphName="HEART">
-                                       <styleClass>
-                                          <String fx:value="like-icon" />
-                                          <String fx:value="tweet-icon" />
-                                       </styleClass></FontAwesomeIconView>
-                                 </graphic>
-                                 <styleClass>
-                                    <String fx:value="tweet-buttons" />
-                                    <String fx:value="like-button" />
-                                 </styleClass>
-                              </Button>
-                              <Button fx:id="shareBtn" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onShareBtnAction">
-                                 <graphic>
-                                    <FontAwesomeIconView glyphName="ARROW_UP">
-                                       <styleClass>
-                                          <String fx:value="share-icon" />
-                                          <String fx:value="tweet-icon" />
-                                       </styleClass></FontAwesomeIconView>
-                                 </graphic>
-                                 <styleClass>
-                                    <String fx:value="tweet-buttons" />
-                                    <String fx:value="share-button" />
-                                 </styleClass>
-                              </Button>
-                           </children>
-                        </HBox>
-                     </bottom>
+                     </left>
                      <center>
-                        <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
-                           <children>
-                              <Label fx:id="textMessageLbl" styleClass="text-lable" text="test message" />
-                              <ImageView fx:id="imageView" fitHeight="150.0" fitWidth="155.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../../../images/Mobile%20login-bro.png" />
-                                 </image></ImageView>
-                              <MediaView fx:id="meidaView" fitHeight="200.0" fitWidth="200.0" />
-                              <Label fx:id="quoteLbl" styleClass="text-lable" text="quote" />
-                           </children>
-                        </VBox>
+                        <Pane minWidth="100.0" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
                      </center>
                   </BorderPane>
-               </center>
+               </top>
             </BorderPane>
          </center>
-         <top>
-            <HBox alignment="CENTER_LEFT" prefHeight="27.0" prefWidth="600.0" spacing="10.0" BorderPane.alignment="CENTER">
-               <children>
-                  <Pane prefHeight="27.0" prefWidth="29.0" />
-                  <FontAwesomeIconView glyphName="RETWEET" styleClass="tweet-icon" />
-                  <Label fx:id="ownerNameLbl" styleClass="text-lable" text="owner name" />
-                  <Label styleClass="text-lable" text="Retweeted" />
-               </children>
-            </HBox>
-         </top>
       </BorderPane>
-   </children>
-</AnchorPane>
+   </center>
+</BorderPane>

@@ -35,7 +35,6 @@ public class TweetHandler implements HttpHandler {
         }
         requestBody.close();
 
-        JSONObject jsonObject = new JSONObject(body.toString());
 
         // ip:port/tweets/tweet-type :(
         switch (method) {
@@ -53,6 +52,8 @@ public class TweetHandler implements HttpHandler {
 //                    break;
 //                }
 
+                JSONObject jsonObject = new JSONObject(body.toString());
+
 //                 Process the user creation based on the request body
                 try {
                     tweetController.createTweet(jsonObject.getString("writerId"), jsonObject.getString("ownerId"), jsonObject.getString("text"), jsonObject.getString("quoteTweetId"), toStringArray(jsonObject.getJSONArray("mediaPaths")), jsonObject.getInt("likes"), jsonObject.getInt("retweets"), jsonObject.getInt("replies"));
@@ -62,13 +63,13 @@ public class TweetHandler implements HttpHandler {
 
                 response = "Tweet successfully tweeted!";
                 break;
-            case "PUT":
-                try {
-                    tweetController.updateTweet(jsonObject.getString("writerId"), jsonObject.getString("ownerId"), jsonObject.getString("text"), jsonObject.getString("quoteTweetId"), toStringArray(jsonObject.getJSONArray("mediaPaths")), jsonObject.getInt("likes"), jsonObject.getInt("retweets"), jsonObject.getInt("replies"));
-                } catch (SQLException e) {
-                    throw new RuntimeException(e);
-                }
-                break;
+//            case "PUT":
+//                try {
+//                    tweetController.updateTweet(jsonObject.getString("writerId"), jsonObject.getString("ownerId"), jsonObject.getString("text"), jsonObject.getString("quoteTweetId"), toStringArray(jsonObject.getJSONArray("mediaPaths")), jsonObject.getInt("likes"), jsonObject.getInt("retweets"), jsonObject.getInt("replies"));
+//                } catch (SQLException e) {
+//                    throw new RuntimeException(e);
+//                }
+//                break;
             case "DELETE":
                 try {
                     tweetController.deleteTweets();

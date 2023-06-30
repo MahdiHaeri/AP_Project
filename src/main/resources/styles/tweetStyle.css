@@ -8,6 +8,14 @@
     -fx-text-fill: white;
 }
 
+/*.left-vbox {*/
+/*    -fx-padding: 2px;*/
+/*}*/
+
+.center-pane {
+    -fx-padding: 3px;
+}
+
 .avatar-image {
     /*-fx-border-radius: 100%;*/
     /*-fx-border-color: #000000;*/
