@@ -5,7 +5,7 @@
 }
 
 .text-lable {
-    -fx-text-fill: #ddd;
+    -fx-text-fill: white;
 }
 
 .avatar-image {
@@ -33,6 +33,16 @@
 /*.tweet-buttons:hover {*/
 /*    -fx-background-color: #e8e8e8;*/
 /*}*/
+
+.ellipsis-h-button:hover {
+    -fx-text-fill: #1DA1F2;
+    -fx-fill: #1DA1F2;
+}
+
+.ellipsis-h-button:hover .ellipsis-h-icon {
+    -fx-text-fill: #1DA1F2;
+    -fx-fill: #1DA1F2;
+}
 
 .comment-button:hover {
     -fx-text-fill: #1DA1F2;
