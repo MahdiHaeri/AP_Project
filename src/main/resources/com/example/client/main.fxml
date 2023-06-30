@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import io.github.gleidson28.GNAvatarView?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="root" stylesheets="@../../../styles/mainStyle.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.client.controllers.MainController">
+   <left>
+      <BorderPane styleClass="menu-bar" BorderPane.alignment="CENTER">
+         <center>
+            <VBox alignment="TOP_CENTER" prefHeight="400.0" prefWidth="196.0" spacing="10.0">
+               <children>
+                  <VBox prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <Pane prefHeight="6.0" prefWidth="196.0" />
+                        <Button alignment="TOP_LEFT" graphicTextGap="15.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="menu-bar-button" text="Home" textAlignment="CENTER">
+                           <graphic>
+                              <FontAwesomeIconView glyphName="HOME" size="18" styleClass="menu-bar-button-icons" />
+                           </graphic>
+                        </Button>
+                        <Button alignment="TOP_LEFT" graphicTextGap="15.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="menu-bar-button" text="Explore" textAlignment="CENTER">
+                           <graphic>
+                              <FontAwesomeIconView glyphName="HASHTAG" size="18" styleClass="menu-bar-button-icons" />
+                           </graphic>
+                        </Button>
+                        <Button alignment="TOP_LEFT" graphicTextGap="15.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="menu-bar-button" text="Notifications" textAlignment="CENTER">
+                           <graphic>
+                              <FontAwesomeIconView glyphName="BELL" size="18" styleClass="menu-bar-button-icons" />
+                           </graphic>
+                        </Button>
+                        <Button alignment="TOP_LEFT" graphicTextGap="15.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="menu-bar-button" text="Messages" textAlignment="CENTER">
+                           <graphic>
+                              <FontAwesomeIconView glyphName="ENVELOPE" size="18" styleClass="menu-bar-button-icons" />
+                           </graphic>
+                        </Button>
+                        <Button alignment="TOP_LEFT" graphicTextGap="15.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="menu-bar-button" text="Bookmarks" textAlignment="CENTER">
+                           <graphic>
+                              <FontAwesomeIconView glyphName="BOOKMARK" size="18" styleClass="menu-bar-button-icons" />
+                           </graphic>
+                        </Button>
+                        <Button alignment="TOP_LEFT" graphicTextGap="15.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="menu-bar-button" text="Lists" textAlignment="CENTER">
+                           <graphic>
+                              <FontAwesomeIconView glyphName="LIST" size="18" styleClass="menu-bar-button-icons" />
+                           </graphic>
+                        </Button>
+                        <Button alignment="TOP_LEFT" graphicTextGap="15.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="menu-bar-button" text="Profile" textAlignment="CENTER">
+                           <graphic>
+                              <GNAvatarView prefHeight="20.0" prefWidth="20.0" styleClass="menu-bar-button-icons">
+                                 <image>
+                                    <Image url="@../../../images/Sign%20up-amico.png" />
+                                 </image>
+                              </GNAvatarView>
+                           </graphic>
+                        </Button>
+                        <Button alignment="TOP_LEFT" graphicTextGap="15.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="menu-bar-button" text="More" textAlignment="CENTER">
+                           <graphic>
+                              <FontAwesomeIconView glyphName="ELLIPSIS_H" size="18" styleClass="menu-bar-button-icons" />
+                           </graphic>
+                        </Button>
+                     </children>
+                  </VBox>
+                  <VBox prefHeight="200.0" prefWidth="100.0" styleClass="tweet-vbox">
+                     <children>
+                        <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="37.0" prefWidth="180.0" styleClass="tweet-buttons" text="Tweet" />
+                     </children>
+                  </VBox>
+               </children>
+            </VBox>
+         </center>
+         <top>
+            <AnchorPane prefHeight="35.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+         </top>
+      </BorderPane>
+   </left>
+</BorderPane>
