@@ -68,22 +68,34 @@
         <tabs>
           <Tab text="Tweets">
                <content>
-                  <AnchorPane prefHeight="200.0" prefWidth="200.0" />
+                  <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                     <children>
+                        <Label layoutX="47.0" layoutY="40.0" text="Tweets tab" />
+                     </children></AnchorPane>
                </content>
             </Tab>
           <Tab text="Tweets &amp; replise">
                <content>
-                  <AnchorPane prefHeight="200.0" prefWidth="200.0" />
+                  <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                     <children>
+                        <Label layoutX="68.0" layoutY="40.0" text="Tweets &amp; replies tab" />
+                     </children></AnchorPane>
                </content>
             </Tab>
             <Tab text="Media">
               <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <Label layoutX="58.0" layoutY="40.0" text="Media tab" />
+                     </children></AnchorPane>
               </content>
             </Tab>
             <Tab text="Likes">
               <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <Label layoutX="67.0" layoutY="40.0" text="LIkes tab" />
+                     </children></AnchorPane>
               </content>
             </Tab>
         </tabs>

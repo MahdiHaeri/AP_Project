@@ -52,7 +52,13 @@ public class MainController implements Initializable {
 
     @FXML
     void onExploreBtnAction(ActionEvent event) {
-
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/client/timeline.fxml"));
+            Parent timelineRoot = fxmlLoader.load();
+            rootBp.setCenter(timelineRoot);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @FXML

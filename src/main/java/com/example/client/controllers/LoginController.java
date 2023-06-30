@@ -49,6 +49,7 @@ public class LoginController implements Initializable {
             // Get the current stage (window) and set the new scene
             Stage currentStage = (Stage) loginBtn.getScene().getWindow();
             currentStage.setScene(mainScene);
+            currentStage.setFullScreen(true);
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -27,6 +27,7 @@ public class TwitterApplication extends Application {
 
 //            stage.initStyle(StageStyle.TRANSPARENT);
             // full screen mode
+//            stage.setMaximized(true);
             stage.setFullScreen(true);
             stage.setScene(scene);
             stage.setTitle("Twitter");
