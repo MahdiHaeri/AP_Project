@@ -132,6 +132,10 @@ public class MainController implements Initializable {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/client/timeline.fxml"));
             Parent timelineRoot = fxmlLoader.load();
             rootBp.setCenter(timelineRoot);
+
+            FXMLLoader fxmlLoader2 = new FXMLLoader(getClass().getResource("/com/example/client/trends.fxml"));
+            Parent trendsRoot = fxmlLoader2.load();
+            rootBp.setRight(trendsRoot);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

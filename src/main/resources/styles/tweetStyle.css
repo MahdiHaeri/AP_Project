@@ -1,6 +1,6 @@
 .root {
-    -fx-background-color: transparent;
-    -fx-padding: 10px;
+    -fx-background-color: #111;
+    -fx-padding: 100px;
     -fx-text-fill: #ddd;
 }
 
@@ -14,6 +14,8 @@
 
 .center-pane {
     -fx-padding: 3px;
+    -fx-border-color: #222;
+    -fx-border-width: 0 0 1 0;
 }
 
 .avatar-image {
