@@ -10,12 +10,15 @@
 
 <BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@../../../styles/bookmarksStyle.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.client.controllers.BookmarksController">
    <top>
-      <BorderPane prefHeight="37.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+      <BorderPane prefHeight="37.0" prefWidth="600.0" styleClass="header" BorderPane.alignment="CENTER">
          <right>
-            <FontAwesomeIconView fill="WHITE" glyphName="ELLIPSIS_H" BorderPane.alignment="CENTER" />
+            <FontAwesomeIconView fill="WHITE" glyphName="ELLIPSIS_H" size="18" styleClass="icon" BorderPane.alignment="CENTER" />
          </right>
          <center>
-            <Label text="Bookmarks" textFill="WHITE" BorderPane.alignment="CENTER" />
+            <Label text="Bookmarks" textFill="WHITE" BorderPane.alignment="CENTER">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font></Label>
          </center>
       </BorderPane>
    </top>
@@ -24,7 +27,7 @@
          <center>
             <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
                <children>
-                  <ImageView fitHeight="148.0" fitWidth="324.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="179.0" fitWidth="332.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../../images/book-in-bird-cage-800x400.v1.71804389.png" />
                      </image>
@@ -34,7 +37,7 @@
                         <Font size="21.0" />
                      </font>
                   </Label>
-                  <Label prefHeight="46.0" prefWidth="247.0" text="Don't let the good ones fly away! Bookmark Tweets to easily find them again in the future." textFill="WHITE" wrapText="true" />
+                  <Label prefHeight="46.0" prefWidth="247.0" styleClass="dark-text" text="Don't let the good ones fly away! Bookmark Tweets to easily find them again in the future." textFill="WHITE" wrapText="true" />
                </children>
             </VBox>
          </center>
