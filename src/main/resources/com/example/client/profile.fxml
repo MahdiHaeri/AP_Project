@@ -2,6 +2,7 @@
 
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import io.github.gleidson28.GNAvatarView?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
@@ -18,10 +19,10 @@
             <AnchorPane layoutX="59.0" layoutY="-23.0" prefHeight="150.0" prefWidth="600.0" styleClass="header-image-container" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
             <GNAvatarView layoutX="74.0" layoutY="105.0" prefHeight="90.0" prefWidth="96.0" stroke="#111111" strokeWidth="4.0" type="CIRCLE">
                <image>
-                  <Image url="@../../../images/myImage.jpeg" />
+                  <Image url="@../../../images/avatar.jpeg" />
                </image>
             </GNAvatarView>
-            <VBox layoutY="152.0" prefHeight="106.0" prefWidth="600.0" spacing="10.0" styleClass="information-vbox" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+            <VBox layoutY="152.0" prefHeight="145.0" prefWidth="308.0" spacing="10.0" styleClass="information-vbox" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="284.0">
                <children>
                   <HBox prefHeight="100.0" prefWidth="200.0" spacing="5.0">
                      <children>
@@ -58,6 +59,13 @@
                         <Label fx:id="followerLbl" styleClass="dark-text" text="Follower" />
                      </children>
                   </HBox>
+               </children>
+            </VBox>
+            <VBox alignment="TOP_CENTER" layoutX="284.0" layoutY="167.0" prefHeight="104.0" prefWidth="80.0" spacing="10.0" AnchorPane.rightAnchor="126.0">
+               <children>
+                  <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="controller-button" text="Edit Profile" />
+                  <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="controller-button" text="Follow" />
+                  <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="controller-button" text="Block" />
                </children>
             </VBox>
          </children>

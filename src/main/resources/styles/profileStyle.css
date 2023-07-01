@@ -5,11 +5,11 @@
 }
 
 .header-image-container {
-    -fx-background-image: url("../images/logo.jpeg");
+    /*-fx-background-image: url("../images/logo.jpeg");*/
     -fx-background-size: cover;
     -fx-background-position: center;
     -fx-background-repeat: no-repeat;
-    -fx-background-color: #000000;
+    -fx-background-color: #999;
 }
 
 .light-text {
@@ -23,6 +23,19 @@
 .information-vbox {
     -fx-padding: 10px;
 }
+
+.controller-button {
+    -fx-background-color: trasparent;
+    -fx-background-radius: 50px;
+    -fx-border-radius: 50px;
+    -fx-border-color: #333;
+    -fx-text-fill: white;
+}
+
+.controller-button:hover {
+    -fx-background-color: #333;
+}
+
 
 .tab-pane {
     -fx-tab-min-height: 30px;

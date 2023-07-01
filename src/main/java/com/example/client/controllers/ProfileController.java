@@ -2,6 +2,10 @@ package com.example.client.controllers;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jwt;
+import io.jsonwebtoken.JwtParser;
+import io.jsonwebtoken.Jwts;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -57,7 +61,11 @@ public class ProfileController implements Initializable {
         // Make a GET request to the server
         HttpURLConnection connection = null;
         try {
-            URL apiUrl = new URL("http://localhost:8080/users/MahdiHaeri");
+
+
+            String username = JWTController.getSubjectFromJwt(JWTController.getJwtKey());
+
+            URL apiUrl = new URL("http://localhost:8080/users/" + username);
             connection = (HttpURLConnection) apiUrl.openConnection();
             connection.setRequestMethod("GET");
 
