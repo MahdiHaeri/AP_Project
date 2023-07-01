@@ -9,12 +9,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.Hyperlink;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 
 import com.example.server.models.User;
 import javafx.stage.Stage;
@@ -62,6 +57,9 @@ public class SignUpController implements Initializable {
     private TextField usernameTf;
 
     @FXML
+    private Label errorMessageLbl;
+
+    @FXML
     void onLoginLinkActino(ActionEvent event) {
         try {
             // Load the FXML file for the SignUp page
@@ -81,6 +79,30 @@ public class SignUpController implements Initializable {
     @FXML
     void onRigesterBtnAction(ActionEvent event) {
         try {
+
+            if (usernameTf.getText().equals("") || firstNameTf.getText().equals("") || lastNameTf.getText().equals("") || emailOrPhoneNumberTf.getText().equals("") || passwordTf.getText().equals("") || confirmPasswordTf.getText().equals("") || countryCmb.getValue().equals("") || birthdayDp.getValue() == null) {
+                errorMessageLbl.setText("Please fill all the fields");
+                errorMessageLbl.setVisible(true);
+                return;
+            }
+
+            //check email
+            if (EmailValidator.isValidEmail(emailOrPhoneNumberTf.getText())) {
+                errorMessageLbl.setVisible(false);
+            } else {
+                errorMessageLbl.setText("Invalid email address");
+                errorMessageLbl.setVisible(true);
+                return;
+            }
+
+            if (passwordTf.getText().equals(confirmPasswordTf.getText())) {
+                errorMessageLbl.setVisible(false);
+            } else {
+                errorMessageLbl.setText("Passwords do not match");
+                errorMessageLbl.setVisible(true);
+                return;
+            }
+
             User user = new User();
             user.setId(usernameTf.getText());
             user.setFirstName(firstNameTf.getText());

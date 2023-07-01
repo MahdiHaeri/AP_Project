@@ -19,7 +19,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="800.0" styleClass="root" stylesheets="@../../../styles/signupStyle.css" xmlns="http://javafx.com/javafx/20" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.client.controllers.SignUpController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="800.0" styleClass="root" stylesheets="@../../../styles/signupStyle.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.client.controllers.SignUpController">
    <children>
       <GridPane layoutX="132.0" layoutY="123.0" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <columnConstraints>
@@ -70,6 +70,7 @@
                               <FontAwesomeIconView fill="WHITE" glyphName="ARROW_RIGHT" styleClass="arrow-icon" />
                            </graphic>
                         </Button>
+                        <Label fx:id="errorMessageLbl" text="Error Message" textAlignment="CENTER" textFill="RED" visible="false" />
                         <HBox alignment="CENTER" prefHeight="43.0" prefWidth="330.0">
                            <children>
                               <Label text="Already have an account?" />
