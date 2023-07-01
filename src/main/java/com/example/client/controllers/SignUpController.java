@@ -26,6 +26,7 @@ import java.net.URL;
 import java.time.ZoneId;
 import java.util.Date;
 import java.util.ResourceBundle;
+import java.util.regex.Pattern;
 
 
 public class SignUpController implements Initializable {
@@ -133,5 +134,16 @@ public class SignUpController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         countryCmb.getItems().addAll("Iran", "USA", "Canada", "Germany", "France", "Italy", "Spain", "Russia", "China", "Japan", "South Korea", "Australia", "Brazil", "Mexico", "Argentina", "Chile", "Peru", "Colombia", "Venezuela", "Ecuador", "Bolivia", "Paraguay", "Uruguay", "Panama", "Costa Rica", "Nicaragua", "Honduras", "El Salvador", "Guatemala", "Cuba", "Dominican Republic", "Puerto Rico", "Jamaica", "Haiti", "Bahamas", "Trinidad and Tobago", "Barbados", "Saint Lucia", "Saint Vincent and the Grenadines", "Grenada", "Antigua and Barbuda", "Dominica", "Saint Kitts and Nevis", "Belize", "Guyana", "Suriname", "Aruba", "Curacao", "Saint Martin", "Sint Maarten", "Bermuda", "Cayman Islands", "British Virgin Islands", "Turks and Caicos Islands", "US Virgin Islands", "Anguilla", "Montserrat", "Martinique", "Guadeloupe", "Saint Barthelemy", "Puerto Rico", "Greenland", "Faroe Islands", "Iceland", "Norway", "Sweden", "Finland", "Denmark");
+    }
+
+    public class EmailValidator {
+        private static final String EMAIL_REGEX =
+                "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
+        private static final Pattern pattern = Pattern.compile(EMAIL_REGEX);
+
+        public static boolean isValidEmail(String email) {
+            return pattern.matcher(email).matches();
+
+        }
     }
 }
