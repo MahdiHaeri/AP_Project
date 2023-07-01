@@ -74,6 +74,7 @@ public class SignUpController implements Initializable {
             // Get the current stage (window) and set the new scene
             Stage currentStage = (Stage) loginLink.getScene().getWindow();
             currentStage.setScene(loginScene);
+            currentStage.setFullScreen(true);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -148,6 +149,18 @@ public class SignUpController implements Initializable {
                 statusMessageLbl.setText("User created successfully");
                 statusMessageLbl.setStyle("-fx-text-fill: green;");
                 statusMessageLbl.setVisible(true);
+
+                // Load the FXML file for the SignUp page
+                Parent loginPage = FXMLLoader.load(getClass().getResource("/com/example/client/login.fxml"));
+
+                // Create a new scene using the SignUp page
+                Scene loginScene = new Scene(loginPage);
+
+                // Get the current stage (window) and set the new scene
+                Stage currentStage = (Stage) loginLink.getScene().getWindow();
+                currentStage.setScene(loginScene);
+                currentStage.setFullScreen(true);
+
                 // Request was successful
                 // Handle the response if needed
             } else {
