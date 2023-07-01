@@ -58,7 +58,7 @@
                         </Label>
                         <VBox alignment="CENTER_LEFT" prefHeight="53.0" prefWidth="240.0" spacing="10.0">
                            <children>
-                              <TextField fx:id="PhoneEmailUsernameTf" promptText="username" />
+                              <TextField fx:id="usernameTf" promptText="username" />
                               <TextField fx:id="passwordTf" promptText="Password" />
                               <Hyperlink fx:id="forgotPasswordLink" onAction="#onForgotPasswordAction" text="Forgot password?" textAlignment="CENTER">
                                  <font>
@@ -72,6 +72,7 @@
                               <FontAwesomeIconView fill="WHITE" glyphName="ARROW_RIGHT" styleClass="arrow-icon" text="" textAlignment="CENTER" />
                            </graphic>
                         </Button>
+                        <Label fx:id="statusMessageLbl" textFill="RED" visible="false" />
                         <HBox alignment="CENTER" prefHeight="31.0" prefWidth="240.0">
                            <children>
                               <Label text="Don't have an account yet? ">

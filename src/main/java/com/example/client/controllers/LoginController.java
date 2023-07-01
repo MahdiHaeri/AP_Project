@@ -1,5 +1,8 @@
 package com.example.client.controllers;
 
+import com.example.server.models.User;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -8,21 +11,33 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.control.skin.LabeledSkinBase;
 import javafx.stage.Stage;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
 import java.net.URL;
+import java.text.SimpleDateFormat;
+import java.time.ZoneId;
+import java.util.Date;
 import java.util.ResourceBundle;
 import java.util.regex.Pattern;
 
 public class LoginController implements Initializable {
 
     @FXML
-    private TextField PhoneEmailUsernameTf;
+    private TextField usernameTf;
 
     @FXML
     private Hyperlink forgotPasswordLink;
+
+    @FXML
+    private Label statusMessageLbl;
 
     @FXML
     private Button loginBtn;
@@ -40,21 +55,53 @@ public class LoginController implements Initializable {
 
     @FXML
     void onLoginBtnAction(ActionEvent event) {
-        try {
+        // Make a GET request to the server
+        HttpURLConnection connection = null;
+//        try {
+//            URL apiUrl = new URL("http://localhost:8080/login/" + usernameTf.getText() + "/" + passwordTf.getText());
+//            connection = (HttpURLConnection) apiUrl.openConnection();
+//            connection.setRequestMethod("GET");
+//
+//            // Check the response code
+//            int responseCode = connection.getResponseCode();
+//            if (responseCode == HttpURLConnection.HTTP_OK) {
+//                // Read the response
+//                BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+//                String response = reader.readLine();
+//                reader.close();
+//
+//                // Parse the JSON response
+//                ObjectMapper objectMapper = new ObjectMapper();
+//                JsonNode userJson = objectMapper.readTree(response);
+//
+//                // Set the labels
+////                usernameLbl.setText(userJson.get("id").asText());
+////                firstNameLbl.setText(userJson.get("firstName").asText());
+////                lastNameLbl.setText(userJson.get("lastName").asText());
+//////                bioLbl.setText(userJson.get("bio").asText());
+////                locationLbl.setText(userJson.get("country").asText());
+//
+//                Date date = new Date(userJson.get("createdAt").asLong());
+//                SimpleDateFormat sdf = new SimpleDateFormat("MMMM yyyy");
+//                String dateString = sdf.format(date);
+////                DateLbl.setText(dateString);
 
-            // Load the FXML file for the Main page
-            Parent mainPage = FXMLLoader.load(getClass().getResource("/com/example/client/main.fxml"));
+//                followercountLbl.setText(userJson.get("followerCount").asText());
+//                followingCountLbl.setText(userJson.get("followingCount").asText());
 
-            // Create a new scene using the Main page
-            Scene mainScene = new Scene(mainPage);
 
-            // Get the current stage (window) and set the new scene
-            Stage currentStage = (Stage) loginBtn.getScene().getWindow();
-            currentStage.setScene(mainScene);
-            currentStage.setFullScreen(true);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+//            } else {
+//                // Handle the error case when the server returns a non-OK response
+//                System.out.println("Failed to retrieve tweets. Response code: " + responseCode);
+//            }
+//        } catch (IOException e) {
+//            // Handle any IO exception that occurs during the request
+//            e.printStackTrace();
+//        } finally {
+//            if (connection != null) {
+//                connection.disconnect();
+//            }
+//        }
     }
 
     @FXML
