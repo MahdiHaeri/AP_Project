@@ -59,7 +59,7 @@
                               <TextField fx:id="firstNameTf" promptText="First name" styleClass="my-text-field" />
                               <TextField fx:id="lastNameTf" promptText="Last name" styleClass="my-text-field" />
                               <TextField fx:id="emailTf" promptText="Email" styleClass="my-text-field" />
-                              <TextField fx:id="phonenumberTf" promptText="Phone number" styleClass="my-text-field" />
+                              <TextField fx:id="phoneNumberTf" promptText="Phone number" styleClass="my-text-field" />
                               <PasswordField fx:id="passwordTf" promptText="Password" styleClass="my-text-field" />
                               <PasswordField fx:id="confirmPasswordTf" promptText="Confirm Password" styleClass="my-text-field" />
                               <ComboBox fx:id="countryCmb" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="150.0" promptText="Country" styleClass="country-combo-box" />

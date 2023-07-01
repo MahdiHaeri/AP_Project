@@ -83,7 +83,7 @@ public class SignUpController implements Initializable {
     void onRigesterBtnAction(ActionEvent event) {
         try {
 
-            if (usernameTf.getText().equals("") || firstNameTf.getText().equals("") || lastNameTf.getText().equals("") || emailOrPhoneNumberTf.getText().equals("") || passwordTf.getText().equals("") || confirmPasswordTf.getText().equals("") || countryCmb.getValue().equals("") || birthdayDp.getValue() == null) {
+            if (usernameTf.getText().equals("") || firstNameTf.getText().equals("") || lastNameTf.getText().equals("") || (emailTf.getText().equals("") && phoneNumberTf.getText().equals("")) || passwordTf.getText().equals("") || confirmPasswordTf.getText().equals("") || countryCmb.getValue().equals("") || birthdayDp.getValue() == null) {
                 statusMessageLbl.setText("Please fill all the fields");
                 statusMessageLbl.setVisible(true);
                 return;
@@ -119,7 +119,8 @@ public class SignUpController implements Initializable {
             usernameTf.setText("");
             firstNameTf.setText("");
             lastNameTf.setText("");
-            emailOrPhoneNumberTf.setText("");
+            emailTf.setText("");
+            phoneNumberTf.setText("");
             passwordTf.setText("");
             confirmPasswordTf.setText("");
             countryCmb.setValue("");
