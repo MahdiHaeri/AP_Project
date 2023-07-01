@@ -70,7 +70,7 @@
                               <FontAwesomeIconView fill="WHITE" glyphName="ARROW_RIGHT" styleClass="arrow-icon" />
                            </graphic>
                         </Button>
-                        <Label fx:id="errorMessageLbl" text="Error Message" textAlignment="CENTER" textFill="RED" visible="false" />
+                        <Label fx:id="statusMessageLbl" textAlignment="CENTER" textFill="RED" visible="false" />
                         <HBox alignment="CENTER" prefHeight="43.0" prefWidth="330.0">
                            <children>
                               <Label text="Already have an account?" />

@@ -57,7 +57,7 @@ public class SignUpController implements Initializable {
     private TextField usernameTf;
 
     @FXML
-    private Label errorMessageLbl;
+    private Label statusMessageLbl;
 
     @FXML
     void onLoginLinkActino(ActionEvent event) {
@@ -81,25 +81,25 @@ public class SignUpController implements Initializable {
         try {
 
             if (usernameTf.getText().equals("") || firstNameTf.getText().equals("") || lastNameTf.getText().equals("") || emailOrPhoneNumberTf.getText().equals("") || passwordTf.getText().equals("") || confirmPasswordTf.getText().equals("") || countryCmb.getValue().equals("") || birthdayDp.getValue() == null) {
-                errorMessageLbl.setText("Please fill all the fields");
-                errorMessageLbl.setVisible(true);
+                statusMessageLbl.setText("Please fill all the fields");
+                statusMessageLbl.setVisible(true);
                 return;
             }
 
             //check email
             if (EmailValidator.isValidEmail(emailOrPhoneNumberTf.getText())) {
-                errorMessageLbl.setVisible(false);
+                statusMessageLbl.setVisible(false);
             } else {
-                errorMessageLbl.setText("Invalid email address");
-                errorMessageLbl.setVisible(true);
+                statusMessageLbl.setText("Invalid email address");
+                statusMessageLbl.setVisible(true);
                 return;
             }
 
             if (passwordTf.getText().equals(confirmPasswordTf.getText())) {
-                errorMessageLbl.setVisible(false);
+                statusMessageLbl.setVisible(false);
             } else {
-                errorMessageLbl.setText("Passwords do not match");
-                errorMessageLbl.setVisible(true);
+                statusMessageLbl.setText("Passwords do not match");
+                statusMessageLbl.setVisible(true);
                 return;
             }
 
@@ -141,6 +141,9 @@ public class SignUpController implements Initializable {
             // Check the response code
             int responseCode = connection.getResponseCode();
             if (responseCode == HttpURLConnection.HTTP_OK) {
+                statusMessageLbl.setText("User created successfully");
+                statusMessageLbl.setStyle("-fx-text-fill: green;");
+                statusMessageLbl.setVisible(true);
                 // Request was successful
                 // Handle the response if needed
             } else {
