@@ -19,6 +19,13 @@ public class UserController {
         bioDAO = new BioDAO();
     }
 
+    public boolean checkUserExists(String username, String password) throws SQLException {
+        if (userDAO.getUser(username, password) == null) {
+            return false;
+        }
+        return true;
+    }
+
     public void createUser(String id, String firstName, String lastName, String email, String phoneNumber, String password, String country, Date birthday) throws SQLException {
         User user = new User(id, firstName, lastName, email, phoneNumber, password, country, birthday);
         userDAO.saveUser(user);
@@ -98,4 +105,5 @@ public class UserController {
         ObjectMapper objectMapper = new ObjectMapper();
         return objectMapper.writeValueAsString(user);
     }
+
 }

@@ -102,6 +102,21 @@ public class LoginController implements Initializable {
 //                connection.disconnect();
 //            }
 //        }
+
+        try {
+            // Load the FXML file for the SignUp page
+            Parent signupPage = FXMLLoader.load(getClass().getResource("/com/example/client/main.fxml"));
+
+            // Create a new scene using the SignUp page
+            Scene signupScene = new Scene(signupPage);
+
+            // Get the current stage (window) and set the new scene
+            Stage currentStage = (Stage) signupLink.getScene().getWindow();
+            currentStage.setScene(signupScene);
+            currentStage.setFullScreen(true);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
@@ -116,6 +131,7 @@ public class LoginController implements Initializable {
             // Get the current stage (window) and set the new scene
             Stage currentStage = (Stage) signupLink.getScene().getWindow();
             currentStage.setScene(signupScene);
+            currentStage.setFullScreen(true);
         } catch (IOException e) {
             e.printStackTrace();
         }

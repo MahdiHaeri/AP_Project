@@ -1,5 +1,6 @@
 package com.example.server.HttpHandlers;
 
+import com.example.server.models.User;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import io.jsonwebtoken.Jwts;
@@ -10,7 +11,10 @@ import javax.crypto.SecretKey;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.nio.charset.StandardCharsets;
+import java.sql.SQLException;
 import java.util.Date;
+
+import com.example.server.controllers.UserController;
 
 public class LoginHandler implements HttpHandler {
 
@@ -28,6 +32,17 @@ public class LoginHandler implements HttpHandler {
                 String password = pathParts[3];
 
                 // Authenticate user (you can add your authentication logic here)
+                boolean userExists = false;
+                try {
+                    userExists = checkUserExists(username, password);
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+                if (!userExists) {
+                    // User doesn't exist, return an error response
+                    exchange.sendResponseHeaders(401, -1);
+                    return;
+                }
 
                 // Generate the JWT token
                 String jwtToken = generateJwtToken(username);
@@ -44,6 +59,16 @@ public class LoginHandler implements HttpHandler {
             }
         }
     }
+
+    private boolean checkUserExists(String username, String password) throws SQLException {
+        UserController userController = new UserController();
+         if (userController.checkUserExists(username, password)) {
+             return true;
+         } else {
+             return false;
+         }
+    }
+
 
     private String generateJwtToken(String username) {
         Date now = new Date();
