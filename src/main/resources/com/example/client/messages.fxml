@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.client.controllers.MessagesController">
+   <top>
+      <BorderPane prefHeight="50.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+         <left>
+            <FontAwesomeIconView glyphName="ENVELOPE" BorderPane.alignment="CENTER" />
+         </left>
+         <right>
+            <FontAwesomeIconView glyphName="GEAR" BorderPane.alignment="CENTER" />
+         </right>
+         <center>
+            <Label text="Messages" BorderPane.alignment="CENTER" />
+         </center>
+      </BorderPane>
+   </top>
+   <center>
+      <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <center>
+            <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Label text="Select a Message" />
+                  <Label prefHeight="51.0" prefWidth="255.0" text="Choose from your existing conversations, start a new one, or just keep swimming." textAlignment="CENTER" wrapText="true" />
+                  <Button mnemonicParsing="false" text="New message" textAlignment="CENTER" />
+               </children>
+            </VBox>
+         </center>
+      </BorderPane>
+   </center>
+</BorderPane>
