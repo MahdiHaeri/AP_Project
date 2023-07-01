@@ -74,7 +74,8 @@ public class SignUpController implements Initializable {
             // Get the current stage (window) and set the new scene
             Stage currentStage = (Stage) loginLink.getScene().getWindow();
             currentStage.setScene(loginScene);
-            currentStage.setFullScreen(true);
+            currentStage.setMaximized(true);
+//            currentStage.setFullScreen(true);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -159,7 +160,8 @@ public class SignUpController implements Initializable {
                 // Get the current stage (window) and set the new scene
                 Stage currentStage = (Stage) loginLink.getScene().getWindow();
                 currentStage.setScene(loginScene);
-                currentStage.setFullScreen(true);
+//                currentStage.setFullScreen(true);
+                currentStage.setMaximized(true);
 
                 // Request was successful
                 // Handle the response if needed

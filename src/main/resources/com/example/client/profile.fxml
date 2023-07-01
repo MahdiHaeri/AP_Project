@@ -61,11 +61,11 @@
                   </HBox>
                </children>
             </VBox>
-            <VBox alignment="TOP_CENTER" layoutX="284.0" layoutY="167.0" prefHeight="104.0" prefWidth="80.0" spacing="10.0" AnchorPane.rightAnchor="126.0">
+            <VBox alignment="TOP_CENTER" layoutX="464.0" layoutY="168.0" prefHeight="104.0" prefWidth="80.0" spacing="10.0" AnchorPane.rightAnchor="48.0">
                <children>
-                  <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="controller-button" text="Edit Profile" />
-                  <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="controller-button" text="Follow" />
-                  <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="controller-button" text="Block" />
+                  <Button fx:id="editProfileBtn" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onEditProfileBtnAction" styleClass="controller-button" text="Edit Profile" />
+                  <Button fx:id="followBtn" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onFolllowBtnAction" styleClass="controller-button" text="Follow" />
+                  <Button fx:id="blockBtn" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onBlockBtnAction" styleClass="controller-button" text="Block" />
                </children>
             </VBox>
          </children>

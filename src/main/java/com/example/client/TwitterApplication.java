@@ -19,7 +19,7 @@ public class TwitterApplication extends Application {
     @Override
     public void start(Stage stage) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/client/login.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/client/main.fxml"));
             Parent root = fxmlLoader.load();
 
             Scene scene = new Scene(root);
@@ -27,8 +27,8 @@ public class TwitterApplication extends Application {
 
 //            stage.initStyle(StageStyle.TRANSPARENT);
             // full screen mode
-//            stage.setMaximized(true);
-            stage.setFullScreen(true);
+            stage.setMaximized(true);
+//            stage.setFullScreen(true);
             stage.setScene(scene);
             stage.setTitle("Twitter");
             stage.show();

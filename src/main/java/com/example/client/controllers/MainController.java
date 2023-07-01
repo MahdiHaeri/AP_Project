@@ -40,7 +40,7 @@ public class MainController implements Initializable {
     private Button profileBtn;
 
     @FXML
-    private BorderPane rootBp;
+    public BorderPane rootBp;
 
     @FXML
     private Button tweetBtn;

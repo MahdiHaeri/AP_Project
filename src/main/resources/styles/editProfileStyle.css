@@ -1,0 +1,53 @@
+.root {
+    -fx-background-color: #111;
+    -fx-padding: 10px;
+}
+
+.information-vbox {
+    -fx-padding: 10px;
+}
+
+.button {
+    -fx-background-color: transparent;
+    -fx-text-fill: white;
+    -fx-background-radius: 50px;
+}
+
+.button:hover {
+    -fx-background-color: #333;
+    -fx-cursor: hand;
+}
+
+.header-image {
+    -fx-background-color: #222;
+}
+
+.header-image:hover {
+    -fx-background-color: #333;
+    -fx-cursor: hand;
+}
+
+.text-field {
+    -fx-background-color: #222;
+    -fx-text-fill: white;
+    -fx-background-radius: 5px;
+    -fx-padding: 8px;
+}
+
+.text-area {
+    -fx-background-color: #222;
+    -fx-font-size: 14px;
+    -fx-text-fill: white;
+    -fx-background-radius: 5px;
+    -fx-border-radius: 5px;
+}
+
+.text-area .content {
+    -fx-background-color: #222;
+    -fx-font-size: 14px;
+}
+
+.avatar:hover {
+    -fx-cursor: hand;
+    -fx-opacity: 0.7;
+}

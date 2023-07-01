@@ -2,20 +2,22 @@ package com.example.client.controllers;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Jwt;
-import io.jsonwebtoken.JwtParser;
-import io.jsonwebtoken.Jwts;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.stage.Stage;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.ProtocolException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -30,7 +32,16 @@ public class ProfileController implements Initializable {
     private Label bioLbl;
 
     @FXML
+    private Button blockBtn;
+
+    @FXML
+    private Button editProfileBtn;
+
+    @FXML
     private Label firstNameLbl;
+
+    @FXML
+    private Button followBtn;
 
     @FXML
     private Label followerLbl;
@@ -55,6 +66,32 @@ public class ProfileController implements Initializable {
 
     @FXML
     private Label usernameLbl;
+
+    @FXML
+    void onBlockBtnAction(ActionEvent event) {
+
+    }
+
+    @FXML
+    void onEditProfileBtnAction(ActionEvent event) {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/client/editProfile.fxml"));
+            Parent profileRoot = fxmlLoader.load();
+            // set to the center of the main border pane
+
+            Stage stage = new Stage();
+            stage.setTitle("Edit Profile");
+            stage.setScene(new Scene(profileRoot));
+            stage.show();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @FXML
+    void onFolllowBtnAction(ActionEvent event) {
+
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
