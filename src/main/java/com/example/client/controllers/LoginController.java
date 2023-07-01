@@ -41,6 +41,7 @@ public class LoginController implements Initializable {
     @FXML
     void onLoginBtnAction(ActionEvent event) {
         try {
+
             // Load the FXML file for the Main page
             Parent mainPage = FXMLLoader.load(getClass().getResource("/com/example/client/main.fxml"));
 
@@ -77,6 +78,4 @@ public class LoginController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
     }
-
-
 }

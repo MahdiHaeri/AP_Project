@@ -36,7 +36,10 @@ public class SignUpController implements Initializable {
     private ComboBox<String> countryCmb;
 
     @FXML
-    private TextField emailOrPhoneNumberTf;
+    private TextField emailTf;
+
+    @FXML
+    private TextField phoneNumberTf;
 
     @FXML
     private TextField firstNameTf;
@@ -87,7 +90,7 @@ public class SignUpController implements Initializable {
             }
 
             //check email
-            if (EmailValidator.isValidEmail(emailOrPhoneNumberTf.getText())) {
+            if (EmailValidator.isValidEmail(emailTf.getText())) {
                 statusMessageLbl.setVisible(false);
             } else {
                 statusMessageLbl.setText("Invalid email address");
@@ -107,8 +110,8 @@ public class SignUpController implements Initializable {
             user.setId(usernameTf.getText());
             user.setFirstName(firstNameTf.getText());
             user.setLastName(lastNameTf.getText());
-            user.setEmail(emailOrPhoneNumberTf.getText());
-            user.setPhoneNumber(emailOrPhoneNumberTf.getText());
+            user.setEmail(emailTf.getText());
+            user.setPhoneNumber(phoneNumberTf.getText());
             user.setPassword(passwordTf.getText());
             user.setCountry((String) countryCmb.getValue());
             user.setBirthday(Date.from(birthdayDp.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant()));

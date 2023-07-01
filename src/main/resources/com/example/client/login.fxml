@@ -19,7 +19,7 @@
 <?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="800.0" stylesheets="@../../../styles/loginStyle.css" xmlns="http://javafx.com/javafx/20" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.client.controllers.LoginController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="800.0" stylesheets="@../../../styles/loginStyle.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.client.controllers.LoginController">
    <children>
       <GridPane layoutX="132.0" layoutY="123.0" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <columnConstraints>
@@ -58,7 +58,7 @@
                         </Label>
                         <VBox alignment="CENTER_LEFT" prefHeight="53.0" prefWidth="240.0" spacing="10.0">
                            <children>
-                              <TextField fx:id="PhoneEmailUsernameTf" promptText="Phone, email, or username" />
+                              <TextField fx:id="PhoneEmailUsernameTf" promptText="username" />
                               <TextField fx:id="passwordTf" promptText="Password" />
                               <Hyperlink fx:id="forgotPasswordLink" onAction="#onForgotPasswordAction" text="Forgot password?" textAlignment="CENTER">
                                  <font>
