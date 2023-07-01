@@ -5,18 +5,22 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.client.controllers.MessagesController">
+<BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@../../../styles/messagesStyle.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.client.controllers.MessagesController">
    <top>
-      <BorderPane prefHeight="50.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+      <BorderPane prefHeight="36.0" prefWidth="580.0" styleClass="header" BorderPane.alignment="CENTER">
          <left>
-            <FontAwesomeIconView glyphName="ENVELOPE" BorderPane.alignment="CENTER" />
+            <FontAwesomeIconView fx:id="envelopIcon" fill="WHITE" glyphName="ENVELOPE" size="18" styleClass="icon" BorderPane.alignment="CENTER" />
          </left>
          <right>
-            <FontAwesomeIconView glyphName="GEAR" BorderPane.alignment="CENTER" />
+            <FontAwesomeIconView fx:id="settingIcon" fill="WHITE" glyphName="GEAR" size="18" styleClass="icon" BorderPane.alignment="CENTER" />
          </right>
          <center>
-            <Label text="Messages" BorderPane.alignment="CENTER" />
+            <Label fx:id="MessagesHaederLbl" text="Messages" textAlignment="CENTER" textFill="WHITE" BorderPane.alignment="CENTER">
+               <font>
+                  <Font size="16.0" />
+               </font></Label>
          </center>
       </BorderPane>
    </top>
@@ -25,9 +29,15 @@
          <center>
             <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
                <children>
-                  <Label text="Select a Message" />
-                  <Label prefHeight="51.0" prefWidth="255.0" text="Choose from your existing conversations, start a new one, or just keep swimming." textAlignment="CENTER" wrapText="true" />
-                  <Button mnemonicParsing="false" text="New message" textAlignment="CENTER" />
+                  <Label text="Select a Message" textFill="WHITE">
+                     <font>
+                        <Font size="20.0" />
+                     </font></Label>
+                  <Label prefHeight="51.0" prefWidth="255.0" text="Choose from your existing conversations, start a new one, or just keep swimming." textAlignment="CENTER" textFill="WHITE" wrapText="true" />
+                  <Button fx:id="newMessageBtn" mnemonicParsing="false" prefHeight="47.0" prefWidth="133.0" styleClass="new-message-button" text="New message" textAlignment="CENTER" textFill="WHITE">
+                     <font>
+                        <Font size="15.0" />
+                     </font></Button>
                </children>
             </VBox>
          </center>
