@@ -101,7 +101,13 @@ public class MainController implements Initializable {
 
     @FXML
     void onNotificatinosBtnAction(ActionEvent event) {
-
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/client/notifications.fxml"));
+            Parent timelineRoot = fxmlLoader.load();
+            rootBp.setCenter(timelineRoot);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @FXML

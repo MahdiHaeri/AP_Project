@@ -27,14 +27,14 @@
    <center>
       <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="TOP_CENTER">
          <center>
-            <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+            <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" spacing="10.0" BorderPane.alignment="CENTER">
                <children>
                   <Label text="Select a Message" textFill="WHITE">
                      <font>
                         <Font size="20.0" />
                      </font></Label>
                   <Label prefHeight="51.0" prefWidth="255.0" text="Choose from your existing conversations, start a new one, or just keep swimming." textAlignment="CENTER" textFill="WHITE" wrapText="true" />
-                  <Button fx:id="newMessageBtn" mnemonicParsing="false" prefHeight="47.0" prefWidth="133.0" styleClass="new-message-button" text="New message" textAlignment="CENTER" textFill="WHITE">
+                  <Button fx:id="newMessageBtn" mnemonicParsing="false" prefHeight="49.0" prefWidth="166.0" styleClass="new-message-button" text="New message" textAlignment="CENTER" textFill="WHITE">
                      <font>
                         <Font size="15.0" />
                      </font></Button>
