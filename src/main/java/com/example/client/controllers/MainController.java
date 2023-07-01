@@ -47,7 +47,13 @@ public class MainController implements Initializable {
 
     @FXML
     void onBookmarksBtnAction(ActionEvent event) {
-
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/client/bookmarks.fxml"));
+            Parent timelineRoot = fxmlLoader.load();
+            rootBp.setCenter(timelineRoot);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @FXML
@@ -79,7 +85,13 @@ public class MainController implements Initializable {
 
     @FXML
     void onMessagesBtnAction(ActionEvent event) {
-
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/client/messages.fxml"));
+            Parent timelineRoot = fxmlLoader.load();
+            rootBp.setCenter(timelineRoot);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @FXML
