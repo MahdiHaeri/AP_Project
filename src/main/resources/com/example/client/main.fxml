@@ -50,7 +50,7 @@
                         </Button>
                         <Button fx:id="profileBtn" alignment="TOP_LEFT" graphicTextGap="15.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onProfileBtnAction" styleClass="menu-bar-button" text="Profile" textAlignment="CENTER">
                            <graphic>
-                              <GNAvatarView prefHeight="20.0" prefWidth="20.0" styleClass="menu-bar-button-icons">
+                              <GNAvatarView prefHeight="20.0" prefWidth="20.0" strokeWidth="0.0" styleClass="menu-bar-button-icons">
                                  <image>
                                     <Image url="@../../../images/Sign%20up-amico.png" />
                                  </image>

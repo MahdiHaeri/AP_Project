@@ -1,0 +1,45 @@
+.root {
+    -fx-background-color: #111;
+    -fx-padding: 10px;
+}
+
+.text-area {
+    -fx-background-color: #222;
+    -fx-font-size: 14px;
+    -fx-text-fill: white;
+    -fx-background-radius: 5px;
+    -fx-border-radius: 5px;
+    -fx-border-width: 0px;
+    -fx-border-color: transparent;
+    -fx-border-style: doted;
+
+}
+
+.text-area .content {
+    -fx-border-width: 0px;
+    -fx-border-color: #111;
+    -fx-background-radius: 5px;
+    -fx-background-color: #111;
+    -fx-font-size: 14px;
+}
+
+.tweet-button {
+    -fx-background-color: #222;
+    -fx-text-fill: white;
+    -fx-background-radius: 50px;
+    -fx-padding: 10px;
+    -fx-border-width: 0px;
+    -fx-border-color: transparent;
+}
+
+.tweet-button:hover {
+    -fx-background-color: #333;
+    -fx-cursor: hand;
+}
+
+.icon {
+    -fx-fill: #1DA1F2;
+    -fx-background-color: transparent;
+    -fx-background-radius: 50px;
+    -fx-cursor: hand;
+}
