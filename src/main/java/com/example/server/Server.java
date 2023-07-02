@@ -26,6 +26,7 @@ public class Server {
             server.createContext("/login", new LoginHandler());
             server.createContext("/media", new MediaHandler());
             server.createContext("/hashtag", new HashtagHandler());
+            server.createContext("/blocks", new BlockHandler());
             server.start();
         } catch (IOException e) {
             throw new RuntimeException(e);
