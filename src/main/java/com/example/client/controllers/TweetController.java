@@ -187,6 +187,11 @@ public class TweetController implements Initializable {
         System.out.println("Share button clicked");
     }
 
+    @FXML
+    void onAvatarViewClicked(ActionEvent event) {
+        System.out.println("Avatar clicked");
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         writerNameLbl.setText("Gleidson");

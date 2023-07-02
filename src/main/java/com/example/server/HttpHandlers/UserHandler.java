@@ -60,7 +60,13 @@ public class UserHandler implements HttpHandler {
                 try {
                     userController.createUser(jsonObject.getString("id"), jsonObject.getString("firstName"), jsonObject.getString("lastName"), jsonObject.getString("email"), jsonObject.getString("phoneNumber"), jsonObject.getString("password"), jsonObject.getString("country"), new Date(jsonObject.getLong("birthday")));
                 } catch (SQLException e) {
-                    throw new RuntimeException(e);
+                    System.out.println(e.getMessage());
+                    response = e.getMessage();
+                    exchange.sendResponseHeaders(400, response.getBytes().length);
+                    OutputStream os = exchange.getResponseBody();
+                    os.write(response.getBytes());
+                    os.close();
+                    return;
                 }
                 Files.createDirectories(Paths.get("src/main/java/com/example/server/assets/" + jsonObject.getString("id")));
                 response = "this is done!";
