@@ -30,7 +30,7 @@
          <left>
             <VBox alignment="TOP_CENTER" prefHeight="445.0" prefWidth="61.0" styleClass="left-vbox" BorderPane.alignment="CENTER">
                <children>
-                  <GNAvatarView fx:id="avatarView" prefHeight="60.0" prefWidth="84.0" stroke="#ffffff00" styleClass="avatar-image" type="CIRCLE">
+                  <GNAvatarView fx:id="avatarView" onMouseClicked="#onAvatarViewClicked" prefHeight="60.0" prefWidth="84.0" stroke="#ffffff00" styleClass="avatar-image" type="CIRCLE">
                      <image>
                         <Image url="@../../../images/Sign%20up-amico.png" />
                      </image>
