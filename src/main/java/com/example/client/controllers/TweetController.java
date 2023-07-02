@@ -3,6 +3,7 @@ package com.example.client.controllers;
 import io.github.gleidson28.GNAvatarView;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
@@ -11,7 +12,9 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.media.MediaView;
+import org.w3c.dom.events.MouseEvent;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -157,6 +160,11 @@ public class TweetController implements Initializable {
 
     public void setWriterUsernameLbl(String text) {
         this.writerUsernameLbl.setText(text);
+    }
+
+    @FXML
+    void onAvatarViewClicked(MouseEvent event) {
+        System.out.println("Avatar clicked");
     }
 
     @FXML

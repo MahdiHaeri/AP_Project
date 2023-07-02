@@ -13,7 +13,7 @@
    <top>
       <BorderPane prefHeight="45.0" prefWidth="491.0" BorderPane.alignment="CENTER">
          <right>
-            <Button mnemonicParsing="false" prefHeight="37.0" prefWidth="67.0" styleClass="tweet-button" text="Tweet" BorderPane.alignment="CENTER" />
+            <Button fx:id="tweetBtn" mnemonicParsing="false" onAction="#onTweetBtnAction" prefHeight="37.0" prefWidth="67.0" styleClass="tweet-button" text="Tweet" BorderPane.alignment="CENTER" />
          </right>
       </BorderPane>
    </top>
@@ -38,8 +38,8 @@
                <center>
                   <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="15.0" BorderPane.alignment="CENTER">
                      <children>
-                        <FontAwesomeIconView fill="WHITE" glyphName="IMAGE" size="18" styleClass="icon" />
-                        <FontAwesomeIconView fill="WHITE" glyphName="FILE" size="18" styleClass="icon" />
+                        <FontAwesomeIconView fx:id="imageIcon" fill="WHITE" glyphName="IMAGE" onMouseClicked="#onImageIconClicked" size="18" styleClass="icon" />
+                        <FontAwesomeIconView fx:id="videoIcon" fill="WHITE" glyphName="FILE" onMouseClicked="#onVideoIconClicked" size="18" styleClass="icon" />
                         <FontAwesomeIconView fill="WHITE" glyphName="LIST_UL" size="18" styleClass="icon" />
                      </children>
                   </HBox>

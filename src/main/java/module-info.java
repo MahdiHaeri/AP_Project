@@ -12,6 +12,7 @@ module com.example.ap_project {
     requires javafx.media;
     requires GNAvatarView;
     requires jjwt.api;
+    requires de.jensd.fx.glyphs.fontawesome;
 
 //    requires javafx.base;
 //    requires javafx.graphics;
