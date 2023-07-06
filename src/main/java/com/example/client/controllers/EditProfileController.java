@@ -3,6 +3,7 @@ package com.example.client.controllers;
 import io.github.gleidson28.GNAvatarView;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -11,14 +12,16 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
 
 import java.io.File;
+import java.net.URL;
+import java.util.ResourceBundle;
 
-public class EditProfileController {
+public class EditProfileController implements Initializable {
 
     @FXML
     private GNAvatarView avatar;
 
     @FXML
-    private Button cancleBtn;
+    private Button cancelBtn;
 
     @FXML
     private AnchorPane headerImagePane;
@@ -40,7 +43,8 @@ public class EditProfileController {
 
     @FXML
     void onCancelBtnAction(ActionEvent event) {
-
+        // close stage
+        cancelBtn.getScene().getWindow().hide();
     }
 
     @FXML
@@ -60,4 +64,8 @@ public class EditProfileController {
 
     }
 
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+
+    }
 }

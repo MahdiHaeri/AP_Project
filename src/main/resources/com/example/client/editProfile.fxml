@@ -67,7 +67,7 @@
                         <TextArea prefHeight="200.0" prefWidth="377.0" promptText="Bio" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                         <TextField promptText="Location" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                         <TextField promptText="Website" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                        <DatePicker maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                        <DatePicker maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" promptText="Brith date" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                      </children>
                   </GridPane>
                </children>

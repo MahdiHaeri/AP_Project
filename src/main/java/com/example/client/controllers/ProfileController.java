@@ -11,6 +11,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -82,6 +83,9 @@ public class ProfileController implements Initializable {
             Stage stage = new Stage();
             stage.setTitle("Edit Profile");
             stage.setScene(new Scene(profileRoot));
+            stage.setResizable(false);
+            stage.initStyle(StageStyle.UNDECORATED);
+            stage.centerOnScreen();
             stage.show();
         } catch (IOException e) {
             throw new RuntimeException(e);
