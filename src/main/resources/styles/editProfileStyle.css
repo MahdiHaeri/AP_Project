@@ -21,6 +21,7 @@
 .header-image {
     -fx-background-color: #222;
     -fx-background-radius: 5px;
+    -fx-border-radius: 5px;
     -fx-background-size: cover;
     -fx-background-position: center;
     -fx-background-repeat: no-repeat;
