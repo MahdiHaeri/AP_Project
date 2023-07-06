@@ -39,7 +39,7 @@ public class EditProfileController {
     }
 
     @FXML
-    void onCancleBtnAction(ActionEvent event) {
+    void onCancelBtnAction(ActionEvent event) {
 
     }
 
