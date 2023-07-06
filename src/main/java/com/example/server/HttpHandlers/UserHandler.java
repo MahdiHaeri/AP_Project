@@ -40,15 +40,22 @@ public class UserHandler implements HttpHandler {
         requestBody.close();
 
         if (path.startsWith("/users/") && splitPath.length == 4) {
+            String userId = splitPath[2];
             if (splitPath[3].equals("follower")) {
                 try {
-                    response = followController.getFollowers(splitPath[2]);
+                    response = followController.getFollowers(userId);
                 } catch (SQLException e) {
                     throw new RuntimeException(e);
                 }
             } else if (splitPath[3].equals("following")) {
                 try {
-                    response = followController.getFollowings(splitPath[2]);
+                    response = followController.getFollowings(userId);
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+            } else if (splitPath[3].equals("bio")) {
+                try {
+                    response = userController.getBioByUserId(userId);
                 } catch (SQLException e) {
                     throw new RuntimeException(e);
                 }
