@@ -37,7 +37,7 @@ public class EditProfileController implements Initializable {
         File selectedFile = fileChooser.showOpenDialog(avatar.getScene().getWindow());
         if (selectedFile != null) {
             Image image = new Image(selectedFile.toURI().toString());
-            ((ImageView)avatar.getParent().getChildrenUnmodifiable().get(3)).setImage(image);
+            avatar.setImage(image);
         }
     }
 
@@ -55,7 +55,7 @@ public class EditProfileController implements Initializable {
         File selectedFile = fileChooser.showOpenDialog(headerImagePane.getScene().getWindow());
         if (selectedFile != null) {
             Image image = new Image(selectedFile.toURI().toString());
-            ((ImageView)headerImagePane.getParent().getChildrenUnmodifiable().get(3)).setImage(image);
+            headerImagePane.setStyle("-fx-background-image: url('" + selectedFile.toURI().toString() + "'); -fx-background-size: cover;");
         }
     }
 
