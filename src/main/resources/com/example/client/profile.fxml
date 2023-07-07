@@ -55,7 +55,7 @@
                      <children>
                         <Label fx:id="followingCountLbl" styleClass="light-text" text="23" />
                         <Label fx:id="followingLbl" styleClass="dark-text" text="Following" />
-                        <Label fx:id="followercountLbl" styleClass="light-text" text="44" />
+                        <Label fx:id="followerCountLbl" styleClass="light-text" text="44" />
                         <Label fx:id="followerLbl" styleClass="dark-text" text="Follower" />
                      </children>
                   </HBox>
