@@ -229,5 +229,39 @@ public class ProfileController implements Initializable {
                 connection.disconnect();
             }
         }
+
+        try {
+            String username = JWTController.getSubjectFromJwt(JWTController.getJwtKey());
+
+            URL apiUrl = new URL("http://localhost:8080/users/" + username + "/bio");
+            connection = (HttpURLConnection) apiUrl.openConnection();
+            connection.setRequestMethod("GET");
+
+            // Check the response code
+            int responseCode = connection.getResponseCode();
+            if (responseCode == HttpURLConnection.HTTP_OK) {
+                // Read the response
+                BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+                String response = reader.readLine();
+                reader.close();
+
+                // Parse the JSON response
+                ObjectMapper objectMapper = new ObjectMapper();
+                JsonNode bio = objectMapper.readTree(response);
+
+                bioLbl.setText(bio.get("biography").asText());
+
+            } else {
+                // Handle the error case when the server returns a non-OK response
+                System.out.println("Failed to retrieve tweets. Response code: " + responseCode);
+            }
+        } catch (IOException e) {
+            // Handle any IO exception that occurs during the request
+            e.printStackTrace();
+        } finally {
+            if (connection != null) {
+                connection.disconnect();
+            }
+        }
     }
 }
