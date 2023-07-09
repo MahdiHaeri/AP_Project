@@ -116,6 +116,10 @@ public class MainController implements Initializable {
     void onProfileBtnAction(ActionEvent event) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/client/profile.fxml"));
+            ProfileController profileController = fxmlLoader.getController();
+            String username = JWTController.getSubjectFromJwt(JWTController.getJwtKey());
+
+
             Parent profileRoot = fxmlLoader.load();
             rootBp.setCenter(profileRoot);
         } catch (IOException e) {

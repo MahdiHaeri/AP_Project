@@ -97,6 +97,40 @@ public class ProfileController implements Initializable {
 
     }
 
+    public void fillProfile(JsonNode userJson, JsonNode followers, JsonNode followings, JsonNode bio) {
+        // Set the labels
+        usernameLbl.setText(userJson.get("id").asText());
+        firstNameLbl.setText(userJson.get("firstName").asText());
+        lastNameLbl.setText(userJson.get("lastName").asText());
+//                bioLbl.setText(userJson.get("bio").asText());
+        locationLbl.setText(userJson.get("country").asText());
+
+        Date date = new Date(userJson.get("createdAt").asLong());
+        SimpleDateFormat sdf = new SimpleDateFormat("MMMM yyyy");
+        String dateString = sdf.format(date);
+        DateLbl.setText(dateString);
+
+
+
+        int followerCount = 0;
+        for (JsonNode followerJson: followers) {
+            followerCount++;
+        }
+
+        followerCountLbl.setText(Integer.toString(followerCount));
+
+
+        int followingCount = 0;
+        for (JsonNode followerJson: followings) {
+            followingCount++;
+        }
+
+        followingCountLbl.setText(Integer.toString(followingCount));
+
+
+        bioLbl.setText(bio.get("biography").asText());
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         // Make a GET request to the server
@@ -230,38 +264,5 @@ public class ProfileController implements Initializable {
             }
         }
 
-        try {
-            String username = JWTController.getSubjectFromJwt(JWTController.getJwtKey());
-
-            URL apiUrl = new URL("http://localhost:8080/users/" + username + "/bio");
-            connection = (HttpURLConnection) apiUrl.openConnection();
-            connection.setRequestMethod("GET");
-
-            // Check the response code
-            int responseCode = connection.getResponseCode();
-            if (responseCode == HttpURLConnection.HTTP_OK) {
-                // Read the response
-                BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-                String response = reader.readLine();
-                reader.close();
-
-                // Parse the JSON response
-                ObjectMapper objectMapper = new ObjectMapper();
-                JsonNode bio = objectMapper.readTree(response);
-
-                bioLbl.setText(bio.get("biography").asText());
-
-            } else {
-                // Handle the error case when the server returns a non-OK response
-                System.out.println("Failed to retrieve tweets. Response code: " + responseCode);
-            }
-        } catch (IOException e) {
-            // Handle any IO exception that occurs during the request
-            e.printStackTrace();
-        } finally {
-            if (connection != null) {
-                connection.disconnect();
-            }
-        }
     }
 }
