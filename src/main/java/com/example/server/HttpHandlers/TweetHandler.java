@@ -1,7 +1,6 @@
 package com.example.server.HttpHandlers;
 
 import com.example.server.controllers.TweetController;
-import com.example.server.utils.ExtractUserAuth;
 import com.fasterxml.jackson.annotation.JsonValue;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;

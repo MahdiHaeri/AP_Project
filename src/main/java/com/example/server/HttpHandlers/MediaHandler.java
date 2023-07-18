@@ -3,7 +3,6 @@ package com.example.server.HttpHandlers;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import com.example.server.controllers.UserController;
-import com.example.server.utils.ExtractUserAuth;
 
 import java.io.*;
 import java.nio.file.Files;
@@ -49,10 +48,10 @@ public class MediaHandler implements HttpHandler {
 					response = "user-not-found";
 					break;
 				}
-				if (!splitedPath[2].equals(ExtractUserAuth.extract(exchange))) {
-					response = "permission-denied";
-					break;
-				}
+//				if (!splitedPath[2].equals(ExtractUserAuth.extract(exchange))) {
+//					response = "permission-denied";
+//					break;
+//				}
 				Files.copy(exchange.getRequestBody(), Path.of("src/main/java/com/example/server/assets/" , splitedPath[2], splitedPath[3] + "." + splitedPath[4]), StandardCopyOption.REPLACE_EXISTING);
 				exchange.getRequestBody().close();
 				response = "done";
