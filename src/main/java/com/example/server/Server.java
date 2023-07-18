@@ -20,7 +20,6 @@ public class Server {
 //        System.exit(0);
         try {
             HttpServer server = HttpServer.create(new InetSocketAddress(8080), 0);
-
             server.createContext("/api/users", new UserHandler());
             server.createContext("/api/login", new LoginHandler());
             server.createContext("/api/tweets", new TweetHandler());
@@ -112,6 +111,12 @@ public class Server {
 
                 20. **Analytics:**
                     - `/api/analytics/tweets` (GET): Retrieve analytics for a user's tweets (e.g., impressions, engagement).
+
+                21. **Media Management:**
+                    - `/api/users/{username}/profile-image (POST): Upload the profile image for a specific user.
+                    - `/api/users/{username}/header-image (POST): Upload the header image for a specific user.
+                    - `/api/users/{username}/profile-image (GET): Retrieve the URL or filename of the user's profile image.
+                    - `/api/users/{username}/header-image (GET): Retrieve the URL or filename of the
 
              */
 
