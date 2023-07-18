@@ -20,14 +20,14 @@ public class Server {
 //        System.exit(0);
         try {
             HttpServer server = HttpServer.create(new InetSocketAddress(8080), 0);
-            server.createContext("/api/users", new UserHandler());
-            server.createContext("/api/login", new LoginHandler());
-            server.createContext("/api/tweets", new TweetHandler());
-            server.createContext("/api/bios", new BioHandler());
-            server.createContext("/api/follows", new FollowHandler());
-            server.createContext("/api/media", new MediaHandler());
-            server.createContext("/api/hashtag", new HashtagHandler());
-            server.createContext("/api/blocks", new BlockHandler());
+            server.createContext("/users", new UserHandler());
+            server.createContext("/login", new LoginHandler());
+            server.createContext("/tweets", new TweetHandler());
+            server.createContext("/bios", new BioHandler());
+            server.createContext("/follows", new FollowHandler());
+            server.createContext("/media", new MediaHandler());
+            server.createContext("/hashtag", new HashtagHandler());
+            server.createContext("/blocks", new BlockHandler());
             server.start();
 
             /*
