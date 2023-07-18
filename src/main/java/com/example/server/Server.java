@@ -32,6 +32,8 @@ public class Server {
             server.start();
 
             /*
+                Here's a comprehensive list of API endpoints you may need for your Twitter-like application:
+
                 1. **User Management:**
                    - `/api/users` (POST): Create a new user account.
                    - `/api/users/{username}` (GET): Retrieve user profile by username.
@@ -69,7 +71,50 @@ public class Server {
                 9. **Search:**
                    - `/api/search/users` (GET): Search for users by their username or display name.
                    - `/api/search/tweets` (GET): Search for tweets based on keywords or hashtags.
-            */
+
+                10. **Bio Management:**
+                   - `/api/users/{username}/bio` (GET): Retrieve the user's bio information.
+                   - `/api/users/{username}/bio` (PUT): Update the user's bio information.
+
+                11. **Block and Unblock:**
+                    - `/api/users/{username}/block` (POST): Block a user, preventing them from following or interacting with the blocking user.
+                    - `/api/users/{username}/unblock` (POST): Unblock a previously blocked user.
+
+                12. **User Followers and Following:**
+                    - `/api/users/{username}/followers` (GET): Retrieve a list of users who follow a specific user.
+                    - `/api/users/{username}/following` (GET): Retrieve a list of users whom a specific user follows.
+
+                13. **Notifications:**
+                    - `/api/notifications` (GET): Retrieve a list of notifications for the authenticated user (e.g., new followers, mentions, likes).
+                    - `/api/notifications/{notificationId}` (DELETE): Dismiss a specific notification.
+
+                14. **Direct Messages:**
+                    - `/api/direct-messages` (GET): Retrieve a list of direct messages for the authenticated user.
+                    - `/api/direct-messages/{recipientUsername}` (GET): Retrieve direct messages exchanged with a specific user.
+                    - `/api/direct-messages/{recipientUsername}` (POST): Send a direct message to a specific user.
+
+                15. **Trending Topics:**
+                    - `/api/trending` (GET): Retrieve a list of current trending topics or hashtags.
+
+                16. **User Recommendations:**
+                    - `/api/recommendations/users` (GET): Get recommendations for users to follow based on interests or connections.
+
+                17. **User Interactions:**
+                    - `/api/users/{username}/likes` (GET): Retrieve a list of tweets liked by a specific user.
+                    - `/api/users/{username}/retweets` (GET): Retrieve a list of tweets retweeted by a specific user.
+
+                18. **User Settings:**
+                    - `/api/settings` (GET): Retrieve the authenticated user's account settings.
+                    - `/api/settings` (PUT): Update the authenticated user's account settings (e.g., privacy, notification preferences).
+
+                19. **User Verification:**
+                    - `/api/users/{username}/verify` (POST): Verify a user's account (if you implement a verification system).
+
+                20. **Analytics:**
+                    - `/api/analytics/tweets` (GET): Retrieve analytics for a user's tweets (e.g., impressions, engagement).
+
+             */
+
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
