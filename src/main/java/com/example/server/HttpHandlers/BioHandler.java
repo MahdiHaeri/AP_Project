@@ -22,7 +22,7 @@ public class BioHandler implements HttpHandler {
         String method = exchange.getRequestMethod();
         String path = exchange.getRequestURI().getPath();
         String response = "";
-        String[] splitedPath = path.split("/");
+        String[] splitPath = path.split("/");
 
         // Read the request body
         InputStream requestBody = exchange.getRequestBody();
@@ -36,7 +36,7 @@ public class BioHandler implements HttpHandler {
 
         switch (method) {
             case "GET":
-                if (splitedPath.length == 2) {
+                if (splitPath.length == 2) {
                     try {
                         response = userController.getBios();
                     } catch (SQLException e) {
@@ -44,7 +44,7 @@ public class BioHandler implements HttpHandler {
                     }
                 } else {
                     // Extract the user ID from the path
-                    String userId = splitedPath[splitedPath.length - 1];
+                    String userId = splitPath[splitPath.length - 1];
                     try {
                         response = userController.getBioByUserId(userId);
                     } catch (SQLException e) {
@@ -75,7 +75,7 @@ public class BioHandler implements HttpHandler {
                 response = "This is the response bios Put";
                 break;
             case "DELETE":
-                if (splitedPath.length == 2) {
+                if (splitPath.length == 2) {
                     try {
                         userController.deleteBios();
                         response = "All bios deleted";
@@ -84,7 +84,7 @@ public class BioHandler implements HttpHandler {
                     }
                 } else {
                     // Extract the user ID from the path
-                    String userId = splitedPath[splitedPath.length - 1];
+                    String userId = splitPath[splitPath.length - 1];
                     try {
                         userController.deleteBio(userId);
                     } catch (SQLException e) {

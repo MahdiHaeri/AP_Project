@@ -1,140 +1,208 @@
 package com.example.server.HttpHandlers;
 
-import com.example.server.controllers.FollowController;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.sun.net.httpserver.HttpExchange;
-import com.sun.net.httpserver.HttpHandler;
-import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.Paths;
+
+import com.example.server.controllers.UserController;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import org.json.JSONObject;
+import spark.Request;
+import spark.Response;
+
 import java.sql.SQLException;
 import java.util.Date;
-import com.example.server.controllers.UserController;
-import org.json.JSONObject;
 
-public class UserHandler implements HttpHandler {
-    @Override
-    public void handle(HttpExchange exchange) throws IOException {
-        UserController userController;
-        FollowController followController;
+public class UserHandler {
+
+    private final UserController userController;
+
+    public UserHandler() throws SQLException {
+        userController = new UserController();
+    }
+
+    public Object handleGetUser(Request request, Response response) {
         try {
-            userController = new UserController();
-            followController = new FollowController();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
+            return userController.getUsers();
+        } catch (Exception e) {
+            response.status(500);
+            return e.getMessage();
+        }
+    }
+
+    public Object handleGetUserById(Request request, Response response) {
+        String username = request.params(":username");
+        try {
+            response.body(userController.getUserById(username));
+        } catch (Exception e) {
+            response.status(400);
+            response.body(e.getMessage());
+            return response.body();
+        }
+        return response.body();
+    }
+
+    public Object handlePostUser(Request request, Response response) throws JsonProcessingException {
+        JSONObject jsonObject = new JSONObject(request.body());
+
+        String id = jsonObject.getString("id");
+        String firstName = jsonObject.getString("firstName");
+        String lastName = jsonObject.getString("lastName");
+        String email = jsonObject.getString("email");
+        String phoneNumber = jsonObject.getString("phoneNumber");
+        String password = jsonObject.getString("password");
+        String country = jsonObject.getString("country");
+        Date birthday = new Date(jsonObject.getLong("birthday"));
+
+        try {
+            userController.createUser(id, firstName, lastName, email, phoneNumber, password, country, birthday);
+        } catch (Exception e) {
+            response.status(400);
+            response.body(e.getMessage());
+            return response.body();
         }
 
-        String method = exchange.getRequestMethod();
-        String path = exchange.getRequestURI().getPath();
-        String response = "";
-        String[] splitPath = path.split("/");
+        response.body("User created successfully");
+        return response.body();
+    }
 
-        // Read the request body
-        InputStream requestBody = exchange.getRequestBody();
-        BufferedReader reader = new BufferedReader(new InputStreamReader(requestBody));
-        StringBuilder body = new StringBuilder();
-        String line;
-        while ((line = reader.readLine()) != null) {
-            body.append(line);
+    public Object handlePutUser(Request request, Response response) throws JsonProcessingException {
+        JSONObject jsonObject = new JSONObject(request.body());
+
+        String id = jsonObject.getString("id");
+        String firstName = jsonObject.getString("firstName");
+        String lastName = jsonObject.getString("lastName");
+        String email = jsonObject.getString("email");
+        String phoneNumber = jsonObject.getString("phoneNumber");
+        String password = jsonObject.getString("password");
+        String country = jsonObject.getString("country");
+        Date birthday = new Date(jsonObject.getLong("birthday"));
+
+        try {
+            userController.updateUser(id, firstName, lastName, email, phoneNumber, password, country, birthday);
+        } catch (Exception e) {
+            response.status(400);
+            response.body(e.getMessage());
+            return response.body();
         }
-        requestBody.close();
 
-        if (path.startsWith("/users/") && splitPath.length == 4) {
-            String userId = splitPath[2];
-            if (splitPath[3].equals("follower")) {
-                try {
-                    response = followController.getFollowers(userId);
-                } catch (SQLException e) {
-                    throw new RuntimeException(e);
-                }
-            } else if (splitPath[3].equals("following")) {
-                try {
-                    response = followController.getFollowings(userId);
-                } catch (SQLException e) {
-                    throw new RuntimeException(e);
-                }
-            } else if (splitPath[3].equals("bio")) {
-                try {
-                    response = userController.getBioByUserId(userId);
-                } catch (SQLException e) {
-                    throw new RuntimeException(e);
-                }
-            } else {
+        response.body("User updated successfully");
+        return response.body();
+    }
 
-            }
-        } else {
-            switch (method) {
-                case "GET":
-                    if (splitPath.length == 2) {
-                        try {
-                            response = userController.getUsers();
-                        } catch (SQLException e) {
-                            throw new RuntimeException(e);
-                        }
-                    } else {
-                        // Extract the user ID from the path
-                        String userId = splitPath[splitPath.length - 1];
-                        try {
-                            response = userController.getUserById(userId);
-                        } catch (SQLException e) {
-                            throw new RuntimeException(e);
-                        }
-                    }
-                    break;
-                case "POST":
-                    // Process the user creation based on the request body
-                    String newUser = body.toString();
-                    JSONObject jsonObject = new JSONObject(newUser);
-                    try {
-                        userController.createUser(jsonObject.getString("id"), jsonObject.getString("firstName"), jsonObject.getString("lastName"), jsonObject.getString("email"), jsonObject.getString("phoneNumber"), jsonObject.getString("password"), jsonObject.getString("country"), new Date(jsonObject.getLong("birthday")));
-                    } catch (SQLException e) {
-                        System.out.println(e.getMessage());
-                        response = e.getMessage();
-                        exchange.sendResponseHeaders(400, response.getBytes().length);
-                        OutputStream os = exchange.getResponseBody();
-                        os.write(response.getBytes());
-                        os.close();
-                        return;
-                    }
-                    Files.createDirectories(Paths.get("src/main/java/com/example/server/assets/" + jsonObject.getString("id")));
-                    response = "this is done!";
-                    break;
-                case "PUT":
-                    String putUser = body.toString();
-                    JSONObject putJsonObject = new JSONObject(putUser);
-                    try {
-                        userController.updateUser(putJsonObject.getString("id"), putJsonObject.getString("firstName"), putJsonObject.getString("lastName"), putJsonObject.getString("email"), putJsonObject.getString("phoneNumber"), putJsonObject.getString("password"), putJsonObject.getString("country"), new Date(putJsonObject.getLong("birthday")));
-                    } catch (SQLException e) {
-                        throw new RuntimeException(e);
-                    }
-                    response = "This is the response users Put";
-                    break;
-                case "DELETE":
-                    if (splitPath.length == 2) {
-                        try {
-                            userController.deleteUsers();
-                            response = "All users deleted";
-                        } catch (SQLException e) {
-                            throw new RuntimeException(e);
-                        }
-                    } else {
-                        // Extract the user ID from the path
-                        String userId = splitPath[splitPath.length - 1];
-                        try {
-                            userController.deleteUser(userId);
-                        } catch (SQLException e) {
-                            throw new RuntimeException(e);
-                        }
-                    }
-                    response = "This is the response users Delete";
-                    break;
-                default:
-                    break;
-            }
+    public Object handleDeleteUserById(Request request, Response response) throws JsonProcessingException {
+        String id = request.params(":username");
+
+        try {
+            userController.deleteUser(id);
+        } catch (Exception e) {
+            response.status(400);
+            response.body(e.getMessage());
+            return response.body();
         }
-        exchange.sendResponseHeaders(200, response.getBytes().length);
-        OutputStream os = exchange.getResponseBody();
-        os.write(response.getBytes());
-        os.close();
+
+        response.body("User deleted successfully");
+        return response.body();
+    }
+
+    public Object handleDeleteUser(Request request, Response response) throws JsonProcessingException {
+        try {
+            userController.deleteUsers();
+        } catch (Exception e) {
+            response.status(400);
+            response.body(e.getMessage());
+            return response.body();
+        }
+
+        response.body("Users deleted successfully");
+        return response.body();
+    }
+
+
+
+
+
+    public Object handleGetBio(Request request, Response response) {
+        try {
+            response.body(userController.getBios());
+            return response.body();
+        } catch (Exception e) {
+            response.status(500);
+            return e.getMessage();
+        }
+    }
+
+    public Object handleGetBioById(Request request, Response response) {
+        String username = request.params(":username");
+        try {
+            response.body(userController.getBioByUserId(username));
+        } catch (Exception e) {
+            response.status(400);
+            response.body(e.getMessage());
+            return response.body();
+        }
+        return response.body();
+    }
+
+    public Object handlePostBio(Request request, Response response) throws JsonProcessingException {
+        JSONObject jsonObject = new JSONObject(request.body());
+        String userId = request.params(":username");
+        String biography = jsonObject.getString("biography");
+        String location = jsonObject.getString("location");
+        String website = jsonObject.getString("website");
+
+        try {
+            userController.createBio(userId, biography, location, website);
+        } catch (Exception e) {
+            response.status(400);
+            response.body(e.getMessage());
+            return response.body();
+        }
+
+        response.body("Bio created successfully");
+        return response.body();
+    }
+
+    public Object handlePutBio(Request request, Response response) throws JsonProcessingException {
+        JSONObject jsonObject = new JSONObject(request.body());
+        String userId = request.params(":username");
+        String biography = jsonObject.getString("biography");
+        String location = jsonObject.getString("location");
+        String website = jsonObject.getString("website");
+
+        try {
+            userController.updateBio(userId, biography, location, website);
+        } catch (Exception e) {
+            response.status(400);
+            response.body(e.getMessage());
+            return response.body();
+        }
+
+        response.body("Bio updated successfully");
+        return response.body();
+    }
+
+    public Object handleDeleteBioById(Request request, Response response) throws JsonProcessingException {
+        String username = request.params(":username");
+        try {
+            userController.deleteBio(username);
+        } catch (Exception e) {
+            response.status(400);
+            response.body(e.getMessage());
+            return response.body();
+        }
+
+        response.body("Bio deleted successfully");
+        return response.body();
+    }
+
+    public Object handleDeleteBio(Request request, Response response) throws JsonProcessingException {
+        try {
+            userController.deleteBios();
+        } catch (Exception e) {
+            response.status(400);
+            response.body(e.getMessage());
+            return response.body();
+        }
+
+        response.body("Bios deleted successfully");
+        return response.body();
     }
 }

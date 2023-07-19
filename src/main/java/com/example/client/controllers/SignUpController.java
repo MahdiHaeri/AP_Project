@@ -133,7 +133,7 @@ public class SignUpController implements Initializable {
             bodyRequest = objectMapper.writeValueAsString(user);
 
             URL url;
-            url = new URL("http://127.0.0.1:8080/users");
+            url = new URL("http://127.0.0.1:8080/api/users");
 
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod("POST");
