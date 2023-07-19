@@ -47,6 +47,17 @@ public class TweetHandler {
         }
     }
 
+    public Object handleGetTimeline(Request request, Response response) {
+        String token = JWTController.getJwtTokenFromHeader(request.headers("Authorization"));
+        String username = JWTController.getUsernameFromJwtToken(token);
+        try {
+            return tweetController.getTimeline(username);
+        } catch (Exception e) {
+            response.status(500);
+            return e.getMessage();
+        }
+    }
+
     public Object handlePostTweet(Request request, Response response) {
         String token = JWTController.getJwtTokenFromHeader(request.headers("Authorization"));
 

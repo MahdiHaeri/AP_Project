@@ -2,6 +2,10 @@ package com.example.server.controllers;
 
 import java.sql.SQLException;
 
+import com.example.server.data_access.FollowDAO;
+import com.example.server.data_access.UserDAO;
+import com.example.server.models.Follow;
+import com.example.server.models.User;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.example.server.data_access.TweetDAO;
@@ -14,8 +18,10 @@ import java.util.Date;
 public class TweetController {
     private final TweetDAO tweetDAO;
 
+    private final FollowDAO followDAO;
     public TweetController() throws SQLException {
         tweetDAO = new TweetDAO();
+        followDAO = new FollowDAO();
     }
 
     public void createTweet(String writerId, String ownerId, String text, String quoteTweetId, ArrayList<String> mediaPaths,int replies, int retweets, int likes) throws SQLException {
@@ -81,5 +87,27 @@ public class TweetController {
         Tweet resultTweet = tweetDAO.getTweet(tweet);
         ObjectMapper objectMapper = new ObjectMapper();
         return objectMapper.writeValueAsString(tweet);
+    }
+
+    public String getTimeline(String username) throws SQLException, JsonProcessingException {
+        ArrayList<Tweet> tweets = tweetDAO.getTweets();
+        ArrayList<Follow> followings = followDAO.getFollowings(username);
+        ArrayList<Tweet> timelineTweets = new ArrayList<>();
+        for (Tweet tweet : tweets) {
+            if (isFollowingTweet(tweet.getOwnerId(), followings)) {
+                timelineTweets.add(tweet);
+            }
+        }
+        ObjectMapper objectMapper = new ObjectMapper();
+        return objectMapper.writeValueAsString(timelineTweets);
+    }
+
+    private boolean isFollowingTweet(String tweetOwnerId, ArrayList<Follow> followings) throws SQLException {
+        for (Follow follow : followings) {
+            if (follow.getFollowed().equals(tweetOwnerId)) {
+                return true;
+            }
+        }
+        return false;
     }
 }

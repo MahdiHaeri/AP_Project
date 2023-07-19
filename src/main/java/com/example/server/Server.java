@@ -1,13 +1,9 @@
 package com.example.server;
 
 import com.example.server.HttpHandlers.*;
-import com.example.server.controllers.*;
-import com.example.server.models.Follow;
-import com.example.server.models.Hashtag;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
-import org.json.JSONObject;
 
 import javax.crypto.SecretKey;
 import java.sql.SQLException;
@@ -76,6 +72,8 @@ public class Server {
         delete("/api/tweets/:tweetId", tweetHandler::handleDeleteTweetByTweetId);
         delete("/api/tweets", tweetHandler::handleDeleteTweet);
         get("/api/users/:username/tweets", tweetHandler::handleGetTweetsByOwnerId);
+
+        get("/api/timeline", tweetHandler::handleGetTimeline);
 
 
         post("/api/login", loginHandler::handlePostLogin);
