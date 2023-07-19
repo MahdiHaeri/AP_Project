@@ -35,7 +35,7 @@ public class Server {
             tweetHandler = new TweetHandler();
             followHandler = new FollowHandler();
             userHandler = new UserHandler();
-        } catch (IOException e) {
+        } catch (SQLException e) {
             throw new RuntimeException(e);
         }
 
