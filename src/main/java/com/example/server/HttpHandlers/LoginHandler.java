@@ -1,26 +1,16 @@
 package com.example.server.HttpHandlers;
 
-import com.example.server.models.User;
+import com.example.server.utils.JWTController;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
-import io.jsonwebtoken.security.Keys;
 
-import javax.crypto.SecretKey;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.nio.charset.StandardCharsets;
 import java.sql.SQLException;
-import java.util.Date;
 
 import com.example.server.controllers.UserController;
 
 public class LoginHandler implements HttpHandler {
-
-    private static final SecretKey SECRET_KEY = Keys.secretKeyFor(SignatureAlgorithm.HS256);
-    private static final long EXPIRATION_TIME = 3600000; // 1 hour
-
     @Override
     public void handle(HttpExchange exchange) throws IOException {
         if ("GET".equals(exchange.getRequestMethod())) {
@@ -45,7 +35,7 @@ public class LoginHandler implements HttpHandler {
                 }
 
                 // Generate the JWT token
-                String jwtToken = generateJwtToken(username);
+                String jwtToken = JWTController.generateJwtToken(username);
 
                 // Set the response headers
                 exchange.getResponseHeaders().set("Content-Type", "application/json");
@@ -67,18 +57,5 @@ public class LoginHandler implements HttpHandler {
          } else {
              return false;
          }
-    }
-
-
-    private String generateJwtToken(String username) {
-        Date now = new Date();
-        Date expiration = new Date(now.getTime() + EXPIRATION_TIME);
-
-        return Jwts.builder()
-                .setSubject(username)
-                .setIssuedAt(now)
-                .setExpiration(expiration)
-                .signWith(SECRET_KEY, SignatureAlgorithm.HS256)
-                .compact();
     }
 }
