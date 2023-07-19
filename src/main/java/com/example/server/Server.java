@@ -94,7 +94,7 @@ public class Server {
             // Now, include the token in the response
             response.status(200);
             response.type("application/json");
-            response.body("{\"token\": \"" + token + "\"}");
+            response.body(token);
 
             return response.body();
         });

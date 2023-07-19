@@ -34,7 +34,7 @@ public class TimelineController implements Initializable {
         // Make a GET request to the server
         HttpURLConnection connection = null;
         try {
-            URL apiUrl = new URL("http://localhost:8080/tweets");
+            URL apiUrl = new URL("http://localhost:8080/api/tweets");
             connection = (HttpURLConnection) apiUrl.openConnection();
             connection.setRequestMethod("GET");
 
