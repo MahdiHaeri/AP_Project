@@ -187,7 +187,7 @@ public class ProfileController implements Initializable {
         try {
             String username = JWTController.getSubjectFromJwt(JWTController.getJwtKey());
 
-            URL apiUrl = new URL("http://localhost:8080/api/users/" + username + "/follower");
+            URL apiUrl = new URL("http://localhost:8080/api/users/" + username + "/followers");
             connection = (HttpURLConnection) apiUrl.openConnection();
             connection.setRequestMethod("GET");
 
