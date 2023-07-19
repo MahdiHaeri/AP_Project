@@ -46,10 +46,7 @@ public class FollowHandler {
     public Object handlePostFollow(Request request, Response response) {
         String token = JWTController.getJwtTokenFromHeader(request.headers("Authorization"));
 
-//        if (token == null) {
-//            response.status(401);
-//            return "Unauthorized";
-//        }
+        // todo: check jwt
 
 //        if (!JWTController.validateJwtToken(token)) {
 //            response.status(401);
@@ -69,15 +66,19 @@ public class FollowHandler {
     }
 
     public Object handlePostUnfollow(Request request, Response response) {
-        // todo : get followerId from session jwt token
-        String token = request.headers("Authorization");
-        // todo :fix hard coded followerId
-        String followerId = "mahdi";
+        String token = JWTController.getJwtTokenFromHeader(request.headers("Authorization"));
+
+//        if (!JWTController.validateJwtToken(token)) {
+//            response.status(401);
+//            return "Unauthorized";
+//        }
+
+        String followerId = JWTController.getUsernameFromJwtToken(token);
         String followedId = request.params(":username");
         try {
             followController.deleteFollow(followerId, followedId);
-            response.status(200);
-            return "Follow deleted successfully!";
+            response.status(201);
+            return "Follow created successfully!";
         } catch (Exception e) {
             response.status(500);
             return e.getMessage();

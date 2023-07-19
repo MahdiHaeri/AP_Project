@@ -64,10 +64,10 @@ public class Server {
 
 
         get("/api/blocks", blockHandler::handleGetBlocks);
-        get("/api/users/:username/blockers", blockHandler::handleGetBlockers);
-        get("/api/users/:username/blocking", blockHandler::handleGetBlocking);
         post("/api/users/:username/block", blockHandler::handlePostBlock);
         post("/api/users/:username/unblock", blockHandler::handlePostUnblock);
+        get("/api/users/:username/blockers", blockHandler::handleGetBlockers);
+        get("/api/users/:username/blocking", blockHandler::handleGetBlocking);
 
 
         post("/api/tweets", tweetHandler::handlePostTweet);

@@ -2,6 +2,7 @@ package com.example.server.HttpHandlers;
 
 import com.example.server.controllers.BlockController;
 import com.example.server.controllers.FollowController;
+import com.example.server.utils.JWTController;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import org.json.JSONObject;
@@ -47,10 +48,14 @@ public class BlockHandler {
     }
 
     public Object handlePostBlock(Request request, Response response) {
-        // todo : get BlockerId from session jwt token
-        String token = request.headers("Authorization");
-        // todo :fix hard coded BlockerId
-        String blockerId = "mahdi";
+        String token = JWTController.getJwtTokenFromHeader(request.headers("Authorization"));
+
+//        if (!JWTController.validateJwtToken(token)) {
+//            response.status(401);
+//            return "Unauthorized";
+//        }
+
+        String blockerId = JWTController.getUsernameFromJwtToken(token);
         String blockedId = request.params(":username");
         try {
             blockController.saveBlock(blockerId, blockedId);
@@ -63,10 +68,14 @@ public class BlockHandler {
     }
 
     public Object handlePostUnblock(Request request, Response response) {
-        // todo : get BlockerId from session jwt token
-        String token = request.headers("Authorization");
-        // todo :fix hard coded BlockerId
-        String blockerId = "mahdi";
+        String token = JWTController.getJwtTokenFromHeader(request.headers("Authorization"));
+
+//        if (!JWTController.validateJwtToken(token)) {
+//            response.status(401);
+//            return "Unauthorized";
+//        }
+
+        String blockerId = JWTController.getUsernameFromJwtToken(token);
         String blockedId = request.params(":username");
         try {
             blockController.deleteBlock(blockerId, blockedId);
