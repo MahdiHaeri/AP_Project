@@ -88,7 +88,6 @@ public class TweetDAO {
     }
 
     public Tweet getTweet(Tweet tweet) throws SQLException {
-        System.out.println("hello world");
         PreparedStatement statement = connection.prepareStatement("SELECT * FROM tweets WHERE id = ?");
         statement.setString(1, tweet.getId());
         ResultSet resultSet = statement.executeQuery();

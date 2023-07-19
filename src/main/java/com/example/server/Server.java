@@ -20,17 +20,14 @@ public class Server {
     private static final SecretKey SECRET_KEY = Keys.secretKeyFor(SignatureAlgorithm.HS256);
     private static final long EXPIRATION_TIME = 3600000; // 1 hour
     public static void main(String[] args) {
+        LoginHandler loginHandler;
         BlockHandler blockHandler;
         TweetHandler tweetHandler;
         FollowHandler followHandler;
         UserHandler userHandler;
-        UserController userController;
-        FollowController followController;
-        BlockController blockController;
-        TweetController tweetController;
-        HashtagController hashtagController;
 
         try {
+            loginHandler = new LoginHandler();
             blockHandler = new BlockHandler();
             tweetHandler = new TweetHandler();
             followHandler = new FollowHandler();
@@ -81,23 +78,7 @@ public class Server {
         get("/api/users/:username/tweets", tweetHandler::handleGetTweetsByOwnerId);
 
 
-        post("/api/login", (request, response) -> {
-            // Your authentication logic here...
-            // Assuming the user has been authenticated and the token should be generated
-
-            // For demonstration purposes, let's assume you have a user ID and secret key.
-
-            JSONObject jsonObject = new JSONObject(request.body());
-            // Create a JWT token
-            String token = generateJwtToken(jsonObject.getString("userId"));
-
-            // Now, include the token in the response
-            response.status(200);
-            response.type("application/json");
-            response.body(token);
-
-            return response.body();
-        });
+        post("/api/login", loginHandler::handlePostLogin);
 
         // TODO /api/logout
 

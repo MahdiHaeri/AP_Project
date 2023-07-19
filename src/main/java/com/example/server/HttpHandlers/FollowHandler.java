@@ -2,14 +2,12 @@ package com.example.server.HttpHandlers;
 
 
 import com.example.server.controllers.FollowController;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import org.json.JSONObject;
 import spark.Request;
 import spark.Response;
 
 import java.sql.SQLException;
-import java.util.Date;
 
+import com.example.server.utils.JWTController;
 public class FollowHandler {
     private final FollowController followController;
 
@@ -46,10 +44,19 @@ public class FollowHandler {
     }
 
     public Object handlePostFollow(Request request, Response response) {
-        // todo : get followerId from session jwt token
-        String token = request.headers("Authorization");
-        // todo :fix hard coded followerId
-        String followerId = "mahdi";
+        String token = JWTController.getJwtTokenFromHeader(request.headers("Authorization"));
+
+//        if (token == null) {
+//            response.status(401);
+//            return "Unauthorized";
+//        }
+
+//        if (!JWTController.validateJwtToken(token)) {
+//            response.status(401);
+//            return "Unauthorized";
+//        }
+
+        String followerId = JWTController.getUsernameFromJwtToken(token);
         String followedId = request.params(":username");
         try {
             followController.saveFollow(followerId, followedId);

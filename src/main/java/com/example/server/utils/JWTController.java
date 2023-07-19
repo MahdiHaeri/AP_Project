@@ -1,37 +1,51 @@
 package com.example.server.utils;
 
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
 
 import javax.crypto.SecretKey;
 import java.util.Date;
 
 public class JWTController {
-    private static final SecretKey SECRET_KEY = Keys.secretKeyFor(SignatureAlgorithm.HS256);
     private static final long EXPIRATION_TIME = 3600000; // 1 hour
+
+    // Use the Singleton pattern to ensure the same secret key is reused
+    private static SecretKey secretKeyInstance;
+
+    private static SecretKey getSecretKey() {
+        if (secretKeyInstance == null) {
+            secretKeyInstance = Keys.secretKeyFor(SignatureAlgorithm.HS256);
+        }
+        return secretKeyInstance;
+    }
 
     public static String generateJwtToken(String username) {
         return Jwts.builder()
                 .setSubject(username)
                 .setExpiration(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
-                .signWith(SECRET_KEY)
+                .signWith(getSecretKey())
                 .compact();
     }
 
     public static String getUsernameFromJwtToken(String jwtToken) {
-        return Jwts.parserBuilder()
-                .setSigningKey(SECRET_KEY)
-                .build()
-                .parseClaimsJws(jwtToken)
-                .getBody()
-                .getSubject();
+        try {
+            Claims claims = Jwts.parserBuilder()
+                    .setSigningKey(getSecretKey())
+                    .build()
+                    .parseClaimsJws(jwtToken)
+                    .getBody();
+
+            return claims.getSubject();
+        } catch (ExpiredJwtException | MalformedJwtException | SignatureException | IllegalArgumentException ex) {
+            // Handle different types of exceptions, e.g., log the error or return null/empty string
+            return null;
+        }
     }
 
     public static boolean validateJwtToken(String jwtToken) {
         try {
             Jwts.parserBuilder()
-                    .setSigningKey(SECRET_KEY)
+                    .setSigningKey(getSecretKey())
                     .build()
                     .parseClaimsJws(jwtToken);
             return true;
