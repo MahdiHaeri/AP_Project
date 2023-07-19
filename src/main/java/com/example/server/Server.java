@@ -29,24 +29,19 @@ public class Server {
         BlockController blockController;
         TweetController tweetController;
         HashtagController hashtagController;
+
         try {
             blockHandler = new BlockHandler();
             tweetHandler = new TweetHandler();
             followHandler = new FollowHandler();
             userHandler = new UserHandler();
-        } catch (SQLException e) {
+        } catch (IOException e) {
             throw new RuntimeException(e);
         }
 
         // Initialize the Spark server
         port(8080); // Set your desired port number
-
-
-//         Define your API routes and handlers using Spark Java
-//        get("/api/users", (request, response) -> {
-//            response.body(userController.getUsers());
-//            return response.body();
-//        });
+      
 
         get("/api/users", userHandler::handleGetUser);
         get("/api/users/:username", userHandler::handleGetUserById);
