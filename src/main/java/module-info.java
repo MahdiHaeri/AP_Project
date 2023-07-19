@@ -13,6 +13,7 @@ module com.example.ap_project {
     requires GNAvatarView;
     requires jjwt.api;
     requires de.jensd.fx.glyphs.fontawesome;
+    requires spark.core;
 
 //    requires javafx.base;
 //    requires javafx.graphics;

@@ -60,13 +60,13 @@ public class TweetDAO {
 
     public void deleteTweet(String id) throws SQLException {
         PreparedStatement statement = connection.prepareStatement("DELETE FROM tweets WHERE id = ?");
-        statement.setString(1, id);
+        statement.setInt(1, Integer.parseInt(id));
         statement.executeUpdate();
     }
 
     public Tweet getTweet(String id) throws SQLException {
         PreparedStatement statement = connection.prepareStatement("SELECT * FROM tweets WHERE id = ?");
-        statement.setString(1, id);
+        statement.setInt(1, Integer.parseInt(id));
         ResultSet resultSet = statement.executeQuery();
         if (resultSet.next()) {
             Tweet tweet = new Tweet();
@@ -77,8 +77,8 @@ public class TweetDAO {
             tweet.setQuoteTweetId(resultSet.getString("quote_tweet_id"));
             Array array = resultSet.getArray("media_path");
             Object[] elements = (Object[]) array.getArray();
-            ArrayList<String> mediapath = toArrayList(elements);
-            tweet.setMediaPaths(mediapath);
+            ArrayList<String> mediaPath = toArrayList(elements);
+            tweet.setMediaPaths(mediaPath);
             tweet.setLikes(resultSet.getInt("likes"));
             tweet.setRetweets(resultSet.getInt("retweets"));
             tweet.setReplies(resultSet.getInt("replies"));
@@ -88,6 +88,7 @@ public class TweetDAO {
     }
 
     public Tweet getTweet(Tweet tweet) throws SQLException {
+        System.out.println("hello world");
         PreparedStatement statement = connection.prepareStatement("SELECT * FROM tweets WHERE id = ?");
         statement.setString(1, tweet.getId());
         ResultSet resultSet = statement.executeQuery();

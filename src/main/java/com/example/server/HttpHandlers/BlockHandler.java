@@ -1,89 +1,80 @@
 package com.example.server.HttpHandlers;
 
 import com.example.server.controllers.BlockController;
+import com.example.server.controllers.FollowController;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import org.json.JSONObject;
+import spark.Request;
+import spark.Response;
 
 import java.io.*;
 import java.sql.SQLException;
 
-public class BlockHandler implements HttpHandler {
-    @Override
-    public void handle(HttpExchange exchange) throws IOException {
-        BlockController blockController = null;
+public class BlockHandler {
+    private final BlockController blockController;
+
+    public BlockHandler() throws SQLException {
+        blockController = new BlockController();
+    }
+
+    public Object handleGetBlocks(Request request, Response response) {
         try {
-            blockController = new BlockController();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
+            return blockController.getBlocks();
+        } catch (Exception e) {
+            response.status(500);
+            return e.getMessage();
         }
-        String method = exchange.getRequestMethod();
-        String path = exchange.getRequestURI().getPath();
-        String response = "";
-        String[] splitedPath = path.split("/");
+    }
 
-        // Read the request body
-        InputStream requestBody = exchange.getRequestBody();
-        BufferedReader reader = new BufferedReader(new InputStreamReader(requestBody));
-        StringBuilder body = new StringBuilder();
-        String line;
-        while ((line = reader.readLine()) != null) {
-            body.append(line);
-        }
-        requestBody.close();
 
-        switch (method) {
-            case "GET":
-                if (splitedPath.length == 2) {
-                    try {
-                        response = blockController.getBlocks();
-                    } catch (SQLException e) {
-                        throw new RuntimeException(e);
-                    }
-                } else {
-                    // Extract the user ID from the path
-//                    String userId = splitedPath[splitedPath.length - 1];
-//                    try {
-//                        response = userController.getUserById(userId);
-//                    } catch (SQLException e) {
-//                        throw new RuntimeException(e);
-//                    }
-                }
-                break;
-            case "POST":
-                // Process the user creation based on the request body
-                String newBlock = body.toString();
-                JSONObject jsonObject = new JSONObject(newBlock);
-                try {
-                    blockController.saveBlock(jsonObject.getString("blockerId"), jsonObject.getString("blockedId"));
-                } catch (SQLException e) {
-                    throw new RuntimeException(e);
-                }
-                response = "this is done!";
-                break;
-            case "PUT":
-//                String putBlock = body.toString();
-//                JSONObject putJsonObject = new JSONObject(putBlock);
-//                try {
-//                    blockController.updateUser(putJsonObject.getString("id"), putJsonObject.getString("firstName"), putJsonObject.getString("lastName"), putJsonObject.getString("email"), putJsonObject.getString("phoneNumber"), putJsonObject.getString("password"), putJsonObject.getString("country"), new Date(putJsonObject.getLong("birthday")));
-//                } catch (SQLException e) {
-//                    throw new RuntimeException(e);
-//                }
-                response = "This is the response users Put";
-                break;
-            case "DELETE":
-                try {
-                    blockController.deleteBlocks();
-                } catch (SQLException e) {
-                    throw new RuntimeException(e);
-                }
-                break;
-            default:
-                break;
+    public Object handleGetBlockers(Request request, Response response) {
+        try {
+            return blockController.getBlockers(request.params(":username"));
+        } catch (Exception e) {
+            response.status(500);
+            return e.getMessage();
         }
-        exchange.sendResponseHeaders(200, response.getBytes().length);
-        OutputStream os = exchange.getResponseBody();
-        os.write(response.getBytes());
-        os.close();
+    }
+
+    public Object handleGetBlocking(Request request, Response response) {
+        try {
+            return blockController.getBlockings(request.params(":username"));
+        } catch (Exception e) {
+            response.status(500);
+            return e.getMessage();
+        }
+    }
+
+    public Object handlePostBlock(Request request, Response response) {
+        // todo : get BlockerId from session jwt token
+        String token = request.headers("Authorization");
+        // todo :fix hard coded BlockerId
+        String blockerId = "mahdi";
+        String blockedId = request.params(":username");
+        try {
+            blockController.saveBlock(blockerId, blockedId);
+            response.status(201);
+            return "Follow created successfully!";
+        } catch (Exception e) {
+            response.status(500);
+            return e.getMessage();
+        }
+    }
+
+    public Object handlePostUnblock(Request request, Response response) {
+        // todo : get BlockerId from session jwt token
+        String token = request.headers("Authorization");
+        // todo :fix hard coded BlockerId
+        String blockerId = "mahdi";
+        String blockedId = request.params(":username");
+        try {
+            blockController.deleteBlock(blockerId, blockedId);
+            response.status(201);
+            return "Follow created successfully!";
+        } catch (Exception e) {
+            response.status(500);
+            return e.getMessage();
+        }
     }
 }
