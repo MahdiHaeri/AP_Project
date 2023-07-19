@@ -1,6 +1,7 @@
 package com.example.server.HttpHandlers;
 
 import com.example.server.controllers.TweetController;
+import com.example.server.utils.JWTController;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -47,9 +48,12 @@ public class TweetHandler {
     }
 
     public Object handlePostTweet(Request request, Response response) {
+        String token = JWTController.getJwtTokenFromHeader(request.headers("Authorization"));
+
+
         JSONObject jsonObject = new JSONObject(request.body());
         String writerId = jsonObject.getString("writerId");
-        String ownderId = jsonObject.getString("ownerId");
+        String ownerId = JWTController.getUsernameFromJwtToken(token);
         String text = jsonObject.getString("text");
         String quotedTweetId = jsonObject.getString("quoteTweetId");
         JSONArray mediaPaths = jsonObject.getJSONArray("mediaPaths");
@@ -64,7 +68,7 @@ public class TweetHandler {
         }
 
         try {
-            tweetController.createTweet(writerId, ownderId, text, quotedTweetId, mediaPathsList, repliesCount, retweetsCount, likesCount);
+            tweetController.createTweet(writerId, ownerId, text, quotedTweetId, mediaPathsList, repliesCount, retweetsCount, likesCount);
             response.status(201);
             return "Tweet created successfully";
         } catch (Exception e) {
