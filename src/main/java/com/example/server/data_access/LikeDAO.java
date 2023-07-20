@@ -50,10 +50,11 @@ public class LikeDAO {
         statement.executeUpdate();
     }
 
-    public void deleteLikesByUserIdAndTweetId(String userId, String tweetId) throws SQLException {
-        PreparedStatement statement = connection.prepareStatement("DELETE FROM likes WHERE user_id = ? AND tweet_id = ?");
+    public boolean isLiked(String userId, String tweetId) throws SQLException {
+        PreparedStatement statement = connection.prepareStatement("SELECT * FROM likes WHERE user_id = ? AND tweet_id = ?");
         statement.setString(1, userId);
         statement.setString(2, tweetId);
-        statement.executeUpdate();
+
+        return statement.executeQuery().next();
     }
 }
