@@ -1,8 +1,11 @@
 package com.example.server.data_access;
 
+import com.example.server.models.Like;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class LikeDAO {
     private final Connection connection;
@@ -48,6 +51,48 @@ public class LikeDAO {
         PreparedStatement statement = connection.prepareStatement("DELETE FROM likes WHERE user_id = ?");
         statement.setString(1, userId);
         statement.executeUpdate();
+    }
+
+    public int getLikesCount(String tweetId) throws SQLException {
+        PreparedStatement statement = connection.prepareStatement("SELECT COUNT(*) FROM likes WHERE tweet_id = ?");
+        statement.setString(1, tweetId);
+
+        return statement.executeQuery().getInt(1);
+    }
+
+    public ArrayList<Like> getLikesByTweetId(String tweetId) throws SQLException {
+        PreparedStatement statement = connection.prepareStatement("SELECT * FROM likes WHERE tweet_id = ?");
+        statement.setString(1, tweetId);
+        ArrayList<Like> likes = new ArrayList<>();
+        var resultSet = statement.executeQuery();
+        while (resultSet.next()) {
+            likes.add(new Like(resultSet.getString("like_id") ,resultSet.getString("user_id"), resultSet.getString("tweet_id"), resultSet.getTimestamp("created_at")));
+        }
+
+        return likes;
+    }
+
+    public ArrayList<Like> getLikesByUserId(String userId) throws SQLException {
+        PreparedStatement statement = connection.prepareStatement("SELECT * FROM likes WHERE user_id = ?");
+        statement.setString(1, userId);
+        ArrayList<Like> likes = new ArrayList<>();
+        var resultSet = statement.executeQuery();
+        while (resultSet.next()) {
+            likes.add(new Like(resultSet.getString("like_id") ,resultSet.getString("user_id"), resultSet.getString("tweet_id"), resultSet.getTimestamp("created_at")));
+        }
+
+        return likes;
+    }
+
+    public ArrayList<Like> getLikes() throws SQLException {
+        PreparedStatement statement = connection.prepareStatement("SELECT * FROM likes");
+        ArrayList<Like> likes = new ArrayList<>();
+        var resultSet = statement.executeQuery();
+        while (resultSet.next()) {
+            likes.add(new Like(resultSet.getString("like_id") ,resultSet.getString("user_id"), resultSet.getString("tweet_id"), resultSet.getTimestamp("created_at")));
+        }
+
+        return likes;
     }
 
     public boolean isLiked(String userId, String tweetId) throws SQLException {
