@@ -90,6 +90,7 @@ public class TweetController {
     }
 
     public String getTimeline(String username) throws SQLException, JsonProcessingException {
+        // todo : add trends tweet to timeline tweets
         ArrayList<Tweet> tweets = tweetDAO.getTweets();
         ArrayList<Follow> followings = followDAO.getFollowings(username);
         ArrayList<Tweet> timelineTweets = new ArrayList<>();
