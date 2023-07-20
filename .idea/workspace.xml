@@ -5,56 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a1f41533-9a29-42d5-a337-09c463cc32cf" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/bin/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/src/main/java/com/example/client/TwitterApplication.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/src/main/java/com/example/client/controllers/BookmarksController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/src/main/java/com/example/client/controllers/CreateTweetController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/src/main/java/com/example/client/controllers/EditProfileController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/src/main/java/com/example/client/controllers/JWTController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/src/main/java/com/example/client/controllers/LoginController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/src/main/java/com/example/client/controllers/MainController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/src/main/java/com/example/client/controllers/MessagesController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/src/main/java/com/example/client/controllers/NotificationsController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/src/main/java/com/example/client/controllers/ProfileController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/src/main/java/com/example/client/controllers/SignUpController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/src/main/java/com/example/client/controllers/TimelineController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/src/main/java/com/example/client/controllers/TrendsController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/src/main/java/com/example/client/controllers/TweetController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/src/main/java/com/example/server/HttpHandlers/BioHandler.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/src/main/java/com/example/server/HttpHandlers/BlockHandler.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/src/main/java/com/example/server/HttpHandlers/FollowHandler.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/src/main/java/com/example/server/HttpHandlers/HashtagHandler.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/src/main/java/com/example/server/HttpHandlers/LikeHandler.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/src/main/java/com/example/server/HttpHandlers/LoginHandler.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/src/main/java/com/example/server/HttpHandlers/MediaHandler.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/src/main/java/com/example/server/HttpHandlers/TweetHandler.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/src/main/java/com/example/server/HttpHandlers/UserHandler.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/src/main/java/com/example/server/Server.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/src/main/java/com/example/server/controllers/BlockController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/src/main/java/com/example/server/controllers/FollowController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/src/main/java/com/example/server/controllers/HashtagController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/src/main/java/com/example/server/controllers/LikeController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/src/main/java/com/example/server/controllers/TweetController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/src/main/java/com/example/server/controllers/UserController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/src/main/java/com/example/server/data_access/BioDAO.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/src/main/java/com/example/server/data_access/BlockDAO.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/src/main/java/com/example/server/data_access/DatabaseConnectionManager.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/src/main/java/com/example/server/data_access/FollowDAO.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/src/main/java/com/example/server/data_access/HashtagDAO.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/src/main/java/com/example/server/data_access/LikeDAO.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/src/main/java/com/example/server/data_access/TweetDAO.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/src/main/java/com/example/server/data_access/UserDAO.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/src/main/java/com/example/server/models/Bio.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/src/main/java/com/example/server/models/Block.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/src/main/java/com/example/server/models/Follow.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/src/main/java/com/example/server/models/Hashtag.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/src/main/java/com/example/server/models/Like.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/src/main/java/com/example/server/models/Tweet.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/src/main/java/com/example/server/models/User.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/src/main/java/com/example/server/utils/JWTController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/src/main/java/module-info.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AP_Project.iml" beforeDir="false" afterPath="$PROJECT_DIR$/AP_Project.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/profile_images/main.cpp" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -201,7 +154,7 @@
       <workItem from="1689698597861" duration="13305000" />
       <workItem from="1689712585556" duration="31475000" />
       <workItem from="1689847107677" duration="8712000" />
-      <workItem from="1689876427996" duration="4650000" />
+      <workItem from="1689876427996" duration="5568000" />
     </task>
     <servers />
   </component>

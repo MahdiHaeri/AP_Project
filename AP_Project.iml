@@ -3,6 +3,8 @@
   <component name="AdditionalModuleElements">
     <content url="file://$MODULE_DIR$" dumb="true">
       <excludeFolder url="file://$MODULE_DIR$/.idea/dataSources" />
+      <excludeFolder url="file://$MODULE_DIR$/assets/header_images" />
+      <excludeFolder url="file://$MODULE_DIR$/assets/tweet_media" />
       <excludeFolder url="file://$MODULE_DIR$/bin/.idea/dataSources" />
       <excludeFolder url="file://$MODULE_DIR$/bin/.settings" />
       <excludeFolder url="file://$MODULE_DIR$/bin/assets" />
