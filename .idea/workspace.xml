@@ -166,7 +166,7 @@
       <recent name="com.example.server" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Server">
+  <component name="RunManager" selected="Application.TwitterApplication">
     <configuration name="Server" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.example.server.Server" />
       <module name="AP_Project" />
@@ -195,8 +195,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.Server" />
         <item itemvalue="Application.TwitterApplication" />
+        <item itemvalue="Application.Server" />
       </list>
     </recent_temporary>
   </component>
