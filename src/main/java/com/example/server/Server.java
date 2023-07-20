@@ -16,6 +16,7 @@ public class Server {
     private static final SecretKey SECRET_KEY = Keys.secretKeyFor(SignatureAlgorithm.HS256);
     private static final long EXPIRATION_TIME = 3600000; // 1 hour
     public static void main(String[] args) {
+        LikeHandler likeHandler;
         LoginHandler loginHandler;
         BlockHandler blockHandler;
         TweetHandler tweetHandler;
@@ -23,6 +24,7 @@ public class Server {
         UserHandler userHandler;
 
         try {
+            likeHandler = new LikeHandler();
             loginHandler = new LoginHandler();
             blockHandler = new BlockHandler();
             tweetHandler = new TweetHandler();
@@ -75,26 +77,18 @@ public class Server {
 
         get("/api/timeline", tweetHandler::handleGetTimeline);
 
-
         post("/api/login", loginHandler::handlePostLogin);
 
         // TODO /api/logout
 
-
-        get("/api/users/:username/likes", (request, response) -> {
-            return "GET /api/users/:username/likes";
-        });
+        get("/api/likes", likeHandler::handleGetLike);
+        get("/api/users/:username/likes", likeHandler::handleGetLikeByUserId);
+        get("/api/tweets/:tweetId/likes", likeHandler::handleGetLikeByTweetId);
+        post("/api/tweets/:tweetId/like", likeHandler::handlePostLike);
+        post("/api/tweets/:tweetId/unlike", likeHandler::handlePostUnlike);
 
         get("/api/users/:username/retweets", (request, response) -> {
             return "GET /api/users/:username/retweets";
-        });
-
-        post("/api/tweets/:tweetId/like", (request, response) -> {
-            return "POST /api/tweets/:tweetId/like";
-        });
-
-        post("/api/tweets/:tweetId/unlike", (request, response) -> {
-            return "POST /api/tweets/:tweetId/unlike";
         });
 
         post("/api/tweets/:tweetId/retweet", (request, response) -> {
