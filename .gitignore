@@ -37,4 +37,4 @@ build/
 ### Mac OS ###
 .DS_Store
 
-src/main/java/com/example/server/assets/
+assets/

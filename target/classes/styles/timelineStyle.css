@@ -1,0 +1,14 @@
+.root {
+    -fx-background-color: transparent;
+}
+.scroll-pane {
+    -fx-background-color: #111;
+}
+
+.scroll-bar > .corner {
+    -fx-background-color: black;
+}
+
+.scroll-bar {
+    -fx-background-color: #111;
+}
