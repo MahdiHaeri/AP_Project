@@ -1,11 +1,16 @@
 package com.example.server.models;
 
 import java.util.Date;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Like {
+    @JsonProperty("likeId")
     private String id;
+    @JsonProperty("userId")
     private String userId;
+    @JsonProperty("tweetId")
     private String tweetId;
+    @JsonProperty("createdAt")
     private Date createdAt;
 
     public Like(String id, String userId, String tweetId, Date createdAt) {
