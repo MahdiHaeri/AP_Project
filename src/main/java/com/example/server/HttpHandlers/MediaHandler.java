@@ -6,20 +6,13 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import spark.Request;
 import spark.Response;
 
-import spark.Spark.*;
-
 import javax.servlet.ServletException;
-import javax.servlet.http.Part;
-
-import static spark.Spark.*;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.sql.SQLException;
 import java.util.Date;
-import java.util.Map;
 
 public class MediaHandler {
     private final UserMediaController userMediaController;
@@ -37,7 +30,7 @@ public class MediaHandler {
         String mediaUrl = "assets/" + mediaType + "/" + userId + "/" + userId + "_" + new Date().getTime() + "." + fileType.split("/")[1];
 
         // get file bytes
-        byte[] fileByte =  request.bodyAsBytes();
+        byte[] fileByte = request.bodyAsBytes();
         File file = new File(mediaUrl);
 
         // create file if it doesn't exist
@@ -76,7 +69,7 @@ public class MediaHandler {
 
         String mediaUrl = jsonArray.get(jsonArray.size() - 1).asText();
 
-         File file = new File(mediaUrl);
+        File file = new File(mediaUrl);
         if (!file.exists() || !file.isFile()) {
             response.status(400);
             response.body("Media file not found or is not a file.");

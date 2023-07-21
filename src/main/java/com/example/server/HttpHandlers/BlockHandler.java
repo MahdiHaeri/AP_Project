@@ -1,15 +1,10 @@
 package com.example.server.HttpHandlers;
 
 import com.example.server.controllers.BlockController;
-import com.example.server.controllers.FollowController;
 import com.example.server.utils.JWTController;
-import com.sun.net.httpserver.HttpExchange;
-import com.sun.net.httpserver.HttpHandler;
-import org.json.JSONObject;
 import spark.Request;
 import spark.Response;
 
-import java.io.*;
 import java.sql.SQLException;
 
 public class BlockHandler {

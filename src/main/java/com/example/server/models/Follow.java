@@ -2,8 +2,6 @@ package com.example.server.models;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import java.util.Date;
-
 public class Follow {
 
     @JsonProperty("follower")

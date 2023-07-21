@@ -8,9 +8,6 @@ import spark.Request;
 import spark.Response;
 
 import java.sql.SQLException;
-import java.util.Date;
-
-
 
 public class LikeHandler {
     private final LikeController likeController;

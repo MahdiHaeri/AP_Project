@@ -3,15 +3,12 @@ package com.example.server.controllers;
 import java.sql.SQLException;
 
 import com.example.server.data_access.FollowDAO;
-import com.example.server.data_access.UserDAO;
 import com.example.server.models.Follow;
-import com.example.server.models.User;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.example.server.data_access.TweetDAO;
 import com.example.server.models.Tweet;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 

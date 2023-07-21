@@ -3,7 +3,6 @@ package com.example.server.controllers;
 import com.example.server.data_access.FollowDAO;
 import com.example.server.data_access.UserDAO;
 import com.example.server.models.Follow;
-import com.example.server.models.User;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 

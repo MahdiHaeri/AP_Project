@@ -2,7 +2,6 @@ package com.example.server.HttpHandlers;
 
 import com.example.server.controllers.TweetController;
 import com.example.server.utils.JWTController;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import spark.Request;
@@ -10,8 +9,6 @@ import spark.Response;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
 
 public class TweetHandler {
     private final TweetController tweetController;
