@@ -16,6 +16,7 @@ public class Server {
     private static final SecretKey SECRET_KEY = Keys.secretKeyFor(SignatureAlgorithm.HS256);
     private static final long EXPIRATION_TIME = 3600000; // 1 hour
     public static void main(String[] args) {
+        MediaHandler mediaHandler;
         LikeHandler likeHandler;
         LoginHandler loginHandler;
         BlockHandler blockHandler;
@@ -24,6 +25,7 @@ public class Server {
         UserHandler userHandler;
 
         try {
+            mediaHandler = new MediaHandler();
             likeHandler = new LikeHandler();
             loginHandler = new LoginHandler();
             blockHandler = new BlockHandler();
@@ -121,13 +123,13 @@ public class Server {
         // todo /api/recommendations/users
         // todo /api/analytics/tweets
 
-        post("/api/users/:username/profile-image", (request, response) -> {
-            return "POST /api/users/:username/profile-image";
-        });
+        get("/api/users/:username/profile-image", mediaHandler::handleGetMedia);
 
-        post("/api/users/:username/header-image", (request, response) -> {
-            return "POST /api/users/:username/header-image";
-        });
+        get("/api/users/:username/header-image", mediaHandler::handleGetMedia);
+
+        post("/api/users/:username/profile-image", mediaHandler::handlePostMedia);
+
+        post("/api/users/:username/header-image", mediaHandler::handlePostMedia);
 
         // Add the notFound route to handle unmatched paths
         notFound((request, response) -> {

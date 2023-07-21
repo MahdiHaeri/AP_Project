@@ -12,16 +12,17 @@ public class UserMediaDAO {
 
     public UserMediaDAO() throws SQLException {
         connection = DatabaseConnectionManager.getConnection();
+        createMediaTable();
     }
 
     public void createMediaTable() throws SQLException {
-        PreparedStatement statement = connection.prepareStatement("CREATE TABLE IF NOT EXISTS user_media (id SERIAL PRIMARY KEY, user_id INT NOT NULL, media_type VARCHAR(10) NOT NULL, media_path VARCHAR(255) NOT NULL, uploaded_at TIMESTAMP NOT NULL DEFAULT NOW())");
+        PreparedStatement statement = connection.prepareStatement("CREATE TABLE IF NOT EXISTS user_media (id SERIAL PRIMARY KEY, user_id VARCHAR(36) NOT NULL, media_type VARCHAR(36) NOT NULL, media_path VARCHAR(255) NOT NULL, uploaded_at TIMESTAMP NOT NULL DEFAULT NOW())");
         statement.executeUpdate();
     }
 
-    public void saveMedia(int userId, String mediaType, String mediaPath) throws SQLException {
+    public void saveMedia(String userId, String mediaType, String mediaPath) throws SQLException {
         PreparedStatement statement = connection.prepareStatement("INSERT INTO user_media (user_id, media_type, media_path) VALUES (?, ?, ?)");
-        statement.setInt(1, userId);
+        statement.setString(1, userId);
         statement.setString(2, mediaType);
         statement.setString(3, mediaPath);
 
@@ -34,9 +35,9 @@ public class UserMediaDAO {
         statement.executeUpdate();
     }
 
-    public void deleteMediaByUserId(int userId) throws SQLException {
+    public void deleteMediaByUserId(String userId) throws SQLException {
         PreparedStatement statement = connection.prepareStatement("DELETE FROM user_media WHERE user_id = ?");
-        statement.setInt(1, userId);
+        statement.setString(1, userId);
         statement.executeUpdate();
     }
 
@@ -45,9 +46,9 @@ public class UserMediaDAO {
         statement.executeUpdate();
     }
 
-    public ArrayList<String> getMediaByUserIdAndType(int userId, String mediaType) throws SQLException {
+    public ArrayList<String> getMediaByUserIdAndType(String userId, String mediaType) throws SQLException {
         PreparedStatement statement = connection.prepareStatement("SELECT media_path FROM user_media WHERE user_id = ? AND media_type = ?");
-        statement.setInt(1, userId);
+        statement.setString(1, userId);
         statement.setString(2, mediaType);
         ResultSet resultSet = statement.executeQuery();
 
@@ -58,9 +59,9 @@ public class UserMediaDAO {
         return mediaPaths;
     }
 
-    public ArrayList<String> getMediaByUserId(int userId) throws SQLException {
+    public ArrayList<String> getMediaByUserId(String userId) throws SQLException {
         PreparedStatement statement = connection.prepareStatement("SELECT media_path FROM user_media WHERE user_id = ?");
-        statement.setInt(1, userId);
+        statement.setString(1, userId);
         ResultSet resultSet = statement.executeQuery();
 
         ArrayList<String> mediaPaths = new ArrayList<>();
