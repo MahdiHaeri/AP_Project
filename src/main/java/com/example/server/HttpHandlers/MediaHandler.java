@@ -66,6 +66,11 @@ public class MediaHandler {
         String userId = request.params(":username");
         String mediaType = request.pathInfo().split("/")[4];
         String userMedia = userMediaController.getMediaByUserIdAndType(userId, mediaType);
+        if (userMedia.equals("[]")) {
+            response.status(400);
+            response.body("Media not found.");
+            return response.body();
+        }
         ObjectMapper mapper = new ObjectMapper();
         JsonNode jsonArray = mapper.readTree(userMedia);
 
