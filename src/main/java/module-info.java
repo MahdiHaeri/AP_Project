@@ -14,6 +14,7 @@ module com.example.ap_project {
     requires jjwt.api;
     requires de.jensd.fx.glyphs.fontawesome;
     requires spark.core;
+    requires javax.servlet.api;
 
 //    requires javafx.base;
 //    requires javafx.graphics;

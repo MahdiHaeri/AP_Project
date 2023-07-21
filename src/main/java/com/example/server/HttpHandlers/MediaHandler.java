@@ -1,69 +1,97 @@
 package com.example.server.HttpHandlers;
 
-import com.sun.net.httpserver.HttpExchange;
-import com.sun.net.httpserver.HttpHandler;
-import com.example.server.controllers.UserController;
+import com.example.server.controllers.UserMediaController;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import spark.Request;
+import spark.Response;
 
-import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.StandardCopyOption;
+import spark.Spark.*;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.Part;
+
+import static spark.Spark.*;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.SQLException;
-import java.util.Collections;
+import java.util.Date;
+import java.util.Map;
 
-public class MediaHandler implements HttpHandler {
-	@Override
-	public void handle(HttpExchange exchange) throws IOException {
-		UserController userController = null;
-		try {
-			userController = new UserController();
-		} catch (SQLException e) {
-			throw new RuntimeException(e);
-		}
-		String response = "";
-		String method = exchange.getRequestMethod();
-		String path = exchange.getRequestURI().getPath();
-		String[] splitedPath = path.split("/");
-		// ip:port/media/userID/mediaName/mediaType
-		if (splitedPath.length != 5) {
-			response = "unknown-request";
-		} else switch (method) {
-			case "GET":
-				File file;
-				try {
-					file = new File("src/main/java/com/example/server/assets/" + splitedPath[2] + "/" + splitedPath[3] + "." + splitedPath[4]);
-				} catch (NullPointerException e) {
-					response = "no-media";
-					break;
-				}
+public class MediaHandler {
+    private final UserMediaController userMediaController;
 
-				exchange.getResponseHeaders().put("Content-Type", Collections.singletonList(splitedPath[4]));
-				exchange.sendResponseHeaders(200, file.length());
-				OutputStream outputStream = exchange.getResponseBody();
-				Files.copy(file.toPath(), outputStream);
-				outputStream.close();
-				return;
-			case "POST":
-				if (!userController.isUserExists(splitedPath[2])) {
-					response = "user-not-found";
-					break;
-				}
-//				if (!splitedPath[2].equals(ExtractUserAuth.extract(exchange))) {
-//					response = "permission-denied";
-//					break;
-//				}
-				Files.copy(exchange.getRequestBody(), Path.of("src/main/java/com/example/server/assets/" , splitedPath[2], splitedPath[3] + "." + splitedPath[4]), StandardCopyOption.REPLACE_EXISTING);
-				exchange.getRequestBody().close();
-				response = "done";
-				break;
-			default:
-				response = "unknown-request2";
-				break;
-		}
+    public MediaHandler() throws SQLException {
+        userMediaController = new UserMediaController();
+    }
 
-		exchange.sendResponseHeaders(200, response.getBytes().length);
-		OutputStream os = exchange.getResponseBody();
-		os.write(response.getBytes());
-		os.close();
-	}
+    public Object handlePostMedia(Request request, Response response) throws IOException, ServletException {
+        String userId = request.params(":username");
+        String mediaType = request.pathInfo().split("/")[4];
+        String fileType = request.headers("Content-Type");
+
+        // make unique file name
+        String mediaUrl = "assets/" + mediaType + "/" + userId + "/" + userId + "_" + new Date().getTime() + "." + fileType.split("/")[1];
+
+        // get file bytes
+        byte[] fileByte =  request.bodyAsBytes();
+        File file = new File(mediaUrl);
+
+        // create file if it doesn't exist
+        if (!file.getParentFile().exists()) {
+            file.getParentFile().mkdirs();
+        }
+
+        file.createNewFile();
+
+        // write file bytes to file
+        java.nio.file.Files.write(file.toPath(), fileByte);
+
+        try {
+            userMediaController.createMedia(userId, mediaType, mediaUrl);
+        } catch (Exception e) {
+            response.status(400);
+            response.body(e.getMessage());
+            return response.body();
+        }
+        response.status(201);
+        response.body("Media saved successfully");
+        return response.body();
+    }
+
+    public Object handleGetMedia(Request request, Response response) throws IOException, ServletException, SQLException {
+        String userId = request.params(":username");
+        String mediaType = request.pathInfo().split("/")[4];
+        String userMedia = userMediaController.getMediaByUserIdAndType(userId, mediaType);
+        ObjectMapper mapper = new ObjectMapper();
+        JsonNode jsonArray = mapper.readTree(userMedia);
+
+        String mediaUrl = jsonArray.get(jsonArray.size() - 1).asText();
+
+         File file = new File(mediaUrl);
+        if (!file.exists() || !file.isFile()) {
+            response.status(400);
+            response.body("Media file not found or is not a file.");
+            return response.body();
+        }
+
+        writeMediaContentToResponse(file, response);
+
+        response.status(200);
+        response.body("Media retrieved successfully");
+        return response.body();
+    }
+
+    public void writeMediaContentToResponse(File file, Response response) throws IOException {
+        try (FileInputStream fis = new FileInputStream(file)) {
+            byte[] buffer = new byte[1024];
+            int bytesRead;
+            while ((bytesRead = fis.read(buffer)) != -1) {
+                response.raw().getOutputStream().write(buffer, 0, bytesRead);
+            }
+        }
+    }
 }
