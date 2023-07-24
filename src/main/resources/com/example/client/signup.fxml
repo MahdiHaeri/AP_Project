@@ -37,7 +37,7 @@
                         <FontAwesomeIconView fill="WHITE" glyphName="TWITTER" size="75" styleClass="twitter-icon" />
                         <ImageView fitHeight="300.0" fitWidth="300.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../../images/Sign%20up-amico.png" />
+                              <Image url="@../../../images/sign_up_amico.png" />
                            </image>
                         </ImageView>
                      </children>

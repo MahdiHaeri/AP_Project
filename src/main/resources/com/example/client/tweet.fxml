@@ -32,7 +32,7 @@
                <children>
                   <GNAvatarView fx:id="avatarView" onMouseClicked="#onAvatarViewClicked" prefHeight="60.0" prefWidth="84.0" stroke="#ffffff00" styleClass="avatar-image" type="CIRCLE">
                      <image>
-                        <Image url="@../../../images/Sign%20up-amico.png" />
+                        <Image url="@../../../images/sign_up_amico.png" />
                      </image>
                   </GNAvatarView>
                </children>
@@ -108,7 +108,7 @@
                         <Label fx:id="textMessageLbl" styleClass="text-lable" text="test message" />
                         <ImageView fx:id="imageView" fitHeight="150.0" fitWidth="155.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../../images/Mobile%20login-bro.png" />
+                              <Image url="@../../../images/mobile_login_bro.png" />
                            </image>
                         </ImageView>
                         <MediaView fx:id="meidaView" fitHeight="200.0" fitWidth="200.0" />

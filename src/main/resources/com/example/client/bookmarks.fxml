@@ -29,7 +29,7 @@
                <children>
                   <ImageView fitHeight="179.0" fitWidth="332.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../../images/book-in-bird-cage-800x400.v1.71804389.png" />
+                        <Image url="@../../../images/book_in_bird_cage.png" />
                      </image>
                   </ImageView>
                   <Label prefHeight="17.0" prefWidth="243.0" text="Save tweets for later" textFill="WHITE">

@@ -59,8 +59,8 @@
                         </Label>
                         <VBox alignment="CENTER_LEFT" prefHeight="53.0" prefWidth="240.0" spacing="10.0">
                            <children>
-                              <TextField fx:id="usernameTf" promptText="username" />
-                              <PasswordField fx:id="passwordTf" promptText="Password" />
+                              <TextField fx:id="usernameTf" promptText="username" styleClass="text-field" />
+                              <PasswordField fx:id="passwordTf" promptText="Password" styleClass="text-field" />
                               <Hyperlink fx:id="forgotPasswordLink" onAction="#onForgotPasswordAction" text="Forgot password?" textAlignment="CENTER">
                                  <font>
                                     <Font size="10.0" />
@@ -103,7 +103,7 @@
                         </Label>
                         <ImageView fitHeight="300.0" fitWidth="300.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../../images/Mobile%20login-bro.png" />
+                              <Image url="@../../../images/mobile_login_bro.png" />
                            </image>
                         </ImageView>
                      </children>
