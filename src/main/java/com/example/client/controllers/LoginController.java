@@ -86,6 +86,7 @@ public class LoginController implements Initializable {
                 try (BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()))) {
                     String response = reader.readLine();
                     JWTController.setJwtKey(response);
+                    System.out.println(response);
 
                     try {
                         // Load the FXML file for the SignUp page

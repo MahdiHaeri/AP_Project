@@ -52,7 +52,7 @@
                            <graphic>
                               <GNAvatarView prefHeight="20.0" prefWidth="20.0" strokeWidth="0.0" styleClass="menu-bar-button-icons">
                                  <image>
-                                    <Image url="@../../../images/Sign%20up-amico.png" />
+                                    <Image url="@../../../images/sign_up_amico.png" />
                                  </image>
                               </GNAvatarView>
                            </graphic>
