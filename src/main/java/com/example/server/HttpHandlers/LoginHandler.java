@@ -1,20 +1,31 @@
 package com.example.server.HttpHandlers;
 
+import com.example.server.controllers.UserController;
 import com.example.server.utils.JWTController;
 import org.json.JSONObject;
 import spark.Request;
 import spark.Response;
 
+import java.sql.SQLException;
+
 public class LoginHandler {
-    public Object handlePostLogin(Request request, Response response) {
-        // Your authentication logic here...
-        // Assuming the user has been authenticated and the token should be generated
 
-        // For demonstration purposes, let's assume you have a user ID and secret key.
+    private final UserController userController;
 
+    public LoginHandler() throws SQLException {
+        userController = new UserController();
+    }
+    public Object handlePostLogin(Request request, Response response) throws SQLException {
         JSONObject jsonObject = new JSONObject(request.body());
+        String userId = jsonObject.getString("userId");
+        String password = jsonObject.getString("password");
+        if (!userController.checkUserExists(userId, password)) {
+            response.status(401);
+            return "Invalid credentials";
+        }
+
         // Create a JWT token
-        String token = JWTController.generateJwtToken(jsonObject.getString("userId"));
+        String token = JWTController.generateJwtToken(userId);
 
         // Now, include the token in the response
         response.status(200);

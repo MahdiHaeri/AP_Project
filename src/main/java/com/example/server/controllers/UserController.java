@@ -20,10 +20,7 @@ public class UserController {
     }
 
     public boolean checkUserExists(String username, String password) throws SQLException {
-        if (userDAO.getUser(username, password) == null) {
-            return false;
-        }
-        return true;
+        return userDAO.getUser(username, password) != null;
     }
 
     public void createUser(String id, String firstName, String lastName, String email, String phoneNumber, String password, String country, Date birthday) throws SQLException {
@@ -105,5 +102,6 @@ public class UserController {
         ObjectMapper objectMapper = new ObjectMapper();
         return objectMapper.writeValueAsString(user);
     }
+
 
 }
