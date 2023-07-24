@@ -44,6 +44,15 @@ public class TweetHandler {
         }
     }
 
+    public Object handleGetRetweetsByOwnerId(Request request, Response response) {
+        try {
+            return tweetController.getRetweetsByOwnerId(request.params(":username"));
+        } catch (Exception e) {
+            response.status(500);
+            return e.getMessage();
+        }
+    }
+
     public Object handleGetTimeline(Request request, Response response) {
         String token = JWTController.getJwtTokenFromHeader(request.headers("Authorization"));
         String username = JWTController.getUsernameFromJwtToken(token);
@@ -55,28 +64,16 @@ public class TweetHandler {
         }
     }
 
+
     public Object handlePostTweet(Request request, Response response) {
         String token = JWTController.getJwtTokenFromHeader(request.headers("Authorization"));
 
-
         JSONObject jsonObject = new JSONObject(request.body());
-        String writerId = jsonObject.getString("writerId");
         String ownerId = JWTController.getUsernameFromJwtToken(token);
         String text = jsonObject.getString("text");
-        String quotedTweetId = jsonObject.getString("quoteTweetId");
-        JSONArray mediaPaths = jsonObject.getJSONArray("mediaPaths");
-        int repliesCount = jsonObject.getInt("replies");
-        int retweetsCount = jsonObject.getInt("retweets");
-        int likesCount = jsonObject.getInt("likes");
-
-
-        ArrayList<String> mediaPathsList = new ArrayList<>();
-        for (int i = 0; i < mediaPaths.length(); i++) {
-            mediaPathsList.add(mediaPaths.getString(i));
-        }
 
         try {
-            tweetController.createTweet(writerId, ownerId, text, quotedTweetId, mediaPathsList, repliesCount, retweetsCount, likesCount);
+            tweetController.createTweet(ownerId, text);
             response.status(201);
             return "Tweet created successfully";
         } catch (Exception e) {
@@ -85,6 +82,60 @@ public class TweetHandler {
         }
     }
 
+    public Object handlePostRetweet(Request request, Response response) {
+        String token = JWTController.getJwtTokenFromHeader(request.headers("Authorization"));
+
+        JSONObject jsonObject = new JSONObject(request.body());
+        String ownerId = JWTController.getUsernameFromJwtToken(token);
+        String text = jsonObject.getString("text");
+        String retweetId = jsonObject.getString("retweetId");
+
+        try {
+            tweetController.createRetweet(ownerId, text, retweetId);
+            response.status(201);
+            return "Retweet created successfully";
+        } catch (Exception e) {
+            response.status(500);
+            return e.getMessage();
+        }
+    }
+
+    public Object handlePostQuoteTweet(Request request, Response response) {
+        String token = JWTController.getJwtTokenFromHeader(request.headers("Authorization"));
+
+        JSONObject jsonObject = new JSONObject(request.body());
+        String ownerId = JWTController.getUsernameFromJwtToken(token);
+        String text = jsonObject.getString("text");
+        String quoteTweetId = jsonObject.getString("quoteTweetId");
+
+        try {
+            tweetController.createQuoteTweet(ownerId, text, quoteTweetId);
+            response.status(201);
+            return "Quote Tweet created successfully";
+        } catch (Exception e) {
+            response.status(500);
+            return e.getMessage();
+        }
+    }
+
+
+    public Object handlePostReplyTweet (Request request, Response response) {
+        String token = JWTController.getJwtTokenFromHeader(request.headers("Authorization"));
+
+        JSONObject jsonObject = new JSONObject(request.body());
+        String ownerId = JWTController.getUsernameFromJwtToken(token);
+        String text = jsonObject.getString("text");
+        String replyTweetId = jsonObject.getString("replyTweetId");
+
+        try {
+            tweetController.createReplyTweet(ownerId, text, replyTweetId);
+            response.status(201);
+            return "Reply Tweet created successfully";
+        } catch (Exception e) {
+            response.status(500);
+            return e.getMessage();
+        }
+    }
     public Object handleDeleteTweetByTweetId(Request request, Response response) {
         try {
             tweetController.deleteTweet(request.params(":tweetId"));

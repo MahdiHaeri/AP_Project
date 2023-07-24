@@ -20,45 +20,33 @@ public class TweetController {
         followDAO = new FollowDAO();
     }
 
-    public void createTweet(String ownerId, String text, int replyCount, int retweetCount, int likeCount) throws SQLException {
+    public void createTweet(String ownerId, String text) throws SQLException {
         Tweet tweet = new Tweet();
         tweet.setOwnerId(ownerId);
         tweet.setText(text);
-        tweet.setReplyCount(replyCount);
-        tweet.setRetweetCount(retweetCount);
-        tweet.setLikeCount(likeCount);
         tweetDAO.saveTweet(tweet);
     }
 
-    public void createRetweet(String ownerId, String text, int replyCount, int retweetCount, int likeCount, String retweetId) throws SQLException {
+    public void createRetweet(String ownerId, String text, String retweetId) throws SQLException {
         Retweet retweet = new Retweet();
         retweet.setOwnerId(ownerId);
         retweet.setText(text);
-        retweet.setReplyCount(replyCount);
-        retweet.setRetweetCount(retweetCount);
-        retweet.setLikeCount(likeCount);
         retweet.setRetweetId(retweetId);
         tweetDAO.saveTweet(retweet);
     }
 
-    public void createQuoteTweet(String ownerId, String text, int replyCount, int retweetCount, int likeCount, String quoteTweetId) throws SQLException {
+    public void createQuoteTweet(String ownerId, String text, String quoteTweetId) throws SQLException {
         QuoteTweet quoteTweet = new QuoteTweet();
         quoteTweet.setOwnerId(ownerId);
         quoteTweet.setText(text);
-        quoteTweet.setReplyCount(replyCount);
-        quoteTweet.setRetweetCount(retweetCount);
-        quoteTweet.setLikeCount(likeCount);
         quoteTweet.setQuoteTweetId(quoteTweetId);
         tweetDAO.saveTweet(quoteTweet);
     }
 
-    public void createReplyTweet(String ownerId, String text, int replyCount, int retweetCount, int likeCount, String replyTweetId) throws SQLException {
+    public void createReplyTweet(String ownerId, String text, String replyTweetId) throws SQLException {
         ReplyTweet replyTweet = new ReplyTweet();
         replyTweet.setOwnerId(ownerId);
         replyTweet.setText(text);
-        replyTweet.setReplyCount(replyCount);
-        replyTweet.setRetweetCount(retweetCount);
-        replyTweet.setLikeCount(likeCount);
         replyTweet.setParentTweetId(replyTweetId);
         tweetDAO.saveTweet(replyTweet);
     }
@@ -115,6 +103,12 @@ public class TweetController {
 
     public String getTweets() throws SQLException, JsonProcessingException {
         ArrayList<Tweet> tweets =  tweetDAO.getTweets();
+        ObjectMapper objectMapper = new ObjectMapper();
+        return objectMapper.writeValueAsString(tweets);
+    }
+
+    public String getTweetsByOwnerId(String ownerId) throws SQLException, JsonProcessingException {
+        ArrayList<Tweet> tweets =  tweetDAO.getTweets(ownerId);
         ObjectMapper objectMapper = new ObjectMapper();
         return objectMapper.writeValueAsString(tweets);
     }

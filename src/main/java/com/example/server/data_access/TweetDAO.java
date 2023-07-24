@@ -41,9 +41,6 @@ public class TweetDAO {
             }
             statement.setString(1, tweet.getOwnerId());
             statement.setString(2, tweet.getText());
-            statement.setInt(3, tweet.getReplyCount());
-            statement.setInt(4, tweet.getRetweetCount());
-            statement.setInt(5, tweet.getLikeCount());
             statement.executeUpdate();
         } finally {
             if (statement != null) {
