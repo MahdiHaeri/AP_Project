@@ -13,6 +13,10 @@ public class ReplyTweet extends Tweet {
             this.parentTweetId = replyTweetId;
         }
 
+        public ReplyTweet() {
+
+        }
+
         public String getParentTweetId() {
             return parentTweetId;
         }

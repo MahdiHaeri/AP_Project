@@ -13,6 +13,10 @@ public class QuoteTweet extends Tweet {
         this.quoteTweetId = quoteTweetId;
     }
 
+    public QuoteTweet() {
+
+    }
+
     public String getQuoteTweetId() {
         return quoteTweetId;
     }

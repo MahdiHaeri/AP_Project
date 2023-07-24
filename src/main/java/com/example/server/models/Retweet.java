@@ -12,6 +12,10 @@ public class Retweet extends Tweet {
         this.retweetId = retweetId;
     }
 
+    public Retweet() {
+
+    }
+
     public String getRetweetId() {
         return retweetId;
     }
