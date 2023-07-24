@@ -1,5 +1,8 @@
 package com.example.server.data_access;
 
+import com.example.server.models.QuoteTweet;
+import com.example.server.models.ReplyTweet;
+import com.example.server.models.Retweet;
 import com.example.server.models.Tweet;
 
 import java.sql.*;
@@ -14,37 +17,67 @@ public class TweetDAO {
     }
 
     public void createTweetTable() throws SQLException {
-        PreparedStatement statement = connection.prepareStatement("CREATE TABLE IF NOT EXISTS tweets (id SERIAL PRIMARY KEY, writer_id VARCHAR(36) NOT NULL, owner_id VARCHAR(36) NOT NULL, text VARCHAR(280) NOT NULL, quote_tweet_id VARCHAR(36), media_path TEXT[] , likes INTEGER NOT NULL, retweets INTEGER NOT NULL, replies INTEGER NOT NULL, create_at DATE NOT NULL)");
-        statement.executeUpdate();
-    }
-    
-    public void saveTweet(Tweet tweet) throws SQLException {
-        PreparedStatement statement = connection.prepareStatement("INSERT INTO tweets (writer_id, owner_id, text, quote_tweet_id, media_path, likes, retweets, replies, create_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
-        statement.setString(1, tweet.getWriterId());
-        statement.setString(2, tweet.getOwnerId());
-        statement.setString(3, tweet.getText());
-        statement.setString(4, tweet.getQuoteTweetId());
-        statement.setArray(5, connection.createArrayOf("text", tweet.getMediaPaths().toArray()));
-        statement.setInt(6, tweet.getLikes());
-        statement.setInt(7, tweet.getRetweets());
-        statement.setInt(8, tweet.getReplies());
-        statement.setDate(9, new java.sql.Date(tweet.getCreatedAt().getTime()));
+        PreparedStatement statement = connection.prepareStatement("CREATE TABLE IF NOT EXISTS tweets (tweet_id SERIAL PRIMARY KEY, owner_id VARCHAR(36) NOT NULL, text VARCHAR(280) NOT NULL, reply_count INT DEFAULT 0, retweet_count INT DEFAULT 0, like_count INT DEFAULT 0, retweet_id VARCHAR(36), quote_tweet_id VARCHAR(36), parent_tweet_id VARCHAR(36), created_at TIMESTAMP DEFAULT now())");
         statement.executeUpdate();
     }
 
+    public void saveTweet(Tweet tweet) throws SQLException {
+        PreparedStatement statement = null;
+        try {
+            if (tweet instanceof Retweet retweet) {
+                statement = connection.prepareStatement("INSERT INTO tweets (owner_id, text, reply_count, retweet_count, like_count, retweet_id) VALUES (?, ?, ?, ?, ?, ?)");
+                statement.setString(6, retweet.getRetweetId());
+
+            } else if (tweet instanceof QuoteTweet quoteTweet) {
+                statement = connection.prepareStatement("INSERT INTO tweets (owner_id, text, reply_count, retweet_count, like_count, quote_tweet_id) VALUES (?, ?, ?, ?, ?, ?)");
+                statement.setString(6, quoteTweet.getQuoteTweetId());
+
+            } else if (tweet instanceof ReplyTweet replyTweet) {
+                statement = connection.prepareStatement("INSERT INTO tweets (owner_id, text, reply_count, retweet_count, like_count, parent_tweet_id) VALUES (?, ?, ?, ?, ?, ?)");
+                statement.setString(6, replyTweet.getParentTweetId());
+
+            } else {
+                statement = connection.prepareStatement("INSERT INTO tweets (owner_id, text, reply_count, retweet_count, like_count) VALUES (?, ?, ?, ?, ?)");
+            }
+            statement.setString(1, tweet.getOwnerId());
+            statement.setString(2, tweet.getText());
+            statement.executeUpdate();
+        } finally {
+            if (statement != null) {
+                statement.close();
+            }
+        }
+    }
+
     public void updateTweet(Tweet tweet) throws SQLException {
-        PreparedStatement statement = connection.prepareStatement("UPDATE tweets SET writer_id = ?, owner_id = ?, text = ?, quote_tweet_id = ?, media_path = ?, likes = ?, retweets = ?, replies = ?, create_at = ? WHERE id = ?");
-        statement.setString(1, tweet.getWriterId());
-        statement.setString(2, tweet.getOwnerId());
-        statement.setString(3, tweet.getText());
-        statement.setString(4, tweet.getQuoteTweetId());
-        statement.setArray(5, connection.createArrayOf("text", tweet.getMediaPaths().toArray()));
-        statement.setInt(6, tweet.getLikes());
-        statement.setInt(7, tweet.getRetweets());
-        statement.setInt(8, tweet.getReplies());
-        statement.setDate(9, new java.sql.Date(tweet.getCreatedAt().getTime()));
-        statement.setString(10, tweet.getId());
-        statement.executeUpdate();
+        PreparedStatement statement = null;
+        try {
+            if (tweet instanceof Retweet retweet) {
+                statement = connection.prepareStatement("UPDATE tweets SET owner_id = ?, text = ?, reply_count = ?, retweet_count = ?, like_count = ?, retweet_id = ? WHERE tweet_id = ?");
+                statement.setString(6, retweet.getRetweetId());
+
+            } else if (tweet instanceof QuoteTweet quoteTweet) {
+                statement = connection.prepareStatement("UPDATE tweets SET owner_id = ?, text = ?, reply_count = ?, retweet_count = ?, like_count = ?, quote_tweet_id = ? WHERE tweet_id = ?");
+                statement.setString(6, quoteTweet.getQuoteTweetId());
+
+            } else if (tweet instanceof ReplyTweet replyTweet) {
+                statement = connection.prepareStatement("UPDATE tweets SET owner_id = ?, text = ?, reply_count = ?, retweet_count = ?, like_count = ?, parent_tweet_id = ? WHERE tweet_id = ?");
+                statement.setString(6, replyTweet.getParentTweetId());
+
+            } else {
+                statement = connection.prepareStatement("UPDATE tweets SET owner_id = ?, text = ?, reply_count = ?, retweet_count = ?, like_count = ? WHERE tweet_id = ?");
+            }
+            statement.setString(1, tweet.getOwnerId());
+            statement.setString(2, tweet.getText());
+            statement.setInt(3, tweet.getReplyCount());
+            statement.setInt(4, tweet.getRetweetCount());
+            statement.setInt(5, tweet.getLikeCount());
+            statement.executeUpdate();
+        } finally {
+            if (statement != null) {
+                statement.close();
+            }
+        }
     }
 
     public void deleteTweets() throws SQLException {
@@ -53,164 +86,148 @@ public class TweetDAO {
     }
 
     public void deleteTweet(Tweet tweet) throws SQLException {
-        PreparedStatement statement = connection.prepareStatement("DELETE FROM tweets WHERE id = ?");
-        statement.setString(1, tweet.getId());
+        PreparedStatement statement = connection.prepareStatement("DELETE FROM tweets WHERE tweet_id = ?");
+        statement.setString(1, tweet.getTweetId());
         statement.executeUpdate();
     }
 
-    public void deleteTweet(String id) throws SQLException {
-        PreparedStatement statement = connection.prepareStatement("DELETE FROM tweets WHERE id = ?");
-        statement.setInt(1, Integer.parseInt(id));
+    public void deleteTweet(String tweetId) throws SQLException {
+        PreparedStatement statement = connection.prepareStatement("DELETE FROM tweets WHERE tweet_id = ?");
+        statement.setInt(1, Integer.parseInt(tweetId));
         statement.executeUpdate();
     }
 
-    public Tweet getTweet(String id) throws SQLException {
-        PreparedStatement statement = connection.prepareStatement("SELECT * FROM tweets WHERE id = ?");
-        statement.setInt(1, Integer.parseInt(id));
+    public Tweet getTweet(String tweetId) throws SQLException {
+        PreparedStatement statement = connection.prepareStatement("SELECT * FROM tweets WHERE tweet_id = ?");
+        statement.setInt(1, Integer.parseInt(tweetId));
         ResultSet resultSet = statement.executeQuery();
         if (resultSet.next()) {
-            Tweet tweet = new Tweet();
-            tweet.setId(resultSet.getString("id"));
-            tweet.setWriterId(resultSet.getString("writer_id"));
-            tweet.setOwnerId(resultSet.getString("owner_id"));
-            tweet.setText(resultSet.getString("text"));
-            tweet.setQuoteTweetId(resultSet.getString("quote_tweet_id"));
-            Array array = resultSet.getArray("media_path");
-            Object[] elements = (Object[]) array.getArray();
-            ArrayList<String> mediaPath = toArrayList(elements);
-            tweet.setMediaPaths(mediaPath);
-            tweet.setLikes(resultSet.getInt("likes"));
-            tweet.setRetweets(resultSet.getInt("retweets"));
-            tweet.setReplies(resultSet.getInt("replies"));
-            return tweet;
-        }
-        return null;
-    }
+            String ownerId = (resultSet.getString("owner_id"));
+            String text = (resultSet.getString("text"));
+            int retweetCount = (resultSet.getInt("retweet_count"));
+            int replyCount = (resultSet.getInt("reply_count"));
+            int likeCount = (resultSet.getInt("like_count"));
+            String retweetId = resultSet.getString("retweet_id");
+            String quoteTweetId = resultSet.getString("quote_tweet_id");
+            String parentTweetId = resultSet.getString("parent_tweet_id");
 
-    public Tweet getTweet(Tweet tweet) throws SQLException {
-        PreparedStatement statement = connection.prepareStatement("SELECT * FROM tweets WHERE id = ?");
-        statement.setString(1, tweet.getId());
-        ResultSet resultSet = statement.executeQuery();
-        if (resultSet.next()) {
-            Tweet resultTweet = new Tweet();
-            resultTweet.setId(resultSet.getString("id"));
-            resultTweet.setWriterId(resultSet.getString("writer_id"));
-            resultTweet.setOwnerId(resultSet.getString("owner_id"));
-            resultTweet.setText(resultSet.getString("text"));
-            resultTweet.setQuoteTweetId(resultSet.getString("quote_tweet_id"));
-            Array array = resultSet.getArray("media_path");
-            Object[] elements = (Object[]) array.getArray();
-            ArrayList<String> mediapath = toArrayList(elements);
-            resultTweet.setMediaPaths(mediapath);
-            resultTweet.setLikes(resultSet.getInt("likes"));
-            resultTweet.setRetweets(resultSet.getInt("retweets"));
-            resultTweet.setReplies(resultSet.getInt("replies"));
-            return resultTweet;
+            if (retweetId != null) {
+                return new Retweet(tweetId, ownerId, text, replyCount, retweetCount, likeCount, retweetId);
+            } else if (quoteTweetId != null) {
+                return new QuoteTweet(tweetId, ownerId, text, replyCount, retweetCount, likeCount, quoteTweetId);
+            } else if (parentTweetId != null) {
+                return new ReplyTweet(tweetId, ownerId, text, replyCount, retweetCount, likeCount, parentTweetId);
+            } else {
+                return new Tweet(tweetId, ownerId, text, replyCount, retweetCount, likeCount);
+            }
         }
         return null;
     }
 
     public ArrayList<Tweet> getTweets() throws SQLException {
-        ArrayList<Tweet> tweets = new ArrayList<Tweet>();
         PreparedStatement statement = connection.prepareStatement("SELECT * FROM tweets");
         ResultSet resultSet = statement.executeQuery();
-        while (resultSet.next()) {
-            Tweet tweet = new Tweet();
-            tweet.setId(resultSet.getString("id"));
-            tweet.setWriterId(resultSet.getString("writer_id"));
-            tweet.setOwnerId(resultSet.getString("owner_id"));
-            tweet.setText(resultSet.getString("text"));
-            tweet.setQuoteTweetId(resultSet.getString("quote_tweet_id"));
-            Array array = resultSet.getArray("media_path");
-            Object[] elements = (Object[]) array.getArray();
-            ArrayList<String> mediapath = toArrayList(elements);
-            tweet.setMediaPaths(mediapath);
-            tweet.setLikes(resultSet.getInt("likes"));
-            tweet.setRetweets(resultSet.getInt("retweets"));
-            tweet.setReplies(resultSet.getInt("replies"));
-            tweets.add(tweet);
-        }
-        return tweets;
-    }
-
-    public ArrayList<Tweet> getTweetsByWriterId(String writerId) throws SQLException {
-        ArrayList<Tweet> tweets = new ArrayList<Tweet>();
-        PreparedStatement statement = connection.prepareStatement("SELECT * FROM tweets WHERE writer_id = ?");
-        statement.setString(1, writerId);
-        ResultSet resultSet = statement.executeQuery();
-        while (resultSet.next()) {
-            Tweet tweet = new Tweet();
-            tweet.setId(resultSet.getString("id"));
-            tweet.setWriterId(resultSet.getString("writer_id"));
-            tweet.setOwnerId(resultSet.getString("owner_id"));
-            tweet.setText(resultSet.getString("text"));
-            tweet.setQuoteTweetId(resultSet.getString("quote_tweet_id"));
-            Array array = resultSet.getArray("media_path");
-            Object[] elements = (Object[]) array.getArray();
-            ArrayList<String> mediapath = toArrayList(elements);
-            tweet.setMediaPaths(mediapath);
-            tweet.setLikes(resultSet.getInt("likes"));
-            tweet.setRetweets(resultSet.getInt("retweets"));
-            tweet.setReplies(resultSet.getInt("replies"));
-            tweets.add(tweet);
-        }
-        return tweets;
-    }
-
-    public ArrayList<Tweet> getTweetsByOwnerId(String ownerId) throws SQLException {
         ArrayList<Tweet> tweets = new ArrayList<>();
+        while (resultSet.next()) {
+            String tweetId = (resultSet.getString("tweet_id"));
+            String ownerId = (resultSet.getString("owner_id"));
+            String text = (resultSet.getString("text"));
+            int retweetCount = (resultSet.getInt("retweet_count"));
+            int replyCount = (resultSet.getInt("reply_count"));
+            int likeCount = (resultSet.getInt("like_count"));
+            String retweetId = resultSet.getString("retweet_id");
+            String quoteTweetId = resultSet.getString("quote_tweet_id");
+            String parentTweetId = resultSet.getString("parent_tweet_id");
+
+            if (retweetId != null) {
+                tweets.add(new Retweet(tweetId, ownerId, text, replyCount, retweetCount, likeCount, retweetId));
+            } else if (quoteTweetId != null) {
+                tweets.add(new QuoteTweet(tweetId, ownerId, text, replyCount, retweetCount, likeCount, quoteTweetId));
+            } else if (parentTweetId != null) {
+                tweets.add(new ReplyTweet(tweetId, ownerId, text, replyCount, retweetCount, likeCount, parentTweetId));
+            } else {
+                tweets.add(new Tweet(tweetId, ownerId, text, replyCount, retweetCount, likeCount));
+            }
+        }
+        return tweets;
+    }
+
+    public ArrayList<Tweet> getTweets(String ownerId) throws SQLException {
         PreparedStatement statement = connection.prepareStatement("SELECT * FROM tweets WHERE owner_id = ?");
         statement.setString(1, ownerId);
         ResultSet resultSet = statement.executeQuery();
-        while (resultSet.next()) {
-            Tweet tweet = new Tweet();
-            tweet.setId(resultSet.getString("id"));
-            tweet.setWriterId(resultSet.getString("writer_id"));
-            tweet.setOwnerId(resultSet.getString("owner_id"));
-            tweet.setText(resultSet.getString("text"));
-            tweet.setQuoteTweetId(resultSet.getString("quote_tweet_id"));
-            Array array = resultSet.getArray("media_path");
-            Object[] elements = (Object[]) array.getArray();
-            ArrayList<String> mediapath = toArrayList(elements);
-            tweet.setMediaPaths(mediapath);
-            tweet.setLikes(resultSet.getInt("likes"));
-            tweet.setRetweets(resultSet.getInt("retweets"));
-            tweet.setReplies(resultSet.getInt("replies"));
-            tweets.add(tweet);
-        }
-        return tweets;
-    }
-
-    public ArrayList<Tweet> getTweetsByQuoteTweetId(String quoteTweetId) throws SQLException {
         ArrayList<Tweet> tweets = new ArrayList<>();
-        PreparedStatement statement = connection.prepareStatement("SELECT * FROM tweets WHERE quote_tweet_id = ?");
-        statement.setString(1, quoteTweetId);
-        ResultSet resultSet = statement.executeQuery();
         while (resultSet.next()) {
-            Tweet tweet = new Tweet();
-            tweet.setId(resultSet.getString("id"));
-            tweet.setWriterId(resultSet.getString("writer_id"));
-            tweet.setOwnerId(resultSet.getString("owner_id"));
-            tweet.setText(resultSet.getString("text"));
-            tweet.setQuoteTweetId(resultSet.getString("quote_tweet_id"));
-            Array array = resultSet.getArray("media_path");
-            Object[] elements = (Object[]) array.getArray();
-            ArrayList<String> mediapath = toArrayList(elements);
-            tweet.setMediaPaths(mediapath);
-            tweet.setLikes(resultSet.getInt("likes"));
-            tweet.setRetweets(resultSet.getInt("retweets"));
-            tweet.setReplies(resultSet.getInt("replies"));
-            tweets.add(tweet);
-        }
+            String tweetId = (resultSet.getString("tweet_id"));
+            String text = (resultSet.getString("text"));
+            int retweetCount = (resultSet.getInt("retweet_count"));
+            int replyCount = (resultSet.getInt("reply_count"));
+            int likeCount = (resultSet.getInt("like_count"));
+            String retweetId = resultSet.getString("retweet_id");
+            String quoteTweetId = resultSet.getString("quote_tweet_id");
+            String parentTweetId = resultSet.getString("parent_tweet_id");
 
+            if (retweetId != null) {
+                tweets.add(new Retweet(tweetId, ownerId, text, replyCount, retweetCount, likeCount, retweetId));
+            } else if (quoteTweetId != null) {
+                tweets.add(new QuoteTweet(tweetId, ownerId, text, replyCount, retweetCount, likeCount, quoteTweetId));
+            } else if (parentTweetId != null) {
+                tweets.add(new ReplyTweet(tweetId, ownerId, text, replyCount, retweetCount, likeCount, parentTweetId));
+            } else {
+                tweets.add(new Tweet(tweetId, ownerId, text, replyCount, retweetCount, likeCount));
+            }
+        }
         return tweets;
     }
 
-    public static ArrayList<String> toArrayList(Object[] objects) {
-        ArrayList<String> result = new ArrayList<>();
-        for (Object object : objects) {
-            result.add(object.toString());
+    public ArrayList<Retweet> getRetweets(String ownerId) throws SQLException {
+        PreparedStatement statement = connection.prepareStatement("SELECT * FROM tweets WHERE owner_id = ? AND retweet_id IS NOT NULL");
+        statement.setString(1, ownerId);
+        ResultSet resultSet = statement.executeQuery();
+        ArrayList<Retweet> retweets = new ArrayList<>();
+        while (resultSet.next()) {
+            String tweetId = (resultSet.getString("tweet_id"));
+            String text = (resultSet.getString("text"));
+            int retweetCount = (resultSet.getInt("retweet_count"));
+            int replyCount = (resultSet.getInt("reply_count"));
+            int likeCount = (resultSet.getInt("like_count"));
+            String retweetId = resultSet.getString("retweet_id");
+            retweets.add(new Retweet(tweetId, ownerId, text, replyCount, retweetCount, likeCount, retweetId));
         }
-        return result;
+        return retweets;
+    }
+
+    public ArrayList<QuoteTweet> getQuoteTweets(String ownerId) throws SQLException {
+        PreparedStatement statement = connection.prepareStatement("SELECT * FROM tweets WHERE owner_id = ? AND quote_tweet_id IS NOT NULL");
+        statement.setString(1, ownerId);
+        ResultSet resultSet = statement.executeQuery();
+        ArrayList<QuoteTweet> quoteTweets = new ArrayList<>();
+        while (resultSet.next()) {
+            String tweetId = (resultSet.getString("tweet_id"));
+            String text = (resultSet.getString("text"));
+            int retweetCount = (resultSet.getInt("retweet_count"));
+            int replyCount = (resultSet.getInt("reply_count"));
+            int likeCount = (resultSet.getInt("like_count"));
+            String quoteTweetId = resultSet.getString("quote_tweet_id");
+            quoteTweets.add(new QuoteTweet(tweetId, ownerId, text, replyCount, retweetCount, likeCount, quoteTweetId));
+        }
+        return quoteTweets;
+    }
+
+    public ArrayList<ReplyTweet> getReplyTweets(String ownerId) throws SQLException {
+        PreparedStatement statement = connection.prepareStatement("SELECT * FROM tweets WHERE owner_id = ? AND parent_tweet_id IS NOT NULL");
+        statement.setString(1, ownerId);
+        ResultSet resultSet = statement.executeQuery();
+        ArrayList<ReplyTweet> replyTweets = new ArrayList<>();
+        while (resultSet.next()) {
+            String tweetId = (resultSet.getString("tweet_id"));
+            String text = (resultSet.getString("text"));
+            int retweetCount = (resultSet.getInt("retweet_count"));
+            int replyCount = (resultSet.getInt("reply_count"));
+            int likeCount = (resultSet.getInt("like_count"));
+            String parentTweetId = resultSet.getString("parent_tweet_id");
+            replyTweets.add(new ReplyTweet(tweetId, ownerId, text, replyCount, retweetCount, likeCount, parentTweetId));
+        }
+        return replyTweets;
     }
 }

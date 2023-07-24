@@ -6,11 +6,8 @@ import java.util.Date;
 import java.util.ArrayList;
 
 public class Tweet {
-    @JsonProperty("id")
-    private String id;
-
-    @JsonProperty("writerId")
-    private String writerId;
+    @JsonProperty("tweetId")
+    private String tweetId;
 
     @JsonProperty("ownerId")
     private String ownerId;
@@ -18,46 +15,25 @@ public class Tweet {
     @JsonProperty("text")
     private String text;
 
-    @JsonProperty("quoteTweetId")
-    private String quoteTweetId;
+    @JsonProperty("replyCount")
+    private int replyCount;
 
-    @JsonProperty("mediaPaths")
-    private ArrayList<String> mediaPaths;
+    @JsonProperty("retweetCount")
+    private int retweetCount;
 
-    @JsonProperty("replies")
-    private int replies;
-
-    @JsonProperty("retweets")
-    private int retweets;
-
-    @JsonProperty("likes")
-    private int likes;
+    @JsonProperty("likeCount")
+    private int likeCount;
 
     @JsonProperty("createdAt")
     private Date createdAt;
 
-    public Tweet(String id, String writerId, String ownerId, String text, String quoteTweetId, ArrayList<String> mediaPaths, int replies, int retweets, int likes, Date createdAt) {
-        this.id = id;
-        this.writerId = writerId;
+    public Tweet(String tweetId, String ownerId, String text, int replyCount, int retweetCount, int likeCount) {
+        this.tweetId = tweetId;
         this.ownerId = ownerId;
         this.text = text;
-        this.quoteTweetId = quoteTweetId;
-        this.mediaPaths = mediaPaths;
-        this.replies = replies;
-        this.retweets = retweets;
-        this.likes = likes;
-        this.createdAt = createdAt;
-    }
-
-    public Tweet(String writerId, String ownerId, String text, String quoteTweetId, ArrayList<String> mediaPaths) {
-        this.writerId = writerId;
-        this.ownerId = ownerId;
-        this.text = text;
-        this.quoteTweetId = quoteTweetId;
-        this.mediaPaths = mediaPaths;
-        this.replies = 0;
-        this.retweets = 0;
-        this.likes = 0;
+        this.replyCount = replyCount;
+        this.retweetCount = retweetCount;
+        this.likeCount = likeCount;
         this.createdAt = new Date();
     }
 
@@ -65,20 +41,12 @@ public class Tweet {
 
     }
 
-    public String getId() {
-        return id;
+    public String getTweetId() {
+        return tweetId;
     }
 
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getWriterId() {
-        return writerId;
-    }
-
-    public void setWriterId(String writerId) {
-        this.writerId = writerId;
+    public void setTweetId(String tweetId) {
+        this.tweetId = tweetId;
     }
 
     public String getOwnerId() {
@@ -97,44 +65,28 @@ public class Tweet {
         this.text = text;
     }
 
-    public String getQuoteTweetId() {
-        return quoteTweetId;
+    public int getReplyCount() {
+        return replyCount;
     }
 
-    public void setQuoteTweetId(String quoteTweetId) {
-        this.quoteTweetId = quoteTweetId;
+    public void setReplyCount(int replyCount) {
+        this.replyCount = replyCount;
     }
 
-    public ArrayList<String> getMediaPaths() {
-        return mediaPaths;
+    public int getRetweetCount() {
+        return retweetCount;
     }
 
-    public void setMediaPaths(ArrayList<String> mediaPaths) {
-        this.mediaPaths = mediaPaths;
+    public void setRetweetCount(int retweetCount) {
+        this.retweetCount = retweetCount;
     }
 
-    public int getReplies() {
-        return replies;
+    public int getLikeCount() {
+        return likeCount;
     }
 
-    public void setReplies(int replies) {
-        this.replies = replies;
-    }
-
-    public int getRetweets() {
-        return retweets;
-    }
-
-    public void setRetweets(int retweets) {
-        this.retweets = retweets;
-    }
-
-    public int getLikes() {
-        return likes;
-    }
-
-    public void setLikes(int likes) {
-        this.likes = likes;
+    public void setLikeCount(int likeCount) {
+        this.likeCount = likeCount;
     }
 
     public Date getCreatedAt() {
@@ -148,15 +100,12 @@ public class Tweet {
     @Override
     public String toString() {
         return "Tweet{" +
-                "id='" + id + '\'' +
-                ", writerId='" + writerId + '\'' +
+                "tweetId='" + tweetId + '\'' +
                 ", ownerId='" + ownerId + '\'' +
                 ", text='" + text + '\'' +
-                ", quoteTweetId='" + quoteTweetId + '\'' +
-                ", mediaPaths=" + mediaPaths +
-                ", replies=" + replies +
-                ", retweets=" + retweets +
-                ", likes=" + likes +
+                ", replyCount=" + replyCount +
+                ", retweetCount=" + retweetCount +
+                ", likeCount=" + likeCount +
                 ", createdAt=" + createdAt +
                 '}';
     }
