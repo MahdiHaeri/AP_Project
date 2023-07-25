@@ -3,18 +3,11 @@ package com.example.client.controllers;
 import io.github.gleidson28.GNAvatarView;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.media.MediaView;
-import org.w3c.dom.events.MouseEvent;
+import javafx.scene.input.MouseEvent;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -24,25 +17,22 @@ public class TweetController implements Initializable {
     private GNAvatarView avatarView;
 
     @FXML
-    private ImageView imageView;
-
-    @FXML
     private Button likeBtn;
-
-    @FXML
-    private MediaView meidaView;
 
     @FXML
     private Label ownerNameLbl;
 
     @FXML
-    private Label quoteLbl;
+    private Label ownerUsernameLbl;
 
     @FXML
     private Button replyBtn;
 
     @FXML
     private Button retweetBtn;
+
+    @FXML
+    private Label retweeterNameLbl;
 
     @FXML
     private Button shareBtn;
@@ -53,12 +43,6 @@ public class TweetController implements Initializable {
     @FXML
     private Label timestapLbl;
 
-    @FXML
-    private Label writerNameLbl;
-
-    @FXML
-    private Label writerUsernameLbl;
-
 //    public GNAvatarView getAvatarView() {
 //        return avatarView;
 //    }
@@ -66,36 +50,29 @@ public class TweetController implements Initializable {
 //    public void setAvatarView(GNAvatarView avatarView) {
 //        this.avatarView = avatarView;
 //    }
-
-//    public ImageView getImageView() {
-//        return imageView;
-//    }
 //
-//    public void setImageView(ImageView imageView) {
-//        this.imageView = imageView;
-//    }
-//    public MediaView getMeidaView() {
-//        return meidaView;
-//    }
+    public String getLikeBtn() {
+        return likeBtn.getText();
+    }
 //
-//    public void setMeidaView(MediaView meidaView) {
-//        this.meidaView = meidaView;
-//    }
+    public void setLikeBtn(String text) {
+        this.likeBtn.setText(text);
+    }
 
     public String getOwnerNameLbl() {
         return ownerNameLbl.getText();
     }
 
-    public void setOwnerNameLbl(String text ) {
-        this.ownerNameLbl.setText(text); ;
+    public void setOwnerNameLbl(String text) {
+        this.ownerNameLbl.setText(text);
     }
 
-    public String getQuoteLbl() {
-        return quoteLbl.getText();
+    public String getOwnerUsernameLbl() {
+        return ownerUsernameLbl.getText();
     }
 
-    public void setQuoteLbl(String text) {
-        this.quoteLbl.setText(text);
+    public void setOwnerUsernameLbl(String text) {
+        this.ownerUsernameLbl.getText();
     }
 
     public String getReplyBtn() {
@@ -114,21 +91,21 @@ public class TweetController implements Initializable {
         this.retweetBtn.setText(text);
     }
 
-    public String getLikeBtn() {
-        return likeBtn.getText();
+    public String getRetweeterNameLbl() {
+        return retweeterNameLbl.getText();
     }
 
-    public void setLikeBtn(String text) {
-        this.likeBtn.setText(text);
+    public void setRetweeterNameLbl(String text) {
+        this.retweeterNameLbl.getText();
     }
 
-    public String getShareBtn() {
-        return shareBtn.getText();
-    }
+//    public Button getShareBtn() {
+//        return shareBtn;
+//    }
 
-    public void setShareBtn(String text) {
-        this.shareBtn.setText(text);
-    }
+//    public void setShareBtn(Button shareBtn) {
+//        this.shareBtn = shareBtn;
+//    }
 
     public String getTextMessageLbl() {
         return textMessageLbl.getText();
@@ -146,64 +123,39 @@ public class TweetController implements Initializable {
         this.timestapLbl.setText(text);
     }
 
-    public String getWriterNameLbl() {
-        return writerNameLbl.getText();
-    }
 
-    public void setWriterNameLbl(String text) {
-        this.writerNameLbl.setText(text);
-    }
-
-    public String getWriterUsernameLbl() {
-        return writerUsernameLbl.getText();
-    }
-
-    public void setWriterUsernameLbl(String text) {
-        this.writerUsernameLbl.setText(text);
-    }
+// event handling :
 
     @FXML
     void onAvatarViewClicked(MouseEvent event) {
-        System.out.println("Avatar clicked");
+
     }
 
     @FXML
     void onLikeBtnAction(ActionEvent event) {
-        System.out.println("Like button clicked");
+
     }
 
     @FXML
     void onReplyBtnAction(ActionEvent event) {
-        System.out.println("Reply button clicked");
+
     }
 
     @FXML
     void onRetweetBtnAction(ActionEvent event) {
-        System.out.println("Retweet button clicked");
+
     }
 
     @FXML
     void onShareBtnAction(ActionEvent event) {
-        System.out.println("Share button clicked");
-    }
 
-    @FXML
-    void onAvatarViewClicked(ActionEvent event) {
-        System.out.println("Avatar clicked");
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        writerNameLbl.setText("Gleidson");
-        writerUsernameLbl.setText("@gleidson28");
-        textMessageLbl.setText("This is a tweet message");
-        timestapLbl.setText("10m");
-        ownerNameLbl.setText("Gleidson");
-        quoteLbl.setText("This is a quote");
-//        avatarView.setImage(new Image(""));
-    }
-
-    public void setTweetText(String text) {
-        textMessageLbl.setText(text);
+        setOwnerNameLbl("Gleidson");
+        setOwnerUsernameLbl("@gleidson28");
+        setTextMessageLbl("Hello World!");
+        setTimestapLbl("1h");
     }
 }

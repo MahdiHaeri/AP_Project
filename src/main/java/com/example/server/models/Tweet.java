@@ -27,14 +27,14 @@ public class Tweet {
     @JsonProperty("createdAt")
     private Date createdAt;
 
-    public Tweet(String tweetId, String ownerId, String text, int replyCount, int retweetCount, int likeCount) {
+    public Tweet(String tweetId, String ownerId, String text, int replyCount, int retweetCount, int likeCount, Date createdAt) {
         this.tweetId = tweetId;
         this.ownerId = ownerId;
         this.text = text;
         this.replyCount = replyCount;
         this.retweetCount = retweetCount;
         this.likeCount = likeCount;
-        this.createdAt = new Date();
+        this.createdAt = createdAt;
     }
 
     public Tweet() {

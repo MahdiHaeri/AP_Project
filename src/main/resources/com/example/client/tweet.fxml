@@ -18,7 +18,7 @@
          <children>
             <Pane prefHeight="27.0" prefWidth="29.0" />
             <FontAwesomeIconView glyphName="RETWEET" styleClass="tweet-icon" />
-            <Label fx:id="ownerNameLbl" styleClass="text-lable" text="owner name" />
+            <Label fx:id="retweeterNameLbl" styleClass="text-lable" text="retweeter name" />
             <Label styleClass="text-lable" text="Retweeted" />
          </children>
       </HBox>
@@ -126,21 +126,18 @@
                         </Button>
                      </right>
                      <left>
-                        <HBox prefHeight="100.0" prefWidth="200.0" spacing="10.0" BorderPane.alignment="CENTER">
+                        <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="300.0" spacing="10.0" BorderPane.alignment="CENTER">
                            <children>
-                              <Label fx:id="writerNameLbl" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="text-lable" text="writer name" textAlignment="CENTER">
+                              <Label fx:id="ownerNameLbl" styleClass="text-lable" text="owner name" textAlignment="CENTER">
                                  <font>
                                     <Font name="System Bold" size="13.0" />
                                  </font>
                               </Label>
-                              <Label fx:id="writerUsernameLbl" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="text-lable" text="writer username" textAlignment="CENTER" />
-                              <Label fx:id="timestapLbl" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="text-lable" text="timestammp" textAlignment="CENTER" />
+                              <Label fx:id="ownerUsernameLbl" styleClass="text-lable" text="owner username" textAlignment="CENTER" />
+                              <Label fx:id="timestapLbl" styleClass="text-lable" text="timestammp" textAlignment="CENTER" />
                            </children>
                         </HBox>
                      </left>
-                     <center>
-                        <Pane minWidth="100.0" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
-                     </center>
                   </BorderPane>
                </top>
             </BorderPane>

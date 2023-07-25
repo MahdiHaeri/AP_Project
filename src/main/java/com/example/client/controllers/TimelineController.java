@@ -23,6 +23,8 @@ import java.net.URL;
 import java.time.ZoneId;
 import java.util.Date;
 import java.util.ResourceBundle;
+import java.text.SimpleDateFormat;
+import java.util.concurrent.TimeUnit;
 
 public class TimelineController implements Initializable {
 
@@ -60,7 +62,10 @@ public class TimelineController implements Initializable {
                     TweetController tweetController = fxmlLoader.getController();
 
                     // Set the tweet information on the controller
-                    tweetController.setTweetText(tweetJson.get("text").asText());
+
+                    long createdAt = tweetJson.get("createdAt").asLong();
+                    tweetController.setTimestapLbl(formatTimestamp(createdAt));
+                    tweetController.setTextMessageLbl(tweetJson.get("text").asText());
                     tweetController.setOwnerNameLbl(tweetJson.get("ownerId").asText());
                     tweetController.setReplyBtn(tweetJson.get("replyCount").asText());
                     tweetController.setRetweetBtn(tweetJson.get("retweetCount").asText());
@@ -86,5 +91,22 @@ public class TimelineController implements Initializable {
 
     public Node getTimelinePane() {
         return tweetsVbox;
+    }
+
+    public String formatTimestamp(long createdAt) {
+        long timeDifference = new Date().getTime() - createdAt;
+        long minutes = TimeUnit.MILLISECONDS.toMinutes(timeDifference);
+        long hours = TimeUnit.MILLISECONDS.toHours(timeDifference);
+        long days = TimeUnit.MILLISECONDS.toDays(timeDifference);
+
+        if (minutes < 60) {
+            return minutes + "m";
+        } else if (hours < 24) {
+            return hours + "h";
+        } else {
+            Date tweetDate = new Date(createdAt);
+            SimpleDateFormat dateFormat = new SimpleDateFormat("d MMMM");
+            return dateFormat.format(tweetDate);
+        }
     }
 }

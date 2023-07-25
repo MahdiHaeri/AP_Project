@@ -6,6 +6,7 @@ import com.example.server.models.Retweet;
 import com.example.server.models.Tweet;
 
 import java.sql.*;
+import java.util.Date;
 import java.util.ArrayList;
 
 public class TweetDAO {
@@ -110,15 +111,18 @@ public class TweetDAO {
             String retweetId = resultSet.getString("retweet_id");
             String quoteTweetId = resultSet.getString("quote_tweet_id");
             String parentTweetId = resultSet.getString("parent_tweet_id");
+            Timestamp timestamp = resultSet.getTimestamp("created_at");
+            Date createdAt = new Date(timestamp.getTime());
+
 
             if (retweetId != null) {
-                return new Retweet(tweetId, ownerId, text, replyCount, retweetCount, likeCount, retweetId);
+                return new Retweet(tweetId, ownerId, text, replyCount, retweetCount, likeCount, createdAt, retweetId);
             } else if (quoteTweetId != null) {
-                return new QuoteTweet(tweetId, ownerId, text, replyCount, retweetCount, likeCount, quoteTweetId);
+                return new QuoteTweet(tweetId, ownerId, text, replyCount, retweetCount, likeCount, createdAt, quoteTweetId);
             } else if (parentTweetId != null) {
-                return new ReplyTweet(tweetId, ownerId, text, replyCount, retweetCount, likeCount, parentTweetId);
+                return new ReplyTweet(tweetId, ownerId, text, replyCount, retweetCount, likeCount, createdAt, parentTweetId);
             } else {
-                return new Tweet(tweetId, ownerId, text, replyCount, retweetCount, likeCount);
+                return new Tweet(tweetId, ownerId, text, replyCount, retweetCount, likeCount, createdAt);
             }
         }
         return null;
@@ -138,15 +142,17 @@ public class TweetDAO {
             String retweetId = resultSet.getString("retweet_id");
             String quoteTweetId = resultSet.getString("quote_tweet_id");
             String parentTweetId = resultSet.getString("parent_tweet_id");
+            Timestamp timestamp = resultSet.getTimestamp("created_at");
+            Date createdAt = new Date(timestamp.getTime());
 
             if (retweetId != null) {
-                tweets.add(new Retweet(tweetId, ownerId, text, replyCount, retweetCount, likeCount, retweetId));
+                tweets.add(new Retweet(tweetId, ownerId, text, replyCount, retweetCount, likeCount, createdAt, retweetId));
             } else if (quoteTweetId != null) {
-                tweets.add(new QuoteTweet(tweetId, ownerId, text, replyCount, retweetCount, likeCount, quoteTweetId));
+                tweets.add(new QuoteTweet(tweetId, ownerId, text, replyCount, retweetCount, likeCount, createdAt, quoteTweetId));
             } else if (parentTweetId != null) {
-                tweets.add(new ReplyTweet(tweetId, ownerId, text, replyCount, retweetCount, likeCount, parentTweetId));
+                tweets.add(new ReplyTweet(tweetId, ownerId, text, replyCount, retweetCount, likeCount, createdAt, parentTweetId));
             } else {
-                tweets.add(new Tweet(tweetId, ownerId, text, replyCount, retweetCount, likeCount));
+                tweets.add(new Tweet(tweetId, ownerId, text, replyCount, retweetCount, likeCount, createdAt));
             }
         }
         return tweets;
@@ -166,15 +172,17 @@ public class TweetDAO {
             String retweetId = resultSet.getString("retweet_id");
             String quoteTweetId = resultSet.getString("quote_tweet_id");
             String parentTweetId = resultSet.getString("parent_tweet_id");
+            Timestamp timestamp = resultSet.getTimestamp("created_at");
+            Date createdAt = new Date(timestamp.getTime());
 
             if (retweetId != null) {
-                tweets.add(new Retweet(tweetId, ownerId, text, replyCount, retweetCount, likeCount, retweetId));
+                tweets.add(new Retweet(tweetId, ownerId, text, replyCount, retweetCount, likeCount, createdAt, retweetId));
             } else if (quoteTweetId != null) {
-                tweets.add(new QuoteTweet(tweetId, ownerId, text, replyCount, retweetCount, likeCount, quoteTweetId));
+                tweets.add(new QuoteTweet(tweetId, ownerId, text, replyCount, retweetCount, likeCount, createdAt, quoteTweetId));
             } else if (parentTweetId != null) {
-                tweets.add(new ReplyTweet(tweetId, ownerId, text, replyCount, retweetCount, likeCount, parentTweetId));
+                tweets.add(new ReplyTweet(tweetId, ownerId, text, replyCount, retweetCount, likeCount, createdAt, parentTweetId));
             } else {
-                tweets.add(new Tweet(tweetId, ownerId, text, replyCount, retweetCount, likeCount));
+                tweets.add(new Tweet(tweetId, ownerId, text, replyCount, retweetCount, likeCount, createdAt));
             }
         }
         return tweets;
@@ -191,8 +199,10 @@ public class TweetDAO {
             int retweetCount = (resultSet.getInt("retweet_count"));
             int replyCount = (resultSet.getInt("reply_count"));
             int likeCount = (resultSet.getInt("like_count"));
+            Timestamp timestamp = resultSet.getTimestamp("created_at");
+            Date createdAt = new Date(timestamp.getTime());
             String retweetId = resultSet.getString("retweet_id");
-            retweets.add(new Retweet(tweetId, ownerId, text, replyCount, retweetCount, likeCount, retweetId));
+            retweets.add(new Retweet(tweetId, ownerId, text, replyCount, retweetCount, likeCount, createdAt, retweetId));
         }
         return retweets;
     }
@@ -209,7 +219,9 @@ public class TweetDAO {
             int replyCount = (resultSet.getInt("reply_count"));
             int likeCount = (resultSet.getInt("like_count"));
             String quoteTweetId = resultSet.getString("quote_tweet_id");
-            quoteTweets.add(new QuoteTweet(tweetId, ownerId, text, replyCount, retweetCount, likeCount, quoteTweetId));
+            Timestamp timestamp = resultSet.getTimestamp("created_at");
+            Date createdAt = new Date(timestamp.getTime());
+            quoteTweets.add(new QuoteTweet(tweetId, ownerId, text, replyCount, retweetCount, likeCount, createdAt, quoteTweetId));
         }
         return quoteTweets;
     }
@@ -225,8 +237,10 @@ public class TweetDAO {
             int retweetCount = (resultSet.getInt("retweet_count"));
             int replyCount = (resultSet.getInt("reply_count"));
             int likeCount = (resultSet.getInt("like_count"));
+            Timestamp timestamp = resultSet.getTimestamp("created_at");
+            Date createdAt = new Date(timestamp.getTime());
             String parentTweetId = resultSet.getString("parent_tweet_id");
-            replyTweets.add(new ReplyTweet(tweetId, ownerId, text, replyCount, retweetCount, likeCount, parentTweetId));
+            replyTweets.add(new ReplyTweet(tweetId, ownerId, text, replyCount, retweetCount, likeCount, createdAt, parentTweetId));
         }
         return replyTweets;
     }
