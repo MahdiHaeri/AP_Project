@@ -26,19 +26,19 @@ public class TweetDAO {
         PreparedStatement statement = null;
         try {
             if (tweet instanceof Retweet retweet) {
-                statement = connection.prepareStatement("INSERT INTO tweets (owner_id, text, reply_count, retweet_count, like_count, retweet_id) VALUES (?, ?, ?, ?, ?, ?)");
-                statement.setString(6, retweet.getRetweetId());
+                statement = connection.prepareStatement("INSERT INTO tweets (owner_id, text, retweet_id) VALUES (?, ?, ?)");
+                statement.setString(3, retweet.getRetweetId());
 
             } else if (tweet instanceof QuoteTweet quoteTweet) {
-                statement = connection.prepareStatement("INSERT INTO tweets (owner_id, text, reply_count, retweet_count, like_count, quote_tweet_id) VALUES (?, ?, ?, ?, ?, ?)");
-                statement.setString(6, quoteTweet.getQuoteTweetId());
+                statement = connection.prepareStatement("INSERT INTO tweets (owner_id, text, quote_tweet_id) VALUES (?, ?, ?)");
+                statement.setString(3, quoteTweet.getQuoteTweetId());
 
             } else if (tweet instanceof ReplyTweet replyTweet) {
-                statement = connection.prepareStatement("INSERT INTO tweets (owner_id, text, reply_count, retweet_count, like_count, parent_tweet_id) VALUES (?, ?, ?, ?, ?, ?)");
-                statement.setString(6, replyTweet.getParentTweetId());
+                statement = connection.prepareStatement("INSERT INTO tweets (owner_id, text, parent_tweet_id) VALUES (?, ?, ?)");
+                statement.setString(3, replyTweet.getParentTweetId());
 
             } else {
-                statement = connection.prepareStatement("INSERT INTO tweets (owner_id, text, reply_count, retweet_count, like_count) VALUES (?, ?, ?, ?, ?)");
+                statement = connection.prepareStatement("INSERT INTO tweets (owner_id, text) VALUES (?, ?)");
             }
             statement.setString(1, tweet.getOwnerId());
             statement.setString(2, tweet.getText());
