@@ -99,7 +99,9 @@ public class TimelineController implements Initializable {
         long hours = TimeUnit.MILLISECONDS.toHours(timeDifference);
         long days = TimeUnit.MILLISECONDS.toDays(timeDifference);
 
-        if (minutes < 60) {
+        if (minutes == 0) {
+            return "Now";
+        } else if (minutes < 60) {
             return minutes + "m";
         } else if (hours < 24) {
             return hours + "h";
