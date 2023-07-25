@@ -6,12 +6,10 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.media.MediaView?>
 <?import javafx.scene.text.Font?>
 
 <BorderPane styleClass="root" stylesheets="@../../../styles/tweetStyle.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.client.controllers.TweetController">
@@ -106,13 +104,6 @@
                   <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
                      <children>
                         <Label fx:id="textMessageLbl" styleClass="text-lable" text="test message" />
-                        <ImageView fx:id="imageView" fitHeight="150.0" fitWidth="155.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../../../images/mobile_login_bro.png" />
-                           </image>
-                        </ImageView>
-                        <MediaView fx:id="meidaView" fitHeight="200.0" fitWidth="200.0" />
-                        <Label fx:id="quoteLbl" styleClass="text-lable" text="quote" />
                      </children>
                   </VBox>
                </center>
