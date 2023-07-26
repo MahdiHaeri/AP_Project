@@ -72,7 +72,7 @@ public class TweetController implements Initializable {
     }
 
     public void setOwnerUsernameLbl(String text) {
-        this.ownerUsernameLbl.getText();
+        this.ownerUsernameLbl.setText(text);
     }
 
     public String getReplyBtn() {
