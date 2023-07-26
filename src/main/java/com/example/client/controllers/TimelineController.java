@@ -1,8 +1,10 @@
 package com.example.client.controllers;
 
-import com.example.server.models.User;
+import com.example.client.http.HttpController;
+import com.example.client.http.HttpMethod;
+import com.example.client.http.HttpResponse;
+import com.example.client.util.TimestampController;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import javafx.fxml.FXML;
@@ -12,19 +14,9 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.layout.VBox;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.ProtocolException;
 import java.net.URL;
-import java.time.ZoneId;
-import java.util.Date;
 import java.util.ResourceBundle;
-import java.text.SimpleDateFormat;
-import java.util.concurrent.TimeUnit;
 
 public class TimelineController implements Initializable {
 
@@ -33,82 +25,69 @@ public class TimelineController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        // Make a GET request to the server
-        HttpURLConnection connection = null;
+        HttpResponse tweetResponse;
+        HttpResponse userResponse;
         try {
-            URL apiUrl = new URL("http://localhost:8080/api/tweets");
-            connection = (HttpURLConnection) apiUrl.openConnection();
-            connection.setRequestMethod("GET");
-
-            // Check the response code
-            int responseCode = connection.getResponseCode();
-            if (responseCode == HttpURLConnection.HTTP_OK) {
-                // Read the response
-                BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-                String response = reader.readLine();
-                reader.close();
-
-                // Parse the JSON response
-                ObjectMapper objectMapper = new ObjectMapper();
-                JsonNode tweetsJson = objectMapper.readTree(response);
-
-                // Iterate over the tweets
-                for (JsonNode tweetJson : tweetsJson) {
-                    // Create an FXML loader and load the tweet FXML file
-                    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/client/tweet.fxml"));
-                    Parent tweetRoot = fxmlLoader.load();
-
-                    // Access the controller of the tweet FXML
-                    TweetController tweetController = fxmlLoader.getController();
-
-                    // Set the tweet information on the controller
-
-                    long createdAt = tweetJson.get("createdAt").asLong();
-                    tweetController.setTimestapLbl(formatTimestamp(createdAt));
-                    tweetController.setTextMessageLbl(tweetJson.get("text").asText());
-                    tweetController.setOwnerUsernameLbl(tweetJson.get("ownerId").asText());
-                    tweetController.setReplyBtn(tweetJson.get("replyCount").asText());
-                    tweetController.setRetweetBtn(tweetJson.get("retweetCount").asText());
-                    tweetController.setLikeBtn(tweetJson.get("likeCount").asText());
-                    // ... set other information on the controller
-
-                    // Add the tweet to the tweet box
-                    tweetsVbox.getChildren().add(tweetRoot);
-                }
-            } else {
-                // Handle the error case when the server returns a non-OK response
-                System.out.println("Failed to retrieve tweets. Response code: " + responseCode);
-            }
+            tweetResponse = HttpController.sendRequest("http://localhost:8080/api/tweets", HttpMethod.GET, null, null);
         } catch (IOException e) {
-            // Handle any IO exception that occurs during the request
-            e.printStackTrace();
-        } finally {
-            if (connection != null) {
-                connection.disconnect();
+            throw new RuntimeException(e);
+        }
+
+        // Parse the JSON response
+        ObjectMapper objectMapper = new ObjectMapper();
+        JsonNode tweetsJson = null;
+        JsonNode usersJson = null;
+        try {
+            tweetsJson = objectMapper.readTree(tweetResponse.getBody());
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
+
+        // Iterate over the tweets
+        for (JsonNode tweetJson : tweetsJson) {
+            // Create an FXML loader and load the tweet FXML file
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/client/tweet.fxml"));
+            Parent tweetRoot = null;
+            try {
+                tweetRoot = fxmlLoader.load();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
             }
+
+            // Access the controller of the tweet FXML
+            TweetController tweetController = fxmlLoader.getController();
+
+            // Set the tweet information on the controller
+
+            try {
+                userResponse = HttpController.sendRequest("http://localhost:8080/api/users/" + tweetJson.get("ownerId").asText(), HttpMethod.GET, null, null);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+
+            try {
+                usersJson = objectMapper.readTree(userResponse.getBody());
+            } catch (JsonProcessingException e) {
+                throw new RuntimeException(e);
+            }
+
+
+            long createdAt = tweetJson.get("createdAt").asLong();
+            tweetController.setTimestapLbl(TimestampController.formatTimestamp(createdAt));
+            tweetController.setTextMessageLbl(tweetJson.get("text").asText());
+            tweetController.setOwnerUsernameLbl(tweetJson.get("ownerId").asText());
+            tweetController.setReplyBtn(tweetJson.get("replyCount").asText());
+            tweetController.setRetweetBtn(tweetJson.get("retweetCount").asText());
+            tweetController.setLikeBtn(tweetJson.get("likeCount").asText());
+            tweetController.setOwnerNameLbl(usersJson.get("firstName").asText() + " " + usersJson.get("lastName").asText());
+            // ... set other information on the controller
+
+            // Add the tweet to the tweet box
+            tweetsVbox.getChildren().add(tweetRoot);
         }
     }
 
     public Node getTimelinePane() {
         return tweetsVbox;
-    }
-
-    public String formatTimestamp(long createdAt) {
-        long timeDifference = new Date().getTime() - createdAt;
-        long minutes = TimeUnit.MILLISECONDS.toMinutes(timeDifference);
-        long hours = TimeUnit.MILLISECONDS.toHours(timeDifference);
-        long days = TimeUnit.MILLISECONDS.toDays(timeDifference);
-
-        if (minutes == 0) {
-            return "Now";
-        } else if (minutes < 60) {
-            return minutes + "m";
-        } else if (hours < 24) {
-            return hours + "h";
-        } else {
-            Date tweetDate = new Date(createdAt);
-            SimpleDateFormat dateFormat = new SimpleDateFormat("d MMMM");
-            return dateFormat.format(tweetDate);
-        }
     }
 }
