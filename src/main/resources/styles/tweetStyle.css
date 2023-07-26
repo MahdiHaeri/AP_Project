@@ -1,7 +1,7 @@
 .root {
     -fx-background-color: #111;
-    -fx-padding: 20px;
     -fx-text-fill: #ddd;
+    -fx-padding: 0 200 0 200;
 }
 
 .text-lable {
@@ -25,20 +25,20 @@
 }
 
 .avatar-image:hover {
-    -fx-scale-x: 1.1;
-    -fx-scale-y: 1.1;
-    -fx-cursor: hand;
+    /*-fx-scale-x: 1.1;*/
+    /*-fx-scale-y: 1.1;*/
+    /*-fx-cursor: hand;*/
 }
 
 .tweet-buttons {
     -fx-background-color: transparent;
-    -fx-fill: #ddd;
-    -fx-text-fill: #ddd;
+    -fx-fill: #666;
+    -fx-text-fill: #666;
 }
 
 .tweet-icon {
-    -fx-fill: #ddd;
-    -fx-text-fill: #ddd;
+    -fx-fill: #666;
+    -fx-text-fill: #666;
 }
 
 .username-text {
@@ -98,4 +98,8 @@
 .share-button:hover .share-icon {
     -fx-text-fill: #1DA1F2;
     -fx-fill: #1DA1F2;
+}
+
+.light-gray {
+    -fx-text-fill: #666;
 }

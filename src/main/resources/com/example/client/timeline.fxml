@@ -20,7 +20,7 @@
          <center>
             <ScrollPane fitToHeight="true" fitToWidth="true" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="TOP_CENTER">
                <content>
-                  <VBox fx:id="tweetsVbox" alignment="TOP_CENTER" prefHeight="386.0" prefWidth="598.0" styleClass="scroll-pane" />
+                  <VBox fx:id="tweetsVbox" alignment="TOP_CENTER" prefHeight="386.0" prefWidth="598.0" spacing="10.0" styleClass="scroll-pane" />
                </content>
             </ScrollPane>
          </center>

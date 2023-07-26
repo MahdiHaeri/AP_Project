@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+
+
+<BorderPane xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <center>
+      <HBox alignment="CENTER_LEFT" prefHeight="27.0" prefWidth="600.0" spacing="10.0">
+         <children>
+            <Pane prefHeight="27.0" prefWidth="29.0" />
+            <FontAwesomeIconView glyphName="RETWEET" styleClass="tweet-icon" />
+            <Label fx:id="retweeterNameLbl" styleClass="text-lable" text="retweeter name" />
+            <Label styleClass="text-lable" text="Retweeted" />
+         </children>
+      </HBox>
+   </center>
+</BorderPane>

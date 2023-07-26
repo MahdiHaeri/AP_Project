@@ -6,31 +6,22 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
 <BorderPane styleClass="root" stylesheets="@../../../styles/tweetStyle.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.client.controllers.TweetController">
-   <top>
-      <HBox alignment="CENTER_LEFT" prefHeight="27.0" prefWidth="600.0" spacing="10.0" BorderPane.alignment="CENTER">
-         <children>
-            <Pane prefHeight="27.0" prefWidth="29.0" />
-            <FontAwesomeIconView glyphName="RETWEET" styleClass="tweet-icon" />
-            <Label fx:id="retweeterNameLbl" styleClass="text-lable" text="retweeter name" />
-            <Label styleClass="text-lable" text="Retweeted" />
-         </children>
-      </HBox>
-   </top>
    <center>
       <BorderPane prefHeight="400.0" prefWidth="600.0" BorderPane.alignment="CENTER">
          <left>
             <VBox alignment="TOP_CENTER" prefHeight="445.0" prefWidth="61.0" styleClass="left-vbox" BorderPane.alignment="CENTER">
                <children>
-                  <GNAvatarView fx:id="avatarView" onMouseClicked="#onAvatarViewClicked" prefHeight="60.0" prefWidth="84.0" stroke="#ffffff00" styleClass="avatar-image" type="CIRCLE">
+                  <AnchorPane prefHeight="12.0" prefWidth="61.0" />
+                  <GNAvatarView fx:id="avatarView" onMouseClicked="#onAvatarViewClicked" prefHeight="55.0" prefWidth="55.0" stroke="#ffffff00" strokeWidth="0.0" styleClass="avatar-image" type="CIRCLE">
                      <image>
-                        <Image url="@../../../images/sign_up_amico.png" />
+                        <Image url="@../../../images/myImage.jpeg" />
                      </image>
                   </GNAvatarView>
                </children>
@@ -43,7 +34,7 @@
                      <children>
                         <Button fx:id="replyBtn" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onReplyBtnAction" text="143">
                            <graphic>
-                              <FontAwesomeIconView glyphName="COMMENT">
+                              <FontAwesomeIconView fill="#666666" glyphName="COMMENT" size="15">
                                  <styleClass>
                                     <String fx:value="comment-icon" />
                                     <String fx:value="tweet-icon" />
@@ -57,7 +48,7 @@
                         </Button>
                         <Button fx:id="retweetBtn" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onRetweetBtnAction" text="21.3k">
                            <graphic>
-                              <FontAwesomeIconView glyphName="RETWEET">
+                              <FontAwesomeIconView glyphName="RETWEET" size="15">
                                  <styleClass>
                                     <String fx:value="retweet-icon" />
                                     <String fx:value="tweet-icon" />
@@ -71,7 +62,7 @@
                         </Button>
                         <Button fx:id="likeBtn" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onLikeBtnAction" text="203k">
                            <graphic>
-                              <FontAwesomeIconView glyphName="HEART">
+                              <FontAwesomeIconView glyphName="HEART" size="15">
                                  <styleClass>
                                     <String fx:value="like-icon" />
                                     <String fx:value="tweet-icon" />
@@ -85,7 +76,7 @@
                         </Button>
                         <Button fx:id="shareBtn" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onShareBtnAction">
                            <graphic>
-                              <FontAwesomeIconView glyphName="ARROW_UP">
+                              <FontAwesomeIconView glyphName="ARROW_UP" size="15">
                                  <styleClass>
                                     <String fx:value="share-icon" />
                                     <String fx:value="tweet-icon" />
@@ -133,8 +124,16 @@
                                     <Font name="System Bold" size="13.0" />
                                  </font>
                               </Label>
-                              <Label fx:id="ownerUsernameLbl" styleClass="text-lable" text="owner username" textAlignment="CENTER" />
-                              <Label fx:id="timestapLbl" styleClass="text-lable" text="timestammp" textAlignment="CENTER" />
+                              <Label fx:id="ownerUsernameLbl" text="owner username" textAlignment="CENTER">
+                                 <styleClass>
+                                    <String fx:value="text-lable" />
+                                    <String fx:value="light-gray" />
+                                 </styleClass></Label>
+                              <Label fx:id="timestapLbl" text="timestammp" textAlignment="CENTER">
+                                 <styleClass>
+                                    <String fx:value="text-lable" />
+                                    <String fx:value="light-gray" />
+                                 </styleClass></Label>
                            </children>
                         </HBox>
                      </left>
