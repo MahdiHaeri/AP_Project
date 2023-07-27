@@ -9,10 +9,11 @@
     -fx-background-radius: 5;
     -fx-text-fill: white;
     -fx-fill: white;
+    -fx-prompt-text-fill: #666;
 }
 
 .text-area .content {
-    -fx-background-color: #222;
+    -fx-background-color: #111;
     -fx-background-radius: 5;
     -fx-box-border: none;
     -fx-border-width: 0;
@@ -62,7 +63,7 @@
     -fx-background-color: #222;
     -fx-text-fill: white;
     -fx-background-radius: 50px;
-    -fx-padding: 10px;
+    -fx-padding: 3px 10px;
     -fx-border-width: 0px;
     -fx-border-color: transparent;
 }

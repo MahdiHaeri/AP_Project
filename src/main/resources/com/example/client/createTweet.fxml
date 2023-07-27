@@ -5,15 +5,17 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.image.Image?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="425.0" prefWidth="491.0" stylesheets="@../../../styles/createTweetStyle.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.client.controllers.CreateTweetController">
    <top>
-      <BorderPane prefHeight="45.0" prefWidth="491.0" BorderPane.alignment="CENTER">
+      <BorderPane BorderPane.alignment="CENTER">
          <right>
-            <Button fx:id="tweetBtn" mnemonicParsing="false" onAction="#onTweetBtnAction" prefHeight="37.0" prefWidth="67.0" styleClass="tweet-button" text="Tweet" BorderPane.alignment="CENTER" />
+            <Button fx:id="tweetBtn" mnemonicParsing="false" onAction="#onTweetBtnAction" styleClass="tweet-button" text="Tweet" textAlignment="CENTER" BorderPane.alignment="CENTER" />
          </right>
       </BorderPane>
    </top>
@@ -31,7 +33,18 @@
             </VBox>
          </left>
          <center>
-            <TextArea prefHeight="200.0" prefWidth="200.0" promptText="What's happening?" wrapText="true" BorderPane.alignment="CENTER" />
+            <BorderPane BorderPane.alignment="CENTER">
+               <center>
+                  <TextArea fx:id="textArea" prefHeight="200.0" prefWidth="200.0" promptText="What's happening?" wrapText="true">
+                     <font>
+                        <Font name="Arimo for Powerline" size="16.0" />
+                     </font>
+                  </TextArea>
+               </center>
+               <top>
+                  <AnchorPane prefHeight="41.0" prefWidth="418.0" BorderPane.alignment="CENTER" />
+               </top>
+            </BorderPane>
          </center>
          <bottom>
             <BorderPane prefHeight="34.0" prefWidth="491.0" BorderPane.alignment="CENTER">

@@ -37,7 +37,7 @@ public class HttpController {
 
             // Read the response
             BufferedReader reader;
-            if (responseCode == HttpURLConnection.HTTP_OK) {
+            if (responseCode >= 200 && responseCode < 300) {
                 reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
             } else {
                 reader = new BufferedReader(new InputStreamReader(connection.getErrorStream()));
