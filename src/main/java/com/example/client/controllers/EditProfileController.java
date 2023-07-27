@@ -109,16 +109,26 @@ public class EditProfileController implements Initializable {
         ObjectMapper objectMapper = new ObjectMapper();
         JsonNode bioJson = null;
         JsonNode userJson = null;
+
+        if (bioResponse.getStatusCode() != 200 || userResponse.getStatusCode() != 200) throw new RuntimeException("Error getting user data");
+
+        if (!bioResponse.getBody().equals("{}")) {
+            try {
+                bioJson = objectMapper.readTree(bioResponse.getBody());
+            } catch (JsonProcessingException e) {
+                throw new RuntimeException(e);
+            }
+
+            bioTextArea.setText(bioJson.get("biography").asText());
+            locationTf.setText(bioJson.get("location").asText());
+            websiteTf.setText(bioJson.get("website").asText());
+        }
+
         try {
-            bioJson = objectMapper.readTree(bioResponse.getBody());
             userJson = objectMapper.readTree(userResponse.getBody());
         } catch (JsonProcessingException e) {
             throw new RuntimeException(e);
         }
-
-        bioTextArea.setText(bioJson.get("biography").asText());
-        locationTf.setText(bioJson.get("location").asText());
-        websiteTf.setText(bioJson.get("website").asText());
 
         firstNameTf.setText(userJson.get("firstName").asText());
         lastNameTf.setText(userJson.get("lastName").asText());

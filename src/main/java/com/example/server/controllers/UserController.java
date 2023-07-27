@@ -71,7 +71,7 @@ public class UserController {
 
     public String getBioByUserId(String userId) throws SQLException, JsonProcessingException {
         Bio bio = bioDAO.getBio(userId);
-        if (bio == null) return null;
+        if (bio == null) return "{}";
         ObjectMapper objectMapper = new ObjectMapper();
         return objectMapper.writeValueAsString(bio);
     }
