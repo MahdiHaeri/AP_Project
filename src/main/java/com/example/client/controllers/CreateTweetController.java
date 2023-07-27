@@ -63,7 +63,6 @@ public class CreateTweetController {
         String body = "{\"text\": \"" + textArea.getText() + "\"}";
         try {
             HttpResponse response = HttpController.sendRequest("http://localhost:8080/api/tweets", HttpMethod.POST, body, headers);
-            System.out.println("this is a bug");
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
