@@ -1,6 +1,19 @@
 .root {
     -fx-background-color: transparent;
 }
+
+/* change the scroller bar color*/
+.scroll-bar:vertical .thumb {
+    -fx-background-color: #333;
+}
+
+
+/* remove up and down button from scroll bar*/
+.scroll-bar:vertical .increment-arrow, .scroll-bar:vertical .decrement-arrow {
+    -fx-background-color: transparent;
+    -fx-fill: transparent;
+}
+
 .scroll-pane {
     -fx-background-color: #111;
 }
