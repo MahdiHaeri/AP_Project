@@ -52,22 +52,25 @@
                     </columnConstraints>
                     <rowConstraints>
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <Label text="Name" textFill="WHITE" />
-                        <Label text="Bio" textFill="WHITE" GridPane.rowIndex="1" />
-                        <Label text="Location" textFill="WHITE" GridPane.rowIndex="2" />
-                        <Label text="Website" textFill="WHITE" GridPane.rowIndex="3" />
-                        <Label text="Birth date" textFill="WHITE" GridPane.rowIndex="4" />
-                        <TextField promptText="Name" GridPane.columnIndex="1" />
-                        <TextArea prefHeight="200.0" prefWidth="377.0" promptText="Bio" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                        <TextField promptText="Location" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                        <TextField promptText="Website" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                        <DatePicker maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" promptText="Brith date" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                        <Label text="First name" textFill="WHITE" />
+                        <Label text="Last name" textFill="WHITE" GridPane.rowIndex="1" />
+                        <Label text="Bio" textFill="WHITE" GridPane.rowIndex="2" />
+                        <Label text="Location" textFill="WHITE" GridPane.rowIndex="3" />
+                        <Label text="Website" textFill="WHITE" GridPane.rowIndex="4" />
+                        <Label text="Birth day" textFill="WHITE" GridPane.rowIndex="5" />
+                        <TextField fx:id="firstNameTf" promptText="First name" GridPane.columnIndex="1" />
+                        <TextField fx:id="lastNameTf" promptText="Last name" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <TextArea fx:id="bioTextArea" prefHeight="200.0" prefWidth="377.0" promptText="Bio" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        <TextField fx:id="locationTf" promptText="Location" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                        <TextField fx:id="websiteTf" promptText="Website" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                        <DatePicker fx:id="birthdayDp" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" promptText="Birth day" GridPane.columnIndex="1" GridPane.rowIndex="5" />
                      </children>
                   </GridPane>
                </children>
