@@ -87,6 +87,11 @@ public class ProfileController implements Initializable {
             stage.initStyle(StageStyle.UNDECORATED);
             stage.centerOnScreen();
             stage.show();
+
+            // update profile page when edit profile is closed
+            stage.setOnHidden(e -> {
+                initialize(null, null);
+            });
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

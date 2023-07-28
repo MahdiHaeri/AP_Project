@@ -137,14 +137,9 @@ public class MainController implements Initializable {
             stage.setScene(new Scene(createTweetRoot));
             stage.show();
             // when stage closed, refresh the timeline to show the new tweet
-            stage.setOnHiding(windowEvent -> {
-                try {
-                    FXMLLoader fxmlLoader2 = new FXMLLoader(getClass().getResource("/com/example/client/timeline.fxml"));
-                    Parent timelineRoot = fxmlLoader2.load();
-                    rootBp.setCenter(timelineRoot);
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
+
+            stage.setOnHidden(e -> {
+                initialize(null, null);
             });
 
         } catch (IOException e) {
