@@ -3,6 +3,7 @@ package com.example.client.controllers;
 import com.example.client.http.HttpController;
 import com.example.client.http.HttpMethod;
 import com.example.client.http.HttpResponse;
+import com.example.server.models.Bio;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -91,7 +92,31 @@ public class EditProfileController implements Initializable {
 
     @FXML
     void onSaveBtnAction(ActionEvent event) {
+        Bio bio = new Bio();
+        bio.setUserId(JWTController.getSubjectFromJwt(JWTController.getJwtKey()));
+        bio.setBiography(bioTextArea.getText());
+        bio.setLocation(locationTf.getText());
+        bio.setWebsite(websiteTf.getText());
 
+        ObjectMapper objectMapper = new ObjectMapper();
+        String bioJson = null;
+        try {
+            bioJson = objectMapper.writeValueAsString(bio);
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
+
+        HttpResponse response;
+        try {
+            response = HttpController.sendRequest("http://localhost:8080/api/users/" + bio.getUserId() + "/bio", HttpMethod.POST, bioJson, null);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        if (!(response.getStatusCode() >= 200 && response.getStatusCode() < 300)) throw new RuntimeException("Error saving bio");
+
+        // close stage
+        saveBtn.getScene().getWindow().hide();
     }
 
     @Override

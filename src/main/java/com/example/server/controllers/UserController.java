@@ -31,6 +31,10 @@ public class UserController {
     public void createBio(String userId, String biography, String location, String website) throws SQLException {
         Bio bio = new Bio(userId, biography, location, website);
         if (userDAO.getUser(userId) == null) throw new SQLException("User does not exist");
+        if (bioDAO.getBio(userId) != null) {
+            bioDAO.updateBio(bio);
+            return;
+        }
         bioDAO.saveBio(bio);
     }
 
