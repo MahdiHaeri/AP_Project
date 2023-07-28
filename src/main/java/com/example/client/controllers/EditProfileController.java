@@ -4,6 +4,7 @@ import com.example.client.http.HttpController;
 import com.example.client.http.HttpMethod;
 import com.example.client.http.HttpResponse;
 import com.example.server.models.Bio;
+import com.example.server.models.User;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -27,6 +28,7 @@ import java.net.URL;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.util.Date;
 import java.util.ResourceBundle;
 
 public class EditProfileController implements Initializable {
@@ -114,6 +116,51 @@ public class EditProfileController implements Initializable {
         }
 
         if (!(response.getStatusCode() >= 200 && response.getStatusCode() < 300)) throw new RuntimeException("Error saving bio");
+
+        // -------------------------- save user info ---------------------------------
+
+        HttpResponse userResponse = null;
+        try {
+            userResponse = HttpController.sendRequest("http://localhost:8080/api/users/" +  JWTController.getSubjectFromJwt(JWTController.getJwtKey()), HttpMethod.GET, null, null);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        if (!(userResponse.getStatusCode() >= 200 && userResponse.getStatusCode() < 300)) throw new RuntimeException("Error getting user data");
+
+        JsonNode userJson = null;
+        try {
+            userJson = objectMapper.readTree(userResponse.getBody());
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
+
+        User user = new User();
+        user.setId(userJson.get("id").asText());
+        user.setFirstName(firstNameTf.getText());
+        user.setLastName(lastNameTf.getText());
+        user.setEmail(userJson.get("email").asText());
+        user.setPhoneNumber(userJson.get("phoneNumber").asText());
+        user.setPassword(userJson.get("password").asText());
+        user.setCountry(userJson.get("country").asText());
+        user.setCreatedAt(new Date(userJson.get("createdAt").asLong()));
+        user.setBirthday(new Date(userJson.get("birthday").asLong()));
+//        user.setBirthday(birthdayDp.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant().toEpochMilli());
+
+        ObjectMapper objectMapper2 = new ObjectMapper();
+        String userJson2 = null;
+        try {
+            userJson2 = objectMapper2.writeValueAsString(user);
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
+
+        HttpResponse userResponse2 = null;
+        try {
+            userResponse2 = HttpController.sendRequest("http://localhost:8080/api/users/" + user.getId(), HttpMethod.PUT, userJson2, null);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
 
         // close stage
         saveBtn.getScene().getWindow().hide();
