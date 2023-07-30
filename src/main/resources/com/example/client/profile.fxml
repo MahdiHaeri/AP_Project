@@ -16,8 +16,8 @@
    <top>
       <AnchorPane prefHeight="335.0" prefWidth="600.0" BorderPane.alignment="CENTER">
          <children>
-            <AnchorPane layoutX="59.0" layoutY="-23.0" prefHeight="150.0" prefWidth="600.0" styleClass="header-image-container" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-            <GNAvatarView layoutX="74.0" layoutY="105.0" prefHeight="90.0" prefWidth="96.0" stroke="#111111" strokeWidth="4.0" type="CIRCLE">
+            <AnchorPane fx:id="headerImagePane" layoutX="59.0" layoutY="-23.0" prefHeight="150.0" prefWidth="600.0" styleClass="header-image-container" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+            <GNAvatarView fx:id="avatar" layoutX="74.0" layoutY="105.0" prefHeight="90.0" prefWidth="96.0" stroke="#111111" strokeWidth="4.0" type="CIRCLE">
                <image>
                   <Image url="@../../../images/avatar.jpeg" />
                </image>

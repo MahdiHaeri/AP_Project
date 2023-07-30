@@ -94,7 +94,7 @@
                <center>
                   <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
                      <children>
-                        <Label fx:id="textMessageLbl" styleClass="text-lable" text="test message" />
+                        <Label fx:id="textMessageLbl" lineSpacing="3.0" styleClass="text-lable" text="test message" wrapText="true" />
                      </children>
                   </VBox>
                </center>
