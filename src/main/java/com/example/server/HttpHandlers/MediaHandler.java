@@ -23,11 +23,11 @@ public class MediaHandler {
 
     public Object handlePostMedia(Request request, Response response) throws IOException, ServletException {
         String userId = request.params(":username");
-        String mediaType = request.pathInfo().split("/")[4];
+        String mediaGroup = request.pathInfo().split("/")[4];
         String fileType = request.headers("Content-Type");
 
         // make unique file name
-        String mediaUrl = "assets/" + mediaType + "/" + userId + "/" + userId + "_" + new Date().getTime() + "." + fileType.split("/")[1];
+        String mediaUrl = "assets/" + mediaGroup + "/" + userId + "/" + userId + "_" + new Date().getTime() + "." + fileType.split("/")[1];
 
         // get file bytes
         byte[] fileByte = request.bodyAsBytes();
@@ -44,7 +44,7 @@ public class MediaHandler {
         java.nio.file.Files.write(file.toPath(), fileByte);
 
         try {
-            userMediaController.createMedia(userId, mediaType, mediaUrl);
+            userMediaController.createMedia(userId, mediaGroup, mediaUrl);
         } catch (Exception e) {
             response.status(400);
             response.body(e.getMessage());
@@ -57,17 +57,25 @@ public class MediaHandler {
 
     public Object handleGetMedia(Request request, Response response) throws IOException, ServletException, SQLException {
         String userId = request.params(":username");
-        String mediaType = request.pathInfo().split("/")[4];
-        String userMedia = userMediaController.getMediaByUserIdAndType(userId, mediaType);
-        if (userMedia.equals("[]")) {
-            response.status(400);
-            response.body("Media not found.");
-            return response.body();
-        }
-        ObjectMapper mapper = new ObjectMapper();
-        JsonNode jsonArray = mapper.readTree(userMedia);
+        String mediaGroup = request.pathInfo().split("/")[4];
+        String userMedia = userMediaController.getMediaByUserIdAndType(userId, mediaGroup);
+        String mediaUrl = null;
 
-        String mediaUrl = jsonArray.get(jsonArray.size() - 1).asText();
+        if (userMedia.equals("[]")) {
+            if (mediaGroup.equals("profile-image")) {
+                mediaUrl = "src/main/resources/images/default_profile_image.jpeg";
+            } else if (mediaGroup.equals("header-image")) {
+                mediaUrl = "src/main/resources/images/default_header_image.png";
+            } else {
+                response.status(400);
+                response.body("Media not found.");
+                return response.body();
+            }
+        } else {
+            ObjectMapper mapper = new ObjectMapper();
+            JsonNode jsonArray = mapper.readTree(userMedia);
+            mediaUrl = jsonArray.get(jsonArray.size() - 1).asText();
+        }
 
         File file = new File(mediaUrl);
         if (!file.exists() || !file.isFile()) {
