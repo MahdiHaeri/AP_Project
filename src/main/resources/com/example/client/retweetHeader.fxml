@@ -13,8 +13,8 @@
          <children>
             <Pane prefHeight="27.0" prefWidth="29.0" />
             <FontAwesomeIconView glyphName="RETWEET" styleClass="tweet-icon" />
-            <Label fx:id="retweeterNameLbl" styleClass="text-lable" text="retweeter name" />
-            <Label styleClass="text-lable" text="Retweeted" />
+            <Label fx:id="retweeterNameLbl" styleClass="text-label" text="retweeter name" />
+            <Label styleClass="text-label" text="Retweeted" />
          </children>
       </HBox>
    </center>

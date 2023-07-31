@@ -4,13 +4,27 @@
     -fx-padding: 0 200 0 200;
 }
 
-.text-lable {
-    -fx-text-fill: white;
+.message-text{
+    -fx-wrap-text: true;
+    -fx-fill: #ddd;
+    -fx-font-style: bold;
 }
 
-/*.left-vbox {*/
-/*    -fx-padding: 2px;*/
-/*}*/
+.owner-name-label {
+    -fx-font-weight: bold;
+}
+
+.light-gray {
+    -fx-text-fill: #666;
+}
+
+.white {
+    -fx-text-fill: #fff;
+}
+
+
+.left-vbox {
+}
 
 .center-pane {
     -fx-padding: 3px;
@@ -39,11 +53,6 @@
 .tweet-icon {
     -fx-fill: #666;
     -fx-text-fill: #666;
-}
-
-.username-text {
-    /* bold text */
-    -fx-font-weight: bold;
 }
 
 /*.tweet-buttons:hover {*/
@@ -98,8 +107,4 @@
 .share-button:hover .share-icon {
     -fx-text-fill: #1DA1F2;
     -fx-fill: #1DA1F2;
-}
-
-.light-gray {
-    -fx-text-fill: #666;
 }
