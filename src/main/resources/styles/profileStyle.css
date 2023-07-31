@@ -4,6 +4,11 @@
     -fx-fill: white;
 }
 
+.full-name-label {
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+}
+
 .header-image-container {
     /*-fx-background-image: url("../images/logo.jpeg");*/
     -fx-background-size: cover;

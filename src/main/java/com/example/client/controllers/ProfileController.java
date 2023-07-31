@@ -45,9 +45,8 @@ public class ProfileController implements Initializable {
 
     @FXML
     private Button editProfileBtn;
-
     @FXML
-    private Label firstNameLbl;
+    private Label fullNameLbl;
 
     @FXML
     private Button followBtn;
@@ -69,9 +68,6 @@ public class ProfileController implements Initializable {
 
     @FXML
     private Label joinedLbl;
-
-    @FXML
-    private Label lastNameLbl;
 
     @FXML
     private Label locationLbl;
@@ -115,9 +111,7 @@ public class ProfileController implements Initializable {
     public void fillProfile(JsonNode userJson, JsonNode followers, JsonNode followings, JsonNode bio) {
         // Set the labels
         usernameLbl.setText(userJson.get("id").asText());
-        firstNameLbl.setText(userJson.get("firstName").asText());
-        lastNameLbl.setText(userJson.get("lastName").asText());
-//                bioLbl.setText(userJson.get("bio").asText());
+        fullNameLbl.setText(userJson.get("firstName").asText() + " " + userJson.get("lastName").asText());
         locationLbl.setText(userJson.get("country").asText());
 
         Date date = new Date(userJson.get("createdAt").asLong());
@@ -170,10 +164,8 @@ public class ProfileController implements Initializable {
                 JsonNode userJson = objectMapper.readTree(response);
 
                 // Set the labels
-                usernameLbl.setText(userJson.get("id").asText());
-                firstNameLbl.setText(userJson.get("firstName").asText());
-                lastNameLbl.setText(userJson.get("lastName").asText());
-//                bioLbl.setText(userJson.get("bio").asText());
+                usernameLbl.setText("@" + userJson.get("id").asText());
+                fullNameLbl.setText(userJson.get("firstName").asText() + " " + userJson.get("lastName").asText());
                 locationLbl.setText(userJson.get("country").asText());
 
                 Date date = new Date(userJson.get("createdAt").asLong());
