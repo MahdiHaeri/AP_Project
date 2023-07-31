@@ -89,14 +89,14 @@ public class LoginController implements Initializable {
 
                     try {
                         // Load the FXML file for the SignUp page
-                        Parent signupPage = FXMLLoader.load(getClass().getResource("/com/example/client/main.fxml"));
+                        Parent mainPage = FXMLLoader.load(getClass().getResource("/com/example/client/main.fxml"));
 
                         // Create a new scene using the SignUp page
-                        Scene signupScene = new Scene(signupPage);
+                        Scene mainScene = new Scene(mainPage);
 
                         // Get the current stage (window) and set the new scene
                         Stage currentStage = (Stage) signupLink.getScene().getWindow();
-                        currentStage.setScene(signupScene);
+                        currentStage.setScene(mainScene);
                         // currentStage.setFullScreen(true);
                         currentStage.setMaximized(true);
 

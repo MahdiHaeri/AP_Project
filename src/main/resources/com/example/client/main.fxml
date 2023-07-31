@@ -76,7 +76,7 @@
             <AnchorPane prefHeight="35.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
          </top>
          <bottom>
-            <Button fx:id="logoutBtn" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefWidth="200.0" styleClass="logout-buttons" text="Logout" BorderPane.alignment="CENTER" />
+            <Button fx:id="logoutBtn" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onLogoutBtnAction" prefWidth="200.0" styleClass="logout-buttons" text="Logout" BorderPane.alignment="CENTER" />
          </bottom>
       </BorderPane>
    </left>

@@ -56,6 +56,9 @@ public class MainController implements Initializable {
     private GNAvatarView avatar;
 
     @FXML
+    private Button logoutBtn;
+
+    @FXML
     void onBookmarksBtnAction(ActionEvent event) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/client/bookmarks.fxml"));
@@ -183,5 +186,19 @@ public class MainController implements Initializable {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    @FXML
+    void onLogoutBtnAction(ActionEvent event) {
+        try {
+            Parent loginPage = FXMLLoader.load(getClass().getResource("/com/example/client/login.fxml"));
+            Scene loginScene = new Scene(loginPage);
+            Stage currentStage = (Stage) logoutBtn.getScene().getWindow();
+            currentStage.setScene(loginScene);
+            currentStage.setMaximized(true);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        JWTController.removeJwtKey();
     }
 }

@@ -20,6 +20,8 @@ public class JWTController {
         JWTController.jwtKey = jwtKey;
     }
 
+    public static void removeJwtKey() { JWTController.jwtKey = null; }
+
     public static String getSubjectFromJwt(String jwt) {
         try {
             String[] jwtParts = jwt.split("\\.");
