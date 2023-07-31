@@ -12,9 +12,12 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
+import javafx.scene.image.Image;
 import javafx.scene.layout.VBox;
 
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -73,14 +76,28 @@ public class TimelineController implements Initializable {
 
 
             long createdAt = tweetJson.get("createdAt").asLong();
-            tweetController.setTimestapLbl(TimestampController.formatTimestamp(createdAt));
-            tweetController.setTextMessageLbl(tweetJson.get("text").asText());
+            tweetController.setTimestampLbl(TimestampController.formatTimestamp(createdAt));
+            tweetController.setTextMessageText(tweetJson.get("text").asText());
             tweetController.setOwnerUsernameLbl("@" + tweetJson.get("ownerId").asText());
             tweetController.setReplyBtn(tweetJson.get("replyCount").asText());
             tweetController.setRetweetBtn(tweetJson.get("retweetCount").asText());
             tweetController.setLikeBtn(tweetJson.get("likeCount").asText());
             tweetController.setOwnerNameLbl(usersJson.get("firstName").asText() + " " + usersJson.get("lastName").asText());
             // ... set other information on the controller
+
+            try {
+
+                URL url2 = new URL("http://localhost:8080/api/users/" + tweetJson.get("ownerId").asText() + "/profile-image");
+                HttpURLConnection conn = (HttpURLConnection) url2.openConnection();
+                conn.setRequestMethod("GET");
+                conn.setDoOutput(true);
+                conn.setUseCaches(false);
+                InputStream inputStream = conn.getInputStream();
+                Image image = new Image(inputStream);
+                tweetController.setAvatarView(image);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
 
             // Add the tweet to the tweet box
             tweetsVbox.getChildren().add(tweetRoot);

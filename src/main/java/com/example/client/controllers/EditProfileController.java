@@ -19,17 +19,25 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.*;
 import javafx.stage.FileChooser;
 
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
+import java.net.HttpURLConnection;
 import java.net.URL;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
+import java.util.Random;
 import java.util.ResourceBundle;
+
+import javafx.embed.swing.SwingFXUtils;
+import javafx.scene.image.Image;
+
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 
 public class EditProfileController implements Initializable {
 
@@ -162,6 +170,53 @@ public class EditProfileController implements Initializable {
             throw new RuntimeException(e);
         }
 
+        Image profileImage = avatar.getImage();
+        Image headerImage = (Image) headerImagePane.getBackground().getImages().get(0).getImage();
+
+        byte[] profileImageBytes = null;
+        byte[] headerImageBytes = null;
+
+        try {
+            profileImageBytes = convertImageToByteArray(profileImage);
+            headerImageBytes = convertImageToByteArray(headerImage);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        try {
+
+            URL url = new URL("http://localhost:8080/api/users/" + user.getId() + "/profile-image");
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setRequestMethod("POST");
+            conn.setRequestProperty("Content-Type", "image/png");
+            conn.setDoOutput(true);
+            conn.setUseCaches(false);
+            OutputStream outputStream = conn.getOutputStream();
+            outputStream.write(profileImageBytes);
+            outputStream.close();
+            int responseCode = conn.getResponseCode();
+            if (!(responseCode >= 200 && responseCode < 300)) throw new RuntimeException("Error saving profile image");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        try {
+
+            URL url = new URL("http://localhost:8080/api/users/" + user.getId() + "/header-image");
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setRequestMethod("POST");
+            conn.setRequestProperty("Content-Type", "image/png");
+            conn.setDoOutput(true);
+            conn.setUseCaches(false);
+            OutputStream outputStream = conn.getOutputStream();
+            outputStream.write(headerImageBytes);
+            outputStream.close();
+            int responseCode = conn.getResponseCode();
+            if (!(responseCode >= 200 && responseCode < 300)) throw new RuntimeException("Error saving header image");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
         // close stage
         saveBtn.getScene().getWindow().hide();
     }
@@ -214,8 +269,36 @@ public class EditProfileController implements Initializable {
         // Step 4: Set the value of the JavaFX DatePicker to the converted LocalDate
         birthdayDp.setValue(birthdayLocalDate);
 
-//        avatar.setImage(new Image(userJson.get("avatarUrl").asText()));
-//        headerImagePane.setStyle("-fx-background-image: url('" + userJson.get("headerUrl").asText() + "'); -fx-background-size: cover;");
+        // set avatar
+        try {
 
+            URL url2 = new URL("http://localhost:8080/api/users/" + username + "/profile-image");
+            HttpURLConnection conn = (HttpURLConnection) url2.openConnection();
+            conn.setRequestMethod("GET");
+            conn.setDoOutput(true);
+            conn.setUseCaches(false);
+            InputStream inputStream = conn.getInputStream();
+            Image image = new Image(inputStream);
+            avatar.setImage(image);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        // set header image
+        try {
+            // Get the current timestamp as the cache buster
+            long cacheBuster = System.currentTimeMillis();
+            URL url3 = new URL("http://localhost:8080/api/users/" + JWTController.getSubjectFromJwt(JWTController.getJwtKey()) + "/header-image" + "?" + cacheBuster);
+            headerImagePane.setStyle("-fx-background-image: url('" + url3 + "'); -fx-background-repeat: no-repeat; -fx-background-size: cover; -fx-background-position: center center;");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+    public byte[] convertImageToByteArray(Image image) throws IOException {
+        BufferedImage bufferedImage = SwingFXUtils.fromFXImage(image, null);
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        ImageIO.write(bufferedImage, "png", byteArrayOutputStream);
+        return byteArrayOutputStream.toByteArray();
     }
 }

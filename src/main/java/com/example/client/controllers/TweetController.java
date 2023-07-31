@@ -6,7 +6,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.text.Text;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -38,19 +40,19 @@ public class TweetController implements Initializable {
     private Button shareBtn;
 
     @FXML
-    private Label textMessageLbl;
+    private Text textMessageText;
 
     @FXML
-    private Label timestapLbl;
+    private Label timestampLbl;
 
-//    public GNAvatarView getAvatarView() {
-//        return avatarView;
-//    }
-//
-//    public void setAvatarView(GNAvatarView avatarView) {
-//        this.avatarView = avatarView;
-//    }
-//
+    public Image getAvatarView() {
+        return avatarView.getImage();
+    }
+
+    public void setAvatarView(Image image) {
+        this.avatarView.setImage(image);
+    }
+
     public String getLikeBtn() {
         return likeBtn.getText();
     }
@@ -107,20 +109,20 @@ public class TweetController implements Initializable {
 //        this.shareBtn = shareBtn;
 //    }
 
-    public String getTextMessageLbl() {
-        return textMessageLbl.getText();
+    public String getTextMessageText() {
+        return textMessageText.getText();
     }
 
-    public void setTextMessageLbl(String text) {
-        this.textMessageLbl.setText(text);
+    public void setTextMessageText(String text) {
+        this.textMessageText.setText(text);
     }
 
-    public String getTimestapLbl() {
-        return timestapLbl.getText();
+    public String getTimestampLbl() {
+        return timestampLbl.getText();
     }
 
-    public void setTimestapLbl(String text) {
-        this.timestapLbl.setText(text);
+    public void setTimestampLbl(String text) {
+        this.timestampLbl.setText(text);
     }
 
 
@@ -153,9 +155,6 @@ public class TweetController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        setOwnerNameLbl("Gleidson");
-        setOwnerUsernameLbl("@gleidson28");
-        setTextMessageLbl("Hello World!");
-        setTimestapLbl("1h");
+
     }
 }

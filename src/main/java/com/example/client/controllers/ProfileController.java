@@ -2,6 +2,7 @@ package com.example.client.controllers;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import io.github.gleidson28.GNAvatarView;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -10,11 +11,14 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
@@ -22,12 +26,16 @@ import java.net.ProtocolException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Random;
 import java.util.ResourceBundle;
 
 public class ProfileController implements Initializable {
 
     @FXML
     private Label DateLbl;
+
+    @FXML
+    private GNAvatarView avatar;
 
     @FXML
     private Label bioLbl;
@@ -45,16 +53,19 @@ public class ProfileController implements Initializable {
     private Button followBtn;
 
     @FXML
-    private Label followerLbl;
+    private Label followerCountLbl;
 
     @FXML
-    private Label followerCountLbl;
+    private Label followerLbl;
 
     @FXML
     private Label followingCountLbl;
 
     @FXML
     private Label followingLbl;
+
+    @FXML
+    private AnchorPane headerImagePane;
 
     @FXML
     private Label joinedLbl;
@@ -67,7 +78,6 @@ public class ProfileController implements Initializable {
 
     @FXML
     private Label usernameLbl;
-
     @FXML
     void onBlockBtnAction(ActionEvent event) {
 
@@ -269,5 +279,27 @@ public class ProfileController implements Initializable {
             }
         }
 
+        try {
+
+            URL url2 = new URL("http://localhost:8080/api/users/" + JWTController.getSubjectFromJwt(JWTController.getJwtKey())+ "/profile-image");
+            HttpURLConnection conn = (HttpURLConnection) url2.openConnection();
+            conn.setRequestMethod("GET");
+            conn.setDoOutput(true);
+            conn.setUseCaches(false);
+            InputStream inputStream = conn.getInputStream();
+            Image image = new Image(inputStream);
+            avatar.setImage(image);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        try {
+            // Get the current timestamp as the cache buster
+            long cacheBuster = System.currentTimeMillis();
+            URL url3 = new URL("http://localhost:8080/api/users/" + JWTController.getSubjectFromJwt(JWTController.getJwtKey()) + "/header-image" + "?" + cacheBuster);
+            headerImagePane.setStyle("-fx-background-image: url('" + url3 + "'); -fx-background-repeat: no-repeat; -fx-background-size: cover; -fx-background-position: center center;");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

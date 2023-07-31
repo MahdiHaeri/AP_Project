@@ -1,5 +1,6 @@
 package com.example.client.controllers;
 
+import io.github.gleidson28.GNAvatarView;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -8,10 +9,13 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -46,6 +50,10 @@ public class MainController implements Initializable {
 
     @FXML
     private Button tweetBtn;
+
+
+    @FXML
+    private GNAvatarView avatar;
 
     @FXML
     void onBookmarksBtnAction(ActionEvent event) {
@@ -156,6 +164,21 @@ public class MainController implements Initializable {
 
             FXMLLoader fxmlLoader2 = new FXMLLoader(getClass().getResource("/com/example/client/trends.fxml"));
             Parent trendsRoot = fxmlLoader2.load();
+
+            try {
+
+                URL url2 = new URL("http://localhost:8080/api/users/" + JWTController.getSubjectFromJwt(JWTController.getJwtKey()) + "/profile-image");
+                HttpURLConnection conn = (HttpURLConnection) url2.openConnection();
+                conn.setRequestMethod("GET");
+                conn.setDoOutput(true);
+                conn.setUseCaches(false);
+                InputStream inputStream = conn.getInputStream();
+                Image image = new Image(inputStream);
+                avatar.setImage(image);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+
             rootBp.setRight(trendsRoot);
         } catch (IOException e) {
             throw new RuntimeException(e);
