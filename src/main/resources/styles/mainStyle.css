@@ -48,3 +48,13 @@
     -fx-scale-x: 0.97;
     -fx-scale-y: 0.97;
 }
+
+.logout-buttons {
+    -fx-background-color: #6666;
+    -fx-text-fill: white;
+}
+
+.logout-buttons:pressed {
+    -fx-background-color: #333;
+}
+
