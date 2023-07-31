@@ -1,5 +1,9 @@
 package com.example.client.controllers;
 
+import com.example.client.http.HttpController;
+import com.example.client.http.HttpResponse;
+import com.example.client.util.TimestampController;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.github.gleidson28.GNAvatarView;
@@ -22,12 +26,13 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
-import java.net.ProtocolException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Random;
 import java.util.ResourceBundle;
+
+import com.example.client.http.*;
 
 public class ProfileController implements Initializable {
 
@@ -142,137 +147,89 @@ public class ProfileController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        // Make a GET request to the server
-        HttpURLConnection connection = null;
+        String username = JWTController.getSubjectFromJwt(JWTController.getJwtKey());
+        HttpResponse response = null;
         try {
-            String username = JWTController.getSubjectFromJwt(JWTController.getJwtKey());
-
-            URL apiUrl = new URL("http://localhost:8080/api/users/" + username);
-            connection = (HttpURLConnection) apiUrl.openConnection();
-            connection.setRequestMethod("GET");
-
-            // Check the response code
-            int responseCode = connection.getResponseCode();
-            if (responseCode == HttpURLConnection.HTTP_OK) {
-                // Read the response
-                BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-                String response = reader.readLine();
-                reader.close();
-
-                // Parse the JSON response
-                ObjectMapper objectMapper = new ObjectMapper();
-                JsonNode userJson = objectMapper.readTree(response);
-
-                // Set the labels
-                usernameLbl.setText("@" + userJson.get("id").asText());
-                fullNameLbl.setText(userJson.get("firstName").asText() + " " + userJson.get("lastName").asText());
-                locationLbl.setText(userJson.get("country").asText());
-
-                Date date = new Date(userJson.get("createdAt").asLong());
-                SimpleDateFormat sdf = new SimpleDateFormat("MMMM yyyy");
-                String dateString = sdf.format(date);
-                DateLbl.setText(dateString);
-
-//                followercountLbl.setText(userJson.get("followerCount").asText());
-//                followingCountLbl.setText(userJson.get("followingCount").asText());
-
-
-            } else {
-                // Handle the error case when the server returns a non-OK response
-                System.out.println("Failed to retrieve tweets. Response code: " + responseCode);
-            }
+            response = HttpController.sendRequest("http://localhost:8080/api/users/" + username, HttpMethod.GET, null, null);
         } catch (IOException e) {
-            // Handle any IO exception that occurs during the request
-            e.printStackTrace();
-        } finally {
-            if (connection != null) {
-                connection.disconnect();
-            }
+            throw new RuntimeException(e);
         }
 
-
+        // Parse the JSON response
+        ObjectMapper objectMapper = new ObjectMapper();
+        JsonNode userJson = null;
         try {
-            String username = JWTController.getSubjectFromJwt(JWTController.getJwtKey());
-
-            URL apiUrl = new URL("http://localhost:8080/api/users/" + username + "/followers");
-            connection = (HttpURLConnection) apiUrl.openConnection();
-            connection.setRequestMethod("GET");
-
-            // Check the response code
-            int responseCode = connection.getResponseCode();
-            if (responseCode == HttpURLConnection.HTTP_OK) {
-                // Read the response
-                BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-                String response = reader.readLine();
-                reader.close();
-
-                // Parse the JSON response
-                ObjectMapper objectMapper = new ObjectMapper();
-                JsonNode followers = objectMapper.readTree(response);
-
-                int followerCount = 0;
-                for (JsonNode followerJson: followers) {
-                    followerCount++;
-                }
-
-                followerCountLbl.setText(Integer.toString(followerCount));
-
-//                followingCountLbl.setText(userJson.get("followingCount").asText());
-
-            } else {
-                // Handle the error case when the server returns a non-OK response
-                System.out.println("Failed to retrieve tweets. Response code: " + responseCode);
-            }
-        } catch (IOException e) {
-            // Handle any IO exception that occurs during the request
-            e.printStackTrace();
-        } finally {
-            if (connection != null) {
-                connection.disconnect();
-            }
+            userJson = objectMapper.readTree(response.getBody());
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
         }
 
+        // Set the labels
+        usernameLbl.setText("@" + userJson.get("id").asText());
+        fullNameLbl.setText(userJson.get("firstName").asText() + " " + userJson.get("lastName").asText());
+        DateLbl.setText(TimestampController.formatTimestamp(userJson.get("createdAt").asLong()));
+
+        // set Followers and Following Count
         try {
-            String username = JWTController.getSubjectFromJwt(JWTController.getJwtKey());
-
-            URL apiUrl = new URL("http://localhost:8080/api/users/" + username + "/following");
-            connection = (HttpURLConnection) apiUrl.openConnection();
-            connection.setRequestMethod("GET");
-
-            // Check the response code
-            int responseCode = connection.getResponseCode();
-            if (responseCode == HttpURLConnection.HTTP_OK) {
-                // Read the response
-                BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-                String response = reader.readLine();
-                reader.close();
-
-                // Parse the JSON response
-                ObjectMapper objectMapper = new ObjectMapper();
-                JsonNode followings = objectMapper.readTree(response);
-
-                int followingCount = 0;
-                for (JsonNode followerJson: followings) {
-                    followingCount++;
-                }
-
-                followingCountLbl.setText(Integer.toString(followingCount));
-
-            } else {
-                // Handle the error case when the server returns a non-OK response
-                System.out.println("Failed to retrieve tweets. Response code: " + responseCode);
-            }
+            response = HttpController.sendRequest("http://localhost:8080/api/users/" + username + "/followers", HttpMethod.GET, null, null);
         } catch (IOException e) {
-            // Handle any IO exception that occurs during the request
-            e.printStackTrace();
-        } finally {
-            if (connection != null) {
-                connection.disconnect();
-            }
+            throw new RuntimeException(e);
         }
 
+        // Parse the JSON response
+        JsonNode followers = null;
         try {
+            followers = objectMapper.readTree(response.getBody());
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
 
+        int followerCount = 0;
+        for (JsonNode followerJson: followers) {
+            followerCount++;
+        }
+
+        followerCountLbl.setText(Integer.toString(followerCount));
+
+        try {
+            response = HttpController.sendRequest("http://localhost:8080/api/users/" + username + "/following", HttpMethod.GET, null, null);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        // Parse the JSON response
+        JsonNode followings = null;
+        try {
+            followings = objectMapper.readTree(response.getBody());
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
+
+        int followingCount = 0;
+        for (JsonNode followerJson: followings) {
+            followingCount++;
+        }
+        followingCountLbl.setText(Integer.toString(followerCount));
+
+        // set bio
+        try {
+            response = HttpController.sendRequest("http://localhost:8080/api/users/" + username + "/bio", HttpMethod.GET, null, null);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        JsonNode bioJson = null;
+        try {
+            bioJson = objectMapper.readTree(response.getBody());
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
+
+        bioLbl.setText(bioJson.get("biography").asText());
+        locationLbl.setText(bioJson.get("location").asText());
+
+        // Set the avatar and header image
+        try {
             URL url2 = new URL("http://localhost:8080/api/users/" + JWTController.getSubjectFromJwt(JWTController.getJwtKey())+ "/profile-image");
             HttpURLConnection conn = (HttpURLConnection) url2.openConnection();
             conn.setRequestMethod("GET");
