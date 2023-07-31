@@ -19,7 +19,7 @@
             <AnchorPane fx:id="headerImagePane" layoutX="59.0" layoutY="-23.0" prefHeight="295.0" prefWidth="593.0" styleClass="header-image-container" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
             <GNAvatarView fx:id="avatar" layoutX="59.0" layoutY="250.0" prefHeight="90.0" prefWidth="96.0" stroke="#111111" strokeWidth="4.0" type="CIRCLE">
                <image>
-                  <Image url="@../../../images/avatar.jpeg" />
+                  <Image url="@../../../images/default_profile_image.jpeg" />
                </image>
             </GNAvatarView>
             <VBox layoutY="152.0" prefHeight="145.0" prefWidth="308.0" spacing="10.0" styleClass="information-vbox" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="284.0">

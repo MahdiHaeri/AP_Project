@@ -24,7 +24,7 @@
          <left>
             <VBox alignment="TOP_CENTER" prefHeight="346.0" prefWidth="53.0" BorderPane.alignment="CENTER">
                <children>
-                  <GNAvatarView prefHeight="41.0" prefWidth="36.0" strokeWidth="0.0" type="CIRCLE">
+                  <GNAvatarView fx:id="avatar" prefHeight="41.0" prefWidth="36.0" strokeWidth="0.0" type="CIRCLE">
                      <image>
                         <Image url="@../../../images/myImage.jpeg" />
                      </image>

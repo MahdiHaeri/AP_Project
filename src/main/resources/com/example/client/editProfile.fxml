@@ -42,7 +42,7 @@
                <children>
                   <GNAvatarView fx:id="avatar" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#onAvatarClicked" prefHeight="60.0" prefWidth="60.0" styleClass="avatar" type="CIRCLE">
                      <image>
-                        <Image url="@../../../images/avatar.jpeg" />
+                        <Image url="@../../../images/default_profile_image.jpeg" />
                      </image>
                   </GNAvatarView>
                   <GridPane prefWidth="442.0" vgap="10.0">

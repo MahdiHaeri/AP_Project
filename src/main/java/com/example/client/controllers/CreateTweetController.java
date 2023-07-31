@@ -5,9 +5,11 @@ import com.example.client.http.HttpHeaders;
 import com.example.client.http.HttpMethod;
 import com.example.client.http.HttpResponse;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
+import io.github.gleidson28.GNAvatarView;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -23,8 +25,12 @@ import javafx.stage.Window;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.ResourceBundle;
 
-public class CreateTweetController {
+public class CreateTweetController implements Initializable {
 
     @FXML
     private Button tweetBtn;
@@ -37,6 +43,10 @@ public class CreateTweetController {
 
     @FXML
     private FontAwesomeIconView imageIcon;
+
+    @FXML
+    private GNAvatarView avatar;
+
 
     @FXML
     void onImageIconClicked(MouseEvent event) {
@@ -85,4 +95,20 @@ public class CreateTweetController {
         }
     }
 
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+
+        try {
+            URL url2 = new URL("http://localhost:8080/api/users/" + JWTController.getSubjectFromJwt(JWTController.getJwtKey()) + "/profile-image");
+            HttpURLConnection conn = (HttpURLConnection) url2.openConnection();
+            conn.setRequestMethod("GET");
+            conn.setDoOutput(true);
+            conn.setUseCaches(false);
+            InputStream inputStream = conn.getInputStream();
+            Image image = new Image(inputStream);
+            avatar.setImage(image);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }
