@@ -52,7 +52,6 @@ public class User {
         this.password = password;
         this.country = country;
         this.birthday = birthday;
-        this.createdAt = new Date();
     }
 
     public User() {
