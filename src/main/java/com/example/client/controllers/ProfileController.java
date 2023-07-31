@@ -20,16 +20,10 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Random;
 import java.util.ResourceBundle;
 
 import com.example.client.http.*;
@@ -109,7 +103,7 @@ public class ProfileController implements Initializable {
     }
 
     @FXML
-    void onFolllowBtnAction(ActionEvent event) {
+    void onFollowBtnAction(ActionEvent event) {
 
     }
 
@@ -118,31 +112,22 @@ public class ProfileController implements Initializable {
         usernameLbl.setText(userJson.get("id").asText());
         fullNameLbl.setText(userJson.get("firstName").asText() + " " + userJson.get("lastName").asText());
         locationLbl.setText(userJson.get("country").asText());
-
-        Date date = new Date(userJson.get("createdAt").asLong());
-        SimpleDateFormat sdf = new SimpleDateFormat("MMMM yyyy");
-        String dateString = sdf.format(date);
-        DateLbl.setText(dateString);
-
-
+        DateLbl.setText(TimestampController.formatTimestamp(userJson.get("createdAt").asLong()));
 
         int followerCount = 0;
         for (JsonNode followerJson: followers) {
             followerCount++;
         }
-
         followerCountLbl.setText(Integer.toString(followerCount));
-
 
         int followingCount = 0;
         for (JsonNode followerJson: followings) {
             followingCount++;
         }
-
         followingCountLbl.setText(Integer.toString(followingCount));
 
-
         bioLbl.setText(bio.get("biography").asText());
+        locationLbl.setText(bio.get("location").asText());
     }
 
     @Override
@@ -218,19 +203,21 @@ public class ProfileController implements Initializable {
             throw new RuntimeException(e);
         }
 
-        JsonNode bioJson = null;
-        try {
-            bioJson = objectMapper.readTree(response.getBody());
-        } catch (JsonProcessingException e) {
-            throw new RuntimeException(e);
-        }
+        if (!response.getBody().equals("{}")) {
+            JsonNode bioJson = null;
+            try {
+                bioJson = objectMapper.readTree(response.getBody());
+            } catch (JsonProcessingException e) {
+                throw new RuntimeException(e);
+            }
 
-        bioLbl.setText(bioJson.get("biography").asText());
-        locationLbl.setText(bioJson.get("location").asText());
+            bioLbl.setText(bioJson.get("biography").asText());
+            locationLbl.setText(bioJson.get("location").asText());
+        }
 
         // Set the avatar and header image
         try {
-            URL url2 = new URL("http://localhost:8080/api/users/" + JWTController.getSubjectFromJwt(JWTController.getJwtKey())+ "/profile-image");
+            URL url2 = new URL("http://localhost:8080/api/users/" + username + "/profile-image");
             HttpURLConnection conn = (HttpURLConnection) url2.openConnection();
             conn.setRequestMethod("GET");
             conn.setDoOutput(true);
@@ -245,7 +232,7 @@ public class ProfileController implements Initializable {
         try {
             // Get the current timestamp as the cache buster
             long cacheBuster = System.currentTimeMillis();
-            URL url3 = new URL("http://localhost:8080/api/users/" + JWTController.getSubjectFromJwt(JWTController.getJwtKey()) + "/header-image" + "?" + cacheBuster);
+            URL url3 = new URL("http://localhost:8080/api/users/" + username + "/header-image" + "?" + cacheBuster);
             headerImagePane.setStyle("-fx-background-image: url('" + url3 + "'); -fx-background-repeat: no-repeat; -fx-background-size: cover; -fx-background-position: center center;");
         } catch (IOException e) {
             throw new RuntimeException(e);

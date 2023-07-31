@@ -7,7 +7,6 @@
 .message-text{
     -fx-wrap-text: true;
     -fx-fill: #ddd;
-    -fx-font-style: bold;
 }
 
 .owner-name-label {
