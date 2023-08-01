@@ -1,7 +1,6 @@
 package com.example.client.controllers;
 
-import com.example.server.models.User;
-import com.fasterxml.jackson.databind.JsonNode;
+import com.example.client.util.JWTController;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -13,10 +12,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.control.skin.LabeledSkinBase;
 import javafx.stage.Stage;
-
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -24,12 +20,8 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.text.SimpleDateFormat;
-import java.time.ZoneId;
-import java.util.Date;
 import java.util.Map;
 import java.util.ResourceBundle;
-import java.util.regex.Pattern;
 
 public class LoginController implements Initializable {
 

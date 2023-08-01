@@ -50,7 +50,7 @@ public class BlockHandler {
 //            return "Unauthorized";
 //        }
 
-        String blockerId = JWTController.getUsernameFromJwtToken(token);
+        String blockerId = JWTController.getSubjectFromJwt(token);
         String blockedId = request.params(":username");
         try {
             blockController.saveBlock(blockerId, blockedId);
@@ -70,7 +70,7 @@ public class BlockHandler {
 //            return "Unauthorized";
 //        }
 
-        String blockerId = JWTController.getUsernameFromJwtToken(token);
+        String blockerId = JWTController.getSubjectFromJwt(token);
         String blockedId = request.params(":username");
         try {
             blockController.deleteBlock(blockerId, blockedId);
