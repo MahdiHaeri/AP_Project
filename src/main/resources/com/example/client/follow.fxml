@@ -7,8 +7,8 @@
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
-
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@../../../styles/follow.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <top>
@@ -21,14 +21,14 @@
             </Label>
          </center>
          <left>
-            <Button mnemonicParsing="false" styleClass="icon_button" BorderPane.alignment="CENTER">
+            <Button fx:id="backBtn" mnemonicParsing="false" onAction="#onBackBtnAction" styleClass="icon_button" BorderPane.alignment="CENTER">
                <graphic>
                   <FontAwesomeIconView glyphName="ARROW_LEFT" styleClass="icon" />
                </graphic>
             </Button>
          </left>
          <right>
-            <Button mnemonicParsing="false" styleClass="icon_button" BorderPane.alignment="CENTER">
+            <Button fx:id="ConnectBtn" mnemonicParsing="false" onAction="#onConnectBtnAction" styleClass="icon_button" BorderPane.alignment="CENTER">
                <graphic>
                   <FontAwesomeIconView glyphName="USER_PLUS" styleClass="icon" />
                </graphic>
@@ -41,17 +41,29 @@
         <tabs>
           <Tab text="Followers you know">
                <content>
-                  <ScrollPane prefHeight="200.0" prefWidth="200.0" />
+                  <ScrollPane prefHeight="200.0" prefWidth="200.0">
+                     <content>
+                        <VBox fx:id="FollowersYouKnowVbox" prefHeight="321.0" prefWidth="600.0" />
+                     </content>
+                  </ScrollPane>
                </content>
             </Tab>
           <Tab text="Followers">
                <content>
-                  <ScrollPane prefHeight="200.0" prefWidth="200.0" />
+                  <ScrollPane prefHeight="200.0" prefWidth="200.0">
+                     <content>
+                        <VBox fx:id="FollowersVbox" prefHeight="323.0" prefWidth="599.0" />
+                     </content>
+                  </ScrollPane>
                </content>
             </Tab>
             <Tab text="Following">
                <content>
-                  <ScrollPane prefHeight="200.0" prefWidth="200.0" />
+                  <ScrollPane prefHeight="200.0" prefWidth="200.0">
+                     <content>
+                        <VBox prefHeight="323.0" prefWidth="600.0" />
+                     </content>
+                  </ScrollPane>
                </content>
             </Tab>
         </tabs>
