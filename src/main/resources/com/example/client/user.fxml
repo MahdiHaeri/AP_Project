@@ -8,8 +8,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="74.0" prefWidth="600.0" stylesheets="@../../../styles/userStyle.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#onRootMouseClicked" prefHeight="74.0" prefWidth="600.0" stylesheets="@../../../styles/userStyle.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <left>
       <GNAvatarView fx:id="avatar" prefHeight="57.0" prefWidth="47.0" strokeWidth="0.0" styleClass="avatar" type="CIRCLE" BorderPane.alignment="CENTER">
          <image>
@@ -32,7 +31,7 @@
             </VBox>
          </center>
          <right>
-            <Button mnemonicParsing="false" text="Follow" BorderPane.alignment="CENTER" />
+            <Button fx:id="followBtn" mnemonicParsing="false" onAction="#onFollowBtnAction" text="Follow" BorderPane.alignment="CENTER" />
          </right>
          <bottom>
             <Label fx:id="BioLbl" maxWidth="1.7976931348623157E308" styleClass="white-text" text="Bio" BorderPane.alignment="CENTER" />
