@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import io.github.gleidson28.GNAvatarView?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="74.0" prefWidth="600.0" stylesheets="@../../../styles/userStyle.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <left>
+      <GNAvatarView fx:id="avatar" prefHeight="57.0" prefWidth="47.0" strokeWidth="0.0" styleClass="avatar" type="CIRCLE" BorderPane.alignment="CENTER">
+         <image>
+            <Image url="@../../../../../../../../Pictures/Wallpaper%20/cristina-gottardi-CSpjU6hYo_0-unsplash%20(1).jpg" />
+         </image>
+      </GNAvatarView>
+   </left>
+   <center>
+      <BorderPane prefHeight="200.0" prefWidth="525.0" styleClass="main-container" BorderPane.alignment="CENTER">
+         <center>
+            <VBox maxWidth="1.7976931348623157E308" prefHeight="200.0" prefWidth="472.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Label fx:id="fullNameLbl" styleClass="white-text" text="Full name">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="usernameLbl" styleClass="light-gray-text" text="\@Username" />
+               </children>
+            </VBox>
+         </center>
+         <right>
+            <Button mnemonicParsing="false" text="Follow" BorderPane.alignment="CENTER" />
+         </right>
+         <bottom>
+            <Label fx:id="BioLbl" maxWidth="1.7976931348623157E308" styleClass="white-text" text="Bio" BorderPane.alignment="CENTER" />
+         </bottom>
+      </BorderPane>
+   </center>
+</BorderPane>
