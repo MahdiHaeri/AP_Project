@@ -2,6 +2,7 @@ package com.example.client.controllers;
 
 import com.example.client.http.HttpController;
 import com.example.client.http.HttpResponse;
+import com.example.client.util.JWTController;
 import com.example.client.util.TimestampController;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;

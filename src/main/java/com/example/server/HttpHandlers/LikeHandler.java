@@ -52,7 +52,7 @@ public class LikeHandler {
     public Object handlePostLike(Request request, Response response) throws JsonProcessingException {
         String token = JWTController.getJwtTokenFromHeader(request.headers("Authorization"));
 
-        String userId = JWTController.getUsernameFromJwtToken(token);
+        String userId = JWTController.getSubjectFromJwt(token);
         String tweetId = request.params(":tweetId");
 
         try {
@@ -68,10 +68,9 @@ public class LikeHandler {
     }
 
     public Object handlePostUnlike(Request request, Response response) {
-        JSONObject jsonObject = new JSONObject(request.body());
         String token = JWTController.getJwtTokenFromHeader(request.headers("Authorization"));
 
-        String userId = JWTController.getUsernameFromJwtToken(token);
+        String userId = JWTController.getSubjectFromJwt(token);
         String tweetId = request.params(":tweetId");
 
         try {

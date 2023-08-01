@@ -55,7 +55,7 @@ public class TweetHandler {
 
     public Object handleGetTimeline(Request request, Response response) {
         String token = JWTController.getJwtTokenFromHeader(request.headers("Authorization"));
-        String username = JWTController.getUsernameFromJwtToken(token);
+        String username = JWTController.getSubjectFromJwt(token);
         try {
             return tweetController.getTimeline(username);
         } catch (Exception e) {
@@ -69,7 +69,7 @@ public class TweetHandler {
         String token = JWTController.getJwtTokenFromHeader(request.headers("Authorization"));
 
         JSONObject jsonObject = new JSONObject(request.body());
-        String ownerId = JWTController.getUsernameFromJwtToken(token);
+        String ownerId = JWTController.getSubjectFromJwt(token);
         String text = jsonObject.getString("text");
 
         try {
@@ -86,7 +86,7 @@ public class TweetHandler {
         String token = JWTController.getJwtTokenFromHeader(request.headers("Authorization"));
 
         JSONObject jsonObject = new JSONObject(request.body());
-        String ownerId = JWTController.getUsernameFromJwtToken(token);
+        String ownerId = JWTController.getSubjectFromJwt(token);
         String text = jsonObject.getString("text");
         String retweetId = jsonObject.getString("retweetId");
 
@@ -104,7 +104,7 @@ public class TweetHandler {
         String token = JWTController.getJwtTokenFromHeader(request.headers("Authorization"));
 
         JSONObject jsonObject = new JSONObject(request.body());
-        String ownerId = JWTController.getUsernameFromJwtToken(token);
+        String ownerId = JWTController.getSubjectFromJwt(token);
         String text = jsonObject.getString("text");
         String quoteTweetId = jsonObject.getString("quoteTweetId");
 
@@ -123,7 +123,7 @@ public class TweetHandler {
         String token = JWTController.getJwtTokenFromHeader(request.headers("Authorization"));
 
         JSONObject jsonObject = new JSONObject(request.body());
-        String ownerId = JWTController.getUsernameFromJwtToken(token);
+        String ownerId = JWTController.getSubjectFromJwt(token);
         String text = jsonObject.getString("text");
         String replyTweetId = jsonObject.getString("replyTweetId");
 

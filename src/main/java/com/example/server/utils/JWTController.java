@@ -4,6 +4,8 @@ import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
 
 import javax.crypto.SecretKey;
+import java.nio.charset.StandardCharsets;
+import java.util.Base64;
 import java.util.Date;
 
 public class JWTController {
@@ -27,17 +29,28 @@ public class JWTController {
                 .compact();
     }
 
-    public static String getUsernameFromJwtToken(String jwtToken) {
+    public static String getSubjectFromJwt(String jwt) {
         try {
-            Claims claims = Jwts.parserBuilder()
-                    .setSigningKey(getSecretKey())
-                    .build()
-                    .parseClaimsJws(jwtToken)
-                    .getBody();
+            String[] jwtParts = jwt.split("\\.");
 
-            return claims.getSubject();
-        } catch (ExpiredJwtException | MalformedJwtException | SignatureException | IllegalArgumentException ex) {
-            // Handle different types of exceptions, e.g., log the error or return null/empty string
+            if (jwtParts.length == 3) {
+                String encodedPayload = jwtParts[1];
+                byte[] decodedPayload = Base64.getUrlDecoder().decode(encodedPayload);
+                String payloadJson = new String(decodedPayload, StandardCharsets.UTF_8);
+
+                // Parse the payload JSON and retrieve the "sub" value
+                // Assuming the payload JSON is in the format: {"sub": "username"}
+                String sub = payloadJson.substring(payloadJson.indexOf("\"sub\":") + 7);
+                sub = sub.substring(0, sub.indexOf("\""));
+
+                return sub;
+            } else {
+                // Invalid JWT format
+                throw new IllegalArgumentException("Invalid JWT format");
+            }
+        } catch (Exception e) {
+            // Handle exception (e.g., invalid JWT format, decoding errors)
+            e.printStackTrace();
             return null;
         }
     }

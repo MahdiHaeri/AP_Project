@@ -53,7 +53,7 @@ public class FollowHandler {
 //            return "Unauthorized";
 //        }
 
-        String followerId = JWTController.getUsernameFromJwtToken(token);
+        String followerId = JWTController.getSubjectFromJwt(token);
         String followedId = request.params(":username");
         try {
             followController.saveFollow(followerId, followedId);
@@ -73,7 +73,7 @@ public class FollowHandler {
 //            return "Unauthorized";
 //        }
 
-        String followerId = JWTController.getUsernameFromJwtToken(token);
+        String followerId = JWTController.getSubjectFromJwt(token);
         String followedId = request.params(":username");
         try {
             followController.deleteFollow(followerId, followedId);

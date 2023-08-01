@@ -98,6 +98,9 @@
     -fx-fill: #e0245e;
 }
 
+.glyph-icon{ -fx-font-family:"FontAwesome"; }
+
+
 .share-button:hover {
     -fx-text-fill: #1DA1F2;
     -fx-fill: #1DA1F2;

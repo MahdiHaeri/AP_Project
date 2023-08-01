@@ -3,6 +3,7 @@ package com.example.client.controllers;
 import com.example.client.http.HttpController;
 import com.example.client.http.HttpMethod;
 import com.example.client.http.HttpResponse;
+import com.example.client.util.JWTController;
 import com.example.client.util.TimestampController;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -28,8 +29,10 @@ public class TimelineController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        String username = JWTController.getSubjectFromJwt(JWTController.getJwtKey());
         HttpResponse tweetResponse;
         HttpResponse userResponse;
+        HttpResponse likeResponse;
         try {
             tweetResponse = HttpController.sendRequest("http://localhost:8080/api/tweets", HttpMethod.GET, null, null);
         } catch (IOException e) {
@@ -75,14 +78,15 @@ public class TimelineController implements Initializable {
             }
 
 
-            long createdAt = tweetJson.get("createdAt").asLong();
-            tweetController.setTimestampLbl(TimestampController.formatTimestamp(createdAt));
+            tweetController.setTweetId(tweetJson.get("tweetId").asText());
             tweetController.setTextMessageText(tweetJson.get("text").asText());
             tweetController.setOwnerUsernameLbl("@" + tweetJson.get("ownerId").asText());
             tweetController.setReplyBtn(tweetJson.get("replyCount").asText());
             tweetController.setRetweetBtn(tweetJson.get("retweetCount").asText());
             tweetController.setLikeBtn(tweetJson.get("likeCount").asText());
             tweetController.setOwnerNameLbl(usersJson.get("firstName").asText() + " " + usersJson.get("lastName").asText());
+            long createdAt = tweetJson.get("createdAt").asLong();
+            tweetController.setTimestampLbl(TimestampController.formatTimestamp(createdAt));
             // ... set other information on the controller
 
             try {
@@ -98,6 +102,30 @@ public class TimelineController implements Initializable {
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
+
+            try {
+                likeResponse = HttpController.sendRequest("http://localhost:8080/api/tweets/" + tweetJson.get("tweetId").asText() + "/likes", HttpMethod.GET, null, null);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+
+            JsonNode likesJson = null;
+            try {
+                likesJson = objectMapper.readTree(likeResponse.getBody());
+            } catch (JsonProcessingException e) {
+                throw new RuntimeException(e);
+            }
+
+            int likeCount = 0;
+            for (JsonNode likeJson : likesJson) {
+                likeCount++;
+                if (likeJson.get("userId").asText().equals(username)) {
+                    tweetController.setTweetLiked();
+                }
+            }
+
+            tweetController.setLikeBtn(Integer.toString(likeCount));
+
 
             // Add the tweet to the tweet box
             tweetsVbox.getChildren().add(tweetRoot);

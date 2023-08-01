@@ -1,10 +1,4 @@
-package com.example.client.controllers;
-
-import io.jsonwebtoken.*;
-import io.jsonwebtoken.security.Keys;
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Jwt;
-import io.jsonwebtoken.Jwts;
+package com.example.client.util;
 
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;

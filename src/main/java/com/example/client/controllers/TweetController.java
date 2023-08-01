@@ -1,5 +1,11 @@
 package com.example.client.controllers;
 
+import com.example.client.http.HttpController;
+import com.example.client.http.HttpHeaders;
+import com.example.client.http.HttpMethod;
+import com.example.client.http.HttpResponse;
+import com.example.client.util.JWTController;
+import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import io.github.gleidson28.GNAvatarView;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -10,16 +16,23 @@ import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class TweetController implements Initializable {
+
+    private boolean isLiked = false;
+    private String tweetId;
 
     @FXML
     private GNAvatarView avatarView;
 
     @FXML
     private Button likeBtn;
+
+    @FXML
+    private FontAwesomeIconView likeIcon;
 
     @FXML
     private Label ownerNameLbl;
@@ -44,6 +57,22 @@ public class TweetController implements Initializable {
 
     @FXML
     private Label timestampLbl;
+
+    public String getTweetId() {
+        return tweetId;
+    }
+
+    public void setTweetId(String tweetId) {
+        this.tweetId = tweetId;
+    }
+
+    public boolean isLiked() {
+        return isLiked;
+    }
+
+    public void setLiked(boolean liked) {
+        isLiked = liked;
+    }
 
     public Image getAvatarView() {
         return avatarView.getImage();
@@ -135,7 +164,29 @@ public class TweetController implements Initializable {
 
     @FXML
     void onLikeBtnAction(ActionEvent event) {
-
+        String tweetId = getTweetId();
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("Authorization", JWTController.getJwtKey());
+        HttpResponse response;
+        if (isLiked) {
+            try {
+                response = HttpController.sendRequest("http://localhost:8080/api/tweets/" + tweetId + "/unlike", HttpMethod.POST, "", headers);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+            decrementLikeCount();
+            setTweetUnliked();
+            setLiked(false);
+        } else {
+            try {
+                response = HttpController.sendRequest("http://localhost:8080/api/tweets/" + tweetId + "/like", HttpMethod.POST, "", headers);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+            incrementLikeCount();
+            setTweetLiked();
+            setLiked(true);
+        }
     }
 
     @FXML
@@ -156,5 +207,27 @@ public class TweetController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
+    }
+
+    private void incrementLikeCount() {
+        int likeCount = Integer.parseInt(likeBtn.getText());
+        likeBtn.setText(String.valueOf(likeCount + 1));
+    }
+
+    private void decrementLikeCount() {
+        int likeCount = Integer.parseInt(likeBtn.getText());
+        likeBtn.setText(String.valueOf(likeCount - 1));
+    }
+
+    public void setTweetLiked() {
+        likeBtn.setStyle("-fx-text-fill: #e0245e");
+        likeIcon.setStyle("-fx-fill: #e0245e");
+        setLiked(true);
+    }
+
+    public void setTweetUnliked() {
+        likeBtn.setStyle("-fx-text-fill: #666");
+        likeIcon.setStyle("-fx-fill: #666");
+        setLiked(false);
     }
 }

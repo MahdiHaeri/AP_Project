@@ -27,4 +27,6 @@ module com.example.ap_project {
     exports com.example.client;
     exports com.example.client.controllers;
     opens com.example.client.controllers to javafx.fxml;
+    exports com.example.client.util;
+    opens com.example.client.util to javafx.fxml;
 }
