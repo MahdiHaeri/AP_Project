@@ -4,7 +4,6 @@ import com.example.client.http.HttpController;
 import com.example.client.http.HttpResponse;
 import com.example.client.util.JWTController;
 import com.example.client.util.TimestampController;
-import com.example.server.models.Follow;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -31,8 +30,6 @@ import java.util.ResourceBundle;
 import com.example.client.http.*;
 
 public class ProfileController implements Initializable {
-    MainController mainController;
-
     @FXML
     private Label DateLbl;
 
@@ -84,8 +81,23 @@ public class ProfileController implements Initializable {
     @FXML
     private Button followingBtn;
 
-    public void setParentController(MainController mainController) {
+    private MainController mainController;
+
+    public void setMainController(MainController mainController) {
         this.mainController = mainController;
+    }
+
+    public MainController getMainController() {
+        return mainController;
+    }
+
+
+    public String getUsernameLbl() {
+        return usernameLbl.getText().substring(1);
+    }
+
+    public void setUsernameLbl(String text) {
+        this.usernameLbl.setText("@" + text);
     }
 
     @FXML
@@ -126,10 +138,13 @@ public class ProfileController implements Initializable {
     void onFollowersBtnAction(ActionEvent event) {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/client/follow.fxml"));
         try {
+            String username = getUsernameLbl();
             Parent followRoot = fxmlLoader.load();
             FollowController followController = fxmlLoader.getController();
-            mainController.getRootBp().setCenter(followRoot);
             followController.setSelectTab(followController.getFollowersTab());
+            followController.setMainController(mainController);
+            followController.fillFollow(username);
+            mainController.getRootBp().setCenter(followRoot);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -139,149 +154,35 @@ public class ProfileController implements Initializable {
     void onFollowingBtnAction(ActionEvent event) {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/client/follow.fxml"));
         try {
+            String username = getUsernameLbl();
             Parent followRoot = fxmlLoader.load();
             FollowController followController = fxmlLoader.getController();
-            mainController.getRootBp().setCenter(followRoot);
             followController.setSelectTab(followController.getFollowingTab());
+            followController.setMainController(mainController);
+            followController.fillFollow(username);
+            mainController.getRootBp().setCenter(followRoot);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
 
-    public void fillProfile(JsonNode userJson, JsonNode followers, JsonNode followings, JsonNode bio) {
-        // Set the labels
-        usernameLbl.setText(userJson.get("id").asText());
-        fullNameLbl.setText(userJson.get("firstName").asText() + " " + userJson.get("lastName").asText());
-        locationLbl.setText(userJson.get("country").asText());
-        DateLbl.setText(TimestampController.formatTimestamp(userJson.get("createdAt").asLong()));
-
-        int followerCount = 0;
-        for (JsonNode followerJson: followers) {
-            followerCount++;
-        }
-        followerCountLbl.setText(Integer.toString(followerCount));
-
-        int followingCount = 0;
-        for (JsonNode followerJson: followings) {
-            followingCount++;
-        }
-        followingCountLbl.setText(Integer.toString(followingCount));
-
-        bioLbl.setText(bio.get("biography").asText());
-        locationLbl.setText(bio.get("location").asText());
-    }
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-//        String username = JWTController.getSubjectFromJwt(JWTController.getJwtKey());
-//        fillProfile(username);
-//        HttpResponse response = null;
-//        try {
-//            response = HttpController.sendRequest("http://localhost:8080/api/users/" + username, HttpMethod.GET, null, null);
-//        } catch (IOException e) {
-//            throw new RuntimeException(e);
-//        }
-//
-//        // Parse the JSON response
-//        ObjectMapper objectMapper = new ObjectMapper();
-//        JsonNode userJson = null;
-//        try {
-//            userJson = objectMapper.readTree(response.getBody());
-//        } catch (JsonProcessingException e) {
-//            throw new RuntimeException(e);
-//        }
-//
-//        // Set the labels
-//        usernameLbl.setText("@" + userJson.get("id").asText());
-//        fullNameLbl.setText(userJson.get("firstName").asText() + " " + userJson.get("lastName").asText());
-//        DateLbl.setText(TimestampController.formatTimestamp(userJson.get("createdAt").asLong()));
-//
-//        // set Followers and Following Count
-//        try {
-//            response = HttpController.sendRequest("http://localhost:8080/api/users/" + username + "/followers", HttpMethod.GET, null, null);
-//        } catch (IOException e) {
-//            throw new RuntimeException(e);
-//        }
-//
-//        // Parse the JSON response
-//        JsonNode followers = null;
-//        try {
-//            followers = objectMapper.readTree(response.getBody());
-//        } catch (JsonProcessingException e) {
-//            throw new RuntimeException(e);
-//        }
-//
-//        int followerCount = 0;
-//        for (JsonNode followerJson: followers) {
-//            followerCount++;
-//        }
-//
-//        followerCountLbl.setText(Integer.toString(followerCount));
-//
-//        try {
-//            response = HttpController.sendRequest("http://localhost:8080/api/users/" + username + "/following", HttpMethod.GET, null, null);
-//        } catch (IOException e) {
-//            throw new RuntimeException(e);
-//        }
-//
-//        // Parse the JSON response
-//        JsonNode followings = null;
-//        try {
-//            followings = objectMapper.readTree(response.getBody());
-//        } catch (JsonProcessingException e) {
-//            throw new RuntimeException(e);
-//        }
-//
-//        int followingCount = 0;
-//        for (JsonNode followerJson: followings) {
-//            followingCount++;
-//        }
-//        followingCountLbl.setText(Integer.toString(followerCount));
-//
-//        // set bio
-//        try {
-//            response = HttpController.sendRequest("http://localhost:8080/api/users/" + username + "/bio", HttpMethod.GET, null, null);
-//        } catch (IOException e) {
-//            throw new RuntimeException(e);
-//        }
-//
-//        if (!response.getBody().equals("{}")) {
-//            JsonNode bioJson = null;
-//            try {
-//                bioJson = objectMapper.readTree(response.getBody());
-//            } catch (JsonProcessingException e) {
-//                throw new RuntimeException(e);
-//            }
-//
-//            bioLbl.setText(bioJson.get("biography").asText());
-//            locationLbl.setText(bioJson.get("location").asText());
-//        }
-//
-//        // Set the avatar and header image
-//        try {
-//            URL url2 = new URL("http://localhost:8080/api/users/" + username + "/profile-image");
-//            HttpURLConnection conn = (HttpURLConnection) url2.openConnection();
-//            conn.setRequestMethod("GET");
-//            conn.setDoOutput(true);
-//            conn.setUseCaches(false);
-//            InputStream inputStream = conn.getInputStream();
-//            Image image = new Image(inputStream);
-//            avatar.setImage(image);
-//        } catch (IOException e) {
-//            throw new RuntimeException(e);
-//        }
-//
-//        try {
-//            // Get the current timestamp as the cache buster
-//            long cacheBuster = System.currentTimeMillis();
-//            URL url3 = new URL("http://localhost:8080/api/users/" + username + "/header-image" + "?" + cacheBuster);
-//            headerImagePane.setStyle("-fx-background-image: url('" + url3 + "'); -fx-background-repeat: no-repeat; -fx-background-size: cover; -fx-background-position: center center;");
-//        } catch (IOException e) {
-//            throw new RuntimeException(e);
-//        }
+
     }
 
     public void fillProfile(String username) {
+
+        if (username.equals(JWTController.getSubjectFromJwt(JWTController.getJwtKey()))) {
+            editProfileBtn.setVisible(true);
+            followBtn.setVisible(false);
+            blockBtn.setVisible(false);
+        } else {
+            editProfileBtn.setVisible(false);
+            followBtn.setVisible(true);
+            blockBtn.setVisible(true);
+        }
+
         HttpResponse response = null;
         try {
             response = HttpController.sendRequest("http://localhost:8080/api/users/" + username, HttpMethod.GET, null, null);

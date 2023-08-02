@@ -140,7 +140,7 @@ public class MainController implements Initializable {
             Parent profileRoot = fxmlLoader.load();
             ProfileController profileController = fxmlLoader.getController();
             profileController.fillProfile(username);
-            profileController.setParentController(this);
+            profileController.setMainController(this);
             rootBp.setCenter(profileRoot);
         } catch (IOException e) {
             throw new RuntimeException(e);

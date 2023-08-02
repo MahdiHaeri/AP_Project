@@ -3,7 +3,6 @@ package com.example.client.controllers;
 import com.example.client.http.HttpController;
 import com.example.client.http.HttpMethod;
 import com.example.client.http.HttpResponse;
-import com.example.client.util.JWTController;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import javafx.event.ActionEvent;
@@ -14,12 +13,9 @@ import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
-import javafx.scene.image.Image;
 import javafx.scene.layout.VBox;
 
 import java.io.IOException;
-import java.io.InputStream;
-import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -51,6 +47,15 @@ public class FollowController implements Initializable {
 
     @FXML
     private TabPane tabPane;
+    private MainController mainController;
+
+    public void setMainController(MainController mainController) {
+        this.mainController = mainController;
+    }
+
+    public MainController getMainController() {
+        return mainController;
+    }
 
     public Tab getFollowersTab() {
         return followersTab;
@@ -132,7 +137,10 @@ public class FollowController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        String username = JWTController.getSubjectFromJwt(JWTController.getJwtKey());
+
+    }
+
+    public void fillFollow(String username) {
         HttpResponse followers;
         HttpResponse following;
 //        HttpResponse followersYouKnow;
@@ -172,41 +180,8 @@ public class FollowController implements Initializable {
             }
 
             UserController userController = fxmlLoader.getController();
-            userController.setUsernameLbl("@" + followerJson.get("follower").asText());
-//            userController.setFollowBtn("Unfollow");
-            HttpResponse followerInfoResponse;
-            HttpResponse followerBioResponse;
-            try {
-                followerInfoResponse = HttpController.sendRequest("http://localhost:8080/api/users/" + followerJson.get("follower").asText(), HttpMethod.GET, null, null);
-                followerBioResponse = HttpController.sendRequest("http://localhost:8080/api/users/" + followerJson.get("follower").asText() + "/bio", HttpMethod.GET, null, null);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-
-            try {
-                URL url2 = new URL("http://localhost:8080/api/users/" + followerJson.get("follower").asText() + "/profile-image");
-                HttpURLConnection conn = (HttpURLConnection) url2.openConnection();
-                conn.setRequestMethod("GET");
-                conn.setDoOutput(true);
-                conn.setUseCaches(false);
-                InputStream inputStream = conn.getInputStream();
-                Image image = new Image(inputStream);
-                userController.setAvatar(image);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-
-            JsonNode followerInfoJson = null;
-            JsonNode followerBioJson = null;
-            try {
-                followerInfoJson = objectMapper.readTree(followerInfoResponse.getBody());
-                followerBioJson = objectMapper.readTree(followerBioResponse.getBody());
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-
-            userController.setFullNameLbl(followerInfoJson.get("firstName").asText() + " " + followerInfoJson.get("lastName").asText());
-            userController.setBioLbl(followerBioJson.get("biography").asText());
+            userController.setMainController(mainController);
+            userController.fillUser(followerJson.get("follower").asText());
             FollowersVbox.getChildren().add(followerRoot);
         }
 
@@ -220,41 +195,8 @@ public class FollowController implements Initializable {
             }
 
             UserController userController = fxmlLoader.getController();
-            userController.setUsernameLbl("@" + followingJsonNode.get("followed").asText());
-//            userController.setFollowBtn("Unfollow");
-            HttpResponse followingInfoResponse;
-            HttpResponse followingBioResponse;
-            try {
-                followingInfoResponse = HttpController.sendRequest("http://localhost:8080/api/users/" + followingJsonNode.get("followed").asText(), HttpMethod.GET, null, null);
-                followingBioResponse = HttpController.sendRequest("http://localhost:8080/api/users/" + followingJsonNode.get("followed").asText() + "/bio", HttpMethod.GET, null, null);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-
-            try {
-                URL url2 = new URL("http://localhost:8080/api/users/" + followingJsonNode.get("followed").asText() + "/profile-image");
-                HttpURLConnection conn = (HttpURLConnection) url2.openConnection();
-                conn.setRequestMethod("GET");
-                conn.setDoOutput(true);
-                conn.setUseCaches(false);
-                InputStream inputStream = conn.getInputStream();
-                Image image = new Image(inputStream);
-                userController.setAvatar(image);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-
-            JsonNode followingInfoJson = null;
-            JsonNode followingBioJson = null;
-            try {
-                followingInfoJson = objectMapper.readTree(followingInfoResponse.getBody());
-                followingBioJson = objectMapper.readTree(followingBioResponse.getBody());
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-
-            userController.setFullNameLbl(followingInfoJson.get("firstName").asText() + " " + followingInfoJson.get("lastName").asText());
-            userController.setBioLbl(followingBioJson.get("biography").asText());
+            userController.setMainController(mainController);
+            userController.fillUser(followingJsonNode.get("followed").asText());
             followingVbox.getChildren().add(followingRoot);
         }
     }
