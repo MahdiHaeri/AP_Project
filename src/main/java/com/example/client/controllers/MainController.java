@@ -137,10 +137,9 @@ public class MainController implements Initializable {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/client/profile.fxml"));
             String username = JWTController.getSubjectFromJwt(JWTController.getJwtKey());
-
-
             Parent profileRoot = fxmlLoader.load();
             ProfileController profileController = fxmlLoader.getController();
+            profileController.fillProfile(username);
             profileController.setParentController(this);
             rootBp.setCenter(profileRoot);
         } catch (IOException e) {

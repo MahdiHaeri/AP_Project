@@ -173,7 +173,115 @@ public class ProfileController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        String username = JWTController.getSubjectFromJwt(JWTController.getJwtKey());
+//        String username = JWTController.getSubjectFromJwt(JWTController.getJwtKey());
+//        fillProfile(username);
+//        HttpResponse response = null;
+//        try {
+//            response = HttpController.sendRequest("http://localhost:8080/api/users/" + username, HttpMethod.GET, null, null);
+//        } catch (IOException e) {
+//            throw new RuntimeException(e);
+//        }
+//
+//        // Parse the JSON response
+//        ObjectMapper objectMapper = new ObjectMapper();
+//        JsonNode userJson = null;
+//        try {
+//            userJson = objectMapper.readTree(response.getBody());
+//        } catch (JsonProcessingException e) {
+//            throw new RuntimeException(e);
+//        }
+//
+//        // Set the labels
+//        usernameLbl.setText("@" + userJson.get("id").asText());
+//        fullNameLbl.setText(userJson.get("firstName").asText() + " " + userJson.get("lastName").asText());
+//        DateLbl.setText(TimestampController.formatTimestamp(userJson.get("createdAt").asLong()));
+//
+//        // set Followers and Following Count
+//        try {
+//            response = HttpController.sendRequest("http://localhost:8080/api/users/" + username + "/followers", HttpMethod.GET, null, null);
+//        } catch (IOException e) {
+//            throw new RuntimeException(e);
+//        }
+//
+//        // Parse the JSON response
+//        JsonNode followers = null;
+//        try {
+//            followers = objectMapper.readTree(response.getBody());
+//        } catch (JsonProcessingException e) {
+//            throw new RuntimeException(e);
+//        }
+//
+//        int followerCount = 0;
+//        for (JsonNode followerJson: followers) {
+//            followerCount++;
+//        }
+//
+//        followerCountLbl.setText(Integer.toString(followerCount));
+//
+//        try {
+//            response = HttpController.sendRequest("http://localhost:8080/api/users/" + username + "/following", HttpMethod.GET, null, null);
+//        } catch (IOException e) {
+//            throw new RuntimeException(e);
+//        }
+//
+//        // Parse the JSON response
+//        JsonNode followings = null;
+//        try {
+//            followings = objectMapper.readTree(response.getBody());
+//        } catch (JsonProcessingException e) {
+//            throw new RuntimeException(e);
+//        }
+//
+//        int followingCount = 0;
+//        for (JsonNode followerJson: followings) {
+//            followingCount++;
+//        }
+//        followingCountLbl.setText(Integer.toString(followerCount));
+//
+//        // set bio
+//        try {
+//            response = HttpController.sendRequest("http://localhost:8080/api/users/" + username + "/bio", HttpMethod.GET, null, null);
+//        } catch (IOException e) {
+//            throw new RuntimeException(e);
+//        }
+//
+//        if (!response.getBody().equals("{}")) {
+//            JsonNode bioJson = null;
+//            try {
+//                bioJson = objectMapper.readTree(response.getBody());
+//            } catch (JsonProcessingException e) {
+//                throw new RuntimeException(e);
+//            }
+//
+//            bioLbl.setText(bioJson.get("biography").asText());
+//            locationLbl.setText(bioJson.get("location").asText());
+//        }
+//
+//        // Set the avatar and header image
+//        try {
+//            URL url2 = new URL("http://localhost:8080/api/users/" + username + "/profile-image");
+//            HttpURLConnection conn = (HttpURLConnection) url2.openConnection();
+//            conn.setRequestMethod("GET");
+//            conn.setDoOutput(true);
+//            conn.setUseCaches(false);
+//            InputStream inputStream = conn.getInputStream();
+//            Image image = new Image(inputStream);
+//            avatar.setImage(image);
+//        } catch (IOException e) {
+//            throw new RuntimeException(e);
+//        }
+//
+//        try {
+//            // Get the current timestamp as the cache buster
+//            long cacheBuster = System.currentTimeMillis();
+//            URL url3 = new URL("http://localhost:8080/api/users/" + username + "/header-image" + "?" + cacheBuster);
+//            headerImagePane.setStyle("-fx-background-image: url('" + url3 + "'); -fx-background-repeat: no-repeat; -fx-background-size: cover; -fx-background-position: center center;");
+//        } catch (IOException e) {
+//            throw new RuntimeException(e);
+//        }
+    }
+
+    public void fillProfile(String username) {
         HttpResponse response = null;
         try {
             response = HttpController.sendRequest("http://localhost:8080/api/users/" + username, HttpMethod.GET, null, null);
