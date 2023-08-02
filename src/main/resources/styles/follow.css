@@ -43,7 +43,7 @@
     -fx-text-fill: #999;
     -fx-background-color: transparent;
     -fx-font-size: 14px;
-    -fx-padding: 0 100 0 100;
+    /*-fx-padding: 0 100 0 105;*/
 }
 
 .tab {
