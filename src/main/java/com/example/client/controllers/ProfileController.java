@@ -306,7 +306,7 @@ public class ProfileController implements Initializable {
         for (JsonNode followerJson: followings) {
             followingCount++;
         }
-        followingCountLbl.setText(Integer.toString(followerCount));
+        followingCountLbl.setText(Integer.toString(followingCount));
 
         // set bio
         try {
