@@ -117,7 +117,7 @@ public class FollowController implements Initializable {
             }
 
             UserController userController = fxmlLoader.getController();
-            userController.setUsernameLbl(followerJson.get("follower").asText());
+            userController.setUsernameLbl("@" + followerJson.get("follower").asText());
             userController.setFollowBtn("Unfollow");
             HttpResponse followerInfoResponse;
             HttpResponse followerBioResponse;

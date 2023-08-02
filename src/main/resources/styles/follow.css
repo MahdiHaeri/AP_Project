@@ -84,12 +84,21 @@
 
 .scroll-pane {
     -fx-background-color: #111;
+    -fx-fit-to-width: true;
+    -fx-fit-to-height: true;
 }
 
 .scroll-bar > .corner {
-    -fx-background-color: black;
+    -fx-background-color: #111;
 }
 
 .scroll-bar {
     -fx-background-color: #111;
+}
+
+.vbox {
+    -fx-background-color: #111;
+    -fx-fit-to-width: true;
+    -fx-fit-to-height: true;
+    -fx-padding: 0 150 0 150;
 }

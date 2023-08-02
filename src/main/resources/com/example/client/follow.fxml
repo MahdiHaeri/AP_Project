@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@../../../styles/follow.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="638.0" prefWidth="905.0" stylesheets="@../../../styles/follow.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.client.controllers.FollowController">
    <top>
       <BorderPane prefHeight="36.0" prefWidth="600.0" styleClass="header" BorderPane.alignment="CENTER">
          <center>
@@ -41,9 +41,9 @@
         <tabs>
           <Tab text="Followers you know">
                <content>
-                  <ScrollPane prefHeight="200.0" prefWidth="200.0">
+                  <ScrollPane>
                      <content>
-                        <VBox fx:id="FollowersYouKnowVbox" prefHeight="321.0" prefWidth="600.0" />
+                        <VBox fx:id="FollowersYouKnowVbox" maxWidth="1.7976931348623157E308" prefHeight="327.0" prefWidth="594.0" styleClass="vbox" />
                      </content>
                   </ScrollPane>
                </content>
@@ -52,16 +52,16 @@
                <content>
                   <ScrollPane prefHeight="200.0" prefWidth="200.0">
                      <content>
-                        <VBox fx:id="FollowersVbox" prefHeight="323.0" prefWidth="599.0" />
+                        <VBox fx:id="FollowersVbox" maxWidth="1.7976931348623157E308" prefHeight="323.0" prefWidth="599.0" styleClass="vbox" />
                      </content>
                   </ScrollPane>
                </content>
             </Tab>
             <Tab text="Following">
                <content>
-                  <ScrollPane prefHeight="200.0" prefWidth="200.0">
+                  <ScrollPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="200.0" prefWidth="200.0">
                      <content>
-                        <VBox prefHeight="323.0" prefWidth="600.0" />
+                        <VBox maxWidth="1.7976931348623157E308" prefHeight="323.0" prefWidth="600.0" styleClass="vbox" />
                      </content>
                   </ScrollPane>
                </content>
