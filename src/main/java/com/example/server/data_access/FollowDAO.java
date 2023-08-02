@@ -53,7 +53,8 @@ public class FollowDAO {
         return follows;
     }
 
-    public ArrayList<Follow> getFollowers(String userId) throws SQLException { PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM follows WHERE followed = ?");
+    public ArrayList<Follow> getFollowers(String userId) throws SQLException {
+        PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM follows WHERE followed = ?");
         preparedStatement.setString(1, userId);
         ResultSet resultSet = preparedStatement.executeQuery();
         ArrayList<Follow> follows = new ArrayList<>();

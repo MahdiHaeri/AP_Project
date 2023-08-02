@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#onRootMouseClicked" prefHeight="74.0" prefWidth="600.0" stylesheets="@../../../styles/userStyle.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.client.controllers.UserController">
+<BorderPane minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#onRootMouseClicked" prefHeight="70.0" prefWidth="500.0" stylesheets="@../../../styles/userStyle.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.client.controllers.UserController">
    <left>
       <GNAvatarView fx:id="avatar" prefHeight="57.0" prefWidth="47.0" strokeWidth="0.0" styleClass="avatar" type="CIRCLE" BorderPane.alignment="CENTER">
          <image>

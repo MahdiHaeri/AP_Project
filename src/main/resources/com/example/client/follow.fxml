@@ -43,7 +43,7 @@
                <content>
                   <ScrollPane>
                      <content>
-                        <VBox fx:id="FollowersYouKnowVbox" maxWidth="1.7976931348623157E308" prefHeight="327.0" prefWidth="594.0" styleClass="vbox" />
+                        <VBox fx:id="FollowersYouKnowVbox" maxWidth="1.7976931348623157E308" prefHeight="327.0" prefWidth="594.0" spacing="10.0" styleClass="vbox" />
                      </content>
                   </ScrollPane>
                </content>
@@ -52,7 +52,7 @@
                <content>
                   <ScrollPane prefHeight="200.0" prefWidth="200.0">
                      <content>
-                        <VBox fx:id="FollowersVbox" maxWidth="1.7976931348623157E308" prefHeight="323.0" prefWidth="599.0" styleClass="vbox" />
+                        <VBox fx:id="FollowersVbox" maxWidth="1.7976931348623157E308" prefHeight="323.0" prefWidth="599.0" spacing="10.0" styleClass="vbox" />
                      </content>
                   </ScrollPane>
                </content>
@@ -61,7 +61,7 @@
                <content>
                   <ScrollPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="200.0" prefWidth="200.0">
                      <content>
-                        <VBox maxWidth="1.7976931348623157E308" prefHeight="323.0" prefWidth="600.0" styleClass="vbox" />
+                        <VBox maxWidth="1.7976931348623157E308" prefHeight="323.0" prefWidth="600.0" spacing="10.0" styleClass="vbox" />
                      </content>
                   </ScrollPane>
                </content>

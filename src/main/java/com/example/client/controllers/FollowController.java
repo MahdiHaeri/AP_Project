@@ -12,9 +12,12 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
 import javafx.scene.layout.VBox;
 
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -118,12 +121,25 @@ public class FollowController implements Initializable {
 
             UserController userController = fxmlLoader.getController();
             userController.setUsernameLbl("@" + followerJson.get("follower").asText());
-            userController.setFollowBtn("Unfollow");
+//            userController.setFollowBtn("Unfollow");
             HttpResponse followerInfoResponse;
             HttpResponse followerBioResponse;
             try {
                 followerInfoResponse = HttpController.sendRequest("http://localhost:8080/api/users/" + followerJson.get("follower").asText(), HttpMethod.GET, null, null);
                 followerBioResponse = HttpController.sendRequest("http://localhost:8080/api/users/" + followerJson.get("follower").asText() + "/bio", HttpMethod.GET, null, null);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+
+            try {
+                URL url2 = new URL("http://localhost:8080/api/users/" + followerJson.get("follower").asText() + "/profile-image");
+                HttpURLConnection conn = (HttpURLConnection) url2.openConnection();
+                conn.setRequestMethod("GET");
+                conn.setDoOutput(true);
+                conn.setUseCaches(false);
+                InputStream inputStream = conn.getInputStream();
+                Image image = new Image(inputStream);
+                userController.setAvatar(image);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
@@ -140,6 +156,7 @@ public class FollowController implements Initializable {
             userController.setFullNameLbl(followerInfoJson.get("firstName").asText() + " " + followerInfoJson.get("lastName").asText());
             userController.setBioLbl(followerBioJson.get("biography").asText());
             FollowersVbox.getChildren().add(followerRoot);
+
         }
     }
 }

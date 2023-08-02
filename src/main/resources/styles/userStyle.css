@@ -2,7 +2,7 @@
     /*-fx-background-color: TRANSPARENT;*/
     -fx-background-color: #111;
     /*-fx-padding: 0 200 0 200;*/
-    /*-fx-padding: 10px;*/
+    -fx-padding: 10px;
 }
 
 .white-text {
