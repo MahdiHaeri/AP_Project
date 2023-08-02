@@ -14,7 +14,7 @@
    <top>
       <BorderPane prefHeight="36.0" prefWidth="600.0" styleClass="header" BorderPane.alignment="CENTER">
          <center>
-            <Label styleClass="white-text" text="username" BorderPane.alignment="CENTER">
+            <Label fx:id="usernameLbl" styleClass="white-text" text="username" BorderPane.alignment="CENTER">
                <font>
                   <Font size="16.0" />
                </font>

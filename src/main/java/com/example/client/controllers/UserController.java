@@ -216,6 +216,11 @@ public class UserController implements Initializable {
         }
 
         setFullNameLbl(followerInfoJson.get("firstName").asText() + " " + followerInfoJson.get("lastName").asText());
-        setBioLbl(followerBioJson.get("biography").asText());
+
+        if (followerBioJson.toString().equals("{}")) {
+            setBioLbl("");
+        } else {
+            setBioLbl(followerBioJson.get("biography").asText());
+        }
     }
 }

@@ -11,6 +11,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.layout.VBox;
@@ -47,6 +48,9 @@ public class FollowController implements Initializable {
 
     @FXML
     private TabPane tabPane;
+
+    @FXML
+    private Label usernameLbl;
     private MainController mainController;
 
     public void setMainController(MainController mainController) {
@@ -55,6 +59,14 @@ public class FollowController implements Initializable {
 
     public MainController getMainController() {
         return mainController;
+    }
+
+    public String getUsernameLbl() {
+        return usernameLbl.getText();
+    }
+
+    public void setUsernameLbl(String username) {
+        this.usernameLbl.setText(username);
     }
 
     public Tab getFollowersTab() {
@@ -141,6 +153,7 @@ public class FollowController implements Initializable {
     }
 
     public void fillFollow(String username) {
+        setUsernameLbl(username);
         HttpResponse followers;
         HttpResponse following;
 //        HttpResponse followersYouKnow;
