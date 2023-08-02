@@ -131,7 +131,39 @@ public class ProfileController implements Initializable {
 
     @FXML
     void onFollowBtnAction(ActionEvent event) {
+        if (followBtn.getText().equals("Follow")) {
+            follow();
+        } else {
+            unfollow();
+        }
+    }
 
+    private void unfollow() {
+        HttpResponse response = null;
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("Authorization", "Bearer " + JWTController.getJwtKey());
+        try {
+            response = HttpController.sendRequest("http://localhost:8080/api/users/" + getUsernameLbl() + "/unfollow", HttpMethod.POST, "", headers);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        if (response.getStatusCode() >= 200 && response.getStatusCode() < 300) {
+            followBtn.setText("Follow");
+        }
+    }
+
+    private void follow() {
+        HttpResponse response = null;
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("Authorization", "Bearer " + JWTController.getJwtKey());
+        try {
+            response = HttpController.sendRequest("http://localhost:8080/api/users/" + getUsernameLbl() + "/follow", HttpMethod.POST, "", headers);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        if (response.getStatusCode() >= 200 && response.getStatusCode() < 300) {
+            followBtn.setText("Unfollow");
+        }
     }
 
     @FXML
@@ -166,6 +198,31 @@ public class ProfileController implements Initializable {
         }
     }
 
+    public boolean isFollowing(String username) {
+        String usernameFromJwt = JWTController.getSubjectFromJwt(JWTController.getJwtKey());
+        HttpResponse response = null;
+        try {
+            response = HttpController.sendRequest("http://localhost:8080/api/users/" + usernameFromJwt + "/following", HttpMethod.GET, "", null);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        if (response.getStatusCode() >= 200 && response.getStatusCode() < 300) {
+            ObjectMapper objectMapper = new ObjectMapper();
+            JsonNode jsonNode = null;
+            try {
+                jsonNode = objectMapper.readTree(response.getBody());
+            } catch (JsonProcessingException e) {
+                throw new RuntimeException(e);
+            }
+            for (JsonNode node : jsonNode) {
+                if (node.get("followed").asText().equals(username)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
@@ -181,6 +238,11 @@ public class ProfileController implements Initializable {
             editProfileBtn.setVisible(false);
             followBtn.setVisible(true);
             blockBtn.setVisible(true);
+            if (isFollowing(username)) {
+                followBtn.setText("Unfollow");
+            } else {
+                followBtn.setText("Follow");
+            }
         }
 
         HttpResponse response = null;
