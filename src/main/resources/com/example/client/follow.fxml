@@ -37,9 +37,9 @@
       </BorderPane>
    </top>
    <center>
-      <TabPane cache="true" prefHeight="200.0" prefWidth="200.0" rotateGraphic="true" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
+      <TabPane fx:id="tabPane" cache="true" prefHeight="200.0" prefWidth="200.0" rotateGraphic="true" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
         <tabs>
-          <Tab text="Followers you know">
+          <Tab fx:id="followingYouKnowTab" text="Followers you know">
                <content>
                   <ScrollPane>
                      <content>
@@ -48,7 +48,7 @@
                   </ScrollPane>
                </content>
             </Tab>
-          <Tab text="Followers">
+          <Tab fx:id="followersTab" text="Followers">
                <content>
                   <ScrollPane prefHeight="200.0" prefWidth="200.0">
                      <content>
@@ -57,7 +57,7 @@
                   </ScrollPane>
                </content>
             </Tab>
-            <Tab text="Following">
+            <Tab fx:id="followingTab" text="Following">
                <content>
                   <ScrollPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="200.0" prefWidth="200.0">
                      <content>

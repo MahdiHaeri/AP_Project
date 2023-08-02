@@ -129,6 +129,7 @@ public class ProfileController implements Initializable {
             Parent followRoot = fxmlLoader.load();
             FollowController followController = fxmlLoader.getController();
             mainController.getRootBp().setCenter(followRoot);
+            followController.setSelectTab(followController.getFollowersTab());
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -141,6 +142,7 @@ public class ProfileController implements Initializable {
             Parent followRoot = fxmlLoader.load();
             FollowController followController = fxmlLoader.getController();
             mainController.getRootBp().setCenter(followRoot);
+            followController.setSelectTab(followController.getFollowingTab());
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

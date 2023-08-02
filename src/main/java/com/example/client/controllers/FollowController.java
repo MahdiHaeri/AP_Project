@@ -12,6 +12,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
+import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
 import javafx.scene.image.Image;
 import javafx.scene.layout.VBox;
 
@@ -38,6 +40,53 @@ public class FollowController implements Initializable {
     @FXML
     private Button backBtn;
 
+    @FXML
+    private Tab followersTab;
+
+    @FXML
+    private Tab followingTab;
+
+    @FXML
+    private Tab followingYouKnowTab;
+
+    @FXML
+    private TabPane tabPane;
+
+    public Tab getFollowersTab() {
+        return followersTab;
+    }
+
+    public void setFollowersTab(Tab followersTab) {
+        this.followersTab = followersTab;
+    }
+
+    public Tab getFollowingTab() {
+        return followingTab;
+    }
+
+    public void setFollowingTab(Tab followingTab) {
+        this.followingTab = followingTab;
+    }
+
+    public Tab getFollowingYouKnowTab() {
+        return followingYouKnowTab;
+    }
+
+    public void setFollowingYouKnowTab(Tab followingYouKnowTab) {
+        this.followingYouKnowTab = followingYouKnowTab;
+    }
+
+    public TabPane getTabPane() {
+        return tabPane;
+    }
+
+    public void setTabPane(TabPane tabPane) {
+        this.tabPane = tabPane;
+    }
+
+    public void setSelectTab(Tab tab) {
+        tabPane.getSelectionModel().select(tab);
+    }
 
     public String getConnectBtn() {
         return ConnectBtn.getText();
