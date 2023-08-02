@@ -6,6 +6,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -46,7 +47,7 @@ public class MainController implements Initializable {
     private Button profileBtn;
 
     @FXML
-    public BorderPane rootBp;
+    private BorderPane rootBp;
 
     @FXML
     private Button tweetBtn;
@@ -57,6 +58,14 @@ public class MainController implements Initializable {
 
     @FXML
     private Button logoutBtn;
+
+    public BorderPane getRootBp() {
+        return rootBp;
+    }
+
+    public void setCenter(Parent parent) {
+        rootBp.setCenter(parent);
+    }
 
     @FXML
     void onBookmarksBtnAction(ActionEvent event) {
@@ -127,11 +136,12 @@ public class MainController implements Initializable {
     void onProfileBtnAction(ActionEvent event) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/client/profile.fxml"));
-            ProfileController profileController = fxmlLoader.getController();
             String username = JWTController.getSubjectFromJwt(JWTController.getJwtKey());
 
 
             Parent profileRoot = fxmlLoader.load();
+            ProfileController profileController = fxmlLoader.getController();
+            profileController.setParentController(this);
             rootBp.setCenter(profileRoot);
         } catch (IOException e) {
             throw new RuntimeException(e);

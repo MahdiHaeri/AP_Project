@@ -1,0 +1,104 @@
+.root {
+    -fx-background-color: #111;
+}
+
+.white-text {
+    -fx-text-fill: white;
+}
+
+.header {
+    -fx-padding: 5px;
+}
+
+.icon_button {
+    -fx-background-color: transparent;
+    -fx-padding: 5px;
+}
+
+.icon_button:pressed .icon{
+    -fx-fill: #666;
+}
+
+.icon {
+    -fx-fill: #ddd;
+}
+
+.tab-pane {
+    /*-fx-tab-min-height: 30px;*/
+    /*-fx-tab-max-height: 30px;*/
+
+    -fx-fit-to-width: true;
+    -fx-fit-to-height: true;
+
+    -fx-background-color: transparent;
+    -fx-border-width: 1 0 0 0;
+    -fx-border-color: #222;
+}
+
+.tab-pane .tab-header-area .tab-header-background {
+    -fx-background-color: transparent;
+}
+
+.tab .tab-label {
+    -fx-text-fill: #999;
+    -fx-background-color: transparent;
+    -fx-font-size: 14px;
+    /*-fx-padding: 0 100 0 105;*/
+}
+
+.tab {
+    -fx-background-color: transparent;
+    -fx-pref-height: 30px;
+    -fx-fill: white;
+    /*-fx-background-insets: 0;*/
+    -fx-background-insets: 0 2 0 0, 0 5 0 0, 1 6 0 0 ;
+}
+
+.tab:selected .tab-label{
+    -fx-text-fill: white;
+    -fx-background-insets: 0;
+}
+
+.tab:selected {
+    -fx-border-width: 0 0 2 0;
+    -fx-border-color: #1DA1F2;
+}
+
+.tab-pane > .tab-header-area > .headers-region > .tab:selected .focus-indicator {
+    -fx-border-color: transparent;
+}
+
+
+
+
+/* change the scroller bar color*/
+.scroll-bar:vertical .thumb {
+    -fx-background-color: #333;
+}
+
+/* remove up and down button from scroll bar*/
+.scroll-bar:vertical .increment-arrow, .scroll-bar:vertical .decrement-arrow {
+    -fx-background-color: transparent;
+    -fx-fill: transparent;
+}
+
+.scroll-pane {
+    -fx-background-color: #111;
+    -fx-fit-to-width: true;
+    -fx-fit-to-height: true;
+}
+
+.scroll-bar > .corner {
+    -fx-background-color: #111;
+}
+
+.scroll-bar {
+    -fx-background-color: #111;
+}
+
+.vbox {
+    -fx-background-color: #111;
+    /*-fx-fit-to-width: true;*/
+    /*-fx-fit-to-height: true;*/
+    -fx-padding: 0 200 0 200;
+}

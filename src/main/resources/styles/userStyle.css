@@ -1,0 +1,30 @@
+.root {
+    /*-fx-background-color: TRANSPARENT;*/
+    -fx-background-color: #111;
+    /*-fx-padding: 0 200 0 200;*/
+    -fx-padding: 10px;
+}
+
+.white-text {
+    -fx-text-fill: white;
+}
+
+.light-gray-text {
+    -fx-text-fill: #666;
+}
+
+.avatar {
+}
+
+.main-container {
+    -fx-padding: 10px;
+}
+
+.button {
+    -fx-padding: 3 30 3 30;
+    -fx-background-radius: 50px;
+    -fx-border-radius: 50px;
+    -fx-background-color: white;
+    -fx-text-fill: black;
+}
+

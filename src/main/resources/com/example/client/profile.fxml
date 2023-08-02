@@ -60,12 +60,26 @@
                         </HBox>
                      </children>
                   </VBox>
-                  <HBox prefHeight="100.0" prefWidth="200.0" spacing="10.0">
+                  <HBox prefHeight="100.0" prefWidth="200.0" spacing="5.0">
                      <children>
-                        <Label fx:id="followingCountLbl" styleClass="light-text" text="23" />
-                        <Label fx:id="followingLbl" styleClass="dark-text" text="Following" />
-                        <Label fx:id="followerCountLbl" styleClass="light-text" text="44" />
-                        <Label fx:id="followerLbl" styleClass="dark-text" text="Follower" />
+                        <Button fx:id="followingBtn" mnemonicParsing="false" onAction="#onFollowingBtnAction" text="Following">
+                           <graphic>
+                              <Label fx:id="followingCountLbl" styleClass="light-text" text="23" />
+                           </graphic>
+                           <styleClass>
+                              <String fx:value="dark-text" />
+                              <String fx:value="follow-button" />
+                           </styleClass>
+                        </Button>
+                        <Button fx:id="followersBtn" mnemonicParsing="false" onAction="#onFollowersBtnAction" text="Followers">
+                           <graphic>
+                              <Label fx:id="followerCountLbl" styleClass="light-text" text="44" />
+                           </graphic>
+                           <styleClass>
+                              <String fx:value="dark-text" />
+                              <String fx:value="follow-button" />
+                           </styleClass>
+                        </Button>
                      </children>
                   </HBox>
                </children>

@@ -25,12 +25,13 @@
     -fx-text-fill: #666;
 }
 
+
 .information-vbox {
     -fx-padding: 10px;
 }
 
 .controller-button {
-    -fx-background-color: #111;
+    -fx-background-color: transparent;
     -fx-background-radius: 50px;
     -fx-border-radius: 50px;
     -fx-border-color: #333;
@@ -39,6 +40,18 @@
 
 .controller-button:hover {
     -fx-background-color: #333;
+}
+
+.follow-button {
+    -fx-background-color: transparent;
+    -fx-background-radius: 10px;
+    -fx-border-radius: 10px;
+    -fx-border-color: transparent;
+    -fx-padding: 0px;
+}
+
+.follow-button:hover {
+    -fx-background-color: #222;
 }
 
 
@@ -74,8 +87,11 @@
 .tab:selected .tab-label{
     -fx-text-fill: white;
     -fx-background-insets: 0;
+}
+
+.tab:selected {
     -fx-border-width: 0 0 2 0;
-    -fx-border-color: #fff;
+    -fx-border-color: #1DA1F2;
 }
 
 .tab-pane > .tab-header-area > .headers-region > .tab:selected .focus-indicator {

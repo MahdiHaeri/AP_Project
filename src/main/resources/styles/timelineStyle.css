@@ -7,7 +7,6 @@
     -fx-background-color: #333;
 }
 
-
 /* remove up and down button from scroll bar*/
 .scroll-bar:vertical .increment-arrow, .scroll-bar:vertical .decrement-arrow {
     -fx-background-color: transparent;
