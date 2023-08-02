@@ -30,6 +30,7 @@ import java.util.ResourceBundle;
 import com.example.client.http.*;
 
 public class ProfileController implements Initializable {
+    MainController mainController;
 
     @FXML
     private Label DateLbl;
@@ -74,6 +75,18 @@ public class ProfileController implements Initializable {
 
     @FXML
     private Label usernameLbl;
+
+
+    @FXML
+    private Button followersBtn;
+
+    @FXML
+    private Button followingBtn;
+
+    public void setParentController(MainController mainController) {
+        this.mainController = mainController;
+    }
+
     @FXML
     void onBlockBtnAction(ActionEvent event) {
 
@@ -105,6 +118,22 @@ public class ProfileController implements Initializable {
 
     @FXML
     void onFollowBtnAction(ActionEvent event) {
+
+    }
+
+    @FXML
+    void onFollowersBtnAction(ActionEvent event) {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/client/follow.fxml"));
+        try {
+            Parent followRoot = fxmlLoader.load();
+            mainController.getRootBp().setCenter(followRoot);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @FXML
+    void onFollowingBtnAction(ActionEvent event) {
 
     }
 
