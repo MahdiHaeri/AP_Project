@@ -1,8 +1,11 @@
 package com.example.client.controllers;
 
 import com.example.client.http.HttpController;
+import com.example.client.http.HttpHeaders;
 import com.example.client.http.HttpMethod;
 import com.example.client.http.HttpResponse;
+import com.example.client.util.JWTController;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.github.gleidson28.GNAvatarView;
@@ -90,11 +93,6 @@ public class UserController implements Initializable {
     }
 
     @FXML
-    void onFollowBtnAction(ActionEvent event) {
-
-    }
-
-    @FXML
     void onRootMouseClicked(MouseEvent event) {
         String username = getUsernameLbl();
         try {
@@ -109,12 +107,80 @@ public class UserController implements Initializable {
         }
     }
 
+    @FXML
+    void onFollowBtnAction(ActionEvent event) {
+        if (followBtn.getText().equals("Follow")) {
+            follow();
+        } else {
+            unfollow();
+        }
+    }
+
+    private void unfollow() {
+        HttpResponse response = null;
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("Authorization", "Bearer " + JWTController.getJwtKey());
+        try {
+            response = HttpController.sendRequest("http://localhost:8080/api/users/" + getUsernameLbl() + "/unfollow", HttpMethod.POST, "", headers);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        if (response.getStatusCode() >= 200 && response.getStatusCode() < 300) {
+            followBtn.setText("Follow");
+        }
+    }
+
+    private void follow() {
+        HttpResponse response = null;
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("Authorization", "Bearer " + JWTController.getJwtKey());
+        try {
+            response = HttpController.sendRequest("http://localhost:8080/api/users/" + getUsernameLbl() + "/follow", HttpMethod.POST, "", headers);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        if (response.getStatusCode() >= 200 && response.getStatusCode() < 300) {
+            followBtn.setText("Unfollow");
+        }
+    }
+
+    public boolean isFollowing(String username) {
+        String usernameFromJwt = JWTController.getSubjectFromJwt(JWTController.getJwtKey());
+        HttpResponse response = null;
+        try {
+            response = HttpController.sendRequest("http://localhost:8080/api/users/" + usernameFromJwt + "/following", HttpMethod.GET, "", null);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        if (response.getStatusCode() >= 200 && response.getStatusCode() < 300) {
+            ObjectMapper objectMapper = new ObjectMapper();
+            JsonNode jsonNode = null;
+            try {
+                jsonNode = objectMapper.readTree(response.getBody());
+            } catch (JsonProcessingException e) {
+                throw new RuntimeException(e);
+            }
+            for (JsonNode node : jsonNode) {
+                if (node.get("followed").asText().equals(username)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
     }
 
     public void fillUser(String username) {
+        if (isFollowing(username)) {
+            followBtn.setText("Unfollow");
+        } else {
+            followBtn.setText("Follow");
+        }
+
         setUsernameLbl("@" + username);
 
         HttpResponse followerInfoResponse;

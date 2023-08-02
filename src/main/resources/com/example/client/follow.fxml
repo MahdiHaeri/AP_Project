@@ -48,20 +48,20 @@
                   </ScrollPane>
                </content>
             </Tab>
-          <Tab fx:id="followersTab" text="Followers">
-               <content>
-                  <ScrollPane prefHeight="200.0" prefWidth="200.0">
-                     <content>
-                        <VBox fx:id="FollowersVbox" maxWidth="1.7976931348623157E308" prefHeight="323.0" prefWidth="599.0" spacing="10.0" styleClass="vbox" />
-                     </content>
-                  </ScrollPane>
-               </content>
-            </Tab>
             <Tab fx:id="followingTab" text="Following">
                <content>
                   <ScrollPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="200.0" prefWidth="200.0">
                      <content>
                         <VBox fx:id="followingVbox" maxWidth="1.7976931348623157E308" prefHeight="323.0" prefWidth="600.0" spacing="10.0" styleClass="vbox" />
+                     </content>
+                  </ScrollPane>
+               </content>
+            </Tab>
+          <Tab fx:id="followersTab" text="Followers">
+               <content>
+                  <ScrollPane prefHeight="200.0" prefWidth="200.0">
+                     <content>
+                        <VBox fx:id="FollowersVbox" maxWidth="1.7976931348623157E308" prefHeight="323.0" prefWidth="599.0" spacing="10.0" styleClass="vbox" />
                      </content>
                   </ScrollPane>
                </content>
