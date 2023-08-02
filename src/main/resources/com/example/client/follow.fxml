@@ -61,7 +61,7 @@
                <content>
                   <ScrollPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="200.0" prefWidth="200.0">
                      <content>
-                        <VBox maxWidth="1.7976931348623157E308" prefHeight="323.0" prefWidth="600.0" spacing="10.0" styleClass="vbox" />
+                        <VBox fx:id="followingVbox" maxWidth="1.7976931348623157E308" prefHeight="323.0" prefWidth="600.0" spacing="10.0" styleClass="vbox" />
                      </content>
                   </ScrollPane>
                </content>

@@ -27,10 +27,13 @@ public class FollowController implements Initializable {
     private Button ConnectBtn;
 
     @FXML
+    private VBox FollowersYouKnowVbox;
+
+    @FXML
     private VBox FollowersVbox;
 
     @FXML
-    private VBox FollowersYouKnowVbox;
+    private VBox followingVbox;
 
     @FXML
     private Button backBtn;
@@ -156,7 +159,54 @@ public class FollowController implements Initializable {
             userController.setFullNameLbl(followerInfoJson.get("firstName").asText() + " " + followerInfoJson.get("lastName").asText());
             userController.setBioLbl(followerBioJson.get("biography").asText());
             FollowersVbox.getChildren().add(followerRoot);
+        }
 
+        for (JsonNode followingJsonNode : followingJson) {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/client/user.fxml"));
+            Parent followingRoot = null;
+            try {
+                followingRoot = fxmlLoader.load();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+
+            UserController userController = fxmlLoader.getController();
+            userController.setUsernameLbl("@" + followingJsonNode.get("followed").asText());
+//            userController.setFollowBtn("Unfollow");
+            HttpResponse followingInfoResponse;
+            HttpResponse followingBioResponse;
+            try {
+                followingInfoResponse = HttpController.sendRequest("http://localhost:8080/api/users/" + followingJsonNode.get("followed").asText(), HttpMethod.GET, null, null);
+                followingBioResponse = HttpController.sendRequest("http://localhost:8080/api/users/" + followingJsonNode.get("followed").asText() + "/bio", HttpMethod.GET, null, null);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+
+            try {
+                URL url2 = new URL("http://localhost:8080/api/users/" + followingJsonNode.get("followed").asText() + "/profile-image");
+                HttpURLConnection conn = (HttpURLConnection) url2.openConnection();
+                conn.setRequestMethod("GET");
+                conn.setDoOutput(true);
+                conn.setUseCaches(false);
+                InputStream inputStream = conn.getInputStream();
+                Image image = new Image(inputStream);
+                userController.setAvatar(image);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+
+            JsonNode followingInfoJson = null;
+            JsonNode followingBioJson = null;
+            try {
+                followingInfoJson = objectMapper.readTree(followingInfoResponse.getBody());
+                followingBioJson = objectMapper.readTree(followingBioResponse.getBody());
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+
+            userController.setFullNameLbl(followingInfoJson.get("firstName").asText() + " " + followingInfoJson.get("lastName").asText());
+            userController.setBioLbl(followingBioJson.get("biography").asText());
+            followingVbox.getChildren().add(followingRoot);
         }
     }
 }
