@@ -4,6 +4,7 @@ import com.example.client.http.HttpController;
 import com.example.client.http.HttpResponse;
 import com.example.client.util.JWTController;
 import com.example.client.util.TimestampController;
+import com.example.server.models.Follow;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -126,6 +127,7 @@ public class ProfileController implements Initializable {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/client/follow.fxml"));
         try {
             Parent followRoot = fxmlLoader.load();
+            FollowController followController = fxmlLoader.getController();
             mainController.getRootBp().setCenter(followRoot);
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -134,7 +136,14 @@ public class ProfileController implements Initializable {
 
     @FXML
     void onFollowingBtnAction(ActionEvent event) {
-
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/client/follow.fxml"));
+        try {
+            Parent followRoot = fxmlLoader.load();
+            FollowController followController = fxmlLoader.getController();
+            mainController.getRootBp().setCenter(followRoot);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public void fillProfile(JsonNode userJson, JsonNode followers, JsonNode followings, JsonNode bio) {
