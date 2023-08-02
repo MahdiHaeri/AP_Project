@@ -81,8 +81,12 @@ public class MainController implements Initializable {
     @FXML
     void onExploreBtnAction(ActionEvent event) {
         try {
+            String username = JWTController.getSubjectFromJwt(JWTController.getJwtKey());
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/client/timeline.fxml"));
             Parent timelineRoot = fxmlLoader.load();
+            TimelineController timelineController = fxmlLoader.getController();
+            timelineController.setMainController(this);
+            timelineController.fillTimeline(username);
             rootBp.setCenter(timelineRoot);
         } catch (IOException e) {
             throw new RuntimeException(e);
