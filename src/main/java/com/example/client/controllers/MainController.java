@@ -92,8 +92,12 @@ public class MainController implements Initializable {
     @FXML
     void onHomeBtnAction(ActionEvent event) {
         try {
+            String username = JWTController.getSubjectFromJwt(JWTController.getJwtKey());
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/client/timeline.fxml"));
             Parent timelineRoot = fxmlLoader.load();
+            TimelineController timelineController = fxmlLoader.getController();
+            timelineController.setMainController(this);
+            timelineController.fillTimeline(username);
             rootBp.setCenter(timelineRoot);
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -172,6 +176,9 @@ public class MainController implements Initializable {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/client/timeline.fxml"));
             Parent timelineRoot = fxmlLoader.load();
+            TimelineController timelineController = fxmlLoader.getController();
+            timelineController.setMainController(this);
+            timelineController.fillTimeline(JWTController.getSubjectFromJwt(JWTController.getJwtKey()));
             rootBp.setCenter(timelineRoot);
 
             FXMLLoader fxmlLoader2 = new FXMLLoader(getClass().getResource("/com/example/client/trends.fxml"));

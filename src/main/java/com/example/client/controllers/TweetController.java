@@ -5,11 +5,17 @@ import com.example.client.http.HttpHeaders;
 import com.example.client.http.HttpMethod;
 import com.example.client.http.HttpResponse;
 import com.example.client.util.JWTController;
+import com.example.client.util.TimestampController;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import io.github.gleidson28.GNAvatarView;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -17,6 +23,8 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -57,6 +65,16 @@ public class TweetController implements Initializable {
 
     @FXML
     private Label timestampLbl;
+
+    private MainController mainController;
+
+    public void setMainController(MainController mainController) {
+        this.mainController = mainController;
+    }
+
+    public MainController getMainController() {
+        return mainController;
+    }
 
     public String getTweetId() {
         return tweetId;
@@ -99,7 +117,7 @@ public class TweetController implements Initializable {
     }
 
     public String getOwnerUsernameLbl() {
-        return ownerUsernameLbl.getText();
+        return ownerUsernameLbl.getText().substring(1);
     }
 
     public void setOwnerUsernameLbl(String text) {
@@ -159,7 +177,17 @@ public class TweetController implements Initializable {
 
     @FXML
     void onAvatarViewClicked(MouseEvent event) {
-
+        String username = getOwnerUsernameLbl();
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/client/profile.fxml"));
+            Parent profileRoot = fxmlLoader.load();
+            ProfileController profileController = fxmlLoader.getController();
+            profileController.fillProfile(username);
+            profileController.setMainController(mainController);
+            mainController.setCenter(profileRoot);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @FXML
@@ -207,6 +235,88 @@ public class TweetController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
+    }
+
+    public void fillTweet(String tweetId, String username) {
+        // Set the tweet information on the controller
+        HttpResponse tweetResponse;
+        HttpResponse userResponse;
+        HttpResponse likeResponse;
+
+        try {
+            tweetResponse = HttpController.sendRequest("http://localhost:8080/api/tweets/" + tweetId, HttpMethod.GET, null, null);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        JsonNode tweetJson;
+        JsonNode usersJson;
+        try {
+            tweetJson = objectMapper.readTree(tweetResponse.getBody());
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
+
+        try {
+            userResponse = HttpController.sendRequest("http://localhost:8080/api/users/" + tweetJson.get("ownerId").asText(), HttpMethod.GET, null, null);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        try {
+            usersJson = objectMapper.readTree(userResponse.getBody());
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
+
+
+        setTweetId(tweetJson.get("tweetId").asText());
+        setTextMessageText(tweetJson.get("text").asText());
+        setOwnerUsernameLbl("@" + tweetJson.get("ownerId").asText());
+        setReplyBtn(tweetJson.get("replyCount").asText());
+        setRetweetBtn(tweetJson.get("retweetCount").asText());
+        setLikeBtn(tweetJson.get("likeCount").asText());
+        setOwnerNameLbl(usersJson.get("firstName").asText() + " " + usersJson.get("lastName").asText());
+        long createdAt = tweetJson.get("createdAt").asLong();
+        setTimestampLbl(TimestampController.formatTimestamp(createdAt));
+        // ... set other information on the controller
+
+        try {
+            URL url2 = new URL("http://localhost:8080/api/users/" + tweetJson.get("ownerId").asText() + "/profile-image");
+            HttpURLConnection conn = (HttpURLConnection) url2.openConnection();
+            conn.setRequestMethod("GET");
+            conn.setDoOutput(true);
+            conn.setUseCaches(false);
+            InputStream inputStream = conn.getInputStream();
+            Image image = new Image(inputStream);
+            setAvatarView(image);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        try {
+            likeResponse = HttpController.sendRequest("http://localhost:8080/api/tweets/" + tweetJson.get("tweetId").asText() + "/likes", HttpMethod.GET, null, null);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        JsonNode likesJson = null;
+        try {
+            likesJson = objectMapper.readTree(likeResponse.getBody());
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
+
+        int likeCount = 0;
+        for (JsonNode likeJson : likesJson) {
+            likeCount++;
+            if (likeJson.get("userId").asText().equals(username)) {
+                setTweetLiked();
+            }
+        }
+
+        setLikeBtn(Integer.toString(likeCount));
     }
 
     private void incrementLikeCount() {

@@ -27,12 +27,23 @@ public class TimelineController implements Initializable {
     @FXML
     private VBox tweetsVbox;
 
+    private MainController mainController;
+
+    public void setMainController(MainController mainController) {
+        this.mainController = mainController;
+    }
+
+    public MainController getMainController() {
+        return mainController;
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        String username = JWTController.getSubjectFromJwt(JWTController.getJwtKey());
+
+    }
+
+    public void fillTimeline(String username) {
         HttpResponse tweetResponse;
-        HttpResponse userResponse;
-        HttpResponse likeResponse;
         try {
             tweetResponse = HttpController.sendRequest("http://localhost:8080/api/tweets", HttpMethod.GET, null, null);
         } catch (IOException e) {
@@ -42,7 +53,6 @@ public class TimelineController implements Initializable {
         // Parse the JSON response
         ObjectMapper objectMapper = new ObjectMapper();
         JsonNode tweetsJson = null;
-        JsonNode usersJson = null;
         try {
             tweetsJson = objectMapper.readTree(tweetResponse.getBody());
         } catch (JsonProcessingException e) {
@@ -62,72 +72,8 @@ public class TimelineController implements Initializable {
 
             // Access the controller of the tweet FXML
             TweetController tweetController = fxmlLoader.getController();
-
-            // Set the tweet information on the controller
-
-            try {
-                userResponse = HttpController.sendRequest("http://localhost:8080/api/users/" + tweetJson.get("ownerId").asText(), HttpMethod.GET, null, null);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-
-            try {
-                usersJson = objectMapper.readTree(userResponse.getBody());
-            } catch (JsonProcessingException e) {
-                throw new RuntimeException(e);
-            }
-
-
-            tweetController.setTweetId(tweetJson.get("tweetId").asText());
-            tweetController.setTextMessageText(tweetJson.get("text").asText());
-            tweetController.setOwnerUsernameLbl("@" + tweetJson.get("ownerId").asText());
-            tweetController.setReplyBtn(tweetJson.get("replyCount").asText());
-            tweetController.setRetweetBtn(tweetJson.get("retweetCount").asText());
-            tweetController.setLikeBtn(tweetJson.get("likeCount").asText());
-            tweetController.setOwnerNameLbl(usersJson.get("firstName").asText() + " " + usersJson.get("lastName").asText());
-            long createdAt = tweetJson.get("createdAt").asLong();
-            tweetController.setTimestampLbl(TimestampController.formatTimestamp(createdAt));
-            // ... set other information on the controller
-
-            try {
-
-                URL url2 = new URL("http://localhost:8080/api/users/" + tweetJson.get("ownerId").asText() + "/profile-image");
-                HttpURLConnection conn = (HttpURLConnection) url2.openConnection();
-                conn.setRequestMethod("GET");
-                conn.setDoOutput(true);
-                conn.setUseCaches(false);
-                InputStream inputStream = conn.getInputStream();
-                Image image = new Image(inputStream);
-                tweetController.setAvatarView(image);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-
-            try {
-                likeResponse = HttpController.sendRequest("http://localhost:8080/api/tweets/" + tweetJson.get("tweetId").asText() + "/likes", HttpMethod.GET, null, null);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-
-            JsonNode likesJson = null;
-            try {
-                likesJson = objectMapper.readTree(likeResponse.getBody());
-            } catch (JsonProcessingException e) {
-                throw new RuntimeException(e);
-            }
-
-            int likeCount = 0;
-            for (JsonNode likeJson : likesJson) {
-                likeCount++;
-                if (likeJson.get("userId").asText().equals(username)) {
-                    tweetController.setTweetLiked();
-                }
-            }
-
-            tweetController.setLikeBtn(Integer.toString(likeCount));
-
-
-            // Add the tweet to the tweet box
+            tweetController.setMainController(mainController);
+            tweetController.fillTweet(tweetJson.get("tweetId").asText(), username);
             tweetsVbox.getChildren().add(tweetRoot);
         }
     }
