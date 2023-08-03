@@ -15,6 +15,8 @@ import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.HBox;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.FileChooser;
 
 import java.io.File;
@@ -41,6 +43,9 @@ public class CreateTweetController implements Initializable {
     @FXML
     private GNAvatarView avatar;
 
+    @FXML
+    private HBox imageContainerHbox;
+
 
     @FXML
     void onImageIconClicked(MouseEvent event) {
@@ -50,7 +55,18 @@ public class CreateTweetController implements Initializable {
         File selectedFile = fileChooser.showOpenDialog(imageIcon.getScene().getWindow());
         if (selectedFile != null) {
             Image image = new Image(selectedFile.toURI().toString());
-            ((ImageView)imageIcon.getParent().getChildrenUnmodifiable().get(3)).setImage(image);
+            ImageView imageView = new ImageView(image);
+            imageView.setFitWidth(250);
+            imageView.setFitHeight(180);
+            // radius of the image
+            // Create a Rectangle with rounded corners
+            Rectangle clipRectangle = new Rectangle(250, 180);
+            clipRectangle.setArcWidth(20);
+            clipRectangle.setArcHeight(20);
+            imageView.setClip(clipRectangle);
+
+
+            imageContainerHbox.getChildren().add(imageView);
         }
     }
 

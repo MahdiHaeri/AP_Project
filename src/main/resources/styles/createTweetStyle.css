@@ -21,7 +21,7 @@
 
 .text-area:focused .content {
     -fx-background-insets: 0;
-    -fx-background-color: #222;
+    -fx-background-color: #111;
     -fx-background-radius: 5;
 }
 
@@ -31,7 +31,7 @@
 
 .viewport {
     -fx-background-insets: 0;
-    -fx-background-color: #222;
+    -fx-background-color: transparent;
     -fx-background-radius: 5;
 
     -fx-focus-color: -fx-control-inner-background;
@@ -78,4 +78,40 @@
     -fx-background-color: transparent;
     -fx-background-radius: 50px;
     -fx-cursor: hand;
+}
+
+.image-container {
+    -fx-background-color: transparent;
+    -fx-background-radius: 50px;
+    -fx-cursor: hand;
+    -fx-fit-to-width: true;
+    -fx-fit-to-height: true;
+}
+
+.scroll-bar:vertical .thumb {
+    -fx-background-color: #333;
+}
+
+.scroll-bar:horizontal .thumb {
+    -fx-background-color: #333;
+}
+
+/* remove up and down button from scroll bar*/
+.scroll-bar:vertical .increment-arrow, .scroll-bar:vertical .decrement-arrow {
+    -fx-background-color: transparent;
+    -fx-fill: transparent;
+}
+
+/* remove up and down button from scroll bar*/
+.scroll-bar:horizontal .increment-arrow, .scroll-bar:horizontal .decrement-arrow {
+    -fx-background-color: transparent;
+    -fx-fill: transparent;
+}
+
+.scroll-pane {
+    -fx-background-color: transparent;
+}
+
+.scroll-bar > .corner {
+    -fx-background-color: black;
 }

@@ -3,6 +3,7 @@
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import io.github.gleidson28.GNAvatarView?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -44,6 +45,13 @@
                <top>
                   <AnchorPane prefHeight="41.0" prefWidth="418.0" BorderPane.alignment="CENTER" />
                </top>
+               <bottom>
+                  <ScrollPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                     <content>
+                        <HBox fx:id="imageContainerHbox" spacing="5.0" styleClass="image-container" />
+                     </content>
+                  </ScrollPane>
+               </bottom>
             </BorderPane>
          </center>
          <bottom>
