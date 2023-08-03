@@ -64,9 +64,13 @@ public class CreateTweetController implements Initializable {
             clipRectangle.setArcWidth(20);
             clipRectangle.setArcHeight(20);
             imageView.setClip(clipRectangle);
-
-
             imageContainerHbox.getChildren().add(imageView);
+            // if Hbox have 4 images disable the imageIcon
+            if (imageContainerHbox.getChildren().size() == 4) {
+                imageIcon.setDisable(true);
+                imageIcon.setStyle("-fx-opacity: 0.5;");
+            }
+
         }
     }
 

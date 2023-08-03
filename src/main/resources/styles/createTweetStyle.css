@@ -3,6 +3,8 @@
     -fx-padding: 10px;
 }
 
+.glyph-icon{ -fx-font-family:"FontAwesome"; }
+
 .text-area {
     -fx-background-insets: 0;
     -fx-background-color: #222;
