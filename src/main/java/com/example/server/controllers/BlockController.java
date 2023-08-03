@@ -50,10 +50,10 @@ public class BlockController {
         return response;
     }
 
-    public String getBlockings(String blockerId) throws SQLException, JsonProcessingException {
-        ArrayList<Block> blockings = blockDAO.getBlockings(blockerId);
+    public String getBlocking(String blockerId) throws SQLException, JsonProcessingException {
+        ArrayList<Block> blocking = blockDAO.getBlockings(blockerId);
         ObjectMapper objectMapper = new ObjectMapper();
-        String response = objectMapper.writeValueAsString(blockings);
+        String response = objectMapper.writeValueAsString(blocking);
         return response;
     }
 }
