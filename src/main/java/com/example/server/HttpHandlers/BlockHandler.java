@@ -35,7 +35,7 @@ public class BlockHandler {
 
     public Object handleGetBlocking(Request request, Response response) {
         try {
-            return blockController.getBlockings(request.params(":username"));
+            return blockController.getBlocking(request.params(":username"));
         } catch (Exception e) {
             response.status(500);
             return e.getMessage();

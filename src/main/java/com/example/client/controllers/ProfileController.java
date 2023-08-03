@@ -104,7 +104,46 @@ public class ProfileController implements Initializable {
 
     @FXML
     void onBlockBtnAction(ActionEvent event) {
+        if (blockBtn.getText().equals("Block")) {
+            block();
+            if (followBtn.getText().equals("Unfollow")) {
+                unfollow();
+            }
+        } else {
+            unblock();
+        }
+    }
 
+    private void block() {
+        HttpResponse response = null;
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("Authorization", "Bearer " + JWTController.getJwtKey());
+        try {
+            response = HttpController.sendRequest("http://localhost:8080/api/users/" + getUsernameLbl() + "/block", HttpMethod.POST, "", headers);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        if (response.getStatusCode() >= 200 && response.getStatusCode() < 300) {
+            blockBtn.setText("Unblock");
+        } else {
+            System.out.println("Error: " + response.getStatusCode());
+        }
+    }
+
+    private void unblock() {
+        HttpResponse response = null;
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("Authorization", "Bearer " + JWTController.getJwtKey());
+        try {
+            response = HttpController.sendRequest("http://localhost:8080/api/users/" + getUsernameLbl() + "/unblock", HttpMethod.POST, "", headers);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        if (response.getStatusCode() >= 200 && response.getStatusCode() < 300) {
+            blockBtn.setText("Block");
+        } else {
+            System.out.println("Error: " + response.getStatusCode());
+        }
     }
 
     @FXML
@@ -138,6 +177,9 @@ public class ProfileController implements Initializable {
     @FXML
     void onFollowBtnAction(ActionEvent event) {
         if (followBtn.getText().equals("Follow")) {
+            if (blockBtn.getText().equals("Unblock")) {
+                unblock();
+            }
             follow();
         } else {
             unfollow();
@@ -229,6 +271,31 @@ public class ProfileController implements Initializable {
         return false;
     }
 
+    public boolean isBlocked(String username) {
+        String usernameFromJwt = JWTController.getSubjectFromJwt(JWTController.getJwtKey());
+        HttpResponse response = null;
+        try {
+            response = HttpController.sendRequest("http://localhost:8080/api/users/" + usernameFromJwt + "/blocking", HttpMethod.GET, "", null);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        if (response.getStatusCode() >= 200 && response.getStatusCode() < 300) {
+            ObjectMapper objectMapper = new ObjectMapper();
+            JsonNode jsonNode = null;
+            try {
+                jsonNode = objectMapper.readTree(response.getBody());
+            } catch (JsonProcessingException e) {
+                throw new RuntimeException(e);
+            }
+            for (JsonNode node : jsonNode) {
+                if (node.get("blocked").asText().equals(username)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
@@ -248,6 +315,12 @@ public class ProfileController implements Initializable {
                 followBtn.setText("Unfollow");
             } else {
                 followBtn.setText("Follow");
+            }
+
+            if (isBlocked(username)) {
+                blockBtn.setText("Unblock");
+            } else {
+                blockBtn.setText("Block");
             }
         }
 

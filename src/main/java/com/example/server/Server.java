@@ -63,9 +63,9 @@ public class Server {
         get("/api/follows", followHandler::handleGetFollows);
 
 
-        get("/api/blocks", blockHandler::handleGetBlocks);
         post("/api/users/:username/block", blockHandler::handlePostBlock);
         post("/api/users/:username/unblock", blockHandler::handlePostUnblock);
+        get("/api/blocks", blockHandler::handleGetBlocks);
         get("/api/users/:username/blockers", blockHandler::handleGetBlockers);
         get("/api/users/:username/blocking", blockHandler::handleGetBlocking);
 
