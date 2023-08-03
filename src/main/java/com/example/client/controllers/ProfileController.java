@@ -81,6 +81,8 @@ public class ProfileController implements Initializable {
     @FXML
     private Button followingBtn;
 
+    private String username;
+
     private MainController mainController;
 
     public void setMainController(MainController mainController) {
@@ -122,11 +124,15 @@ public class ProfileController implements Initializable {
 
             // update profile page when edit profile is closed
             stage.setOnHidden(e -> {
-                initialize(null, null);
+                updateProfile();
             });
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    private void updateProfile() {
+        if (username != null) fillProfile(username);
     }
 
     @FXML
@@ -229,7 +235,7 @@ public class ProfileController implements Initializable {
     }
 
     public void fillProfile(String username) {
-
+        this.username = username;
         if (username.equals(JWTController.getSubjectFromJwt(JWTController.getJwtKey()))) {
             editProfileBtn.setVisible(true);
             followBtn.setVisible(false);
