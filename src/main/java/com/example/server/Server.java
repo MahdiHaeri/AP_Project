@@ -124,30 +124,18 @@ public class Server {
         // todo /api/analytics/tweets
 
         get("/api/users/:username/profile-image", mediaHandler::handleGetMedia);
-
         get("/api/users/:username/header-image", mediaHandler::handleGetMedia);
-
         post("/api/users/:username/profile-image", mediaHandler::handlePostMedia);
-
         post("/api/users/:username/header-image", mediaHandler::handlePostMedia);
+
+        get("/api/tweets/:tweetId/tweet-image", mediaHandler::handleGetMedia);
+        post("/api/tweets/:tweetId/tweet-image", mediaHandler::handlePostMedia);
 
         // Add the notFound route to handle unmatched paths
         notFound((request, response) -> {
             response.status(404);
             return "Not found";
         });
-    }
-
-    private static String generateJwtToken(String username) {
-        Date now = new Date();
-        Date expiration = new Date(now.getTime() + EXPIRATION_TIME);
-
-        return Jwts.builder()
-                .setSubject(username)
-                .setIssuedAt(now)
-                .setExpiration(expiration)
-                .signWith(SECRET_KEY, SignatureAlgorithm.HS256)
-                .compact();
     }
 }
 
