@@ -73,7 +73,7 @@ public class TimelineController implements Initializable {
             // Access the controller of the tweet FXML
             TweetController tweetController = fxmlLoader.getController();
             tweetController.setMainController(mainController);
-            tweetController.fillTweet(tweetJson.get("tweetId").asText(), username);
+            tweetController.fillTweet(tweetJson.get("tweetId").asText());
             tweetsVbox.getChildren().add(tweetRoot);
         }
     }

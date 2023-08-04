@@ -93,7 +93,7 @@
                   </HBox>
                </bottom>
                <center>
-                  <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+                  <VBox fx:id="contentContainer" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="TOP_LEFT">
                      <children>
                         <Text fx:id="textMessageText" fill="WHITE" lineSpacing="3.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="message-text" text="Text Message" textAlignment="JUSTIFY" wrappingWidth="400.0" />
                      </children>

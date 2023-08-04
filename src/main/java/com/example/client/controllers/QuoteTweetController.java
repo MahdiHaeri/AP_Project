@@ -1,22 +1,17 @@
 package com.example.client.controllers;
 
 import com.example.client.http.HttpController;
-import com.example.client.http.HttpHeaders;
 import com.example.client.http.HttpMethod;
 import com.example.client.http.HttpResponse;
-import com.example.client.util.JWTController;
 import com.example.client.util.TimestampController;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import io.github.gleidson28.GNAvatarView;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
@@ -29,40 +24,21 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class TweetController implements Initializable {
+public class QuoteTweetController implements Initializable {
 
-    private boolean isLiked = false;
     private String tweetId;
 
     @FXML
     private GNAvatarView avatarView;
 
     @FXML
-    private Button likeBtn;
-
-    @FXML
-    private FontAwesomeIconView likeIcon;
+    private VBox contentContainer;
 
     @FXML
     private Label ownerNameLbl;
 
     @FXML
     private Label ownerUsernameLbl;
-
-    @FXML
-    private Button replyBtn;
-
-    @FXML
-    private Button retweetBtn;
-
-    @FXML
-    private Label retweeterNameLbl;
-
-    @FXML
-    private Button shareBtn;
-
-    @FXML
-    private VBox contentContainer;
 
     @FXML
     private Text textMessageText;
@@ -79,21 +55,12 @@ public class TweetController implements Initializable {
     public MainController getMainController() {
         return mainController;
     }
-
     public String getTweetId() {
         return tweetId;
     }
 
     public void setTweetId(String tweetId) {
         this.tweetId = tweetId;
-    }
-
-    public boolean isLiked() {
-        return isLiked;
-    }
-
-    public void setLiked(boolean liked) {
-        isLiked = liked;
     }
 
     public Image getAvatarView() {
@@ -104,12 +71,12 @@ public class TweetController implements Initializable {
         this.avatarView.setImage(image);
     }
 
-    public String getLikeBtn() {
-        return likeBtn.getText();
+    public VBox getContentContainer() {
+        return contentContainer;
     }
-//
-    public void setLikeBtn(String text) {
-        this.likeBtn.setText(text);
+
+    public void setContentContainer(VBox contentContainer) {
+        this.contentContainer = contentContainer;
     }
 
     public String getOwnerNameLbl() {
@@ -128,38 +95,6 @@ public class TweetController implements Initializable {
         this.ownerUsernameLbl.setText(text);
     }
 
-    public String getReplyBtn() {
-        return replyBtn.getText();
-    }
-
-    public void setReplyBtn(String text) {
-        this.replyBtn.setText(text);
-    }
-
-    public String getRetweetBtn() {
-        return retweetBtn.getText();
-    }
-
-    public void setRetweetBtn(String text) {
-        this.retweetBtn.setText(text);
-    }
-
-    public String getRetweeterNameLbl() {
-        return retweeterNameLbl.getText();
-    }
-
-    public void setRetweeterNameLbl(String text) {
-        this.retweeterNameLbl.getText();
-    }
-
-//    public Button getShareBtn() {
-//        return shareBtn;
-//    }
-
-//    public void setShareBtn(Button shareBtn) {
-//        this.shareBtn = shareBtn;
-//    }
-
     public String getTextMessageText() {
         return textMessageText.getText();
     }
@@ -177,8 +112,6 @@ public class TweetController implements Initializable {
     }
 
 
-// event handling :
-
     @FXML
     void onAvatarViewClicked(MouseEvent event) {
         String username = getOwnerUsernameLbl();
@@ -194,61 +127,19 @@ public class TweetController implements Initializable {
         }
     }
 
-    @FXML
-    void onLikeBtnAction(ActionEvent event) {
-        String tweetId = getTweetId();
-        HttpHeaders headers = new HttpHeaders();
-        headers.set("Authorization", JWTController.getJwtKey());
-        HttpResponse response;
-        if (isLiked) {
-            try {
-                response = HttpController.sendRequest("http://localhost:8080/api/tweets/" + tweetId + "/unlike", HttpMethod.POST, "", headers);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-            decrementLikeCount();
-            setTweetUnliked();
-            setLiked(false);
-        } else {
-            try {
-                response = HttpController.sendRequest("http://localhost:8080/api/tweets/" + tweetId + "/like", HttpMethod.POST, "", headers);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-            incrementLikeCount();
-            setTweetLiked();
-            setLiked(true);
-        }
-    }
-
-    @FXML
-    void onReplyBtnAction(ActionEvent event) {
-
-    }
-
-    @FXML
-    void onRetweetBtnAction(ActionEvent event) {
-
-    }
-
-    @FXML
-    void onShareBtnAction(ActionEvent event) {
-
-    }
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
     }
 
-    public void fillTweet(String tweetId) {
+    public void fillQuote(String quoteId) {
         // Set the tweet information on the controller
         HttpResponse tweetResponse;
         HttpResponse userResponse;
         HttpResponse likeResponse;
 
         try {
-            tweetResponse = HttpController.sendRequest("http://localhost:8080/api/tweets/" + tweetId, HttpMethod.GET, null, null);
+            tweetResponse = HttpController.sendRequest("http://localhost:8080/api/tweets/" + quoteId, HttpMethod.GET, null, null);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -278,9 +169,6 @@ public class TweetController implements Initializable {
         setTweetId(tweetJson.get("tweetId").asText());
         setTextMessageText(tweetJson.get("text").asText());
         setOwnerUsernameLbl("@" + tweetJson.get("ownerId").asText());
-        setReplyBtn(tweetJson.get("replyCount").asText());
-        setRetweetBtn(tweetJson.get("retweetCount").asText());
-        setLikeBtn(tweetJson.get("likeCount").asText());
         setOwnerNameLbl(usersJson.get("firstName").asText() + " " + usersJson.get("lastName").asText());
         long createdAt = tweetJson.get("createdAt").asLong();
         setTimestampLbl(TimestampController.formatTimestamp(createdAt));
@@ -298,65 +186,5 @@ public class TweetController implements Initializable {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-
-        try {
-            likeResponse = HttpController.sendRequest("http://localhost:8080/api/tweets/" + tweetJson.get("tweetId").asText() + "/likes", HttpMethod.GET, null, null);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-
-        JsonNode likesJson = null;
-        try {
-            likesJson = objectMapper.readTree(likeResponse.getBody());
-        } catch (JsonProcessingException e) {
-            throw new RuntimeException(e);
-        }
-
-        int likeCount = 0;
-        for (JsonNode likeJson : likesJson) {
-            likeCount++;
-            if (likeJson.get("userId").asText().equals(JWTController.getSubjectFromJwt(JWTController.getJwtKey()))) {
-                setTweetLiked();
-            }
-        }
-
-        setLikeBtn(Integer.toString(likeCount));
-    }
-
-    public void addQuote(String quoteTweetId) {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/client/quoteTweet.fxml"));
-        Parent quoteTweetRoot = null;
-        try {
-            quoteTweetRoot = fxmlLoader.load();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-
-        QuoteTweetController quoteTweetController = fxmlLoader.getController();
-        quoteTweetController.fillQuote(quoteTweetId);
-        quoteTweetController.setMainController(mainController);
-        contentContainer.getChildren().add(quoteTweetRoot);
-    }
-
-    private void incrementLikeCount() {
-        int likeCount = Integer.parseInt(likeBtn.getText());
-        likeBtn.setText(String.valueOf(likeCount + 1));
-    }
-
-    private void decrementLikeCount() {
-        int likeCount = Integer.parseInt(likeBtn.getText());
-        likeBtn.setText(String.valueOf(likeCount - 1));
-    }
-
-    public void setTweetLiked() {
-        likeBtn.setStyle("-fx-text-fill: #e0245e");
-        likeIcon.setStyle("-fx-fill: #e0245e");
-        setLiked(true);
-    }
-
-    public void setTweetUnliked() {
-        likeBtn.setStyle("-fx-text-fill: #666");
-        likeIcon.setStyle("-fx-fill: #666");
-        setLiked(false);
     }
 }

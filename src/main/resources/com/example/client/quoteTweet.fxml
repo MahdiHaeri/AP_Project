@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import io.github.gleidson28.GNAvatarView?>
+<?import java.lang.String?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane styleClass="root" stylesheets="@../../../styles/quoteTweetStyle.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.client.controllers.QuoteTweetController">
+    <center>
+        <BorderPane prefHeight="400.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+            <center>
+                <BorderPane prefHeight="200.0" prefWidth="200.0" styleClass="center-pane" BorderPane.alignment="CENTER">
+                    <center>
+                        <VBox fx:id="contentContainer" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="TOP_LEFT">
+                            <children>
+                                <Text fx:id="textMessageText" fill="WHITE" lineSpacing="3.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="message-text" text="Text Message" textAlignment="JUSTIFY" wrappingWidth="400.0" />
+                            </children>
+                        </VBox>
+                    </center>
+                    <top>
+                        <BorderPane prefHeight="31.0" prefWidth="539.0" BorderPane.alignment="CENTER">
+                            <right>
+                                <Button disable="true" mnemonicParsing="false" visible="false" BorderPane.alignment="CENTER">
+                                    <graphic>
+                                        <FontAwesomeIconView glyphName="ELLIPSIS_H">
+                                            <styleClass>
+                                                <String fx:value="tweet-icon" />
+                                                <String fx:value="ellipsis-h-icon" />
+                                            </styleClass>
+                                        </FontAwesomeIconView>
+                                    </graphic>
+                                    <styleClass>
+                                        <String fx:value="tweet-buttons" />
+                                        <String fx:value="ellipsis-h-button" />
+                                    </styleClass>
+                                </Button>
+                            </right>
+                            <left>
+                                <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="300.0" spacing="10.0" BorderPane.alignment="CENTER">
+                                    <children>
+                                    <GNAvatarView fx:id="avatarView" onMouseClicked="#onAvatarViewClicked" prefHeight="31.0" prefWidth="22.0" stroke="#ffffff00" strokeWidth="0.0" styleClass="avatar-image" type="CIRCLE">
+                                        <image>
+                                            <Image url="@../../../images/myImage.jpeg" />
+                                        </image>
+                                    </GNAvatarView>
+                                        <Label fx:id="ownerNameLbl" styleClass="white" text="owner name" textAlignment="CENTER">
+                                            <font>
+                                                <Font name="System Bold" size="13.0" />
+                                            </font>
+                                        </Label>
+                                        <Label fx:id="ownerUsernameLbl" styleClass="light-gray" text="owner username" textAlignment="CENTER" />
+                                        <Label fx:id="timestampLbl" styleClass="light-gray" text="timestammp" textAlignment="CENTER" />
+                                    </children>
+                                </HBox>
+                            </left>
+                        </BorderPane>
+                    </top>
+                </BorderPane>
+            </center>
+        </BorderPane>
+    </center>
+</BorderPane>
