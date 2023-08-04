@@ -1,13 +1,11 @@
 package com.example.server;
 
 import com.example.server.HttpHandlers.*;
-import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
 
 import javax.crypto.SecretKey;
 import java.sql.SQLException;
-import java.util.Date;
 
 import static spark.Spark.*;
 
@@ -16,7 +14,8 @@ public class Server {
     private static final SecretKey SECRET_KEY = Keys.secretKeyFor(SignatureAlgorithm.HS256);
     private static final long EXPIRATION_TIME = 3600000; // 1 hour
     public static void main(String[] args) {
-        MediaHandler mediaHandler;
+        TweetMediaHandler tweetMediaHandler;
+        UserMediaHandler userMediaHandler;
         LikeHandler likeHandler;
         LoginHandler loginHandler;
         BlockHandler blockHandler;
@@ -25,7 +24,8 @@ public class Server {
         UserHandler userHandler;
 
         try {
-            mediaHandler = new MediaHandler();
+            tweetMediaHandler = new TweetMediaHandler();
+            userMediaHandler = new UserMediaHandler();
             likeHandler = new LikeHandler();
             loginHandler = new LoginHandler();
             blockHandler = new BlockHandler();
@@ -123,13 +123,13 @@ public class Server {
         // todo /api/recommendations/users
         // todo /api/analytics/tweets
 
-        get("/api/users/:username/profile-image", mediaHandler::handleGetMedia);
-        get("/api/users/:username/header-image", mediaHandler::handleGetMedia);
-        post("/api/users/:username/profile-image", mediaHandler::handlePostMedia);
-        post("/api/users/:username/header-image", mediaHandler::handlePostMedia);
+        get("/api/users/:username/profile-image", userMediaHandler::handleGetMedia);
+        get("/api/users/:username/header-image", userMediaHandler::handleGetMedia);
+        post("/api/users/:username/profile-image", userMediaHandler::handlePostMedia);
+        post("/api/users/:username/header-image", userMediaHandler::handlePostMedia);
 
-        get("/api/tweets/:tweetId/tweet-image", mediaHandler::handleGetMedia);
-        post("/api/tweets/:tweetId/tweet-image", mediaHandler::handlePostMedia);
+        get("/api/tweets/:tweetId/tweet-image", tweetMediaHandler::handleGetMedia);
+        post("/api/tweets/:tweetId/tweet-image", tweetMediaHandler::handlePostMedia);
 
         // Add the notFound route to handle unmatched paths
         notFound((request, response) -> {
