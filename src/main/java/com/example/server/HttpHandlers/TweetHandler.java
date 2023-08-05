@@ -88,7 +88,7 @@ public class TweetHandler {
         JSONObject jsonObject = new JSONObject(request.body());
         String ownerId = JWTController.getSubjectFromJwt(token);
         String text = jsonObject.getString("text");
-        String retweetId = jsonObject.getString("retweetId");
+        String retweetId = request.params(":tweetId");
 
         try {
             tweetController.createRetweet(ownerId, text, retweetId);
@@ -106,7 +106,7 @@ public class TweetHandler {
         JSONObject jsonObject = new JSONObject(request.body());
         String ownerId = JWTController.getSubjectFromJwt(token);
         String text = jsonObject.getString("text");
-        String quoteTweetId = jsonObject.getString("quoteTweetId");
+        String quoteTweetId = request.params(":tweetId");
 
         try {
             tweetController.createQuoteTweet(ownerId, text, quoteTweetId);
@@ -125,7 +125,7 @@ public class TweetHandler {
         JSONObject jsonObject = new JSONObject(request.body());
         String ownerId = JWTController.getSubjectFromJwt(token);
         String text = jsonObject.getString("text");
-        String replyTweetId = jsonObject.getString("replyTweetId");
+        String replyTweetId = request.params(":tweetId");
 
         try {
             tweetController.createReplyTweet(ownerId, text, replyTweetId);

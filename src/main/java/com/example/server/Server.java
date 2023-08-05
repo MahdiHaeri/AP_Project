@@ -79,23 +79,17 @@ public class Server {
 
         get("/api/timeline", tweetHandler::handleGetTimeline);
 
-        post("/api/login", loginHandler::handlePostLogin);
+        post("/api/tweets/:tweetId/retweet", tweetHandler::handlePostRetweet);
+        post("/api/tweets/:tweetId/quote", tweetHandler::handlePostQuoteTweet);
+        post("/api/tweets/:tweetId/reply", tweetHandler::handlePostReplyTweet);
 
-        // TODO /api/logout
+        post("/api/login", loginHandler::handlePostLogin);
 
         get("/api/likes", likeHandler::handleGetLike);
         get("/api/users/:username/likes", likeHandler::handleGetLikeByUserId);
         get("/api/tweets/:tweetId/likes", likeHandler::handleGetLikeByTweetId);
         post("/api/tweets/:tweetId/like", likeHandler::handlePostLike);
         post("/api/tweets/:tweetId/unlike", likeHandler::handlePostUnlike);
-
-        get("/api/users/:username/retweets", (request, response) -> {
-            return "GET /api/users/:username/retweets";
-        });
-
-        post("/api/tweets/:tweetId/retweet", (request, response) -> {
-            return "POST /api/tweets/:tweetId/retweet";
-        });
 
         get("/api/hashtags/:hashtag", (request, response) -> {
             return "GET /api/hashtags/:hashtag";
