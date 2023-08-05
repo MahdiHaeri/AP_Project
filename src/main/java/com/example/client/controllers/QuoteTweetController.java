@@ -133,6 +133,7 @@ public class QuoteTweetController implements Initializable {
     }
 
     public void fillQuote(String quoteId) {
+        setTweetId(quoteId);
         // Set the tweet information on the controller
         HttpResponse tweetResponse;
         HttpResponse userResponse;

@@ -16,6 +16,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -25,6 +26,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -81,16 +83,6 @@ public class TweetController implements Initializable {
 
     @FXML
     private Label timestampLbl;
-
-    private MainController mainController;
-
-    public void setMainController(MainController mainController) {
-        this.mainController = mainController;
-    }
-
-    public MainController getMainController() {
-        return mainController;
-    }
 
     public String getTweetId() {
         return tweetId;
@@ -172,6 +164,16 @@ public class TweetController implements Initializable {
         this.retweeterNameLbl.getText();
     }
 
+    private MainController mainController;
+
+    public void setMainController(MainController mainController) {
+        this.mainController = mainController;
+    }
+
+    public MainController getMainController() {
+        return mainController;
+    }
+
 //    public Button getShareBtn() {
 //        return shareBtn;
 //    }
@@ -243,12 +245,50 @@ public class TweetController implements Initializable {
 
     @FXML
     void onReplyBtnAction(ActionEvent event) {
+        String tweetId = getTweetId();
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/client/createTweet.fxml"));
+            Stage stage = new Stage();
+            Parent createReplyTweetRoot = fxmlLoader.load();
+            CreateTweetController createTweetController = fxmlLoader.getController();
+            createTweetController.setMainController(getMainController());
+            createTweetController.addReply(tweetId);
+            stage.setTitle("Create Reply Tweet");
+            stage.setScene(new Scene(createReplyTweetRoot));
+            stage.show();
+            // when stage closed, refresh the timeline to show the new tweet
 
+            stage.setOnHidden(e -> {
+                initialize(null, null);
+            });
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @FXML
     void onRetweetBtnAction(ActionEvent event) {
+        String tweetId = getTweetId();
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/client/createTweet.fxml"));
+            Stage stage = new Stage();
+            Parent createReplyTweetRoot = fxmlLoader.load();
+            CreateTweetController createTweetController = fxmlLoader.getController();
+            createTweetController.setMainController(getMainController());
+            createTweetController.addQuote(tweetId);
+            stage.setTitle("Create Reply Tweet");
+            stage.setScene(new Scene(createReplyTweetRoot));
+            stage.show();
+            // when stage closed, refresh the timeline to show the new tweet
 
+            stage.setOnHidden(e -> {
+                initialize(null, null);
+            });
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @FXML

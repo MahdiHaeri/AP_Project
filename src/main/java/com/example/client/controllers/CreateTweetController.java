@@ -9,13 +9,16 @@ import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import io.github.gleidson28.GNAvatarView;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.FileChooser;
 
@@ -28,8 +31,13 @@ import java.util.ResourceBundle;
 
 public class CreateTweetController implements Initializable {
 
+    String tweetType;
+
     @FXML
     private Button tweetBtn;
+
+    @FXML
+    private VBox mainVbox;
 
     @FXML
     private TextArea textArea;
@@ -46,6 +54,49 @@ public class CreateTweetController implements Initializable {
     @FXML
     private HBox imageContainerHbox;
 
+    private QuoteTweetController quoteTweetController;
+
+    public QuoteTweetController getQuoteTweetController() {
+        return quoteTweetController;
+    }
+
+    public void setQuoteTweetController(QuoteTweetController quoteTweetController) {
+        this.quoteTweetController = quoteTweetController;
+    }
+
+    private MainController mainController;
+
+    public void setMainController(MainController mainController) {
+        this.mainController = mainController;
+    }
+
+    public MainController getMainController() {
+        return mainController;
+    }
+
+    public String getTweetType() {
+        return tweetType;
+    }
+
+    public void setTweetType(String tweetType) {
+        this.tweetType = tweetType;
+    }
+
+    public String getTweetBtn() {
+        return tweetBtn.getText();
+    }
+
+    public void setTweetBtn(String text) {
+        this.tweetBtn.setText(text);
+    }
+
+    public Image getAvatar() {
+        return avatar.getImage();
+    }
+
+    public void setAvatar(Image image) {
+        this.avatar.setImage(image);
+    }
 
     @FXML
     void onImageIconClicked(MouseEvent event) {
@@ -76,13 +127,53 @@ public class CreateTweetController implements Initializable {
 
     @FXML
     void onTweetBtnAction(ActionEvent event) {
+        if (textArea.getText().isEmpty()) {
+            return;
+        }
+
+        switch (getTweetType()) {
+            case "tweet" -> createTweet();
+            case "reply" -> createReply();
+            case "quote" -> createQuote();
+        }
+
+
+        textArea.setText("");
+
+        textArea.getScene().getWindow().hide();
+
+    }
+
+    private void createQuote() {
         HttpHeaders headers = new HttpHeaders();
         headers.set("Content-Type", "application/json");
         headers.set("Authorization", "Bearer " + JWTController.getJwtKey());
 
-        if (textArea.getText().isEmpty()) {
-            return;
+        String body = "{\"text\": \"" + textArea.getText() + "\"}";
+        try {
+            HttpResponse response = HttpController.sendRequest("http://localhost:8080/api/tweets/" + quoteTweetController.getTweetId() + "/quote", HttpMethod.POST, body, headers);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
+    }
+
+    private void createReply() {
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("Content-Type", "application/json");
+        headers.set("Authorization", "Bearer " + JWTController.getJwtKey());
+
+        String body = "{\"text\": \"" + textArea.getText() + "\"}";
+        try {
+            HttpResponse response = HttpController.sendRequest("http://localhost:8080/api/tweets/" + quoteTweetController.getTweetId() + "/reply", HttpMethod.POST, body, headers);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private void createTweet() {
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("Content-Type", "application/json");
+        headers.set("Authorization", "Bearer " + JWTController.getJwtKey());
 
         String body = "{\"text\": \"" + textArea.getText() + "\"}";
         try {
@@ -90,11 +181,6 @@ public class CreateTweetController implements Initializable {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-
-        textArea.setText("");
-
-        textArea.getScene().getWindow().hide();
-
     }
 
     @FXML
@@ -111,6 +197,7 @@ public class CreateTweetController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        setTweetType("tweet");
 
         try {
             URL url2 = new URL("http://localhost:8080/api/users/" + JWTController.getSubjectFromJwt(JWTController.getJwtKey()) + "/profile-image");
@@ -124,5 +211,39 @@ public class CreateTweetController implements Initializable {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public void addQuote(String quoteTweetId) {
+        setTweetType("quote");
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/client/quoteTweet.fxml"));
+        Parent quoteTweetRoot = null;
+        try {
+            quoteTweetRoot = fxmlLoader.load();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        QuoteTweetController replyTweetController = fxmlLoader.getController();
+        setQuoteTweetController(replyTweetController);
+        replyTweetController.fillQuote(quoteTweetId);
+        replyTweetController.setMainController(mainController);
+        mainVbox.getChildren().add(quoteTweetRoot);
+    }
+
+    public void addReply(String replyTweetId) {
+        setTweetType("reply");
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/client/quoteTweet.fxml"));
+        Parent replyTweetRoot = null;
+        try {
+            replyTweetRoot = fxmlLoader.load();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        QuoteTweetController replyTweetController = fxmlLoader.getController();
+        setQuoteTweetController(replyTweetController);
+        replyTweetController.fillQuote(replyTweetId);
+        replyTweetController.setMainController(mainController);
+        mainVbox.getChildren().add(0, replyTweetRoot);
     }
 }

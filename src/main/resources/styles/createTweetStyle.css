@@ -3,6 +3,12 @@
     -fx-padding: 10px;
 }
 
+
+
+.main-vbox {
+    /*-fx-padding: 20px;*/
+}
+
 .glyph-icon{ -fx-font-family:"FontAwesome"; }
 
 .text-area {

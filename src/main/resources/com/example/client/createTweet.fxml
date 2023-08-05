@@ -21,52 +21,56 @@
       </BorderPane>
    </top>
    <center>
-      <BorderPane prefHeight="381.0" prefWidth="491.0" BorderPane.alignment="CENTER">
-         <left>
-            <VBox alignment="TOP_CENTER" prefHeight="346.0" prefWidth="53.0" BorderPane.alignment="CENTER">
-               <children>
-                  <GNAvatarView fx:id="avatar" prefHeight="41.0" prefWidth="36.0" strokeWidth="0.0" type="CIRCLE">
-                     <image>
-                        <Image url="@../../../images/myImage.jpeg" />
-                     </image>
-                  </GNAvatarView>
-               </children>
-            </VBox>
-         </left>
-         <center>
-            <BorderPane BorderPane.alignment="CENTER">
-               <center>
-                  <TextArea fx:id="textArea" prefHeight="200.0" prefWidth="200.0" promptText="What's happening?" wrapText="true">
-                     <font>
-                        <Font name="Arimo for Powerline" size="16.0" />
-                     </font>
-                  </TextArea>
-               </center>
-               <top>
-                  <AnchorPane prefHeight="41.0" prefWidth="418.0" BorderPane.alignment="CENTER" />
-               </top>
-               <bottom>
-                  <ScrollPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-                     <content>
-                        <HBox fx:id="imageContainerHbox" spacing="5.0" styleClass="image-container" />
-                     </content>
-                  </ScrollPane>
-               </bottom>
-            </BorderPane>
-         </center>
-         <bottom>
-            <BorderPane prefHeight="34.0" prefWidth="491.0" BorderPane.alignment="CENTER">
-               <center>
-                  <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="15.0" BorderPane.alignment="CENTER">
+      <VBox fx:id="mainVbox" prefWidth="471.0" spacing="5.0" styleClass="main-vbox" BorderPane.alignment="CENTER">
+         <children>
+            <BorderPane prefHeight="381.0" prefWidth="471.0">
+               <left>
+                  <VBox alignment="TOP_CENTER" prefHeight="346.0" prefWidth="53.0" BorderPane.alignment="CENTER">
                      <children>
-                        <FontAwesomeIconView fx:id="imageIcon" fill="WHITE" glyphName="IMAGE" onMouseClicked="#onImageIconClicked" size="18" styleClass="icon" />
-                        <FontAwesomeIconView fx:id="videoIcon" fill="WHITE" glyphName="FILE" onMouseClicked="#onVideoIconClicked" size="18" styleClass="icon" />
-                        <FontAwesomeIconView fill="WHITE" glyphName="LIST_UL" size="18" styleClass="icon" />
+                        <GNAvatarView fx:id="avatar" prefHeight="41.0" prefWidth="36.0" strokeWidth="0.0" type="CIRCLE">
+                           <image>
+                              <Image url="@../../../images/myImage.jpeg" />
+                           </image>
+                        </GNAvatarView>
                      </children>
-                  </HBox>
+                  </VBox>
+               </left>
+               <center>
+                  <BorderPane BorderPane.alignment="CENTER">
+                     <center>
+                        <TextArea fx:id="textArea" prefHeight="200.0" prefWidth="200.0" promptText="What's happening?" wrapText="true">
+                           <font>
+                              <Font name="Arimo for Powerline" size="16.0" />
+                           </font>
+                        </TextArea>
+                     </center>
+                     <top>
+                        <AnchorPane prefHeight="41.0" prefWidth="418.0" BorderPane.alignment="CENTER" />
+                     </top>
+                     <bottom>
+                        <ScrollPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                           <content>
+                              <HBox fx:id="imageContainerHbox" spacing="5.0" styleClass="image-container" />
+                           </content>
+                        </ScrollPane>
+                     </bottom>
+                  </BorderPane>
                </center>
             </BorderPane>
-         </bottom>
-      </BorderPane>
+         </children>
+      </VBox>
    </center>
+   <bottom>
+      <BorderPane prefHeight="34.0" prefWidth="491.0" BorderPane.alignment="CENTER">
+         <center>
+            <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="15.0" BorderPane.alignment="CENTER">
+               <children>
+                  <FontAwesomeIconView fx:id="imageIcon" fill="WHITE" glyphName="IMAGE" onMouseClicked="#onImageIconClicked" size="18" styleClass="icon" />
+                  <FontAwesomeIconView fx:id="videoIcon" fill="WHITE" glyphName="FILE" onMouseClicked="#onVideoIconClicked" size="18" styleClass="icon" />
+                  <FontAwesomeIconView fill="WHITE" glyphName="LIST_UL" size="18" styleClass="icon" />
+               </children>
+            </HBox>
+         </center>
+      </BorderPane>
+   </bottom>
 </BorderPane>
