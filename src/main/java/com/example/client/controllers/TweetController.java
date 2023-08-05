@@ -261,6 +261,34 @@ public class TweetController implements Initializable {
 
     }
 
+    public void prepareTweet(String tweetId) {
+        HttpResponse tweetResponse;
+        HttpResponse userResponse;
+        try {
+            tweetResponse = HttpController.sendRequest("http://localhost:8080/api/tweets/" + tweetId, HttpMethod.GET, null, null);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        JsonNode tweetJson;
+        try {
+            tweetJson = objectMapper.readTree(tweetResponse.getBody());
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
+
+        if (tweetJson.has("retweetId")) {
+            fillTweet(tweetJson.get("retweetId").asText());
+            addRetweetHeader(tweetJson.get("ownerId").asText());
+        } else if (tweetJson.has("quoteTweetId")) {
+            fillTweet(tweetId);
+            addQuote(tweetJson.get("quoteTweetId").asText());
+        } else {
+            fillTweet(tweetId);
+        }
+    }
+
     public void fillTweet(String tweetId) {
         // Set the tweet information on the controller
         HttpResponse tweetResponse;
