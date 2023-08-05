@@ -29,6 +29,16 @@ public class TimelineController implements Initializable {
 
     private MainController mainController;
 
+    private String username;
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
     public void setMainController(MainController mainController) {
         this.mainController = mainController;
     }
@@ -43,6 +53,7 @@ public class TimelineController implements Initializable {
     }
 
     public void fillTimeline(String username) {
+        setUsername(username);
         HttpResponse tweetResponse;
         try {
             tweetResponse = HttpController.sendRequest("http://localhost:8080/api/tweets", HttpMethod.GET, null, null);
@@ -72,10 +83,16 @@ public class TimelineController implements Initializable {
 
             // Access the controller of the tweet FXML
             TweetController tweetController = fxmlLoader.getController();
+            tweetController.setTimelineController(this);
             tweetController.setMainController(mainController);
             tweetController.prepareTweet(tweetJson.get("tweetId").asText());
             tweetsVbox.getChildren().add(tweetRoot);
         }
+    }
+
+    public void updateTimeline() {
+        tweetsVbox.getChildren().clear();
+        fillTimeline(getUsername());
     }
 
     public Node getTimelinePane() {

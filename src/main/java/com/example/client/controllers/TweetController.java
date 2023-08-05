@@ -174,6 +174,16 @@ public class TweetController implements Initializable {
         return mainController;
     }
 
+    private TimelineController timelineController;
+
+    public TimelineController getTimelineController() {
+        return timelineController;
+    }
+
+    public void setTimelineController(TimelineController timelineController) {
+        this.timelineController = timelineController;
+    }
+
 //    public Button getShareBtn() {
 //        return shareBtn;
 //    }
@@ -259,7 +269,7 @@ public class TweetController implements Initializable {
             // when stage closed, refresh the timeline to show the new tweet
 
             stage.setOnHidden(e -> {
-                initialize(null, null);
+                getTimelineController().updateTimeline();
             });
 
         } catch (IOException e) {
@@ -283,7 +293,7 @@ public class TweetController implements Initializable {
             // when stage closed, refresh the timeline to show the new tweet
 
             stage.setOnHidden(e -> {
-                initialize(null, null);
+                getTimelineController().updateTimeline();
             });
 
         } catch (IOException e) {
@@ -293,7 +303,24 @@ public class TweetController implements Initializable {
 
     @FXML
     void onShareBtnAction(ActionEvent event) {
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("Content-Type", "application/json");
+        headers.set("Authorization", "Bearer " + JWTController.getJwtKey());
+        String tweetId = getTweetId();
+        HttpResponse response;
+//        String body = "";
+        String body = "{\"text\": \" this is the text of retweet\"}";
+        try {
+            response = HttpController.sendRequest("http://localhost:8080/api/tweets/" + tweetId + "/retweet", HttpMethod.POST, body, headers);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
 
+        if (response.getStatusCode() >= 200 && response.getStatusCode() < 300) {
+            timelineController.updateTimeline();
+        } else {
+            System.out.println("error in retweeting");
+        }
     }
 
     @Override
@@ -321,7 +348,7 @@ public class TweetController implements Initializable {
             prepareTweet(tweetJson.get("parentTweetId").asText());
             addReply(tweetId);
         } else if (tweetJson.has("retweetId")) {
-            fillTweet(tweetJson.get("retweetId").asText());
+            prepareTweet(tweetJson.get("retweetId").asText());
             addRetweetHeader(tweetJson.get("ownerId").asText());
         } else if (tweetJson.has("quoteTweetId")) {
             fillTweet(tweetId);
