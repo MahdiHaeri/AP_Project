@@ -15,6 +15,7 @@
 
 .scroll-pane {
     -fx-background-color: #111;
+    -fx-padding: 0 100 0 100;
 }
 
 .scroll-bar > .corner {
