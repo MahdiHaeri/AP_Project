@@ -263,7 +263,6 @@ public class TweetController implements Initializable {
 
     public void prepareTweet(String tweetId) {
         HttpResponse tweetResponse;
-        HttpResponse userResponse;
         try {
             tweetResponse = HttpController.sendRequest("http://localhost:8080/api/tweets/" + tweetId, HttpMethod.GET, null, null);
         } catch (IOException e) {
@@ -278,7 +277,10 @@ public class TweetController implements Initializable {
             throw new RuntimeException(e);
         }
 
-        if (tweetJson.has("retweetId")) {
+        if (tweetJson.has("parentTweetId")) {
+            prepareTweet(tweetJson.get("parentTweetId").asText());
+            addReply(tweetId);
+        } else if (tweetJson.has("retweetId")) {
             fillTweet(tweetJson.get("retweetId").asText());
             addRetweetHeader(tweetJson.get("ownerId").asText());
         } else if (tweetJson.has("quoteTweetId")) {

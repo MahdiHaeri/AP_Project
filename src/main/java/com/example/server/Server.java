@@ -79,6 +79,7 @@ public class Server {
 
         get("/api/timeline", tweetHandler::handleGetTimeline);
 
+        // todo: add get for these
         post("/api/tweets/:tweetId/retweet", tweetHandler::handlePostRetweet);
         post("/api/tweets/:tweetId/quote", tweetHandler::handlePostQuoteTweet);
         post("/api/tweets/:tweetId/reply", tweetHandler::handlePostReplyTweet);
