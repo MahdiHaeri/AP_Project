@@ -36,6 +36,9 @@ public class TweetController implements Initializable {
     private String tweetId;
 
     @FXML
+    private VBox rootVbox;
+
+    @FXML
     private BorderPane rootBp;
 
     @FXML
@@ -354,6 +357,21 @@ public class TweetController implements Initializable {
         RetweetHeaderController retweetHeaderController = fxmlLoader.getController();
         retweetHeaderController.fillRetweetHeader(username);
         rootBp.setTop(retweetHeaderRoot);
+    }
+
+    public void addReply(String replyTweetId) {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/client/tweet.fxml"));
+        Parent replyTweetRoot = null;
+        try {
+            replyTweetRoot = fxmlLoader.load();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        TweetController replyTweetController = fxmlLoader.getController();
+        replyTweetController.fillTweet(replyTweetId);
+        replyTweetController.setMainController(mainController);
+        rootVbox.getChildren().add(replyTweetRoot);
     }
 
     private void incrementLikeCount() {

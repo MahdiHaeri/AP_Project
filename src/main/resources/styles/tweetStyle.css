@@ -1,7 +1,12 @@
-.root {
+.root-vbox {
     -fx-background-color: #111;
     -fx-text-fill: #ddd;
-    -fx-padding: 0 200 0 200;
+    -fx-border-color: #222;
+    -fx-border-width: 0 0 1 0;
+}
+
+.root-border-pane {
+
 }
 
 .message-text{
@@ -26,9 +31,7 @@
 }
 
 .center-pane {
-    -fx-padding: 3px;
-    -fx-border-color: #222;
-    -fx-border-width: 0 0 1 0;
+    -fx-padding: 0 0 0 3;
 }
 
 .avatar-image {
