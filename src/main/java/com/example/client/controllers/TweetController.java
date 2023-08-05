@@ -20,6 +20,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
@@ -33,6 +34,9 @@ public class TweetController implements Initializable {
 
     private boolean isLiked = false;
     private String tweetId;
+
+    @FXML
+    private BorderPane rootBp;
 
     @FXML
     private GNAvatarView avatarView;
@@ -336,6 +340,20 @@ public class TweetController implements Initializable {
         quoteTweetController.fillQuote(quoteTweetId);
         quoteTweetController.setMainController(mainController);
         contentContainer.getChildren().add(quoteTweetRoot);
+    }
+
+    public void addRetweetHeader(String username) {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/client/retweetHeader.fxml"));
+        Parent retweetHeaderRoot = null;
+        try {
+            retweetHeaderRoot = fxmlLoader.load();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        RetweetHeaderController retweetHeaderController = fxmlLoader.getController();
+        retweetHeaderController.fillRetweetHeader(username);
+        rootBp.setTop(retweetHeaderRoot);
     }
 
     private void incrementLikeCount() {

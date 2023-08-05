@@ -1,0 +1,39 @@
+.root {
+    -fx-background-color: #111;
+    -fx-text-fill: #ddd;
+    /*-fx-padding: 0 200 0 200;*/
+}
+
+.message-text{
+    -fx-wrap-text: true;
+    -fx-fill: #ddd;
+}
+
+.owner-name-label {
+    -fx-font-weight: bold;
+}
+
+.light-gray {
+    -fx-text-fill: #666;
+}
+
+.white {
+    -fx-text-fill: #fff;
+}
+
+
+.left-vbox {
+}
+
+.tweet-buttons {
+    -fx-background-color: transparent;
+    -fx-fill: #666;
+    -fx-text-fill: #666;
+}
+
+.tweet-icon {
+    -fx-fill: #666;
+    -fx-text-fill: #666;
+}
+
+.glyph-icon{ -fx-font-family:"FontAwesome"; }

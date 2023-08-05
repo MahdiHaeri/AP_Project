@@ -6,13 +6,13 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 
-<BorderPane stylesheets="@../../../styles/tweetStyle.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.client.controllers.TweetController">
+<BorderPane stylesheets="@../../../styles/retweetHeaderStyle.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.client.controllers.RetweetHeaderController">
    <center>
-      <HBox alignment="CENTER_LEFT" prefHeight="27.0" prefWidth="600.0" spacing="10.0">
+      <HBox alignment="CENTER_LEFT" prefWidth="600.0" spacing="10.0">
          <children>
             <Pane prefHeight="27.0" prefWidth="29.0" />
             <FontAwesomeIconView glyphName="RETWEET" styleClass="tweet-icon" />
-            <Label fx:id="retweeterNameLbl" styleClass="light-gray" text="retweeter name" />
+            <Label fx:id="retweetedNameLbl" styleClass="light-gray" text="retweeted name" />
             <Label styleClass="light-gray" text="Retweeted" />
          </children>
       </HBox>
