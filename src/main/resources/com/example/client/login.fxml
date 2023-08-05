@@ -109,9 +109,9 @@
                <center>
                   <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
                      <children>
-                        <Label prefHeight="85.0" prefWidth="222.0" text="Join Twitter today and see what's happening in the world right now" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+                        <Label text="Join Twitter today and see what's happening in the world right now" textAlignment="CENTER" textFill="WHITE" wrapText="true">
                            <font>
-                              <Font name="System Bold" size="11.0" />
+                              <Font name="System Bold" size="15.0" />
                            </font>
                         </Label>
                         <ImageView fitHeight="300.0" fitWidth="300.0" pickOnBounds="true" preserveRatio="true">
