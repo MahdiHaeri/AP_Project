@@ -13,14 +13,13 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
 <VBox fx:id="rootVbox" styleClass="root-vbox" stylesheets="@../../../styles/tweetStyle.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.client.controllers.TweetController">
    <children>
       <BorderPane fx:id="rootBp" styleClass="root-border-pane" stylesheets="@../../../styles/tweetStyle.css">
          <center>
             <BorderPane prefHeight="400.0" prefWidth="600.0" BorderPane.alignment="CENTER">
                <left>
-                  <VBox alignment="TOP_CENTER" prefHeight="445.0" prefWidth="61.0" styleClass="left-vbox" BorderPane.alignment="CENTER">
+                  <VBox fx:id="leftVbox" alignment="TOP_CENTER" prefHeight="445.0" prefWidth="61.0" styleClass="left-vbox" BorderPane.alignment="CENTER">
                      <children>
                         <AnchorPane prefHeight="12.0" prefWidth="61.0" />
                         <GNAvatarView fx:id="avatarView" onMouseClicked="#onAvatarViewClicked" prefHeight="55.0" prefWidth="55.0" stroke="#ffffff00" strokeWidth="0.0" styleClass="avatar-image" type="CIRCLE">
@@ -98,7 +97,7 @@
                      <center>
                         <VBox fx:id="contentContainer" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="TOP_LEFT">
                            <children>
-                              <Text fx:id="textMessageText" fill="WHITE" lineSpacing="3.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="message-text" text="Text Message" textAlignment="JUSTIFY" wrappingWidth="400.0" />
+                              <Text fx:id="textMessageText" fill="WHITE" lineSpacing="3.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="message-text" text="Text Message" wrappingWidth="400.0" />
                            </children>
                         </VBox>
                      </center>

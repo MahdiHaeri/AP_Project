@@ -18,7 +18,7 @@ public class TweetDAO {
     }
 
     public void createTweetTable() throws SQLException {
-        PreparedStatement statement = connection.prepareStatement("CREATE TABLE IF NOT EXISTS tweets (tweet_id SERIAL PRIMARY KEY, owner_id VARCHAR(36) NOT NULL, text VARCHAR(280) NOT NULL, reply_count INT DEFAULT 0, retweet_count INT DEFAULT 0, like_count INT DEFAULT 0, retweet_id VARCHAR(36), quote_tweet_id VARCHAR(36), parent_tweet_id VARCHAR(36), created_at TIMESTAMP DEFAULT now())");
+        PreparedStatement statement = connection.prepareStatement("CREATE TABLE IF NOT EXISTS tweets (tweet_id SERIAL PRIMARY KEY, owner_id VARCHAR(36) NOT NULL, text VARCHAR(300) NOT NULL, reply_count INT DEFAULT 0, retweet_count INT DEFAULT 0, like_count INT DEFAULT 0, retweet_id VARCHAR(36), quote_tweet_id VARCHAR(36), parent_tweet_id VARCHAR(36), created_at TIMESTAMP DEFAULT now())");
         statement.executeUpdate();
     }
 

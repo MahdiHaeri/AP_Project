@@ -22,6 +22,8 @@ import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Line;
 import javafx.scene.text.Text;
 
 import java.io.IOException;
@@ -40,6 +42,9 @@ public class TweetController implements Initializable {
 
     @FXML
     private BorderPane rootBp;
+
+    @FXML
+    private VBox leftVbox;
 
     @FXML
     private GNAvatarView avatarView;
@@ -105,6 +110,14 @@ public class TweetController implements Initializable {
 
     public Image getAvatarView() {
         return avatarView.getImage();
+    }
+
+    public double getAvatarX() {
+        return avatarView.getLayoutX();
+    }
+
+    public double getAvatarY() {
+        return avatarView.getLayoutY();
     }
 
     public void setAvatarView(Image image) {
