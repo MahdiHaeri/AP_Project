@@ -8,6 +8,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 
+import java.awt.geom.FlatteningPathIterator;
 import java.io.IOException;
 
 public class TwitterApplication extends Application {

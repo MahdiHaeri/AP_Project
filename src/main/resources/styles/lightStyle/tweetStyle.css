@@ -1,0 +1,104 @@
+.root-vbox {
+    -fx-background-color: transparent;
+    -fx-border-color: #eee;
+    -fx-border-width: 0 0 1 0;
+}
+
+.root-border-pane {
+
+}
+
+.primary-color {
+    -fx-text-fill: black;
+    -fx-fill: black;
+}
+
+.secondary-color {
+    -fx-text-fill: #666;
+    -fx-fill: #666;
+}
+
+.accent-color {
+    -fx-text-fill: #111;
+    -fx-fill: #111;
+}
+
+.owner-name-label {
+    -fx-font-weight: bold;
+}
+
+.left-vbox {
+}
+
+.center-pane {
+    -fx-padding: 0 0 0 3;
+}
+
+.avatar-image {
+    /*-fx-border-radius: 100%;*/
+    /*-fx-border-color: #000000;*/
+    /*-fx-border-width: 1px;*/
+}
+
+.avatar-image:hover {
+    /*-fx-scale-x: 1.1;*/
+    /*-fx-scale-y: 1.1;*/
+    /*-fx-cursor: hand;*/
+}
+
+.tweet-buttons {
+    -fx-background-color: transparent;
+}
+
+.ellipsis-h-button:hover {
+    -fx-text-fill: #1DA1F2;
+    -fx-fill: #1DA1F2;
+}
+
+.ellipsis-h-button:hover .ellipsis-h-icon {
+    -fx-text-fill: #1DA1F2;
+    -fx-fill: #1DA1F2;
+}
+
+.comment-button:hover {
+    -fx-text-fill: #1DA1F2;
+    -fx-fill: #1DA1F2;
+}
+
+.comment-button:hover .comment-icon {
+    -fx-text-fill: #1DA1F2;
+    -fx-fill: #1DA1F2;
+}
+
+.retweet-button:hover {
+    -fx-text-fill: #17bf63;
+    -fx-fill : #17bf63;
+}
+
+.retweet-button:hover .retweet-icon {
+    -fx-text-fill: #17bf63;
+    -fx-fill : #17bf63;
+}
+
+.like-button:hover {
+    -fx-text-fill: #e0245e;
+    -fx-fill: #e0245e;
+}
+
+.like-button:hover .like-icon {
+    -fx-text-fill: #e0245e;
+    -fx-fill: #e0245e;
+}
+
+.glyph-icon{ -fx-font-family:"FontAwesome"; }
+
+
+.quote-button:hover {
+    -fx-text-fill: #1DA1F2;
+    -fx-fill: #1DA1F2;
+}
+
+.quote-button:hover .quote-icon {
+    -fx-text-fill: #1DA1F2;
+    -fx-fill: #1DA1F2;
+}

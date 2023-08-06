@@ -13,9 +13,9 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<VBox fx:id="rootVbox" styleClass="root-vbox" stylesheets="@../../../styles/tweetStyle.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.client.controllers.TweetController">
+<VBox fx:id="rootVbox" styleClass="root-vbox" stylesheets="@../../../styles/lightStyle/tweetStyle.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.client.controllers.TweetController">
    <children>
-      <BorderPane fx:id="rootBp" styleClass="root-border-pane" stylesheets="@../../../styles/tweetStyle.css">
+      <BorderPane fx:id="rootBp" styleClass="root-border-pane" stylesheets="@../../../styles/lightStyle/tweetStyle.css">
          <center>
             <BorderPane prefHeight="400.0" prefWidth="600.0" BorderPane.alignment="CENTER">
                <left>
@@ -41,12 +41,14 @@
                                        <styleClass>
                                           <String fx:value="comment-icon" />
                                           <String fx:value="tweet-icon" />
+                                          <String fx:value="secondary-color" />
                                        </styleClass>
                                     </FontAwesomeIconView>
                                  </graphic>
                                  <styleClass>
                                     <String fx:value="tweet-buttons" />
                                     <String fx:value="comment-button" />
+                                    <String fx:value="secondary-color" />
                                  </styleClass>
                               </Button>
                               <Button fx:id="retweetBtn" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onRetweetBtnAction" text="21.3k">
@@ -55,12 +57,14 @@
                                        <styleClass>
                                           <String fx:value="retweet-icon" />
                                           <String fx:value="tweet-icon" />
+                                          <String fx:value="secondary-color" />
                                        </styleClass>
                                     </FontAwesomeIconView>
                                  </graphic>
                                  <styleClass>
                                     <String fx:value="tweet-buttons" />
                                     <String fx:value="retweet-button" />
+                                    <String fx:value="secondary-color" />
                                  </styleClass>
                               </Button>
                               <Button fx:id="likeBtn" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onLikeBtnAction" text="203k">
@@ -69,12 +73,14 @@
                                        <styleClass>
                                           <String fx:value="like-icon" />
                                           <String fx:value="tweet-icon" />
+                                          <String fx:value="secondary-color" />
                                        </styleClass>
                                     </FontAwesomeIconView>
                                  </graphic>
                                  <styleClass>
                                     <String fx:value="tweet-buttons" />
                                     <String fx:value="like-button" />
+                                    <String fx:value="secondary-color" />
                                  </styleClass>
                               </Button>
                               <Button fx:id="quoteBtn" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onQuoteBtnAction" text="10">
@@ -83,12 +89,14 @@
                                        <styleClass>
                                           <String fx:value="quote-icon" />
                                           <String fx:value="tweet-icon" />
+                                          <String fx:value="secondary-color" />
                                        </styleClass>
                                     </FontAwesomeIconView>
                                  </graphic>
                                  <styleClass>
                                     <String fx:value="tweet-buttons" />
                                     <String fx:value="quote-button" />
+                                    <String fx:value="secondary-color" />
                                  </styleClass>
                               </Button>
                            </children>
@@ -97,7 +105,7 @@
                      <center>
                         <VBox fx:id="contentContainer" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="TOP_LEFT">
                            <children>
-                              <Text fx:id="textMessageText" fill="WHITE" lineSpacing="3.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="message-text" text="Text Message" wrappingWidth="400.0" />
+                              <Text fx:id="textMessageText" lineSpacing="3.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="accent-color" text="Text Message" wrappingWidth="400.0" />
                            </children>
                         </VBox>
                      </center>
@@ -110,6 +118,7 @@
                                        <styleClass>
                                           <String fx:value="tweet-icon" />
                                           <String fx:value="ellipsis-h-icon" />
+                                          <String fx:value="secondary-color" />
                                        </styleClass>
                                     </FontAwesomeIconView>
                                  </graphic>
@@ -122,13 +131,13 @@
                            <left>
                               <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="300.0" spacing="10.0" BorderPane.alignment="CENTER">
                                  <children>
-                                    <Label fx:id="ownerNameLbl" styleClass="white" text="owner name" textAlignment="CENTER">
+                                    <Label fx:id="ownerNameLbl" styleClass="primary-color" text="owner name" textAlignment="CENTER">
                                        <font>
                                           <Font name="System Bold" size="13.0" />
                                        </font>
                                     </Label>
-                                    <Label fx:id="ownerUsernameLbl" styleClass="light-gray" text="owner username" textAlignment="CENTER" />
-                                    <Label fx:id="timestampLbl" styleClass="light-gray" text="timestammp" textAlignment="CENTER" />
+                                    <Label fx:id="ownerUsernameLbl" styleClass="secondary-color" text="owner username" textAlignment="CENTER" />
+                                    <Label fx:id="timestampLbl" styleClass="secondary-color" text="timestammp" textAlignment="CENTER" />
                                  </children>
                               </HBox>
                            </left>

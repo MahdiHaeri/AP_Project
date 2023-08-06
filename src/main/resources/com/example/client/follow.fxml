@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import java.lang.String?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
@@ -10,11 +11,11 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="638.0" prefWidth="905.0" stylesheets="@../../../styles/follow.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.client.controllers.FollowController">
+<BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="638.0" prefWidth="905.0" stylesheets="@../../../styles/lightStyle/follow.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.client.controllers.FollowController">
    <top>
       <BorderPane prefHeight="36.0" prefWidth="600.0" styleClass="header" BorderPane.alignment="CENTER">
          <center>
-            <Label fx:id="usernameLbl" styleClass="white-text" text="username" BorderPane.alignment="CENTER">
+            <Label fx:id="usernameLbl" styleClass="primary-color" text="username" BorderPane.alignment="CENTER">
                <font>
                   <Font size="16.0" />
                </font>
@@ -23,14 +24,22 @@
          <left>
             <Button fx:id="backBtn" mnemonicParsing="false" onAction="#onBackBtnAction" styleClass="icon_button" BorderPane.alignment="CENTER">
                <graphic>
-                  <FontAwesomeIconView glyphName="ARROW_LEFT" styleClass="icon" />
+                  <FontAwesomeIconView glyphName="ARROW_LEFT">
+                     <styleClass>
+                        <String fx:value="icon" />
+                        <String fx:value="primary-color" />
+                     </styleClass></FontAwesomeIconView>
                </graphic>
             </Button>
          </left>
          <right>
             <Button fx:id="ConnectBtn" mnemonicParsing="false" onAction="#onConnectBtnAction" styleClass="icon_button" BorderPane.alignment="CENTER">
                <graphic>
-                  <FontAwesomeIconView glyphName="USER_PLUS" styleClass="icon" />
+                  <FontAwesomeIconView glyphName="USER_PLUS">
+                     <styleClass>
+                        <String fx:value="icon" />
+                        <String fx:value="primary-color" />
+                     </styleClass></FontAwesomeIconView>
                </graphic>
             </Button>
          </right>

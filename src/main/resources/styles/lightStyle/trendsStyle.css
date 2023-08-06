@@ -1,7 +1,12 @@
 .root {
     -fx-background-color: transparent;
-    -fx-border-color: #222;
+    -fx-border-color: #eee;
     -fx-border-width: 0 0 0 1;
+}
+
+.icon {
+    -fx-fill: black;
+    -fx-text-fill: black;
 }
 
 .icon:pressed {
@@ -19,7 +24,8 @@
 }
 
 .search-text-field {
-    -fx-background-color: #222;
-    -fx-text-fill: white;
+    -fx-background-color: #eee;
+    -fx-text-fill: black;
+    -fx-prompt-text-fill: #333;
+    -fx-background-radius: 50px;
 }
-

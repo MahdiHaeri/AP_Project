@@ -1,0 +1,135 @@
+.root {
+    -fx-background-color: white;
+    -fx-padding: 10px;
+}
+
+.primary-color {
+    -fx-text-fill: black;
+    -fx-fill: black;
+}
+
+.secondary-color {
+    -fx-text-fill: #666;
+    -fx-fill: #666;
+}
+
+.accent-color {
+    -fx-text-fill: #111;
+    -fx-fill: #111;
+}
+
+.main-vbox {
+    /*-fx-padding: 20px;*/
+}
+
+.glyph-icon{ -fx-font-family:"FontAwesome"; }
+
+.text-area {
+    -fx-background-insets: 0;
+    -fx-background-color: #eee;
+    -fx-background-radius: 5;
+    -fx-prompt-text-fill: #666;
+}
+
+.text-area .content {
+    -fx-background-color: #eee;
+    -fx-background-radius: 5;
+    -fx-box-border: none;
+    -fx-border-width: 0;
+}
+
+.text-area:focused .content {
+    -fx-background-insets: 0;
+    -fx-background-color: #ddd;
+    -fx-background-radius: 5;
+}
+
+.scroll-pane .scroll-bar {
+    -fx-background-color: transparent;
+}
+
+.viewport {
+    -fx-background-insets: 0;
+    -fx-background-color: transparent;
+    -fx-background-radius: 5;
+
+    -fx-focus-color: -fx-control-inner-background;
+    -fx-faint-focus-color: -fx-control-inner-background;
+    -fx-text-box-border: -fx-control-inner-background;
+    -fx-border-width: -1;
+}
+
+.content {
+}
+
+.text {
+}
+
+.text-area:focused {
+    /*-fx-highlight-fill: #7ecfff;*/
+
+    /*-fx-background-insets: 0;*/
+    /*-fx-background-color: transparent, white, transparent, white;*/
+    /*-fx-background-radius: 0, 0, 0, 0;*/
+
+    /*-fx-focus-color: -fx-control-inner-background;*/
+    /*-fx-faint-focus-color: -fx-control-inner-background;*/
+    /*-fx-text-box-border: -fx-control-inner-background;*/
+    /*-fx-border-width: -1;*/
+}
+
+.tweet-button {
+    -fx-background-color: #eee;
+    -fx-background-radius: 50px;
+    -fx-padding: 3px 10px;
+    -fx-border-width: 0px;
+    -fx-border-color: transparent;
+}
+
+.tweet-button:hover {
+    -fx-background-color: #ddd;
+    -fx-cursor: hand;
+}
+
+.icon {
+    -fx-fill: #1DA1F2;
+    -fx-background-color: transparent;
+    -fx-background-radius: 50px;
+    -fx-cursor: hand;
+}
+
+.image-container {
+    -fx-background-color: transparent;
+    -fx-background-radius: 50px;
+    -fx-cursor: hand;
+    -fx-fit-to-width: true;
+    -fx-fit-to-height: true;
+}
+
+.scroll-bar:vertical .thumb {
+    -fx-background-color: #ddd;
+}
+
+.scroll-bar:horizontal .thumb {
+    -fx-background-color: #ddd;
+}
+
+/* remove up and down button from scroll bar*/
+.scroll-bar:vertical .increment-arrow, .scroll-bar:vertical .decrement-arrow {
+    -fx-background-color: transparent;
+    -fx-fill: transparent;
+}
+
+/* remove up and down button from scroll bar*/
+.scroll-bar:horizontal .increment-arrow, .scroll-bar:horizontal .decrement-arrow {
+    -fx-background-color: transparent;
+    -fx-fill: transparent;
+}
+
+.scroll-pane {
+    -fx-background-color: transparent;
+}
+
+.scroll-bar > .corner {
+    -fx-background-color: transparent;
+}

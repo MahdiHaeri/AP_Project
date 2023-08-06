@@ -1,0 +1,31 @@
+.root {
+    -fx-background-color: transparent;
+    -fx-border-color: #222;
+    -fx-border-width: 0 0 0 1;
+}
+
+.icon {
+    -fx-fill: white;
+    -fx-text-fill: white;
+}
+
+.icon:pressed {
+    -fx-scale-x: 0.97;
+    -fx-scale-y: 0.97;
+    -fx-fill: #666;
+}
+
+.search-container {
+
+}
+
+.trend-vbox {
+    -fx-padding: 10px;
+}
+
+.search-text-field {
+    -fx-background-color: #222;
+    -fx-text-fill: white;
+    -fx-prompt-text-fill: #666;
+}
+

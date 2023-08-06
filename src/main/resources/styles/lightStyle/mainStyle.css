@@ -1,0 +1,59 @@
+.root {
+    -fx-background-color: white;
+}
+
+.menu-bar {
+    -fx-background-color: #eee;
+    -fx-padding: 0px;
+}
+
+.menu-bar-button {
+    -fx-background-color: transparent;
+    -fx-text-fill: black;
+    -fx-padding: 10px;
+    -fx-border-radius: 0;
+    -fx-background-radius: 0;
+}
+
+.menu-bar-button:focused {
+    -fx-background-color: #ccc;
+    /*-fx-text-fill: #1DA1F2;*/
+}
+
+
+.menu-bar-button:hover .menu-bar-button-icons {
+    -fx-scale-x: 0.8;
+    -fx-scale-y: 0.8;
+}
+
+.menu-bar-button-icons {
+    -fx-fill: black;
+    -fx-text-fill: black;
+}
+
+.tweet-vbox {
+    -fx-padding: 10px;
+}
+
+.tweet-buttons {
+    -fx-background-color: #1DA1F2;
+    -fx-border-radius: 50px;
+    -fx-background-radius: 50px;
+    -fx-text-fill: white;
+    -fx-padding: 10px;
+}
+
+.tweet-buttons:pressed {
+    -fx-scale-x: 0.97;
+    -fx-scale-y: 0.97;
+}
+
+.logout-buttons {
+    -fx-background-color: #ccc;
+    -fx-text-fill: black;
+}
+
+.logout-buttons:pressed {
+    -fx-background-color: #ddd;
+}
+

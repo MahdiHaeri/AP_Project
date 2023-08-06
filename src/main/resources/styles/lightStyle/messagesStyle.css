@@ -1,0 +1,41 @@
+.root {
+    -fx-background-color: transparent;
+}
+
+.primary-color {
+    -fx-text-fill: black;
+    -fx-fill: black;
+}
+
+.secondary-color {
+    -fx-text-fill: #666;
+    -fx-fill: #666;
+}
+
+.accent-color {
+    -fx-text-fill: #111;
+    -fx-fill: #111;
+}
+
+.header {
+    -fx-padding: 10px;
+}
+
+.new-message-button {
+    -fx-background-color: #1DA1F2;
+    -fx-border-radius: 50px;
+    -fx-background-radius: 50px;
+    -fx-text-fill: white;
+    -fx-padding: 15px;
+}
+
+
+.new-message-button:hover {
+    -fx-background-color: #1A91DA;
+}
+
+.icon:pressed {
+    -fx-scale-x: 0.97;
+    -fx-scale-y: 0.97;
+    -fx-fill: #666;
+}

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import java.lang.String?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -8,14 +9,18 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@../../../styles/bookmarksStyle.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.client.controllers.BookmarksController">
+<BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@../../../styles/lightStyle/bookmarksStyle.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.client.controllers.BookmarksController">
    <top>
       <BorderPane prefHeight="37.0" prefWidth="600.0" styleClass="header" BorderPane.alignment="CENTER">
          <right>
-            <FontAwesomeIconView fill="WHITE" glyphName="ELLIPSIS_H" size="18" styleClass="icon" BorderPane.alignment="CENTER" />
+            <FontAwesomeIconView fill="WHITE" glyphName="ELLIPSIS_H" size="18" BorderPane.alignment="CENTER">
+               <styleClass>
+                  <String fx:value="icon" />
+                  <String fx:value="primary-color" />
+               </styleClass></FontAwesomeIconView>
          </right>
          <center>
-            <Label text="Bookmarks" textFill="WHITE" BorderPane.alignment="CENTER">
+            <Label styleClass="primary-color" text="Bookmarks" textFill="WHITE" BorderPane.alignment="CENTER">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font></Label>
@@ -32,12 +37,12 @@
                         <Image url="@../../../images/book_in_bird_cage.png" />
                      </image>
                   </ImageView>
-                  <Label prefHeight="17.0" prefWidth="243.0" text="Save tweets for later" textFill="WHITE">
+                  <Label prefHeight="17.0" prefWidth="243.0" styleClass="primary-color" text="Save tweets for later" textFill="WHITE">
                      <font>
                         <Font size="21.0" />
                      </font>
                   </Label>
-                  <Label prefHeight="46.0" prefWidth="247.0" styleClass="dark-text" text="Don't let the good ones fly away! Bookmark Tweets to easily find them again in the future." textFill="WHITE" wrapText="true" />
+                  <Label prefHeight="46.0" prefWidth="247.0" styleClass="secondary-color" text="Don't let the good ones fly away! Bookmark Tweets to easily find them again in the future." textFill="WHITE" wrapText="true" />
                </children>
             </VBox>
          </center>

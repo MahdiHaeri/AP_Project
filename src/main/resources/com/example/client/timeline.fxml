@@ -6,9 +6,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="400.0" prefWidth="600.0" styleClass="root" stylesheets="@../../../styles/timelineStyle.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.client.controllers.TimelineController">
+<BorderPane prefHeight="400.0" prefWidth="600.0" styleClass="root" stylesheets="@../../../styles/lightStyle/timelineStyle.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.client.controllers.TimelineController">
    <top>
-      <Label alignment="CENTER" prefHeight="32.0" prefWidth="81.0" styleClass="white-text" text="Home" textAlignment="CENTER" BorderPane.alignment="CENTER">
+      <Label alignment="CENTER" prefHeight="32.0" prefWidth="81.0" styleClass="primary-color" text="Home" textAlignment="CENTER" BorderPane.alignment="CENTER">
          <font>
             <Font size="21.0" />
          </font>

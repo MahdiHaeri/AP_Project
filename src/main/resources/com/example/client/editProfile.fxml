@@ -15,17 +15,17 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="538.0" prefWidth="520.0" stylesheets="@../../../styles/editProfileStyle.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.client.controllers.EditProfileController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="538.0" prefWidth="520.0" stylesheets="@../../../styles/lightStyle/editProfileStyle.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.client.controllers.EditProfileController">
    <top>
       <BorderPane prefHeight="41.0" prefWidth="600.0" BorderPane.alignment="CENTER">
          <left>
-            <Button fx:id="cancelBtn" mnemonicParsing="false" onAction="#onCancelBtnAction" text="Cancel" textFill="WHITE" BorderPane.alignment="CENTER" />
+            <Button fx:id="cancelBtn" mnemonicParsing="false" onAction="#onCancelBtnAction" styleClass="primary-color" text="Cancel" textFill="WHITE" BorderPane.alignment="CENTER" />
          </left>
          <center>
             <Label text="Edit Profile" textFill="WHITE" BorderPane.alignment="CENTER" />
          </center>
          <right>
-            <Button fx:id="saveBtn" mnemonicParsing="false" onAction="#onSaveBtnAction" text="save" textFill="WHITE" BorderPane.alignment="CENTER" />
+            <Button fx:id="saveBtn" mnemonicParsing="false" onAction="#onSaveBtnAction" styleClass="primary-color" text="save" textFill="WHITE" BorderPane.alignment="CENTER" />
          </right>
       </BorderPane>
    </top>
@@ -59,18 +59,18 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <Label text="First name" textFill="WHITE" />
-                        <Label text="Last name" textFill="WHITE" GridPane.rowIndex="1" />
-                        <Label text="Bio" textFill="WHITE" GridPane.rowIndex="2" />
-                        <Label text="Location" textFill="WHITE" GridPane.rowIndex="3" />
-                        <Label text="Website" textFill="WHITE" GridPane.rowIndex="4" />
-                        <Label text="Birth day" textFill="WHITE" GridPane.rowIndex="5" />
-                        <TextField fx:id="firstNameTf" promptText="First name" GridPane.columnIndex="1" />
-                        <TextField fx:id="lastNameTf" promptText="Last name" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                        <TextArea fx:id="bioTextArea" prefHeight="200.0" prefWidth="377.0" promptText="Bio" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                        <TextField fx:id="locationTf" promptText="Location" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                        <TextField fx:id="websiteTf" promptText="Website" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                        <DatePicker fx:id="birthdayDp" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" promptText="Birth day" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                        <Label styleClass="primary-color" text="First name" textFill="WHITE" />
+                        <Label styleClass="primary-color" text="Last name" textFill="WHITE" GridPane.rowIndex="1" />
+                        <Label styleClass="primary-color" text="Bio" textFill="WHITE" GridPane.rowIndex="2" />
+                        <Label styleClass="primary-color" text="Location" textFill="WHITE" GridPane.rowIndex="3" />
+                        <Label styleClass="primary-color" text="Website" textFill="WHITE" GridPane.rowIndex="4" />
+                        <Label styleClass="primary-color" text="Birth day" textFill="WHITE" GridPane.rowIndex="5" />
+                        <TextField fx:id="firstNameTf" promptText="First name" styleClass="primary-color" GridPane.columnIndex="1" />
+                        <TextField fx:id="lastNameTf" promptText="Last name" styleClass="primary-color" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <TextArea fx:id="bioTextArea" prefHeight="200.0" prefWidth="377.0" promptText="Bio" styleClass="primary-color" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        <TextField fx:id="locationTf" promptText="Location" styleClass="primary-color" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                        <TextField fx:id="websiteTf" promptText="Website" styleClass="primary-color" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                        <DatePicker fx:id="birthdayDp" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" promptText="Birth day" styleClass="primary-color" GridPane.columnIndex="1" GridPane.rowIndex="5" />
                      </children>
                   </GridPane>
                </children>

@@ -1,0 +1,37 @@
+.root {
+    -fx-background-color: transparent;
+    -fx-padding: 10px;
+}
+
+.primary-color {
+    -fx-text-fill: black;
+    -fx-fill: black;
+}
+
+.secondary-color {
+    -fx-text-fill: #666;
+    -fx-fill: #666;
+}
+
+.accent-color {
+    -fx-text-fill: #111;
+    -fx-fill: #111;
+}
+
+.avatar {
+}
+
+.main-container {
+    -fx-padding: 10px;
+}
+
+.button {
+    -fx-padding: 3 30 3 30;
+    -fx-background-radius: 50px;
+    -fx-border-radius: 50px;
+    -fx-background-color: transparent;
+}
+
+.button:hover {
+    -fx-background-color: #eee;
+}

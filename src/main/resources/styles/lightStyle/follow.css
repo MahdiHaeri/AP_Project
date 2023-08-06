@@ -1,0 +1,116 @@
+.root {
+    -fx-background-color: white;
+}
+
+.primary-color {
+    -fx-text-fill: black;
+    -fx-fill: black;
+}
+
+.secondary-color {
+    -fx-text-fill: #666;
+    -fx-fill: #666;
+}
+
+.accent-color {
+    -fx-text-fill: #111;
+    -fx-fill: #111;
+}
+
+.header {
+    -fx-padding: 5px;
+}
+
+.icon_button {
+    -fx-background-color: transparent;
+    -fx-padding: 5px;
+}
+
+.icon_button:pressed .icon{
+    -fx-fill: #ddd;
+}
+
+.icon {
+}
+
+.tab-pane {
+    /*-fx-tab-min-height: 30px;*/
+    /*-fx-tab-max-height: 30px;*/
+
+    -fx-fit-to-width: true;
+    -fx-fit-to-height: true;
+
+    -fx-background-color: transparent;
+    -fx-border-width: 1 0 0 0;
+    -fx-border-color: #eee;
+}
+
+.tab-pane .tab-header-area .tab-header-background {
+    -fx-background-color: transparent;
+}
+
+.tab {
+    -fx-background-color: transparent;
+    -fx-pref-height: 30px;
+    /*-fx-background-insets: 0;*/
+    -fx-background-insets: 0 2 0 0, 0 5 0 0, 1 6 0 0 ;
+}
+
+.tab .tab-label {
+    -fx-background-color: transparent;
+    -fx-text-fill: #666;
+    -fx-font-size: 14px;
+    -fx-alignment: center;
+}
+
+.tab:selected .tab-label{
+    -fx-text-fill: black;
+    -fx-background-insets: 0;
+}
+
+.tab:selected {
+    -fx-border-width: 0 0 2 0;
+    -fx-background-insets: 0;
+    -fx-border-color: #1DA1F2;
+}
+
+.tab-pane > .tab-header-area > .headers-region > .tab:selected .focus-indicator {
+    -fx-border-color: transparent;
+}
+
+
+/* change the scroller bar color*/
+.scroll-bar:vertical .thumb {
+    -fx-background-color: #ddd;
+}
+
+/* remove up and down button from scroll bar*/
+.scroll-bar:vertical .increment-arrow, .scroll-bar:vertical .decrement-arrow {
+    -fx-background-color: transparent;
+    -fx-fill: transparent;
+}
+
+.scroll-pane {
+    -fx-background-color: transparent;
+    -fx-fit-to-width: true;
+    -fx-fit-to-height: true;
+}
+
+.scroll-bar > .corner {
+    -fx-background-color: transparent;
+}
+
+.scroll-bar {
+    -fx-background-color: transparent;
+}
+
+.vbox {
+    -fx-background-color: transparent;
+    /*-fx-fit-to-width: true;*/
+    /*-fx-fit-to-height: true;*/
+    -fx-padding: 0 200 0 200;
+}
+
+.scroll-pane > .viewport {
+    -fx-background-color: transparent;
+}

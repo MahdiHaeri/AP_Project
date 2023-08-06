@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="425.0" prefWidth="491.0" stylesheets="@../../../styles/createTweetStyle.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.client.controllers.CreateTweetController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="425.0" prefWidth="491.0" stylesheets="@../../../styles/lightStyle/createTweetStyle.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.client.controllers.CreateTweetController">
    <top>
       <BorderPane BorderPane.alignment="CENTER">
          <right>
@@ -38,7 +38,7 @@
                <center>
                   <BorderPane BorderPane.alignment="CENTER">
                      <center>
-                        <TextArea fx:id="textArea" prefHeight="200.0" prefWidth="200.0" promptText="What's happening?" wrapText="true">
+                        <TextArea fx:id="textArea" prefHeight="200.0" prefWidth="200.0" promptText="What's happening?" styleClass="primary-color" wrapText="true">
                            <font>
                               <Font name="Arimo for Powerline" size="16.0" />
                            </font>

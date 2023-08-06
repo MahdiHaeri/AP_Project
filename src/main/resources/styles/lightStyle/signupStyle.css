@@ -2,44 +2,57 @@
     -fx-alignment: center;
 }
 
-.left-pane {
+.right-pane {
     -fx-background-color: white;
     -fx-column-halignment: center;
     -fx-row-valignment: center;
     -fx-padding: 30px;
 }
 
-.right-pane {
-    /*-fx-background-color: #1DA1F2;*/
+.left-pane {
     -fx-background-color: linear-gradient(to right top,  #1DA1F2,rgba(14,188,231,1) 100%);
+    /*-fx-background-color: #1DA1F2;*/
     -fx-alignment: center;
     -fx-padding: 30px;
 }
 
 .twitter-icon {
     -fx-font-size: 75px;
-    -fx-fill: linear-gradient(to right top,  #1DA1F2,rgba(14,188,231,1) 100%);
+    /*-fx-fill: linear-gradient(to right top,  #1DA1F2,rgba(14,188,231,1) 100%);;*/
+    -fx-fill: white;
 }
 
-.text-field {
+.my-text-field {
     -fx-background-color: white;
     -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.75) , 4, 0, 1, 1);
     -fx-padding: 7px;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 4px;
 }
 
-.login-button {
+.register-button {
     -fx-text-fill: white;
     -fx-background-color: linear-gradient(to right top,  #1DA1F2,rgba(14,188,231,1) 100%);
-    -fx-padding: 7px;
 }
 
-.login-button:hover {
+.register-button:hover {
     -fx-cursor: hand;
     -fx-background-color: linear-gradient(to left , #1DA1F2, rgba(14,188,231,1) 100%);
 }
 
-.login-button:hover .arrow-icon {
+.register-button:hover .arrow-icon {
     -fx-translate-x: 10px;
+}
+
+.country-combo-box {
+    -fx-background-color: white;
+    -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.75) , 4, 0, 1, 1);
+    -fx-padding: 4px;
+}
+
+.birthday-date-picker {
+    -fx-background-color: white;
+    -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.75) , 4, 0, 1, 1);
 }
 
 /*.text-field {*/

@@ -1,0 +1,40 @@
+.root {
+    -fx-background-color: transparent;
+}
+
+.primary-color {
+    -fx-text-fill: black;
+    -fx-fill: black;
+}
+
+/* change the scroller bar color*/
+.scroll-bar:vertical .thumb {
+    -fx-background-color: #999;
+}
+
+/* remove up and down button from scroll bar*/
+.scroll-bar:vertical .increment-arrow, .scroll-bar:vertical .decrement-arrow {
+    -fx-background-color: transparent;
+    -fx-fill: transparent;
+}
+
+.scroll-pane {
+    -fx-background-color: transparent;
+    -fx-padding: 0 150 0 150;
+}
+
+.VBox {
+    -fx-background-color: transparent;
+}
+
+.scroll-bar > .corner {
+    -fx-background-color: transparent;
+}
+
+.scroll-bar {
+    -fx-background-color: transparent;
+}
+
+.scroll-pane > .viewport {
+    -fx-background-color: transparent;
+}

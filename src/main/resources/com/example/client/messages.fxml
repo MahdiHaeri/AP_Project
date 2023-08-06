@@ -1,23 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import java.lang.String?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@../../../styles/messagesStyle.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.client.controllers.MessagesController">
+<BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@../../../styles/lightStyle/messagesStyle.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.client.controllers.MessagesController">
    <top>
       <BorderPane prefHeight="36.0" prefWidth="580.0" styleClass="header" BorderPane.alignment="CENTER">
          <left>
-            <FontAwesomeIconView fx:id="envelopIcon" fill="WHITE" glyphName="ENVELOPE" size="18" styleClass="icon" BorderPane.alignment="CENTER" />
+            <FontAwesomeIconView fx:id="envelopIcon" fill="WHITE" glyphName="ENVELOPE" size="18" BorderPane.alignment="CENTER">
+               <styleClass>
+                  <String fx:value="icon" />
+                  <String fx:value="primary-color" />
+               </styleClass></FontAwesomeIconView>
          </left>
          <right>
-            <FontAwesomeIconView fx:id="settingIcon" fill="WHITE" glyphName="GEAR" size="18" styleClass="icon" BorderPane.alignment="CENTER" />
+            <FontAwesomeIconView fx:id="settingIcon" fill="WHITE" glyphName="GEAR" size="18" BorderPane.alignment="CENTER">
+               <styleClass>
+                  <String fx:value="icon" />
+                  <String fx:value="primary-color" />
+               </styleClass></FontAwesomeIconView>
          </right>
          <center>
-            <Label fx:id="MessagesHaederLbl" text="Messages" textAlignment="CENTER" textFill="WHITE" BorderPane.alignment="CENTER">
+            <Label fx:id="MessagesHaederLbl" styleClass="primary-color" text="Messages" textAlignment="CENTER" textFill="WHITE" BorderPane.alignment="CENTER">
                <font>
                   <Font size="16.0" />
                </font></Label>
@@ -29,11 +38,11 @@
          <center>
             <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" spacing="10.0" BorderPane.alignment="CENTER">
                <children>
-                  <Label text="Select a Message" textFill="WHITE">
+                  <Label styleClass="primary-color" text="Select a Message" textFill="WHITE">
                      <font>
                         <Font size="20.0" />
                      </font></Label>
-                  <Label prefHeight="51.0" prefWidth="255.0" text="Choose from your existing conversations, start a new one, or just keep swimming." textAlignment="CENTER" textFill="WHITE" wrapText="true" />
+                  <Label prefHeight="51.0" prefWidth="255.0" styleClass="secondary-color" text="Choose from your existing conversations, start a new one, or just keep swimming." textAlignment="CENTER" textFill="WHITE" wrapText="true" />
                   <Button fx:id="newMessageBtn" mnemonicParsing="false" prefHeight="49.0" prefWidth="166.0" styleClass="new-message-button" text="New message" textAlignment="CENTER" textFill="WHITE">
                      <font>
                         <Font size="15.0" />
