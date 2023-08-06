@@ -9,7 +9,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.example.server.data_access.TweetDAO;
 
 import java.util.ArrayList;
-import java.util.Date;
 
 public class TweetController {
     private final TweetDAO tweetDAO;
@@ -125,6 +124,23 @@ public class TweetController {
         return objectMapper.writeValueAsString(tweet);
     }
 
+    public String getRepliesByParentTweetId(String parentTweetId) throws SQLException, JsonProcessingException {
+        ArrayList<ReplyTweet> replies =  tweetDAO.getRepliesByParentTweetId(parentTweetId);
+        ObjectMapper objectMapper = new ObjectMapper();
+        return objectMapper.writeValueAsString(replies);
+    }
+
+    public String getRetweetsByRetweetId(String retweetId) throws SQLException, JsonProcessingException {
+        ArrayList<Retweet> retweets =  tweetDAO.getRetweetsByRetweetId(retweetId);
+        ObjectMapper objectMapper = new ObjectMapper();
+        return objectMapper.writeValueAsString(retweets);
+    }
+
+    public String getQuotesByQuoteTweetId(String quoteTweetId) throws JsonProcessingException, SQLException {
+        ArrayList<QuoteTweet> Quotes =  tweetDAO.getQuotesByQuoteTweetId(quoteTweetId);
+        ObjectMapper objectMapper = new ObjectMapper();
+        return objectMapper.writeValueAsString(Quotes);
+    }
     public String getTimeline(String username) throws SQLException, JsonProcessingException {
         // todo : add trends tweet to timeline tweets
         // todo : remove Blocked users tweets from timeline tweets:w

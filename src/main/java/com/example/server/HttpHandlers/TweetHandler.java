@@ -157,4 +157,40 @@ public class TweetHandler {
             return e.getMessage();
         }
     }
+
+    public Object handleGetReplies(Request request, Response response) {
+        String tweetId = request.params(":tweetId");
+        try {
+            response.body(tweetController.getRepliesByParentTweetId(tweetId));
+        } catch (Exception e) {
+            response.status(400);
+            response.body(e.getMessage());
+            return response.body();
+        }
+        return response.body();
+    }
+
+    public Object handleGetRetweets(Request request, Response response) {
+        String tweetId = request.params(":tweetId");
+        try {
+            response.body(tweetController.getRetweetsByRetweetId(tweetId));
+        } catch (Exception e) {
+            response.status(400);
+            response.body(e.getMessage());
+            return response.body();
+        }
+        return response.body();
+    }
+
+    public Object handleGetQuotes(Request request, Response response) {
+        String tweetId = request.params(":tweetId");
+        try {
+            response.body(tweetController.getQuotesByQuoteTweetId(tweetId));
+        } catch (Exception e) {
+            response.status(400);
+            response.body(e.getMessage());
+            return response.body();
+        }
+        return response.body();
+    }
 }

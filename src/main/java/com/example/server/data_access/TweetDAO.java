@@ -244,4 +244,61 @@ public class TweetDAO {
         }
         return replyTweets;
     }
+    public ArrayList<ReplyTweet> getRepliesByParentTweetId(String parentTweetId) throws SQLException {
+        PreparedStatement statement = connection.prepareStatement("SELECT * FROM tweets WHERE parent_tweet_id = ?");
+        statement.setString(1, parentTweetId);
+        ResultSet resultSet = statement.executeQuery();
+        ArrayList<ReplyTweet> replyTweets = new ArrayList<>();
+        while (resultSet.next()) {
+            String tweetId = (resultSet.getString("tweet_id"));
+            String ownerId = (resultSet.getString("owner_id"));
+            String text = (resultSet.getString("text"));
+            int retweetCount = (resultSet.getInt("retweet_count"));
+            int replyCount = (resultSet.getInt("reply_count"));
+            int likeCount = (resultSet.getInt("like_count"));
+            Timestamp timestamp = resultSet.getTimestamp("created_at");
+            Date createdAt = new Date(timestamp.getTime());
+            replyTweets.add(new ReplyTweet(tweetId, ownerId, text, replyCount, retweetCount, likeCount, createdAt, parentTweetId));
+        }
+        return replyTweets;
+    }
+
+
+    public ArrayList<Retweet> getRetweetsByRetweetId(String retweetId) throws SQLException {
+        PreparedStatement statement = connection.prepareStatement("SELECT * FROM tweets WHERE retweet_id = ?");
+        statement.setString(1, retweetId);
+        ResultSet resultSet = statement.executeQuery();
+        ArrayList<Retweet> replyTweets = new ArrayList<>();
+        while (resultSet.next()) {
+            String tweetId = (resultSet.getString("tweet_id"));
+            String ownerId = (resultSet.getString("owner_id"));
+            String text = (resultSet.getString("text"));
+            int retweetCount = (resultSet.getInt("retweet_count"));
+            int replyCount = (resultSet.getInt("reply_count"));
+            int likeCount = (resultSet.getInt("like_count"));
+            Timestamp timestamp = resultSet.getTimestamp("created_at");
+            Date createdAt = new Date(timestamp.getTime());
+            replyTweets.add(new Retweet(tweetId, ownerId, text, replyCount, retweetCount, likeCount, createdAt, retweetId));
+        }
+        return replyTweets;
+    }
+
+    public ArrayList<QuoteTweet> getQuotesByQuoteTweetId(String quoteTweetId) throws SQLException {
+        PreparedStatement statement = connection.prepareStatement("SELECT * FROM tweets WHERE quote_tweet_id = ?");
+        statement.setString(1, quoteTweetId);
+        ResultSet resultSet = statement.executeQuery();
+        ArrayList<QuoteTweet> replyTweets = new ArrayList<>();
+        while (resultSet.next()) {
+            String tweetId = (resultSet.getString("tweet_id"));
+            String ownerId = (resultSet.getString("owner_id"));
+            String text = (resultSet.getString("text"));
+            int retweetCount = (resultSet.getInt("retweet_count"));
+            int replyCount = (resultSet.getInt("reply_count"));
+            int likeCount = (resultSet.getInt("like_count"));
+            Timestamp timestamp = resultSet.getTimestamp("created_at");
+            Date createdAt = new Date(timestamp.getTime());
+            replyTweets.add(new QuoteTweet(tweetId, ownerId, text, replyCount, retweetCount, likeCount, createdAt, quoteTweetId));
+        }
+        return replyTweets;
+    }
 }

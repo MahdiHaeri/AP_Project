@@ -79,10 +79,12 @@ public class Server {
 
         get("/api/timeline", tweetHandler::handleGetTimeline);
 
-        // todo: add get for these
         post("/api/tweets/:tweetId/retweet", tweetHandler::handlePostRetweet);
         post("/api/tweets/:tweetId/quote", tweetHandler::handlePostQuoteTweet);
         post("/api/tweets/:tweetId/reply", tweetHandler::handlePostReplyTweet);
+        get("/api/tweets/:tweetId/replies", tweetHandler::handleGetReplies);
+        get("/api/tweets/:tweetId/retweets", tweetHandler::handleGetRetweets);
+        get("/api/tweets/:tweetId/quotes", tweetHandler::handleGetQuotes);
 
         post("/api/login", loginHandler::handlePostLogin);
 
