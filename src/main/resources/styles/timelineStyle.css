@@ -2,6 +2,10 @@
     -fx-background-color: transparent;
 }
 
+.white-text {
+    -fx-text-fill: white;
+}
+
 /* change the scroller bar color*/
 .scroll-bar:vertical .thumb {
     -fx-background-color: #333;
@@ -14,14 +18,22 @@
 }
 
 .scroll-pane {
-    -fx-background-color: #111;
+    -fx-background-color: transparent;
     -fx-padding: 0 100 0 100;
 }
 
+.VBox {
+    -fx-background-color: transparent;
+}
+
 .scroll-bar > .corner {
-    -fx-background-color: black;
+    -fx-background-color: transparent;
 }
 
 .scroll-bar {
-    -fx-background-color: #111;
+    -fx-background-color: transparent;
+}
+
+.scroll-pane > .viewport {
+    -fx-background-color: transparent;
 }
