@@ -1,5 +1,5 @@
 .root-vbox {
-    -fx-background-color: #111;
+    -fx-background-color: transparent;
     -fx-text-fill: #ddd;
     -fx-border-color: #222;
     -fx-border-width: 0 0 1 0;

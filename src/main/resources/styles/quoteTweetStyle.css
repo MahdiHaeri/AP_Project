@@ -1,5 +1,5 @@
 .root {
-    -fx-background-color: #111;
+    -fx-background-color: transparent;
     -fx-text-fill: #ddd;
     /*-fx-padding: 0 200 0 200;*/
     -fx-padding: 0 0 0 0;
