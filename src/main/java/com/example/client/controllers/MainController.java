@@ -6,14 +6,15 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
+import javax.imageio.stream.ImageInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
@@ -21,6 +22,12 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class MainController implements Initializable {
+
+    @FXML
+    private Button changeThemeBtn;
+
+    @FXML
+    private ImageView themeImageView;
 
     @FXML
     private Button bookmarksBtn;
@@ -65,6 +72,21 @@ public class MainController implements Initializable {
 
     public void setCenter(Parent parent) {
         rootBp.setCenter(parent);
+    }
+
+    public Image getThemeImageView() {
+        return themeImageView.getImage();
+    }
+
+    public void setThemeImageView(Image image) {
+        this.themeImageView.setImage(image);
+    }
+
+    @FXML
+    void onChangeThemeBtnAction(ActionEvent event) {
+        Image image = new Image(getClass().getResourceAsStream("/images/icons8_dark_mode_48.png"));
+        setThemeImageView(image);
+        changeThemeBtn.setText("Dark mode");
     }
 
     @FXML

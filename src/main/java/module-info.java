@@ -16,6 +16,7 @@ module com.example.ap_project {
     requires spark.core;
     requires javax.servlet.api;
     requires javafx.swing;
+    requires MaterialFX;
 
 //    requires javafx.base;
 //    requires javafx.graphics;

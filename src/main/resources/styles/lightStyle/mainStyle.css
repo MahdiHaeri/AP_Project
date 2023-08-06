@@ -7,6 +7,29 @@
     -fx-padding: 0px;
 }
 
+.primary-color {
+    -fx-text-fill: black;
+    -fx-fill: black;
+}
+
+.secondary-color {
+    -fx-text-fill: #666;
+    -fx-fill: #666;
+}
+
+.accent-color {
+    -fx-text-fill: #111;
+    -fx-fill: #111;
+}
+
+.change-theme-button {
+    -fx-background-color: transparent;
+    -fx-text-fill: black;
+    -fx-padding: 10px;
+    -fx-border-radius: 0;
+    -fx-background-radius: 0;
+}
+
 .menu-bar-button {
     -fx-background-color: transparent;
     -fx-text-fill: black;
