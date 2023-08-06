@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 
-<BorderPane stylesheets="@../../../styles/lightStyle/retweetHeaderStyle.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.client.controllers.RetweetHeaderController">
+<BorderPane stylesheets="@../../../styles/darkStyle/retweetHeaderStyle.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.client.controllers.RetweetHeaderController">
    <center>
       <HBox alignment="CENTER_LEFT" prefWidth="600.0" spacing="10.0">
          <children>
