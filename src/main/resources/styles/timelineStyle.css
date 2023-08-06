@@ -4,6 +4,7 @@
 
 .white-text {
     -fx-text-fill: white;
+    -fx-fill: white;
 }
 
 /* change the scroller bar color*/
@@ -19,7 +20,7 @@
 
 .scroll-pane {
     -fx-background-color: transparent;
-    -fx-padding: 0 100 0 100;
+    -fx-padding: 0 150 0 150;
 }
 
 .VBox {
