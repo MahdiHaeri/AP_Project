@@ -77,18 +77,18 @@
                                     <String fx:value="like-button" />
                                  </styleClass>
                               </Button>
-                              <Button fx:id="shareBtn" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onShareBtnAction">
+                              <Button fx:id="quoteBtn" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onQuoteBtnAction" text="10">
                                  <graphic>
-                                    <FontAwesomeIconView fx:id="shareIcon" glyphName="ARROW_UP" size="15">
+                                    <FontAwesomeIconView fx:id="quoteIcon" glyphName="QUOTE_LEFT" size="15">
                                        <styleClass>
-                                          <String fx:value="share-icon" />
+                                          <String fx:value="quote-icon" />
                                           <String fx:value="tweet-icon" />
                                        </styleClass>
                                     </FontAwesomeIconView>
                                  </graphic>
                                  <styleClass>
                                     <String fx:value="tweet-buttons" />
-                                    <String fx:value="share-button" />
+                                    <String fx:value="quote-button" />
                                  </styleClass>
                               </Button>
                            </children>

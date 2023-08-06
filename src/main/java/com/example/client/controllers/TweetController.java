@@ -23,8 +23,6 @@ import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Line;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
@@ -37,6 +35,13 @@ import java.util.ResourceBundle;
 public class TweetController implements Initializable {
 
     private boolean isLiked = false;
+
+    private boolean isRetweeted = false;
+
+    private boolean isReply = false;
+
+    private boolean isQuoted = false;
+
     private String tweetId;
 
     @FXML
@@ -55,7 +60,16 @@ public class TweetController implements Initializable {
     private Button likeBtn;
 
     @FXML
+    private FontAwesomeIconView replyIcon;
+
+    @FXML
+    private FontAwesomeIconView retweetIcon;
+
+    @FXML
     private FontAwesomeIconView likeIcon;
+
+    @FXML
+    private FontAwesomeIconView quoteIcon;
 
     @FXML
     private Label ownerNameLbl;
@@ -70,10 +84,10 @@ public class TweetController implements Initializable {
     private Button retweetBtn;
 
     @FXML
-    private Label retweeterNameLbl;
+    private Label retweetedNameLbl;
 
     @FXML
-    private Button shareBtn;
+    private Button quoteBtn;
 
     @FXML
     private VBox contentContainer;
@@ -98,6 +112,30 @@ public class TweetController implements Initializable {
 
     public void setLiked(boolean liked) {
         isLiked = liked;
+    }
+
+    public boolean isRetweeted() {
+        return isRetweeted;
+    }
+
+    public void setRetweeted(boolean retweeted) {
+        isRetweeted = retweeted;
+    }
+
+    public boolean isReplied() {
+        return isReply;
+    }
+
+    public void setReplied(boolean reply) {
+        isReply = reply;
+    }
+
+    public boolean isQuoted() {
+        return isQuoted;
+    }
+
+    public void setQuoted(boolean quoted) {
+        isQuoted = quoted;
     }
 
     public Image getAvatarView() {
@@ -156,12 +194,12 @@ public class TweetController implements Initializable {
         this.retweetBtn.setText(text);
     }
 
-    public String getRetweeterNameLbl() {
-        return retweeterNameLbl.getText();
+    public String getRetweetedNameLbl() {
+        return retweetedNameLbl.getText();
     }
 
-    public void setRetweeterNameLbl(String text) {
-        this.retweeterNameLbl.getText();
+    public void setRetweetedNameLbl(String text) {
+        this.retweetedNameLbl.getText();
     }
 
     private MainController mainController;
@@ -184,13 +222,13 @@ public class TweetController implements Initializable {
         this.timelineController = timelineController;
     }
 
-//    public Button getShareBtn() {
-//        return shareBtn;
-//    }
+    public String getQuoteBtn() {
+        return quoteBtn.getText();
+    }
 
-//    public void setShareBtn(Button shareBtn) {
-//        this.shareBtn = shareBtn;
-//    }
+    public void setQuoteBtn(String text) {
+        this.quoteBtn.setText(text);
+    }
 
     public String getTextMessageText() {
         return textMessageText.getText();
@@ -279,6 +317,28 @@ public class TweetController implements Initializable {
 
     @FXML
     void onRetweetBtnAction(ActionEvent event) {
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("Content-Type", "application/json");
+        headers.set("Authorization", "Bearer " + JWTController.getJwtKey());
+        String tweetId = getTweetId();
+        HttpResponse response;
+//        String body = "";
+        String body = "{\"text\": \" this is the text of retweet\"}";
+        try {
+            response = HttpController.sendRequest("http://localhost:8080/api/tweets/" + tweetId + "/retweet", HttpMethod.POST, body, headers);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        if (response.getStatusCode() >= 200 && response.getStatusCode() < 300) {
+            timelineController.updateTimeline();
+        } else {
+            System.out.println("error in retweeting");
+        }
+    }
+
+    @FXML
+    void onQuoteBtnAction(ActionEvent event) {
         String tweetId = getTweetId();
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/client/createTweet.fxml"));
@@ -298,28 +358,6 @@ public class TweetController implements Initializable {
 
         } catch (IOException e) {
             throw new RuntimeException(e);
-        }
-    }
-
-    @FXML
-    void onShareBtnAction(ActionEvent event) {
-        HttpHeaders headers = new HttpHeaders();
-        headers.set("Content-Type", "application/json");
-        headers.set("Authorization", "Bearer " + JWTController.getJwtKey());
-        String tweetId = getTweetId();
-        HttpResponse response;
-//        String body = "";
-        String body = "{\"text\": \" this is the text of retweet\"}";
-        try {
-            response = HttpController.sendRequest("http://localhost:8080/api/tweets/" + tweetId + "/retweet", HttpMethod.POST, body, headers);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-
-        if (response.getStatusCode() >= 200 && response.getStatusCode() < 300) {
-            timelineController.updateTimeline();
-        } else {
-            System.out.println("error in retweeting");
         }
     }
 
@@ -363,6 +401,9 @@ public class TweetController implements Initializable {
         HttpResponse tweetResponse;
         HttpResponse userResponse;
         HttpResponse likeResponse;
+        HttpResponse replyResponse;
+        HttpResponse retweetResponse;
+        HttpResponse quoteResponse;
 
         try {
             tweetResponse = HttpController.sendRequest("http://localhost:8080/api/tweets/" + tweetId, HttpMethod.GET, null, null);
@@ -416,6 +457,8 @@ public class TweetController implements Initializable {
             throw new RuntimeException(e);
         }
 
+        // update like count and style
+
         try {
             likeResponse = HttpController.sendRequest("http://localhost:8080/api/tweets/" + tweetJson.get("tweetId").asText() + "/likes", HttpMethod.GET, null, null);
         } catch (IOException e) {
@@ -438,6 +481,56 @@ public class TweetController implements Initializable {
         }
 
         setLikeBtn(Integer.toString(likeCount));
+
+        // update reply count and style
+        // update retweet + quote count and style
+
+        try {
+            retweetResponse = HttpController.sendRequest("http://localhost:8080/api/tweets/" + tweetJson.get("tweetId").asText() + "/retweets", HttpMethod.GET, null, null);
+            quoteResponse = HttpController.sendRequest("http://localhost:8080/api/tweets/" + tweetJson.get("tweetId").asText() + "/quotes", HttpMethod.GET, null, null);
+            replyResponse = HttpController.sendRequest("http://localhost:8080/api/tweets/" + tweetJson.get("tweetId").asText() + "/replies", HttpMethod.GET, null, null);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        JsonNode repliesJson = null;
+        JsonNode retweetsJson = null;
+        JsonNode quotesJson = null;
+
+        try {
+            retweetsJson = objectMapper.readTree(retweetResponse.getBody());
+            quotesJson = objectMapper.readTree(quoteResponse.getBody());
+            repliesJson = objectMapper.readTree(replyResponse.getBody());
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
+
+        int replyCount = 0;
+        for (JsonNode replyJson : repliesJson) {
+            replyCount++;
+            if (replyJson.get("ownerId").asText().equals(JWTController.getSubjectFromJwt(JWTController.getJwtKey()))) {
+                setTweetReplied();
+            }
+        }
+        setReplyBtn(Integer.toString(replyCount));
+
+        int retweetCount = 0;
+        for (JsonNode retweetJson : retweetsJson) {
+            retweetCount++;
+            if (retweetJson.get("ownerId").asText().equals(JWTController.getSubjectFromJwt(JWTController.getJwtKey()))) {
+                setTweetRetweeted();
+            }
+        }
+        setRetweetBtn(Integer.toString(retweetCount));
+
+        int quoteCount = 0;
+        for (JsonNode quoteJson : quotesJson) {
+            quoteCount++;
+            if (quoteJson.get("ownerId").asText().equals(JWTController.getSubjectFromJwt(JWTController.getJwtKey()))) {
+                setTweetQuoted();
+            }
+        }
+        setQuoteBtn(Integer.toString(quoteCount));
     }
 
     public void addQuote(String quoteTweetId) {
@@ -504,5 +597,41 @@ public class TweetController implements Initializable {
         likeBtn.setStyle("-fx-text-fill: #666");
         likeIcon.setStyle("-fx-fill: #666");
         setLiked(false);
+    }
+
+    private void setTweetReplied() {
+        replyBtn.setStyle("-fx-text-fill: #1DA1F2");
+        replyIcon.setStyle("-fx-fill: #1DA1F2");
+        setReplied(true);
+    }
+
+    private void setTweetUnreplied() {
+        replyBtn.setStyle("-fx-text-fill: #666");
+        replyIcon.setStyle("-fx-fill: #666");
+        setReplied(false);
+    }
+
+    public void setTweetRetweeted() {
+        retweetBtn.setStyle("-fx-text-fill: #17bf63");
+        retweetIcon.setStyle("-fx-fill: #17bf63");
+        setRetweeted(true);
+    }
+
+    public void setTweetUnretweeted() {
+        retweetBtn.setStyle("-fx-text-fill: #666");
+        retweetIcon.setStyle("-fx-fill: #666");
+        setRetweeted(false);
+    }
+
+    public void setTweetQuoted() {
+        quoteBtn.setStyle("-fx-text-fill: #1DA1F2");
+        quoteIcon.setStyle("-fx-fill: #1DA1F2");
+        setQuoted(true);
+    }
+
+    public void setTweetUnquoted() {
+        quoteBtn.setStyle("-fx-text-fill: #666");
+        quoteIcon.setStyle("-fx-fill: #666");
+        setQuoted(false);
     }
 }
