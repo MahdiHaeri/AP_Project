@@ -4,6 +4,21 @@
     /*-fx-padding: 0 200 0 200;*/
 }
 
+.primary-color {
+    -fx-text-fill: white;
+    -fx-fill: white;
+}
+
+.secondary-color {
+    -fx-text-fill: #ddd;
+    -fx-fill: #ddd;
+}
+
+.accent-color {
+    -fx-text-fill: #eee;
+    -fx-fill: #eee;
+}
+
 .message-text{
     -fx-wrap-text: true;
     -fx-fill: #ddd;

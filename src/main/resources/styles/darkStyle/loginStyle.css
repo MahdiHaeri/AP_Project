@@ -3,6 +3,21 @@
     -fx-background-color: white;
 }
 
+.primary-color {
+    -fx-text-fill: white;
+    -fx-fill: white;
+}
+
+.secondary-color {
+    -fx-text-fill: #ddd;
+    -fx-fill: #ddd;
+}
+
+.accent-color {
+    -fx-text-fill: #eee;
+    -fx-fill: #eee;
+}
+
 .left-pane {
     -fx-background-color: transparent;
     -fx-column-halignment: center;

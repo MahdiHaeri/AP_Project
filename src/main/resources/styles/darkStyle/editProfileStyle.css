@@ -3,6 +3,21 @@
     -fx-padding: 10px;
 }
 
+.primary-color {
+    -fx-text-fill: white;
+    -fx-fill: white;
+}
+
+.secondary-color {
+    -fx-text-fill: #ddd;
+    -fx-fill: #ddd;
+}
+
+.accent-color {
+    -fx-text-fill: #eee;
+    -fx-fill: #eee;
+}
+
 .information-vbox {
     -fx-padding: 10px;
 }

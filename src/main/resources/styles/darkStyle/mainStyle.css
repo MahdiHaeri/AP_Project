@@ -20,8 +20,23 @@
 }
 
 .accent-color {
-    -fx-text-fill: #111;
-    -fx-fill: #111;
+    -fx-text-fill: #eee;
+    -fx-fill: #eee;
+}
+
+.primary-color {
+    -fx-text-fill: white;
+    -fx-fill: white;
+}
+
+.secondary-color {
+    -fx-text-fill: #ddd;
+    -fx-fill: #ddd;
+}
+
+.accent-color {
+    -fx-text-fill: #333;
+    -fx-fill: #333;
 }
 
 .change-theme-button {
