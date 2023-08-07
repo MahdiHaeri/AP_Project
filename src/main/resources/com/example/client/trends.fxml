@@ -12,7 +12,7 @@
    <center>
       <BorderPane prefHeight="200.0" prefWidth="200.0" styleClass="root" BorderPane.alignment="CENTER">
          <top>
-            <Label prefHeight="22.0" prefWidth="245.0" text="Trends for you" textAlignment="CENTER" textFill="WHITE" BorderPane.alignment="CENTER">
+            <Label prefHeight="22.0" prefWidth="245.0" styleClass="primary-color" text="Trends for you" textAlignment="CENTER" textFill="WHITE" BorderPane.alignment="CENTER">
                <font>
                   <Font size="17.0" />
                </font></Label>
