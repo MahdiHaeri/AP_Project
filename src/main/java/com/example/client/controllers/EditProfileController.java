@@ -109,6 +109,16 @@ public class EditProfileController implements Initializable {
         bio.setLocation(locationTf.getText());
         bio.setWebsite(websiteTf.getText());
 
+        if (bio.getBiography().equals("")) {
+            bio.setBiography("Bio");
+        }
+        if (bio.getLocation().equals("")) {
+            bio.setLocation("Location");
+        }
+        if (bio.getWebsite().equals("")) {
+            bio.setWebsite("Website");
+        }
+
         ObjectMapper objectMapper = new ObjectMapper();
         String bioJson = null;
         try {
