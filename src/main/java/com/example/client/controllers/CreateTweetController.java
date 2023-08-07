@@ -5,6 +5,7 @@ import com.example.client.http.HttpHeaders;
 import com.example.client.http.HttpMethod;
 import com.example.client.http.HttpResponse;
 import com.example.client.util.JWTController;
+import com.example.client.util.ThemeManager;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import io.github.gleidson28.GNAvatarView;
 import javafx.event.ActionEvent;
@@ -17,6 +18,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Rectangle;
@@ -31,6 +33,8 @@ import java.util.ResourceBundle;
 
 public class CreateTweetController implements Initializable {
 
+    @FXML
+    private BorderPane rootBp;
     String tweetType;
 
     @FXML
@@ -197,6 +201,7 @@ public class CreateTweetController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        ThemeManager.applyTheme(rootBp, url.getPath());
         setTweetType("tweet");
 
         try {

@@ -4,6 +4,7 @@ import com.example.client.http.HttpController;
 import com.example.client.http.HttpMethod;
 import com.example.client.http.HttpResponse;
 import com.example.client.util.JWTController;
+import com.example.client.util.ThemeManager;
 import com.example.client.util.TimestampController;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -14,6 +15,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.image.Image;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 
 import java.io.IOException;
@@ -23,6 +25,9 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class TimelineController implements Initializable {
+
+    @FXML
+    private BorderPane rootBp;
 
     @FXML
     private VBox tweetsVbox;
@@ -49,7 +54,7 @@ public class TimelineController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
+        ThemeManager.applyTheme(rootBp,  url.getPath());
     }
 
     public void fillTimeline(String username) {

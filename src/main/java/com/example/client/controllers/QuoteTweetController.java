@@ -3,6 +3,7 @@ package com.example.client.controllers;
 import com.example.client.http.HttpController;
 import com.example.client.http.HttpMethod;
 import com.example.client.http.HttpResponse;
+import com.example.client.util.ThemeManager;
 import com.example.client.util.TimestampController;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -15,6 +16,7 @@ import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
@@ -25,7 +27,8 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class QuoteTweetController implements Initializable {
-
+    @FXML
+    private BorderPane rootBp;
     private String tweetId;
 
     @FXML
@@ -129,7 +132,7 @@ public class QuoteTweetController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
+        ThemeManager.applyTheme(rootBp, url.getPath());
     }
 
     public void fillQuote(String quoteId) {

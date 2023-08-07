@@ -12,7 +12,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane styleClass="root" stylesheets="@../../../styles/darkStyle/quoteTweetStyle.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.client.controllers.QuoteTweetController">
+<BorderPane fx:id="rootBp" styleClass="root" stylesheets="@../../../styles/darkStyle/quoteTweetStyle.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.client.controllers.QuoteTweetController">
     <center>
         <BorderPane prefHeight="400.0" prefWidth="600.0" BorderPane.alignment="CENTER">
             <center>
@@ -51,7 +51,7 @@
                                     <children>
                                     <GNAvatarView fx:id="avatarView" onMouseClicked="#onAvatarViewClicked" prefHeight="33.0" prefWidth="16.0" stroke="#ffffff00" strokeWidth="0.0" styleClass="avatar-image" type="CIRCLE">
                                         <image>
-                                            <Image url="@../../../images/myImage.jpeg" />
+                                            <Image url="@../../../images/default_profile_image.jpeg" />
                                         </image>
                                     </GNAvatarView>
                                         <Label fx:id="ownerNameLbl" styleClass="primary-color" text="owner name" textAlignment="CENTER">

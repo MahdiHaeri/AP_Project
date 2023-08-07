@@ -4,6 +4,7 @@ import com.example.client.http.HttpController;
 import com.example.client.http.HttpMethod;
 import com.example.client.http.HttpResponse;
 import com.example.client.util.JWTController;
+import com.example.client.util.ThemeManager;
 import com.example.server.models.Bio;
 import com.example.server.models.User;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -38,6 +39,8 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 public class EditProfileController implements Initializable {
+    @FXML
+    private BorderPane rootBp;
 
     @FXML
     private GNAvatarView avatar;
@@ -221,6 +224,7 @@ public class EditProfileController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        ThemeManager.applyTheme(rootBp, url.getPath());
         String username = JWTController.getSubjectFromJwt(JWTController.getJwtKey());
         HttpResponse bioResponse;
         HttpResponse userResponse;

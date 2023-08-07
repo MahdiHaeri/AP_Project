@@ -5,6 +5,7 @@ import com.example.client.http.HttpHeaders;
 import com.example.client.http.HttpMethod;
 import com.example.client.http.HttpResponse;
 import com.example.client.util.JWTController;
+import com.example.client.util.ThemeManager;
 import com.example.client.util.TimestampController;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -33,7 +34,6 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class TweetController implements Initializable {
-
     private boolean isLiked = false;
 
     private boolean isRetweeted = false;
@@ -363,7 +363,7 @@ public class TweetController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
+        ThemeManager.applyTheme(rootVbox, url.getPath());
     }
 
     public void prepareTweet(String tweetId) {

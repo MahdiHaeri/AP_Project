@@ -5,6 +5,7 @@ import com.example.client.http.HttpHeaders;
 import com.example.client.http.HttpMethod;
 import com.example.client.http.HttpResponse;
 import com.example.client.util.JWTController;
+import com.example.client.util.ThemeManager;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -18,6 +19,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.BorderPane;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -26,6 +28,9 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class UserController implements Initializable {
+
+    @FXML
+    private BorderPane rootBp;
 
     @FXML
     private Label BioLbl;
@@ -171,7 +176,7 @@ public class UserController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
+        ThemeManager.applyTheme(rootBp, url.getPath());
     }
 
     public void fillUser(String username) {

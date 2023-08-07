@@ -3,6 +3,7 @@ package com.example.client.controllers;
 import com.example.client.http.HttpController;
 import com.example.client.http.HttpMethod;
 import com.example.client.http.HttpResponse;
+import com.example.client.util.ThemeManager;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import javafx.event.ActionEvent;
@@ -14,6 +15,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 
 import java.io.IOException;
@@ -21,6 +23,9 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class FollowController implements Initializable {
+
+    @FXML
+    private BorderPane rootBp;
 
     @FXML
     private Button ConnectBtn;
@@ -149,7 +154,7 @@ public class FollowController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
+        ThemeManager.applyTheme(rootBp, url.getPath());
     }
 
     public void fillFollow(String username) {

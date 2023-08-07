@@ -24,7 +24,7 @@
                         <AnchorPane prefHeight="12.0" prefWidth="61.0" />
                         <GNAvatarView fx:id="avatarView" onMouseClicked="#onAvatarViewClicked" prefHeight="55.0" prefWidth="55.0" stroke="#ffffff00" strokeWidth="0.0" styleClass="avatar-image" type="CIRCLE">
                            <image>
-                              <Image url="@../../../images/myImage.jpeg" />
+                              <Image url="@../../../images/default_profile_image.jpeg" />
                            </image>
                         </GNAvatarView>
                      </children>

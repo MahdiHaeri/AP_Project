@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="425.0" prefWidth="491.0" stylesheets="@../../../styles/darkStyle/createTweetStyle.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.client.controllers.CreateTweetController">
+<BorderPane fx:id="rootBp" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="425.0" prefWidth="491.0" stylesheets="@../../../styles/darkStyle/createTweetStyle.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.client.controllers.CreateTweetController">
    <top>
       <BorderPane BorderPane.alignment="CENTER">
          <right>
@@ -29,7 +29,7 @@
                      <children>
                         <GNAvatarView fx:id="avatar" prefHeight="41.0" prefWidth="36.0" strokeWidth="0.0" type="CIRCLE">
                            <image>
-                              <Image url="@../../../images/myImage.jpeg" />
+                              <Image url="@../../../images/default_profile_image.jpeg" />
                            </image>
                         </GNAvatarView>
                      </children>

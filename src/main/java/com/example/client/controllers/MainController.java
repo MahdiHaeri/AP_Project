@@ -1,6 +1,7 @@
 package com.example.client.controllers;
 
 import com.example.client.util.JWTController;
+import com.example.client.util.ThemeManager;
 import io.github.gleidson28.GNAvatarView;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -18,6 +19,7 @@ import javax.imageio.stream.ImageInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -84,9 +86,38 @@ public class MainController implements Initializable {
 
     @FXML
     void onChangeThemeBtnAction(ActionEvent event) {
+        ThemeManager.changeTheme();
+
+        if (ThemeManager.getCurrentTheme() == ThemeManager.Theme.DARK) {
+            changeToDarkMode();
+        } else {
+            changeToLightMode();
+        }
+
+        // TODO: change theme in database
+
+        // refresh main page
+        try {
+            String username = JWTController.getSubjectFromJwt(JWTController.getJwtKey());
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/client/main.fxml"));
+            Parent mainRoot = fxmlLoader.load();
+            MainController mainController = fxmlLoader.getController();
+            rootBp.getScene().setRoot(mainRoot);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private void changeToDarkMode() {
         Image image = new Image(getClass().getResourceAsStream("/images/icons8_dark_mode_48.png"));
         setThemeImageView(image);
         changeThemeBtn.setText("Dark mode");
+    }
+
+    private void changeToLightMode() {
+        Image image = new Image(getClass().getResourceAsStream("/images/icons8_light_mode_78.png"));
+        setThemeImageView(image);
+        changeThemeBtn.setText("Light mode");
     }
 
     @FXML
@@ -199,6 +230,12 @@ public class MainController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        if (ThemeManager.getCurrentTheme() == ThemeManager.Theme.DARK) {
+            changeToDarkMode();
+        } else {
+            changeToLightMode();
+        }
+        ThemeManager.applyTheme(rootBp, url.getPath());
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/client/timeline.fxml"));
             Parent timelineRoot = fxmlLoader.load();

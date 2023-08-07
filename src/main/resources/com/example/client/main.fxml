@@ -77,11 +77,11 @@
             <Button fx:id="logoutBtn" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onLogoutBtnAction" prefWidth="200.0" styleClass="logout-buttons" text="Logout" BorderPane.alignment="CENTER" />
          </bottom>
          <top>
-            <Button fx:id="changeThemeBtn" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onChangeThemeBtnAction" text="Light mode" BorderPane.alignment="CENTER">
+            <Button fx:id="changeThemeBtn" alignment="TOP_LEFT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onChangeThemeBtnAction" prefWidth="200.0" text="Dark mode" BorderPane.alignment="CENTER">
                <graphic>
-                  <ImageView fx:id="themeImageView" fitHeight="21.0" fitWidth="17.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="themeImageView" fitHeight="20.0" fitWidth="41.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../../images/icons8_light_mode_78.png" />
+                        <Image url="@../../../images/icons8_dark_mode_48.png" />
                      </image>
                   </ImageView>
                </graphic>
