@@ -19,9 +19,55 @@ This is a Twitter-like application built using Java and JavaFX for the client-si
 To run the application, follow these steps:
 
 1. Clone the repository to your local machine.
-2. Set up the PostgreSQL database and configure the connection details in the application.
-3. Build and run the server component.
-4. Build and run the client application.
+
+   ```bash
+   git clone git@github.com:MahdiHaeri/AP_Project.git
+   ```
+
+2. Set up the PostgreSQL database and configure the connection details in the application. Open the `DatabaseConnectionManager.java` file located at `com/example/server/data_access/DatabaseConnectionManager.java`.
+
+   ```java
+   package com.example.server.data_access;
+
+   import java.sql.Connection;
+   import java.sql.DriverManager;
+   import java.sql.SQLException;
+
+   public class DatabaseConnectionManager {
+       private static final String JDBC_URL = "jdbc:postgresql://your_postgresql_host:your_port/your_database_name";
+       private static final String USERNAME = "your_username";
+       private static final String PASSWORD = "your_password";
+
+       private static Connection connection;
+
+       private DatabaseConnectionManager() {
+           // Private constructor to prevent instantiation
+       }
+
+       public static Connection getConnection() throws SQLException {
+           if (connection == null || connection.isClosed()) {
+               connection = DriverManager.getConnection(JDBC_URL, USERNAME, PASSWORD);
+           }
+           return connection;
+       }
+   }
+   ```
+
+3. In the `DatabaseConnectionManager.java` file, modify the following lines to match your PostgreSQL database configuration:
+
+   ```java
+   private static final String JDBC_URL = "jdbc:postgresql://your_postgresql_host:your_port/your_database_name";
+   private static final String USERNAME = "your_username";
+   private static final String PASSWORD = "your_password";
+   ```
+
+4. Build and run the server component.
+
+5. Build and run the client application.
+
+Make sure to replace the placeholders (e.g., `your_username`, `your_database_name`, etc.) with the actual values relevant to your PostgreSQL database setup.
+
+After following these steps, users will be able to set up the database connection correctly and run your application smoothly.
 
 ## Features
 
