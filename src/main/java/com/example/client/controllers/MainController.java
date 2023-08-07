@@ -15,11 +15,9 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
-import javax.imageio.stream.ImageInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -96,16 +94,7 @@ public class MainController implements Initializable {
 
         // TODO: change theme in database
 
-        // refresh main page
-        try {
-            String username = JWTController.getSubjectFromJwt(JWTController.getJwtKey());
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/client/main.fxml"));
-            Parent mainRoot = fxmlLoader.load();
-            MainController mainController = fxmlLoader.getController();
-            rootBp.getScene().setRoot(mainRoot);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        updateMainPage();
     }
 
     private void changeToDarkMode() {
@@ -220,7 +209,7 @@ public class MainController implements Initializable {
             // when stage closed, refresh the timeline to show the new tweet
 
             stage.setOnHidden(e -> {
-                initialize(null, null);
+                updateMainPage();
             });
 
         } catch (IOException e) {
@@ -262,6 +251,16 @@ public class MainController implements Initializable {
             }
 
             rootBp.setRight(trendsRoot);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void updateMainPage() {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/client/main.fxml"));
+            Parent mainRoot = fxmlLoader.load();
+            rootBp.getScene().setRoot(mainRoot);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
