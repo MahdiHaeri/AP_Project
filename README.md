@@ -183,6 +183,7 @@ POST /api/tweets/:tweetId/tweet-image
 - PostgreSQL
 - HTTP Server
 - RESTful API
+- JWT authentication
 - MVC Architecture
 - JSON
 - Data Access Object (DAO) pattern
